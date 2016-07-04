@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.SplashActivity" />
-        <activity android:name=".activity.LoginActivity" />
+        <activity android:name=".activity.LoginActivity" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity android:name=".activity.AssignActivity" />
         <activity android:name=".activity.MobileActivity" />
         <activity android:name=".activity.InputCarActivity" />
