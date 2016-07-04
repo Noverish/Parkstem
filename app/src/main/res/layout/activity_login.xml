@@ -6,7 +6,9 @@
     android:background="@drawable/login_bg"
     android:paddingLeft="27sp"
     android:paddingRight="27sp"
-    android:paddingTop="310sp">
+    android:paddingTop="310sp"
+    tools:context=".activity.MainActivity">
+    <!--여기 context 부분은 연동시킬 자바파일에 따라 바꿔줘야함-->
     <!-- PaddingTop Original Size is 330sp -->
 
     <LinearLayout
