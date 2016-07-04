@@ -1,10 +1,10 @@
 package com.trams.parkstem.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.trams.parkstem.R;
 
@@ -69,7 +70,39 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_splash) {
+            Intent intent = new Intent(this, SplashActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.action_login) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.action_assign) {
+            Intent intent = new Intent(this, AssignActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.action_mobile) {
+            Intent intent = new Intent(this, MobileActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.action_car_register) {
+            Intent intent = new Intent(this, InputCarActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.action_card_register) {
+            Intent intent = new Intent(this, InputCardActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.action_card_new_card) {
+            Intent intent = new Intent(this, InputNewCardActivity.class);
+            startActivity(intent);
             return true;
         }
 

@@ -5,51 +5,26 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF">
 
-    <RelativeLayout
-        android:id="@+id/input_new_card_menu"
-        android:layout_width="match_parent"
-        android:layout_height="55sp"
-        android:background="@drawable/img_main"
-        >
-        <RelativeLayout
-            android:layout_marginLeft="7sp"
-            android:layout_width="14sp"
-            android:layout_height="19sp"
-            android:layout_marginTop="19sp"
-            android:background="@drawable/btn_back"
-            >
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="카드 등록"
-                android:textSize="22sp"
-                android:textColor="#000000"
-                />
-        </RelativeLayout>
-
-    </RelativeLayout>
 
     <ScrollView
-        android:layout_below="@id/input_new_card_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <LinearLayout
-        android:paddingLeft="34dp"
-        android:layout_marginTop="40dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
+        android:paddingLeft="34dp"
+        android:layout_marginTop="46dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_gravity="center_vertical"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="44dp">
+            android:layout_height="wrap_content">
             <TextView
                 android:textSize="20sp"
                 android:textColor="#000000"
@@ -59,6 +34,7 @@
 
             <EditText
                 android:id="@+id/input_new_card_name"
+                android:background="@null"
                 android:layout_marginLeft="36dp"
                 android:textSize="20sp"
                 android:textColor="#000000"
@@ -70,10 +46,10 @@
 
         <LinearLayout
             android:gravity="center_vertical"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="40dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="44dp">
+            android:layout_height="wrap_content">
             <TextView
                 android:textSize="20sp"
                 android:textColor="#000000"
@@ -111,10 +87,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="40dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="44dp">
+            android:layout_height="wrap_content">
             <TextView
                 android:textSize="20sp"
                 android:textColor="#000000"
@@ -124,6 +100,7 @@
 
             <EditText
                 android:id="@+id/input_new_card_number"
+                android:background="@null"
                 android:layout_marginLeft="36dp"
                 android:textSize="20sp"
                 android:textColor="#000000"
@@ -133,12 +110,12 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal"
+        <RelativeLayout
+            android:layout_marginTop="45dp"
             android:layout_width="match_parent"
-            android:layout_height="44dp">
+            android:layout_height="wrap_content">
             <TextView
+                android:id="@+id/input_new_card_duration"
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:text="유효기간"
@@ -146,7 +123,9 @@
                 android:layout_height="wrap_content" />
 
             <EditText
+                android:layout_toRightOf="@+id/input_new_card_duration"
                 android:id="@+id/input_new_card_duration_month"
+                android:background="@null"
                 android:layout_marginLeft="36dp"
                 android:textSize="20sp"
                 android:textColor="#000000"
@@ -156,21 +135,23 @@
                 android:layout_height="wrap_content" />
 
             <EditText
+                android:layout_toRightOf="@+id/input_new_card_duration"
                 android:id="@+id/input_new_card_duration_year"
-                android:layout_marginLeft="11dp"
+                android:background="@null"
+                android:layout_marginLeft="90dp"
                 android:textSize="20sp"
                 android:textColor="#000000"
                 android:hint="2016년"
                 android:textColorHint="#bcc1c5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-        </LinearLayout>
+        </RelativeLayout>
 
         <LinearLayout
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="45dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="44dp">
+            android:layout_height="wrap_content">
             <TextView
                 android:textSize="20sp"
                 android:textColor="#000000"
@@ -180,6 +161,7 @@
 
             <EditText
                 android:id="@+id/input_new_card_birth"
+                android:background="@null"
                 android:layout_marginLeft="36dp"
                 android:textSize="20sp"
                 android:textColor="#000000"
@@ -191,10 +173,10 @@
 
         <LinearLayout
             android:gravity="center_vertical"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="40dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="44dp">
+            android:layout_height="wrap_content">
             <TextView
                 android:textSize="20sp"
                 android:textColor="#000000"
@@ -225,7 +207,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="40dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -341,7 +323,9 @@
                 android:layout_height="wrap_content" />
         </RelativeLayout>
 
+    </LinearLayout>
         <RelativeLayout
+            android:layout_marginBottom="180dp"
             android:layout_marginTop="58dp"
             android:layout_gravity="center"
             android:background="@drawable/btn_1_middle"
@@ -356,5 +340,6 @@
                 android:layout_height="wrap_content" />
         </RelativeLayout>
     </LinearLayout>
+
     </ScrollView>
 </RelativeLayout>

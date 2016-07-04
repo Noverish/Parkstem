@@ -6,5 +6,11 @@
 
     <string name="activity_input_car_register">차량등록</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_splash">스플래쉬 이미지</string>
+    <string name="action_login">로그인</string>
+    <string name="action_assign">회원가입</string>
+    <string name="action_mobile">모바일</string>
+    <string name="action_car_register">차량등록</string>
+    <string name="action_card_register">카드등록</string>
+    <string name="action_card_new_card">새카드</string>
 </resources>
