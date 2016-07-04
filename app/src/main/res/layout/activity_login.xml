@@ -6,8 +6,7 @@
     android:background="@drawable/login_bg"
     android:paddingLeft="27sp"
     android:paddingRight="27sp"
-    android:paddingTop="310sp"
-    tools:context="com.example.jaehyo.parkstem.MainActivity">
+    android:paddingTop="310sp">
     <!-- PaddingTop Original Size is 330sp -->
 
     <LinearLayout
