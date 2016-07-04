@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context="com.example.jaehyo.parkstem.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/input_car_menu"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/img_main"
+        >
+        <RelativeLayout
+            android:layout_marginLeft="7dp"
+            android:layout_width="24dp"
+            android:layout_height="17dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_menu"
+            >
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PARKSTEM"
+                android:textSize="22sp"
+                android:textColor="#000000"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/input_car_menu2"
+        android:background="@drawable/btn_2"
+        android:layout_below="@id/input_car_menu"
+        android:layout_width="match_parent"
+        android:layout_height="32dp">
+
+        <TextView
+            android:id="@+id/input_car_skip"
+            android:layout_centerInParent="true"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            android:text="SKIP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_marginLeft="2dp"
+            android:background="@drawable/btn_skip"
+            android:layout_toRightOf="@id/input_car_skip"
+            android:layout_centerVertical="true"
+            android:layout_width="11dp"
+            android:layout_height="16dp"></RelativeLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_below="@id/input_car_menu2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_marginTop="105dp"
+            android:src="@drawable/img_card"
+            android:layout_width="110dp"
+            android:layout_height="74dp" />
+
+        <TextView
+            android:id="@+id/input_first_card"
+            android:layout_marginTop="55dp"
+            android:text="카드등록"
+            android:textColor="#000000"
+            android:textSize="27sp"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:id="@+id/input_new_card"
+            android:layout_marginTop="22dp"
+            android:background="@drawable/btn_1_middle"
+            android:layout_width="174dp"
+            android:layout_height="44dp">
+            <TextView
+                android:text="카드추가등록"
+                android:textColor="#ffffff"
+                android:textSize="27sp"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+    </ScrollView>
+</RelativeLayout>

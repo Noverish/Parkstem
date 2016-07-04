@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    tools:context="com.example.jaehyo.parkstem.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/cerification_menu"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/img_main"
+        >
+        <RelativeLayout
+            android:layout_marginLeft="7dp"
+            android:layout_width="24dp"
+            android:layout_height="17dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_menu"
+            >
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PARKSTEM"
+                android:textSize="22sp"
+                android:textColor="#000000"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/cerification_menu2"
+        android:background="@drawable/btn_2"
+        android:layout_below="@id/cerification_menu"
+        android:layout_width="match_parent"
+        android:layout_height="32dp">
+
+        <TextView
+            android:id="@+id/cerification_skip"
+            android:layout_centerInParent="true"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            android:text="SKIP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_marginLeft="2dp"
+            android:background="@drawable/btn_skip"
+            android:layout_toRightOf="@id/cerification_skip"
+            android:layout_centerVertical="true"
+            android:layout_width="11dp"
+            android:layout_height="16dp"></RelativeLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_below="@id/cerification_menu2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/certification_layout1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <ImageView
+            android:layout_marginTop="15dp"
+            android:src="@drawable/img_phone"
+            android:layout_width="56dp"
+            android:layout_height="99dp" />
+        
+        <TextView
+            android:layout_marginTop="4dp"
+            android:textSize="22sp"
+            android:textColor="#5d5d5d"
+            android:text="휴대폰 인증"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:textSize="23sp"
+            android:textAlignment="center"
+            android:hint="이름"
+            android:textColorHint="#bcc1c5"
+            android:textColor="#5d5d5d"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/box_edit"
+            android:layout_width="211dp"
+            android:layout_height="43dp" />
+
+        <EditText
+            android:textSize="23dp"
+            android:textAlignment="center"
+            android:hint="생년월일"
+            android:textColorHint="#bcc1c5"
+            android:textColor="#5d5d5d"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/box_edit"
+            android:layout_width="211dp"
+            android:layout_height="43dp" />
+
+        <EditText
+            android:textSize="23sp"
+            android:textAlignment="center"
+            android:hint="휴대폰 번호"
+            android:textColorHint="#bcc1c5"
+            android:textColor="#5d5d5d"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/box_edit"
+            android:layout_width="211dp"
+            android:layout_height="43dp" />
+
+            <LinearLayout
+                android:layout_marginTop="7dp"
+                android:orientation="horizontal"
+                android:layout_width="211dp"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:background="@drawable/box_edit_small"
+                    android:layout_width="92dp"
+                    android:layout_height="33dp">
+                    <ImageView
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/img_t"
+                        android:layout_width="25dp"
+                        android:layout_height="28dp" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:background="@drawable/btn_m_1"
+                    android:layout_marginLeft="34dp"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp" />
+                <ImageView
+                    android:background="@drawable/btn_w_2"
+                    android:layout_marginLeft="6dp"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_1_small"
+                android:layout_width="77dp"
+                android:layout_height="43dp">
+                <TextView
+                    android:layout_centerInParent="true"
+                    android:textColor="#ffffff"
+                    android:textSize="23sp"
+                    android:text="확인"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginTop="10dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/input_car_card"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="87dp">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <RelativeLayout
+                    android:id="@+id/input_car"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/input_card"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"></RelativeLayout>
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    </ScrollView>
+</RelativeLayout>
