@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context="com.example.jaehyo.parkstem.MainActivity">
+    tools:context=".activity.MainActivity">
+    <!--여기 context 부분은 연동시킬 자바파일에 따라 바꿔줘야함-->
 
     <RelativeLayout
         android:id="@+id/input_new_card_menu"
