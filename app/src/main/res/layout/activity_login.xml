@@ -6,9 +6,7 @@
     android:background="@drawable/login_bg"
     android:paddingLeft="27sp"
     android:paddingRight="27sp"
-    android:paddingTop="310dp"
-    tools:context=".activity.LoginActivity">
-    <!--여기 context 부분은 연동시킬 자바파일에 따라 바꿔줘야함-->
+    android:paddingTop="310sp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,20 +18,23 @@
             android:layout_width="wrap_content"
             android:layout_height="46sp"
             android:paddingTop="8sp"
-            android:background="@drawable/login_naver_bg">
+            android:background="@drawable/login_naver_bg"
+            >
             <RelativeLayout
                 android:layout_width="30sp"
                 android:layout_height="30sp"
                 android:layout_alignParentLeft="true"
                 android:background="@drawable/login_naver_logo"
-                android:layout_marginLeft="41sp">
+                android:layout_marginLeft="41sp"
+                >
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="183sp"
                 android:layout_height="30sp"
                 android:layout_marginLeft="11sp"
-                android:paddingTop="5sp">
+                android:paddingTop="5sp"
+                >
                 <TextView
                     android:id="@+id/logged_naver"
                     android:layout_width="match_parent"

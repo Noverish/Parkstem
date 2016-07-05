@@ -60,6 +60,12 @@ public class ServerClient {
     }
 
 
+
+    public boolean regid(final String memberGubun, final String name, final String emial, final String mobile, final String nickName, final String kakaoID, final String facebookID, final String naverID, final String parkstemID, final String parkstemPW, final String regDate) {
+        return true;
+    }
+
+
     public boolean regbyemail(final String memberGubun, final String name, final String email, final String mobile, final String nickName, final String parkstemID, final String parkstemPW){
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -89,6 +95,7 @@ public class ServerClient {
             ex.printStackTrace();
             return false;
         }
+
     }
 
     private JSONObject connect(HashMap<String, String> hashMap) {

@@ -4,7 +4,5 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash"
-    tools:context=".activity.MainActivity">
-    <!--여기 context 부분은 연동시킬 자바파일에 따라 바꿔줘야함-->
+    android:background="@drawable/splash">
 </RelativeLayout>
