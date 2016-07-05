@@ -27,6 +27,13 @@
         <activity android:name=".activity.InputCarActivity" />
         <activity android:name=".activity.InputCardActivity" />
         <activity android:name=".activity.InputNewCardActivity" />
+
+
+        <!-- 네이버 아이디로 로그인에서 사용하는 액티비티를 등록 -->
+        <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginInAppBrowserActivity"
+            android:label="OAuth2.0 In-app"/>
     </application>
 
 </manifest>
