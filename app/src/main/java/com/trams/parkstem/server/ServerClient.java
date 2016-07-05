@@ -14,6 +14,31 @@ import java.util.HashMap;
  * Created by monc2 on 2016-07-04.
  */
 public class ServerClient {
+    static String uniqueID;
+    static String msg;
+
+    static String mycar;
+    static String mycard;
+    static String[][] paymentinfo;
+
+    static String local_id;
+    static String in_date;
+    static String out_date;
+    static String total;
+
+    static String[][] carinfo;
+    static String indate;
+    static String outdate;
+
+    static String[][] cardlist;
+
+    static String itemTotalCount;
+    static String pageCount;
+
+
+    static String[][] datinfo;
+
+
     public static ServerClient serverClient;
     public static ServerClient getInstance() {
         if(serverClient == null) {
@@ -30,71 +55,13 @@ public class ServerClient {
 
     private final String TAG = getClass().getSimpleName();
 
-    public static final String LOGIN_URL = "http://app.parkstem.com/api/member_login.php";
 
 
-    public boolean login(final String parkstemID, final String parkstemPW) {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                HashMap<String, String> hashMap = new HashMap<>();
-                hashMap.put("parkstemID", parkstemID);
-                hashMap.put("parkstemPW", parkstemPW);
-                result = connect(hashMap);
-            }
-        });
-
-        try {
-            thread.start();
-            thread.join();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        try {
-            return (result.getInt("res") == 1);
-        } catch (JSONException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
-
-
-    public boolean regbyemail(final String memberGubun, final String name, final String email, final String mobile, final String nickName, final String parkstemID, final String parkstemPW){
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                HashMap<String, String> hashMap = new HashMap<>();
-                hashMap.put("memberGubun",memberGubun);
-                hashMap.put("name", name);
-                hashMap.put("email", email);
-                hashMap.put("mobile", mobile);
-                hashMap.put("nickName", nickName);
-                hashMap.put("parkstemID", parkstemID);
-                hashMap.put("parkstemPW", parkstemPW);
-                result = connect(hashMap);
-            }
-        });
-
-        try {
-            thread.start();
-            thread.join();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        try {
-            return (result.getInt("res") == 1);
-        } catch (JSONException ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
-
-    private JSONObject connect(HashMap<String, String> hashMap) {
+    private JSONObject connect(HashMap<String, String> hashMap, String urlStr) {
         try {
             String jsonStr;
-            URL url = new URL(LOGIN_URL);HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            URL url = new URL(urlStr);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
 
             con.setConnectTimeout(10000);
             con.setDoOutput(true);
@@ -129,5 +96,102 @@ public class ServerClient {
             return null;
         }
 
+    }
+
+    public boolean login(final String parkstemID, final String parkstemPW) {
+
+        final String LOGIN_URL = "http://app.parkstem.com/api/member_login.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("parkstemID", parkstemID);
+                hashMap.put("parkstemPW", parkstemPW);
+                result = connect(hashMap, LOGIN_URL);
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            return (result.getInt("res") == 1);
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+
+    public boolean regbyemail(final String memberGubun, final String name, final String email, final String mobile, final String nickName, final String ID){
+        final String JOIN_URL = "http://app.parkstem.com/api/member_join.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("memberGubun",memberGubun);
+                hashMap.put("name", name);
+                hashMap.put("email", email);
+                hashMap.put("mobile", mobile);
+                hashMap.put("nickName", nickName);
+                if(memberGubun=="kakao"){
+                    hashMap.put("kakaoID", ID);
+                }
+                else if(memberGubun=="fb"){
+                    hashMap.put("facebookID", ID);
+                }
+                else if(memberGubun=="naver"){
+                    hashMap.put("naverID", ID);
+                }
+                hashMap.put("parkstemID", ID);
+                result = connect(hashMap, JOIN_URL);
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            return (result.getInt("res") == 1);
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean dashboard(final String uniqueID){
+        final String DASH_URL = "http://app.parkstem.com/api/dashboard.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("uniqueID",uniqueID);
+                result = connect(hashMap, DASH_URL);
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            msg = result.getString("msg");
+            mycar = result.getString("mycar");
+            return (result.getInt("res") == 1);
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            return false;
+        }
     }
 }
