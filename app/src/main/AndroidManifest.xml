@@ -20,6 +20,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.SplashActivity" />
+        <activity android:name=".activity.LoginActivity" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+        <activity android:name=".activity.AssignActivity" />
+        <activity android:name=".activity.MobileActivity" />
+        <activity android:name=".activity.InputCarActivity" />
+        <activity android:name=".activity.InputCardActivity" />
+        <activity android:name=".activity.InputNewCardActivity" />
     </application>
 
 </manifest>
