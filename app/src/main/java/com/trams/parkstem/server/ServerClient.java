@@ -1,5 +1,6 @@
 package com.trams.parkstem.server;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,6 +20,7 @@ public class ServerClient {
 
     static String mycar;
     static String mycard;
+    //card_name, price, pay_date
     static String[][] paymentinfo;
 
     static String local_id;
@@ -119,6 +121,8 @@ public class ServerClient {
         }
 
         try {
+            msg = result.getString("msg");
+            uniqueID = result.getString("uniqueID");
             return (result.getInt("res") == 1);
         } catch (JSONException ex) {
             ex.printStackTrace();
@@ -160,6 +164,8 @@ public class ServerClient {
         }
 
         try {
+            msg = result.getString("msg");
+            uniqueID = result.getString("uniqueID");
             return (result.getInt("res") == 1);
         } catch (JSONException ex) {
             ex.printStackTrace();
@@ -167,7 +173,7 @@ public class ServerClient {
         }
     }
 
-    public boolean dashboard(final String uniqueID){
+    public boolean dashboard(){
         final String DASH_URL = "http://app.parkstem.com/api/dashboard.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -188,10 +194,118 @@ public class ServerClient {
         try {
             msg = result.getString("msg");
             mycar = result.getString("mycar");
+            JSONArray jdata = result.getJSONArray("data");
+            int size = jdata.length();
+            for(int i=0;i<size;i++){
+                paymentinfo = new String [size][3];
+                paymentinfo[i][0] = jdata.getJSONObject(i).getString("card_name");
+                paymentinfo[i][1] = jdata.getJSONObject(i).getString("price");
+                paymentinfo[i][2] = jdata.getJSONObject(i).getString("pay_date");
+            }
             return (result.getInt("res") == 1);
         } catch (JSONException ex) {
             ex.printStackTrace();
             return false;
         }
     }
+
+    public boolean hipass(final String hipass) {
+
+        final String LOGIN_URL = "http://app.parkstem.com/api/hipass.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("uniqueID", uniqueID);
+                hashMap.put("hipass", hipass);
+                result = connect(hashMap, LOGIN_URL);
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            msg = result.getString("msg");
+            uniqueID = result.getString("uniqueID");
+            return (result.getInt("res") == 1);
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean presentpark(){
+        final String DASH_URL = "http://app.parkstem.com/api/car_recent.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("uniqueID",uniqueID);
+                result = connect(hashMap, DASH_URL);
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            msg = result.getString("msg");
+            local_id = result.getString("local_id");
+            in_date = result.getString("in_date");
+            out_date = result.getString("out_date");
+            total = result.getString("total");
+            return (result.getInt("res") == 1);
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean regcar(final String mycar2){
+        final String DASH_URL = "http://app.parkstem.com/api/car_reg.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("uniqueID",uniqueID);
+                hashMap.put("mycar", mycar2);
+                result = connect(hashMap, DASH_URL);
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            msg = result.getString("msg");
+            mycar = result.getString("mycar");
+            JSONArray jdata = result.getJSONArray("data");
+            int size = jdata.length();
+            for(int i=0;i<size;i++){
+                paymentinfo = new String [size][3];
+                paymentinfo[i][0] = jdata.getJSONObject(i).getString("card_name");
+                paymentinfo[i][1] = jdata.getJSONObject(i).getString("price");
+                paymentinfo[i][2] = jdata.getJSONObject(i).getString("pay_date");
+            }
+            return (result.getInt("res") == 1);
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    //asdfasdf
 }
