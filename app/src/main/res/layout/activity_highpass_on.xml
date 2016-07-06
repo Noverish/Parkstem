@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="9dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:gravity="center"
+            android:background="@drawable/btn_2"
+            android:orientation="horizontal"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp">
+            <RelativeLayout
+                android:background="@drawable/img_mobileticket_2"
+                android:layout_width="23dp"
+                android:layout_height="16dp">
+            </RelativeLayout>
+
+            <TextView
+                android:textSize="19sp"
+                android:textColor="#ffffff"
+                android:text="모바일 주차권"
+                android:layout_marginLeft="11dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:background="@drawable/btn_2"
+            android:orientation="horizontal"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp">
+            <RelativeLayout
+                android:background="@drawable/img_tickethistory"
+                android:layout_width="12dp"
+                android:layout_height="20dp">
+            </RelativeLayout>
+
+            <TextView
+                android:textSize="19sp"
+                android:textColor="#ffffff"
+                android:text="주차권 구매내역"
+                android:layout_marginLeft="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+        <ImageView
+            android:src="@drawable/img_home_person_2"
+            android:layout_marginTop="40dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+        
+        <RelativeLayout
+            android:background="@drawable/btn_hipass_1"
+            android:layout_marginTop="40dp"
+            android:layout_width="120dp"
+            android:layout_height="46dp">
+            <RelativeLayout
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="4dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/btn_hipass_in"
+                android:layout_width="38dp"
+                android:layout_height="38dp"></RelativeLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/highpass_off_text"
+            android:layout_centerHorizontal="true"
+            android:textColor="#5d5d5d"
+            android:textSize="34sp"
+            android:text="하이패스"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        
+        <ImageView
+            android:layout_marginTop="4dp"
+            android:src="@drawable/btn_question"
+            android:layout_toRightOf="@+id/highpass_off_text"
+            android:layout_width="22dp"
+            android:layout_height="22dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_gravity="right"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/btn_0_middle"
+        android:layout_width="64dp"
+        android:layout_height="24dp">
+        <TextView
+            android:layout_centerInParent="true"
+            android:textColor="#5d5d5d"
+            android:textSize="14sp"
+            android:text="MORE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:background="@drawable/btn_3"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <RelativeLayout
+            android:layout_width="79dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_centerInParent="true"
+                android:textSize="21sp"
+                android:text="4.12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <TextView
+            android:gravity="center_vertical"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:text="호텔아르누보\n주차장"
+            android:layout_width="90dp"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:layout_marginLeft="10dp"
+            android:layout_width="80dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_centerInParent="true"
+                android:textSize="21sp"
+                android:text="2h30m"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginRight="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_centerInParent="true"
+                android:textSize="21sp"
+                android:text="W30,000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <!-- \ 어떻게 출력? 16진수 FFE6 10진수 65510 -->
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <RelativeLayout
+            android:layout_width="79dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_centerInParent="true"
+                android:textSize="21sp"
+                android:text="4.14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <TextView
+            android:gravity="center_vertical"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:text="상록회관\n주차장"
+            android:layout_width="90dp"
+            android:layout_height="match_parent" />
+
+        <RelativeLayout
+            android:layout_marginLeft="10dp"
+            android:layout_width="80dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_centerInParent="true"
+                android:textSize="21sp"
+                android:text="3h"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginRight="9dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_centerInParent="true"
+                android:textSize="21sp"
+                android:text="W9,000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <!-- \ 어떻게 출력? 16진수 FFE6 10진수 65510 -->
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:background="@drawable/input_car_card"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="87dp">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"></RelativeLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</LinearLayout>
+</ScrollView>

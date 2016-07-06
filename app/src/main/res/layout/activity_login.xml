@@ -6,17 +6,14 @@
     android:background="@drawable/login_bg"
     android:paddingLeft="27sp"
     android:paddingRight="27sp"
-    android:paddingTop="310sp"
-    tools:context=".activity.MainActivity">
-    <!--여기 context 부분은 연동시킬 자바파일에 따라 바꿔줘야함-->
-    <!-- PaddingTop Original Size is 330sp -->
+    android:paddingTop="310sp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <LinearLayout
-            android:id="@+id/login_layout_naver"
+            android:id="@+id/activity_login_naver"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="46sp"

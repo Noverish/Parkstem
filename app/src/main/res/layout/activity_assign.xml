@@ -3,42 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".activity.MainActivity">
-    <!--여기 context 부분은 연동시킬 자바파일에 따라 바꿔줘야함-->
-
-    <RelativeLayout
-        android:id="@+id/assign_menu_bar"
-        android:layout_width="match_parent"
-        android:layout_height="55sp"
-        android:background="@drawable/img_main"
-        >
-        <RelativeLayout
-            android:layout_marginLeft="7sp"
-            android:layout_width="24sp"
-            android:layout_height="17sp"
-            android:layout_centerVertical="true"
-            android:background="@drawable/btn_menu"
-            >
-        </RelativeLayout>
-        
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="PARKSTEM"
-                android:textSize="22sp"
-                android:textColor="#000000"
-                />
-        </RelativeLayout>
-    </RelativeLayout>
+    android:background="#FFFFFF">
 
     <ScrollView
-        android:layout_below="@id/assign_menu_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -64,7 +31,7 @@
                     android:hint="이름"
                     android:textSize="17sp"
                     android:textColorHint="#bcc1c5"
-                    android:textColor="#bcc1c5"
+                    android:textColor="#000000"
                     android:layout_marginRight="31sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -83,7 +50,7 @@
                     android:hint="이메일 주소"
                     android:textSize="17sp"
                     android:textColorHint="#bcc1c5"
-                    android:textColor="#bcc1c5"
+                    android:textColor="#000000"
                     android:layout_marginRight="31sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -102,7 +69,7 @@
                     android:hint="비밀번호(4자리 이상)"
                     android:textSize="17sp"
                     android:textColorHint="#bcc1c5"
-                    android:textColor="#bcc1c5"
+                    android:textColor="#000000"
                     android:layout_marginRight="31sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -121,7 +88,7 @@
                     android:hint="핸드폰 번호"
                     android:textSize="17sp"
                     android:textColorHint="#bcc1c5"
-                    android:textColor="#bcc1c5"
+                    android:textColor="#000000"
                     android:layout_marginRight="31sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />

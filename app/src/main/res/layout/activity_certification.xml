@@ -3,49 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".activity.MainActivity">
-    <!--여기 context 부분은 연동시킬 자바파일에 따라 바꿔줘야함-->
 
-    <RelativeLayout
-        android:id="@+id/cerification_menu"
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@drawable/img_main"
-        >
-        <RelativeLayout
-            android:layout_marginLeft="7dp"
-            android:layout_width="24dp"
-            android:layout_height="17dp"
-            android:layout_centerVertical="true"
-            android:background="@drawable/btn_menu"
-            >
-        </RelativeLayout>
+    android:background="#FFFFFF">
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="PARKSTEM"
-                android:textSize="22sp"
-                android:textColor="#000000"
-                />
-        </RelativeLayout>
-    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/cerification_menu2"
         android:background="@drawable/btn_2"
-        android:layout_below="@id/cerification_menu"
         android:layout_width="match_parent"
         android:layout_height="32dp">
 
         <TextView
-            android:id="@+id/cerification_skip"
+            android:id="@+id/input_car_skip"
             android:layout_centerInParent="true"
             android:textColor="#ffffff"
             android:textSize="22sp"
@@ -56,7 +25,7 @@
         <RelativeLayout
             android:layout_marginLeft="2dp"
             android:background="@drawable/btn_skip"
-            android:layout_toRightOf="@id/cerification_skip"
+            android:layout_toRightOf="@id/input_car_skip"
             android:layout_centerVertical="true"
             android:layout_width="11dp"
             android:layout_height="16dp"></RelativeLayout>
