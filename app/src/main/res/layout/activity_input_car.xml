@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/no_nav_toolbar" />
 
     <RelativeLayout
         android:id="@+id/input_car_menu2"
@@ -26,51 +30,51 @@
             android:layout_toRightOf="@id/input_car_skip"
             android:layout_centerVertical="true"
             android:layout_width="11dp"
-            android:layout_height="16dp"></RelativeLayout>
+            android:layout_height="16dp"/>
     </RelativeLayout>
 
     <ScrollView
         android:layout_below="@id/input_car_menu2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <LinearLayout
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:layout_marginTop="105dp"
-            android:src="@drawable/img_car"
-            android:layout_width="88dp"
-            android:layout_height="76dp" />
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginTop="105dp"
+                android:src="@drawable/img_car"
+                android:layout_width="88dp"
+                android:layout_height="76dp" />
 
-        <TextView
-            android:id="@+id/input_first_car"
-            android:layout_marginTop="55dp"
-            android:text="@string/activity_input_car_register"
-            android:textColor="#000000"
-            android:textSize="27sp"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <RelativeLayout
-            android:id="@+id/input_new_car"
-            android:layout_marginTop="22dp"
-            android:background="@drawable/btn_1_middle"
-            android:layout_width="174dp"
-            android:layout_height="44dp">
             <TextView
-                android:text="차량추가등록"
-                android:textColor="#ffffff"
+                android:id="@+id/input_first_car"
+                android:layout_marginTop="55dp"
+                android:text="@string/activity_input_car_register"
+                android:textColor="#000000"
                 android:textSize="27sp"
-                android:layout_centerInParent="true"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-        </RelativeLayout>
-    </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/input_new_car"
+                android:layout_marginTop="22dp"
+                android:background="@drawable/btn_1_middle"
+                android:layout_width="174dp"
+                android:layout_height="44dp">
+                <TextView
+                    android:text="차량추가등록"
+                    android:textColor="#ffffff"
+                    android:textSize="27sp"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </LinearLayout>
 
 
 
     </ScrollView>
-</RelativeLayout>
+</LinearLayout>

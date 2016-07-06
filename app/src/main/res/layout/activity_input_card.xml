@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <include
+        layout="@layout/no_nav_toolbar" />
 
     <RelativeLayout
         android:id="@+id/input_car_menu2"
@@ -33,44 +37,44 @@
         android:layout_below="@id/input_car_menu2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <LinearLayout
-        android:gravity="center"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:layout_marginTop="105dp"
-            android:src="@drawable/img_card"
-            android:layout_width="110dp"
-            android:layout_height="74dp" />
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_marginTop="105dp"
+                android:src="@drawable/img_card"
+                android:layout_width="110dp"
+                android:layout_height="74dp" />
 
-        <TextView
-            android:id="@+id/input_first_card"
-            android:layout_marginTop="55dp"
-            android:text="카드등록"
-            android:textColor="#000000"
-            android:textSize="27sp"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <RelativeLayout
-            android:id="@+id/input_new_card"
-            android:layout_marginTop="22dp"
-            android:background="@drawable/btn_1_middle"
-            android:layout_width="174dp"
-            android:layout_height="44dp">
             <TextView
-                android:text="카드추가등록"
-                android:textColor="#ffffff"
+                android:id="@+id/input_first_card"
+                android:layout_marginTop="55dp"
+                android:text="카드등록"
+                android:textColor="#000000"
                 android:textSize="27sp"
-                android:layout_centerInParent="true"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-        </RelativeLayout>
-    </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/input_new_card"
+                android:layout_marginTop="22dp"
+                android:background="@drawable/btn_1_middle"
+                android:layout_width="174dp"
+                android:layout_height="44dp">
+                <TextView
+                    android:text="카드추가등록"
+                    android:textColor="#ffffff"
+                    android:textSize="27sp"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </LinearLayout>
 
 
 
     </ScrollView>
-</RelativeLayout>
+</LinearLayout>
