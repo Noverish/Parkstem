@@ -307,5 +307,5 @@ public class ServerClient {
         }
     }
 
-    //ㅁㄴㅇㄻㄴㅇㄻㄴㅇㄹ
+    //moon
 }
