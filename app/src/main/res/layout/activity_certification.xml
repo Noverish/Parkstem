@@ -14,7 +14,7 @@
         android:layout_height="32dp">
 
         <TextView
-            android:id="@+id/cerification_skip"
+            android:id="@+id/input_car_skip"
             android:layout_centerInParent="true"
             android:textColor="#ffffff"
             android:textSize="22sp"
@@ -25,7 +25,7 @@
         <RelativeLayout
             android:layout_marginLeft="2dp"
             android:background="@drawable/btn_skip"
-            android:layout_toRightOf="@id/cerification_skip"
+            android:layout_toRightOf="@id/input_car_skip"
             android:layout_centerVertical="true"
             android:layout_width="11dp"
             android:layout_height="16dp"></RelativeLayout>
