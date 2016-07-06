@@ -609,14 +609,22 @@ public class ServerClient {
         }
     }
 
-    public boolean TicketInfoRegister(){
-        final String CAROUT_URL = "http://app.parkstem.com/api/car_out.php";
+    public boolean TicketInfoRegister(final String caseinfo, final String index, final String user_name, final String user_phone, final String user_email, final String start_date, final String end_date, final String Tprice){
+        final String TIREG_URL = "http://app.parkstem.com/api/ticket_pay.php";
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 HashMap<String, String> hashMap = new HashMap<>();
                 hashMap.put("uniqueID",uniqueID);
-                result = connect(hashMap, CAROUT_URL);
+                hashMap.put("gubun",caseinfo);
+                hashMap.put("idx",index);
+                hashMap.put("user_name",user_name);
+                hashMap.put("user_phone",user_phone);
+                hashMap.put("user_email",user_email);
+                hashMap.put("start_date",start_date);
+                hashMap.put("end_date",end_date);
+                hashMap.put("price",Tprice);
+                result = connect(hashMap, TIREG_URL);
             }
         });
 
@@ -629,8 +637,6 @@ public class ServerClient {
 
         try {
             msg = result.getString("msg");
-            outdate = result.getString("outdate");
-            local_id = result.getString("local_id");
             return (result.getInt("res") == 1);
         } catch (JSONException ex) {
             ex.printStackTrace();
