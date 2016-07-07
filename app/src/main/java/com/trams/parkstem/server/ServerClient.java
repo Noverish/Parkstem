@@ -55,7 +55,7 @@ public class ServerClient {
         return serverClient;
     }
 
-    private ServerClient() {
+    public ServerClient() {
 
     }
 
