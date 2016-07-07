@@ -56,7 +56,7 @@ public class InputNewCardActivity extends AppCompatActivity {
         if(view.getId() == R.id.activity_input_new_card_radio_company && cardType == CARD_TYPE_PERSON) {
             cardType = CARD_TYPE_COMPANY;
             companyImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_ground));
-            companyText.setTextColor(ContextCompat.getColor(this, R.color.black));
+            companyText.setTextColor(ContextCompat.getColor(this, R.color.BLACK));
             personImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_round));
             peresonText.setTextColor(ContextCompat.getColor(this, R.color.gray));
         }
@@ -65,7 +65,7 @@ public class InputNewCardActivity extends AppCompatActivity {
             companyImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_round));
             companyText.setTextColor(ContextCompat.getColor(this, R.color.gray));
             personImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_ground));
-            peresonText.setTextColor(ContextCompat.getColor(this, R.color.black));
+            peresonText.setTextColor(ContextCompat.getColor(this, R.color.BLACK));
         }
     }
 }
