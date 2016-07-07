@@ -105,7 +105,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <Button
+                    <RelativeLayout
                         android:id="@+id/assign_agree"
                         android:layout_marginLeft="64sp"
                         android:background="@drawable/box_check"

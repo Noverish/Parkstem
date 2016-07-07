@@ -29,4 +29,9 @@
         android:orderInCategory="100"
         android:title="@string/action_card_new_card"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_mobile_ticket"
+        android:orderInCategory="100"
+        android:title="@string/action_mobile_ticket"
+        app:showAsAction="never" />
 </menu>
