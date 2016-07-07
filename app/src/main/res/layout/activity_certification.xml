@@ -108,15 +108,17 @@
                     </RelativeLayout>
 
                     <ImageView
-                        android:background="@drawable/btn_m_1"
+                        android:background="@drawable/btn_m_2"
                         android:layout_marginLeft="34dp"
                         android:layout_width="33dp"
-                        android:layout_height="33dp" />
+                        android:layout_height="33dp"
+                        android:id="@+id/activity_certification_man" />
                     <ImageView
                         android:background="@drawable/btn_w_2"
                         android:layout_marginLeft="6dp"
                         android:layout_width="33dp"
-                        android:layout_height="33dp" />
+                        android:layout_height="33dp"
+                        android:id="@+id/activity_certification_woman" />
 
                 </LinearLayout>
 
@@ -147,7 +149,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <RelativeLayout
-                        android:id="@+id/input_car"
+                        android:id="@+id/activity_certification_input_car"
                         android:orientation="vertical"
                         android:layout_weight="1"
                         android:layout_width="wrap_content"
@@ -155,7 +157,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/input_card"
+                        android:id="@+id/activity_certification_input_card"
                         android:orientation="vertical"
                         android:layout_gravity="center"
                         android:layout_weight="1"
