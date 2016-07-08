@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.trams.parkstem.R;
+import com.trams.parkstem.server.ServerClient;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity
     private boolean hipassOn;
 
     private final String TAG = getClass().getSimpleName();
+    ServerClient SC = new ServerClient();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,22 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 onHipassButtonClicked();
+            }
+        });
+
+        RelativeLayout move1, move2;
+        move1 = (RelativeLayout) findViewById(R.id.activity_hipass_tocarregister);
+        move1.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                movefromHipasstoCarRegister();
+            }
+        });
+        move2 = (RelativeLayout) findViewById(R.id.activity_hipass_tocardregister);
+        move2.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                movefromHipasstoCardRegister();
             }
         });
     }
@@ -148,12 +166,23 @@ public class MainActivity extends AppCompatActivity
         if(hipassOn) {
             getLayoutInflater().inflate(R.layout.hipass_button_off, hipassButton);
             human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person));
+            SC.HipassOn("Y");
         } else {
             getLayoutInflater().inflate(R.layout.hipass_button_on, hipassButton);
             human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person_2));
+            SC.HipassOn("N");
         }
 
         hipassOn = !hipassOn;
     }
-    //유재효
+
+
+    private void movefromHipasstoCarRegister(){
+        Intent intent = new Intent(this, InputCarActivity.class);
+        startActivity(intent);
+    }
+    private void movefromHipasstoCardRegister(){
+        Intent intent = new Intent(this, InputCardActivity.class);
+        startActivity(intent);
+    }
 }
