@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
         else if (id == R.id.action_mobile) {
-            Intent intent = new Intent(this, MobileActivity.class);
+            Intent intent = new Intent(this, MobileCertificationActivity.class);
             startActivity(intent);
             return true;
         }
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
         else if (id == R.id.action_mobile_ticket) {
-            Intent intent = new Intent(this, TicketActivity.class);
+            Intent intent = new Intent(this, TicketMobileListActivity.class);
             startActivity(intent);
             return true;
         }
@@ -135,7 +135,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_park_status) {
-            // Handle the camera action
+            Intent intent = new Intent(this, ParkStatusActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_car_number) {
             Intent intent = new Intent(this, InputCarActivity.class);
             startActivity(intent);
@@ -143,9 +144,11 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, InputCardActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_long_ticket) {
-
+            Intent intent = new Intent(this, ManageLongTicketActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_park_ticket) {
-
+            Intent intent = new Intent(this, ManageTicketActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_park_list) {
 
         } else if (id == R.id.nav_pay_list) {

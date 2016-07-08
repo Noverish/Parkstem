@@ -193,7 +193,7 @@
             android:layout_alignParentRight="true"
             android:layout_gravity="center_vertical|right"
             android:textSize="23sp"
-            android:text="W12,000"
+            android:text="&#x20a9;12,000"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>

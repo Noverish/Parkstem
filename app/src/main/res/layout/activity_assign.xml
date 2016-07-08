@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <include
-        layout="@layout/no_nav_toolbar" />
+        layout="@layout/toolbar_empty" />
 
     <ScrollView
         android:layout_width="match_parent"

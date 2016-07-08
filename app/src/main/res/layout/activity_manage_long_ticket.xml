@@ -24,7 +24,7 @@
         android:layout_height="wrap_content">
 
         <!-- space of semi_ticket view -->
-        <!-- 상세정보 구매하기는 ticket_view 이용-->
+        <!-- 상세정보 구매하기는 ticket_mobile_item 이용-->
 
     </LinearLayout>
 

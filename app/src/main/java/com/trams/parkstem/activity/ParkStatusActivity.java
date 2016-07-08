@@ -7,12 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import com.trams.parkstem.R;
 
 /**
- * Created by JaeHyo on 2016-07-06.
+ * Created by Noverish on 2016-07-08.
  */
-public class TicketActivity extends AppCompatActivity{
+public class ParkStatusActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mobile_ticket);
+        setContentView(R.layout.activity_park_state);
     }
 }

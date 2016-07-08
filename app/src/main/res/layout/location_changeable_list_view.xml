@@ -1,88 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/location_changeable_list_view_edit_mode"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:id="@+id/location_changeable_list_view_select_all_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="11dp"
-                android:layout_height="11dp"
-                android:layout_marginLeft="17dp"
-                android:layout_gravity="center_vertical"
-                android:background="@drawable/btn_check"/>
+        android:layout_height="match_parent"
+        android:visibility="invisible">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_gravity="center_vertical"
-                android:text="전체선택"
-                android:textSize="11sp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/location_changeable_list_view_delete_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignParentRight="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <LinearLayout
+                android:id="@+id/location_changeable_list_view_select_all_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <ImageView
                     android:layout_width="11dp"
                     android:layout_height="11dp"
+                    android:layout_marginLeft="17dp"
                     android:layout_gravity="center_vertical"
-                    android:background="@drawable/btn_delete"/>
+                    android:background="@drawable/btn_check"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="3dp"
-                    android:text="삭제"
-                    android:textColor="#ba1e45"
+                    android:layout_gravity="center_vertical"
+                    android:text="전체선택"
                     android:textSize="11sp"/>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/location_changeable_list_view_edti_complete_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginLeft="15dp">
-                <ImageView
-                    android:layout_width="11dp"
-                    android:layout_height="11dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/btn_edit"/>
-
-                <TextView
-                    android:layout_width="50dp"
+                android:layout_alignParentRight="true">
+                <LinearLayout
+                    android:id="@+id/location_changeable_list_view_delete_button"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="3dp"
-                    android:text="편집완료"
-                    android:textSize="11sp"/>
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="11dp"
+                        android:layout_height="11dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/btn_delete"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="3dp"
+                        android:text="삭제"
+                        android:textColor="#ba1e45"
+                        android:textSize="11sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/location_changeable_list_view_edti_complete_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="15dp">
+                    <ImageView
+                        android:layout_width="11dp"
+                        android:layout_height="11dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/btn_edit"/>
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="3dp"
+                        android:text="편집완료"
+                        android:textSize="11sp"/>
+                </LinearLayout>
+
             </LinearLayout>
 
+        </RelativeLayout>
+
+        <!--com.woxthebox.draglistview.DragListView
+            android:id="@+id/location_changeable_list_view_drag_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.woxthebox.draglistview.DragListView-->
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/location_changeable_list_view_normal_mode"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:id="@+id/location_changeable_list_view_edit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="right">
+            <ImageView
+                android:layout_width="11dp"
+                android:layout_height="11dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/btn_edit"/>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="3dp"
+                android:text="편집"
+                android:textSize="11sp"/>
         </LinearLayout>
 
-    </RelativeLayout>
+        <ListView
+            android:id="@+id/location_changeable_list_view_normal_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <com.woxthebox.draglistview.DragListView
-        android:id="@+id/location_changeable_list_view_drag_list_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        </ListView>
+    </LinearLayout>
+</FrameLayout>
 
-    </com.woxthebox.draglistview.DragListView>
 
-</LinearLayout>
+
+

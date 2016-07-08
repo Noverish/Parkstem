@@ -16,14 +16,14 @@ import com.trams.parkstem.R;
 /**
  * Created by Noverish on 2016-07-04.
  */
-public class MobileActivity extends AppCompatActivity {
+public class MobileCertificationActivity extends AppCompatActivity {
     ImageView man, woman;
     RelativeLayout move1, move2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_certification);
+        setContentView(R.layout.activity_mobile_certification);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

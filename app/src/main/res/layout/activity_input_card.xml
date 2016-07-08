@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <include
-        layout="@layout/no_nav_toolbar" />
+        layout="@layout/toolbar_empty" />
 
     <RelativeLayout
         android:id="@+id/input_car_menu2"

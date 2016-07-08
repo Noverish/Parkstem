@@ -70,7 +70,7 @@ public class LocationChangeableListView extends LinearLayout {
         });
 
         dragListView.setLayoutManager(new LinearLayoutManager(context));
-        listAdapter = new ItemAdapter(context, listData, R.layout.location_changeable_list_view_item, R.id.list_item_move_image, false);
+        listAdapter = new ItemAdapter(context, listData, R.layout.location_changeable_list_item_editing, R.id.list_item_move_image, false);
         dragListView.setAdapter(listAdapter, false);
         dragListView.setCanDragHorizontally(false);
 

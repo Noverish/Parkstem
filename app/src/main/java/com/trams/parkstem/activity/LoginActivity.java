@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Log.e("activity_mobile_ticket","onCreate");
+        Log.e("activity_ticket_mobile_list","onCreate");
 
         /**
          * OAuthLoginHandler를 startOAuthLoginActivity() 메서드 호출 시 파라미터로 전달하거나 OAuthLoginButton
@@ -76,7 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         naverLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("activity_mobile_ticket","naver");
+                Log.e("activity_ticket_mobile_list","naver");
                 mOAuthLoginModule.startOauthLoginActivity(mContext, mOAuthLoginHandler);
             }
         });

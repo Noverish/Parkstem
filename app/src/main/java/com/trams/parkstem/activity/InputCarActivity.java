@@ -125,7 +125,7 @@ public class InputCarActivity extends AppCompatActivity {
     private void addCarNumber() {
         String carNumberStr = carNumber.getText().toString();
 
-        if(ServerClient.getInstance().regcar(carNumberStr))
+        if(ServerClient.getInstance().RegisterCar(carNumberStr))
             Toast.makeText(this, "차량번호 " + carNumberStr + "가 정상적으로 등록되었습니다",Toast.LENGTH_SHORT).show();
         else
             Toast.makeText(this, "차량번호 등록이 실패하였습니다 다시 시도해 주세요",Toast.LENGTH_SHORT).show();

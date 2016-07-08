@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <include
-                layout="@layout/no_nav_toolbar" />
+                layout="@layout/toolbar_empty" />
 
             <RelativeLayout
                 android:background="@drawable/btn_2"
