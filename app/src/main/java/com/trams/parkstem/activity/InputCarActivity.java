@@ -3,9 +3,9 @@ package com.trams.parkstem.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,10 +16,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.trams.parkstem.ItemAdapter;
 import com.trams.parkstem.R;
+import com.trams.parkstem.custom_view.LocationChangeableListView;
 import com.trams.parkstem.server.ServerClient;
-import com.woxthebox.draglistview.DragListView;
 
 import java.util.ArrayList;
 
@@ -28,7 +27,7 @@ import java.util.ArrayList;
  */
 public class InputCarActivity extends AppCompatActivity {
     private EditText carNumber;
-    private DragListView dragListView;
+    private LocationChangeableListView listView;
     private Context context;
 
     @Override
@@ -37,6 +36,14 @@ public class InputCarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_input_car);
 
         context = this;
+        listView = (LocationChangeableListView) findViewById(R.id.activity_input_car_list_view);
+        listView.setMainItemImage(ContextCompat.getDrawable(this, R.drawable.main_car));
+
+        ArrayList<Pair<Long, String>> listData = new ArrayList<>();
+        for(int i = 0;i<10;i++) {
+            listData.add(new Pair<>((long)i, "item " + i));
+        }
+        listView.setListData(listData);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -81,36 +88,7 @@ public class InputCarActivity extends AppCompatActivity {
             }
         });
 
-        dragListView = (DragListView) findViewById(R.id.activity_input_car_list_view);
-        dragListView.setDragListListener(new DragListView.DragListListener() {
-            @Override
-            public void onItemDragStarted(int position) {
-                Toast.makeText(context, "Start - position: " + position, Toast.LENGTH_SHORT).show();
-            }
 
-            @Override
-            public void onItemDragging(int itemPosition, float x, float y) {
-
-            }
-
-            @Override
-            public void onItemDragEnded(int fromPosition, int toPosition) {
-                if (fromPosition != toPosition) {
-                    Toast.makeText(context, "End - position: " + toPosition, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-
-        ArrayList<Pair<Long, String>> mItemArray = new ArrayList<>();
-        for(int i = 0;i<10;i++) {
-            mItemArray.add(new Pair<>((long)i, "item " + i));
-        }
-
-        dragListView.setLayoutManager(new LinearLayoutManager(this));
-        ItemAdapter listAdapter = new ItemAdapter(mItemArray, R.layout.list_item, R.id.list_item_image, false);
-        dragListView.setAdapter(listAdapter, false);
-        dragListView.setCanDragHorizontally(false);
     }
 
     private void setEditStatus() {

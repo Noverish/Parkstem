@@ -140,12 +140,12 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.woxthebox.draglistview.DragListView
+
+        <com.trams.parkstem.custom_view.LocationChangeableListView
             android:id="@+id/activity_input_car_list_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </com.woxthebox.draglistview.DragListView>
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"/>
 
         <ImageView
             android:id="@+id/activity_input_car_gray3"

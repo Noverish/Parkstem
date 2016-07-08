@@ -142,7 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <EditText
+                <Spinner
                     android:layout_toRightOf="@+id/input_new_card_duration"
                     android:id="@+id/input_new_card_duration_month"
                     android:background="@null"
@@ -155,7 +155,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <EditText
+                <Spinner
                     android:layout_toRightOf="@+id/input_new_card_duration"
                     android:id="@+id/input_new_card_duration_year"
                     android:background="@null"
@@ -207,26 +207,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <RelativeLayout
-                    android:layout_marginLeft="43dp"
-                    android:background="@drawable/img_round"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"></RelativeLayout>
-                <RelativeLayout
-                    android:layout_marginLeft="8dp"
-                    android:background="@drawable/img_round"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"></RelativeLayout>
-                <RelativeLayout
-                    android:layout_marginLeft="8dp"
-                    android:background="@drawable/img_round"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"></RelativeLayout>
-                <RelativeLayout
-                    android:layout_marginLeft="8dp"
-                    android:background="@drawable/img_round"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"></RelativeLayout>
+                <!--com.trams.parkstem.activity.InputNewCardActivity.HidePasswordView
+                    android:id="@+id/activity_input_new_card_hide_password_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/-->
+
+                <view class="com.trams.parkstem.activity.InputNewCardActivity$HidePasswordView"
+                    android:id="@+id/activity_input_new_card_hide_password_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
             </LinearLayout>
 
             <LinearLayout
