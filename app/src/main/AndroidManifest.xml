@@ -28,7 +28,7 @@
         <activity android:name=".activity.InputCarActivity" />
         <activity android:name=".activity.InputCardActivity" />
         <activity android:name=".activity.InputNewCardActivity" />
-
+        <activity android:name=".activity.TicketActivity" />
 
         <!-- 네이버 아이디로 로그인에서 사용하는 액티비티를 등록 -->
         <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity"
