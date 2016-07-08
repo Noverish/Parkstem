@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity
     private boolean hipassOn;
 
     private final String TAG = getClass().getSimpleName();
-    ServerClient SC = new ServerClient();
+    ServerClient SC = ServerClient.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,9 +165,11 @@ public class MainActivity extends AppCompatActivity
 
         if(hipassOn) {
             getLayoutInflater().inflate(R.layout.hipass_button_off, hipassButton);
+            SC.HipassOn("Y");
             human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person));
             SC.HipassOn("Y");
         } else {
+            SC.HipassOn("N");
             getLayoutInflater().inflate(R.layout.hipass_button_on, hipassButton);
             human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person_2));
             SC.HipassOn("N");
