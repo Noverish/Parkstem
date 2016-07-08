@@ -82,6 +82,7 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/activity_highpass_human_image"
                     android:src="@drawable/img_home_person"
                     android:layout_marginTop="40dp"
                     android:layout_width="100dp"

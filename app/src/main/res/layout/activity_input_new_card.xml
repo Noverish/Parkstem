@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:textSize="20sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/BLACK"
                     android:text="카드별칭"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -40,9 +40,10 @@
                     android:background="@null"
                     android:layout_marginLeft="36dp"
                     android:textSize="20sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/BLACK"
                     android:hint="카드별칭"
-                    android:textColorHint="#bcc1c5"
+                    android:singleLine="true"
+                    android:textColorHint="@color/gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -55,38 +56,53 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:textSize="20sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/BLACK"
                     android:text="카드종류"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <RelativeLayout
-                    android:layout_marginLeft="43dp"
-                    android:background="@drawable/img_ground"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"></RelativeLayout>
-
-                <TextView
-                    android:textSize="20sp"
-                    android:text="개인"
-                    android:textColor="#000000"
-                    android:layout_marginLeft="6dp"
+                <LinearLayout
+                    android:id="@+id/activity_input_new_card_radio_person"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/activity_input_new_card_radio_person_image"
+                        android:layout_marginLeft="43dp"
+                        android:background="@drawable/img_ground"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"/>
 
-                <RelativeLayout
-                    android:layout_marginLeft="31dp"
-                    android:background="@drawable/img_round"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"></RelativeLayout>
+                    <TextView
+                        android:id="@+id/activity_input_new_card_radio_person_text"
+                        android:textSize="20sp"
+                        android:text="개인"
+                        android:textColor="@color/BLACK"
+                        android:layout_marginLeft="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
 
-                <TextView
-                    android:textSize="20sp"
-                    android:text="법인"
-                    android:textColor="#bcc1c5"
-                    android:layout_marginLeft="6dp"
+                <LinearLayout
+                    android:id="@+id/activity_input_new_card_radio_company"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:id="@+id/activity_input_new_card_radio_company_image"
+                        android:layout_marginLeft="31dp"
+                        android:background="@drawable/img_round"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"/>
+
+                    <TextView
+                        android:id="@+id/activity_input_new_card_radio_company_text"
+                        android:textSize="20sp"
+                        android:text="법인"
+                        android:textColor="@color/gray"
+                        android:layout_marginLeft="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -96,7 +112,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:textSize="20sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/BLACK"
                     android:text="카드번호"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -106,9 +122,10 @@
                     android:background="@null"
                     android:layout_marginLeft="36dp"
                     android:textSize="20sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/BLACK"
                     android:hint="카드번호"
-                    android:textColorHint="#bcc1c5"
+                    android:singleLine="true"
+                    android:textColorHint="@color/gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -120,32 +137,34 @@
                 <TextView
                     android:id="@+id/input_new_card_duration"
                     android:textSize="20sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/BLACK"
                     android:text="유효기간"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <EditText
+                <Spinner
                     android:layout_toRightOf="@+id/input_new_card_duration"
                     android:id="@+id/input_new_card_duration_month"
                     android:background="@null"
                     android:layout_marginLeft="36dp"
                     android:textSize="20sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/BLACK"
                     android:hint="1월"
-                    android:textColorHint="#bcc1c5"
+                    android:singleLine="true"
+                    android:textColorHint="@color/gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <EditText
+                <Spinner
                     android:layout_toRightOf="@+id/input_new_card_duration"
                     android:id="@+id/input_new_card_duration_year"
                     android:background="@null"
                     android:layout_marginLeft="90dp"
                     android:textSize="20sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/BLACK"
                     android:hint="2016년"
-                    android:textColorHint="#bcc1c5"
+                    android:singleLine="true"
+                    android:textColorHint="@color/gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </RelativeLayout>
@@ -157,7 +176,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:textSize="20sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/BLACK"
                     android:text="생년월일"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -167,9 +186,10 @@
                     android:background="@null"
                     android:layout_marginLeft="36dp"
                     android:textSize="20sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/BLACK"
                     android:hint="생년월일(6자리)"
-                    android:textColorHint="#bcc1c5"
+                    android:singleLine="true"
+                    android:textColorHint="@color/gray"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -182,31 +202,21 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:textSize="20sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/BLACK"
                     android:text="비밀번호"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <RelativeLayout
-                    android:layout_marginLeft="43dp"
-                    android:background="@drawable/img_round"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"></RelativeLayout>
-                <RelativeLayout
-                    android:layout_marginLeft="8dp"
-                    android:background="@drawable/img_round"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"></RelativeLayout>
-                <RelativeLayout
-                    android:layout_marginLeft="8dp"
-                    android:background="@drawable/img_round"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"></RelativeLayout>
-                <RelativeLayout
-                    android:layout_marginLeft="8dp"
-                    android:background="@drawable/img_round"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"></RelativeLayout>
+                <!--com.trams.parkstem.activity.InputNewCardActivity.HidePasswordView
+                    android:id="@+id/activity_input_new_card_hide_password_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/-->
+
+                <view class="com.trams.parkstem.activity.InputNewCardActivity$HidePasswordView"
+                    android:id="@+id/activity_input_new_card_hide_password_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
             </LinearLayout>
 
             <LinearLayout
@@ -216,7 +226,7 @@
                 android:layout_height="wrap_content">
                 <TextView
                     android:textSize="20sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/BLACK"
                     android:text="유의사항"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -228,7 +238,7 @@
                 <TextView
                     android:layout_marginRight="37dp"
                     android:textSize="12sp"
-                    android:textColor="#bcc1c5"
+                    android:textColor="@color/gray"
                     android:text="더보기"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -246,7 +256,7 @@
                 <TextView
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="12dp"
-                    android:textColor="#bcc1c5"
+                    android:textColor="@color/gray"
                     android:textSize="12dp"
                     android:text="결제카드를 등록 해 두시면 결제시마다 카드정보를\n등록하는 불편없이 편리한 결제가 가능합니다."
                     android:layout_width="wrap_content"
@@ -267,7 +277,7 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp" />
                 <TextView
-                    android:textColor="#000000"
+                    android:textColor="@color/BLACK"
                     android:textSize="20sp"
                     android:layout_marginLeft="12dp"
                     android:text="아래 이용약관에 모두 동의합니다"
@@ -281,14 +291,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:textColor="#bcc1c5"
+                    android:textColor="@color/gray"
                     android:textSize="12sp"
                     android:text="정기과금 이용약관"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:layout_marginLeft="155dp"
-                    android:textColor="#bcc1c5"
+                    android:textColor="@color/gray"
                     android:textSize="12sp"
                     android:text="전자금융거래 이용약관"
                     android:layout_width="wrap_content"
@@ -300,14 +310,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:textColor="#bcc1c5"
+                    android:textColor="@color/gray"
                     android:textSize="12sp"
                     android:text="개인정보 수집 및 이용안내"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
                     android:layout_marginLeft="155dp"
-                    android:textColor="#bcc1c5"
+                    android:textColor="@color/gray"
                     android:textSize="12sp"
                     android:text="개인정보제공 및 위탁안내"
                     android:layout_width="wrap_content"
@@ -319,7 +329,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:textColor="#bcc1c5"
+                    android:textColor="@color/gray"
                     android:textSize="12sp"
                     android:text="고유식별정보 수집 및 이용안내"
                     android:layout_width="wrap_content"

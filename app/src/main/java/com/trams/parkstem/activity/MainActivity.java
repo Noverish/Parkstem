@@ -3,6 +3,7 @@ package com.trams.parkstem.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -11,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.trams.parkstem.R;
@@ -135,12 +137,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void onHipassButtonClicked() {
+        ImageView human = (ImageView) findViewById(R.id.activity_highpass_human_image);
         hipassButton.removeAllViews();
 
         if(hipassOn) {
             getLayoutInflater().inflate(R.layout.hipass_button_off, hipassButton);
+            human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person));
         } else {
             getLayoutInflater().inflate(R.layout.hipass_button_on, hipassButton);
+            human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person_2));
         }
 
         hipassOn = !hipassOn;
