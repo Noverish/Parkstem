@@ -5,7 +5,7 @@
 
     <RelativeLayout
         android:layout_alignParentBottom="true"
-        android:background="@drawable/input_car_card"
+        android:background="@drawable/btn_bottom"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="87dp">
@@ -18,16 +18,58 @@
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="13dp"
+                    android:src="@drawable/img_car"
+                    android:layout_width="32dp"
+                    android:layout_height="29dp" />
+
+                <TextView
+                    android:textColor="#5d5d5d"
+                    android:textSize="20sp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="13dp"
+                    android:text="차량등록"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
             </RelativeLayout>
 
             <RelativeLayout
                 android:orientation="vertical"
-                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
+                android:layout_height="match_parent">
 
+                <ImageView
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="13dp"
+                    android:src="@drawable/img_card"
+                    android:layout_width="45dp"
+                    android:layout_height="29dp" />
+
+                <TextView
+                    android:textColor="#5d5d5d"
+                    android:textSize="20sp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="13dp"
+                    android:text="차량등록"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+        
+        <RelativeLayout
+            android:layout_centerInParent="true"
+            android:background="@drawable/img_bottom_bar"
+            android:layout_width="0.4dp"
+            android:layout_height="64dp"></RelativeLayout>
 
     </RelativeLayout>
 </LinearLayout>
