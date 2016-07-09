@@ -18,7 +18,7 @@ import com.trams.parkstem.R;
  */
 public class MobileCertificationActivity extends AppCompatActivity {
     ImageView man, woman;
-    RelativeLayout move1, move2;
+    RelativeLayout movetocar, movetocard;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,15 +43,16 @@ public class MobileCertificationActivity extends AppCompatActivity {
             }
         });
 
-        move1 = (RelativeLayout) findViewById(R.id.activity_certification_input_car);
-        move1.setOnClickListener(new View.OnClickListener(){
+
+        movetocar = (RelativeLayout) findViewById(R.id.activity_certification_input_car);
+        movetocar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 movetocarRegister();
             }
         });
-        move2 = (RelativeLayout) findViewById(R.id.activity_certification_input_card);
-        move2.setOnClickListener(new View.OnClickListener(){
+        movetocard = (RelativeLayout) findViewById(R.id.activity_certification_input_card);
+        movetocard.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 movetocardRegister();

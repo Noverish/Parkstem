@@ -23,6 +23,7 @@
             <RelativeLayout
                 android:layout_marginLeft="0.2dp"
                 android:layout_toLeftOf="@+id/below_bar_center_bar"
+                android:id="@+id/activity_certification_input_car"
                 android:orientation="vertical"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -38,6 +39,7 @@
                 <TextView
                     android:textColor="#5d5d5d"
                     android:textSize="20sp"
+                    android:id="@+id/below_bar_car_register"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="13dp"
@@ -50,6 +52,7 @@
             <RelativeLayout
                 android:layout_marginRight="0.2dp"
                 android:layout_toRightOf="@+id/below_bar_center_bar"
+                android:id="@+id/activity_certification_input_card"
                 android:orientation="vertical"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
@@ -65,6 +68,7 @@
                 <TextView
                     android:textColor="#5d5d5d"
                     android:textSize="20sp"
+                    android:id="@+id/below_bar_card_register"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="13dp"
@@ -74,7 +78,7 @@
 
             </RelativeLayout>
 
-        </>
+        </RelativeLayout>
 
     </RelativeLayout>
 </LinearLayout>

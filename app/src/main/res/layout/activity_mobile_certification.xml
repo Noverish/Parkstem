@@ -140,36 +140,10 @@
 
                 </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_marginTop="10dp"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/input_car_card"
-                android:orientation="horizontal"
+            <com.trams.parkstem.custom_view.BelowBar
+                android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
-                android:layout_height="87dp">
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <RelativeLayout
-                        android:id="@+id/activity_certification_input_car"
-                        android:orientation="vertical"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/activity_certification_input_card"
-                        android:orientation="vertical"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"></RelativeLayout>
-                </LinearLayout>
-
-
-            </RelativeLayout>
+                android:layout_height="match_parent"/>
 
         </LinearLayout>
 
