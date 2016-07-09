@@ -4,12 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -18,32 +18,32 @@ import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.custom_view.LocationChangeableListView;
-import com.trams.parkstem.server.ServerClient;
-
-import java.util.ArrayList;
 
 /**
  * Created by Noverish on 2016-07-04.
  */
 public class InputCarActivity extends AppCompatActivity {
-    private EditText carNumber;
+    private EditText carNumberEditText;
+    private TextView mainCarNumberTextView;
     private LocationChangeableListView listView;
     private Context context;
+    private boolean inEditStatus;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_car);
+        this.inEditStatus = false;
 
         context = this;
         listView = (LocationChangeableListView) findViewById(R.id.activity_input_car_list_view);
         listView.setMainItemImage(ContextCompat.getDrawable(this, R.drawable.main_car));
-
-        ArrayList<Pair<Long, String>> listData = new ArrayList<>();
-        for(int i = 0;i<10;i++) {
-            listData.add(new Pair<>((long)i, "item " + i));
-        }
-        listView.setListData(listData);
+        listView.setOnMainItemChangeListener(new LocationChangeableListView.OnMainItemChangeListener() {
+            @Override
+            public void onMainItemChanged() {
+                refresh();
+            }
+        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,6 +53,12 @@ public class InputCarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setEditStatus();
+
+                //show keyboard manually
+
+                carNumberEditText.requestFocus();
+                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(carNumberEditText, 0);
             }
         });
 
@@ -61,12 +67,13 @@ public class InputCarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addCarNumber();
-                setNotEditStatus();
             }
         });
 
-        carNumber = (EditText) findViewById(R.id.activity_input_car_add_number);
-        carNumber.addTextChangedListener(new TextWatcher() {
+        mainCarNumberTextView = (TextView) findViewById(R.id.input_first_car_text);
+
+        carNumberEditText = (EditText) findViewById(R.id.activity_input_car_add_number);
+        carNumberEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -81,17 +88,25 @@ public class InputCarActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 String result = s.toString().replaceAll(" ", "");
                 if (!s.toString().equals(result)) {
-                    carNumber.setText(result);
-                    carNumber.setSelection(result.length());
+                    carNumberEditText.setText(result);
+                    carNumberEditText.setSelection(result.length());
                     // alert the user
                 }
             }
         });
 
+        refresh();
+    }
+
+    private void refresh() {
+        carNumberEditText.setText("");
+        mainCarNumberTextView.setText(listView.getMainItemContent());
 
     }
 
     private void setEditStatus() {
+        inEditStatus = true;
+
         ImageView gray1 = (ImageView) findViewById(R.id.activity_input_car_gray1);
         ImageView gray2 = (ImageView) findViewById(R.id.activity_input_car_gray2);
         ImageView gray3 = (ImageView) findViewById(R.id.activity_input_car_gray3);
@@ -107,6 +122,8 @@ public class InputCarActivity extends AppCompatActivity {
     }
 
     private void setNotEditStatus() {
+        inEditStatus = false;
+
         ImageView gray1 = (ImageView) findViewById(R.id.activity_input_car_gray1);
         ImageView gray2 = (ImageView) findViewById(R.id.activity_input_car_gray2);
         ImageView gray3 = (ImageView) findViewById(R.id.activity_input_car_gray3);
@@ -123,13 +140,31 @@ public class InputCarActivity extends AppCompatActivity {
     }
 
     private void addCarNumber() {
-        String carNumberStr = carNumber.getText().toString();
+        String carNumberStr = carNumberEditText.getText().toString();
+        if(carNumberStr.matches("\\d{2}\\D\\d{4}")) {
+            setNotEditStatus();
 
-        if(ServerClient.getInstance().RegisterCar(carNumberStr))
-            Toast.makeText(this, "차량번호 " + carNumberStr + "가 정상적으로 등록되었습니다",Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(this, "차량번호 등록이 실패하였습니다 다시 시도해 주세요",Toast.LENGTH_SHORT).show();
+            //hide keyboard
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(carNumberEditText.getWindowToken(), 0);
 
+            listView.addData(carNumberStr);
+            refresh();
+/*
+            if(ServerClient.getInstance().RegisterCar(carNumberStr))
+                Toast.makeText(this, "차량번호 " + carNumberStr + "가 정상적으로 등록되었습니다",Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this, "차량번호 등록이 실패하였습니다 다시 시도해 주세요",Toast.LENGTH_SHORT).show();*/
+        } else {
+            Toast.makeText(this, "잘못된 차량번호 입니다.",Toast.LENGTH_SHORT).show();
+        }
     }
 
+    @Override
+    public void onBackPressed() {
+        if(inEditStatus)
+            setNotEditStatus();
+        else
+            super.onBackPressed();
+    }
 }

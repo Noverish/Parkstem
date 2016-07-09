@@ -84,12 +84,12 @@
 
         </RelativeLayout>
 
-        <!--com.woxthebox.draglistview.DragListView
+        <com.woxthebox.draglistview.DragListView
             android:id="@+id/location_changeable_list_view_drag_list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </com.woxthebox.draglistview.DragListView-->
+        </com.woxthebox.draglistview.DragListView>
 
     </LinearLayout>
 
@@ -97,7 +97,8 @@
         android:id="@+id/location_changeable_list_view_normal_mode"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="invisible">
         <LinearLayout
             android:id="@+id/location_changeable_list_view_edit_button"
             android:layout_width="wrap_content"

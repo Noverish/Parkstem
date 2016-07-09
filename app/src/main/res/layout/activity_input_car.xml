@@ -66,7 +66,6 @@
 
                 <TextView
                     android:id="@+id/input_first_car_text"
-                    android:text="@string/activity_input_car_register"
                     android:textColor="#000000"
                     android:layout_marginTop="55dp"
                     android:textSize="27sp"
