@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content" />
 
             <RelativeLayout
-                android:id="@+id/input_new_card"
+                android:id="@+id/activity_input_card_register"
                 android:layout_marginTop="22dp"
                 android:background="@drawable/btn_1_middle"
                 android:layout_width="174dp"

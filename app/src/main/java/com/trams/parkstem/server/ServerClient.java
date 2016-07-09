@@ -109,7 +109,7 @@ public class ServerClient {
 
     //회원가입 및 로그인 관련 함수
 
-    public boolean Login(final String parkstemID, final String parkstemPW) {
+    public boolean login(final String parkstemID, final String parkstemPW) {
 
         final String LOGIN_URL = "http://app.parkstem.com/api/member_login.php";
         Thread thread = new Thread(new Runnable() {
@@ -140,7 +140,7 @@ public class ServerClient {
     }
 
 
-    public boolean Regbyemail(final String memberGubun, final String name, final String email, final String mobile, final String nickName, final String ID){
+    public boolean regbyemail(final String memberGubun, final String name, final String email, final String mobile, final String nickName, final String ID){
         final String JOIN_URL = "http://app.parkstem.com/api/member_join.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -183,7 +183,7 @@ public class ServerClient {
     }
 
     //회원 정보관리 함수
-    public boolean Dashboard(){
+    public boolean dashboard(){
         final String DASH_URL = "http://app.parkstem.com/api/dashboard.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -220,7 +220,7 @@ public class ServerClient {
         }
     }
 
-    public boolean HipassOn(final String hipass) {
+    public boolean hipassOn(final String hipass) {
 
         final String LOGIN_URL = "http://app.parkstem.com/api/hipass.php";
         Thread thread = new Thread(new Runnable() {
@@ -252,7 +252,7 @@ public class ServerClient {
 
     //주차 현황 함수
 
-    public boolean PresentPark(){
+    public boolean presentPark(){
         final String DASH_URL = "http://app.parkstem.com/api/car_recent.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -285,7 +285,7 @@ public class ServerClient {
 
     //차량관리 함수
 
-    public boolean RegisterCar(final String carnumber){
+    public boolean registerCar(final String carnumber){
         final String DASH_URL = "http://app.parkstem.com/api/car_reg.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -323,7 +323,7 @@ public class ServerClient {
         }
     }
 
-    public boolean ListOfCar(){
+    public boolean listOfCar(){
         final String Clist_URL = "http://app.parkstem.com/api/car_list.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -360,7 +360,7 @@ public class ServerClient {
         }
     }
 
-    public boolean PriorityCar(final String index){
+    public boolean priorityCar(final String index){
         final String Clist_URL = "http://app.parkstem.com/api/car_sort.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -398,7 +398,7 @@ public class ServerClient {
         }
     }
 
-    public boolean DeleteCar(final String carnum){
+    public boolean deleteCar(final String carnum){
         final String DELETE_URL = "http://app.parkstem.com/api/car_del.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -425,7 +425,7 @@ public class ServerClient {
         }
     }
 
-    public boolean CarIn(){
+    public boolean carIn(){
         final String CARIN_URL = "http://app.parkstem.com/api/car_in.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -454,7 +454,7 @@ public class ServerClient {
         }
     }
 
-    public boolean CarOut(){
+    public boolean carOut(){
         final String CAROUT_URL = "http://app.parkstem.com/api/car_out.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -487,7 +487,7 @@ public class ServerClient {
 
     //티켓 관련 함수
 
-    public boolean ListOfTicket() {
+    public boolean listOfTicket() {
         final String Tlist_URL = "http://app.parkstem.com/api/ticket_list.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -530,7 +530,7 @@ public class ServerClient {
         }
     }
 
-    public boolean ListOfLongTicket() {
+    public boolean listOfLongTicket() {
         final String LTlist_URL = "http://app.parkstem.com/api/longticket_list.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -573,7 +573,7 @@ public class ServerClient {
         }
     }
 
-    public boolean TicketInfo(final String parkid, final String caseinfo, final String index){
+    public boolean ticketInfo(final String parkid, final String caseinfo, final String index){
         final String T_INFO_URL = "http://app.parkstem.com/api/ticket_info.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -609,7 +609,7 @@ public class ServerClient {
         }
     }
 
-    public boolean TicketInfoRegister(final String caseinfo, final String index, final String user_name, final String user_phone, final String user_email, final String start_date, final String end_date, final String Tprice){
+    public boolean ticketInfoRegister(final String caseinfo, final String index, final String user_name, final String user_phone, final String user_email, final String start_date, final String end_date, final String Tprice){
         final String TIREG_URL = "http://app.parkstem.com/api/ticket_pay.php";
         Thread thread = new Thread(new Runnable() {
             @Override

@@ -156,10 +156,10 @@ public class MainActivity extends AppCompatActivity
 
         if(hipassOn) {
             getLayoutInflater().inflate(R.layout.hipass_button_off, hipassButton);
-            SC.HipassOn("Y");
+            SC.hipassOn("Y");
         } else {
             getLayoutInflater().inflate(R.layout.hipass_button_on, hipassButton);
-            SC.HipassOn("N");
+            SC.hipassOn("N");
         }
 
         hipassOn = !hipassOn;
