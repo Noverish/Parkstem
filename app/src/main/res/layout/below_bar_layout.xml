@@ -9,14 +9,23 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="87dp">
-        <LinearLayout
-            android:orientation="horizontal"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <RelativeLayout
+                android:id="@+id/below_bar_center_bar"
+                android:layout_centerInParent="true"
+                android:background="@drawable/img_bottom_bar"
+                android:layout_width="0.4dp"
+                android:layout_height="64dp"></RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginLeft="0.2dp"
+                android:layout_toLeftOf="@+id/below_bar_center_bar"
                 android:orientation="vertical"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <ImageView
@@ -39,9 +48,11 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:layout_marginRight="0.2dp"
+                android:layout_toRightOf="@+id/below_bar_center_bar"
                 android:orientation="vertical"
                 android:layout_weight="1"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <ImageView
@@ -63,13 +74,7 @@
 
             </RelativeLayout>
 
-        </LinearLayout>
-        
-        <RelativeLayout
-            android:layout_centerInParent="true"
-            android:background="@drawable/img_bottom_bar"
-            android:layout_width="0.4dp"
-            android:layout_height="64dp"></RelativeLayout>
+        </>
 
     </RelativeLayout>
 </LinearLayout>
