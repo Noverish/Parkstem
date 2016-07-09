@@ -1,7 +1,9 @@
 package com.trams.parkstem.activity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -10,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.trams.parkstem.R;
@@ -21,7 +24,7 @@ public class MainActivity extends AppCompatActivity
     private boolean hipassOn;
 
     private final String TAG = getClass().getSimpleName();
-    ServerClient SC = new ServerClient();
+    ServerClient SC = ServerClient.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,12 +110,17 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
         else if (id == R.id.action_mobile) {
-            Intent intent = new Intent(this, MobileActivity.class);
+            Intent intent = new Intent(this, MobileCertificationActivity.class);
             startActivity(intent);
             return true;
         }
         else if (id == R.id.action_card_new_card) {
             Intent intent = new Intent(this, InputNewCardActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.action_mobile_ticket) {
+            Intent intent = new Intent(this, TicketMobileListActivity.class);
             startActivity(intent);
             return true;
         }
@@ -127,7 +135,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_park_status) {
-            // Handle the camera action
+            Intent intent = new Intent(this, ParkStatusActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_car_number) {
             Intent intent = new Intent(this, InputCarActivity.class);
             startActivity(intent);
@@ -135,9 +144,11 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(this, InputCardActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_long_ticket) {
-
+            Intent intent = new Intent(this, ManageLongTicketActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_park_ticket) {
-
+            Intent intent = new Intent(this, ManageTicketActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_park_list) {
 
         } else if (id == R.id.nav_pay_list) {
@@ -152,14 +163,19 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void onHipassButtonClicked() {
+        ImageView human = (ImageView) findViewById(R.id.activity_highpass_human_image);
         hipassButton.removeAllViews();
 
         if(hipassOn) {
             getLayoutInflater().inflate(R.layout.hipass_button_off, hipassButton);
-            SC.hipassOn("Y");
+            SC.HipassOn("Y");
+            human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person));
+
         } else {
+            SC.HipassOn("N");
             getLayoutInflater().inflate(R.layout.hipass_button_on, hipassButton);
-            SC.hipassOn("N");
+            human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person_2));
+
         }
 
         hipassOn = !hipassOn;

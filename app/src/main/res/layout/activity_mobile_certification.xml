@@ -7,7 +7,7 @@
     android:background="#FFFFFF">
 
     <include
-        layout="@layout/no_nav_toolbar" />
+        layout="@layout/toolbar_empty" />
 
     <RelativeLayout
         android:id="@+id/cerification_menu2"
@@ -65,6 +65,7 @@
                 android:textColor="#5d5d5d"
                 android:layout_marginTop="18dp"
                 android:background="@drawable/box_edit"
+                android:singleLine="true"
                 android:layout_width="211dp"
                 android:layout_height="43dp" />
 
@@ -72,6 +73,7 @@
                 android:textSize="23dp"
                 android:textAlignment="center"
                 android:hint="생년월일"
+                android:singleLine="true"
                 android:textColorHint="#bcc1c5"
                 android:textColor="#5d5d5d"
                 android:layout_marginTop="15dp"
@@ -86,6 +88,7 @@
                 android:textColorHint="#bcc1c5"
                 android:textColor="#5d5d5d"
                 android:layout_marginTop="15dp"
+                android:singleLine="true"
                 android:background="@drawable/box_edit"
                 android:layout_width="211dp"
                 android:layout_height="43dp" />

@@ -24,10 +24,15 @@
         <activity android:name=".activity.SplashActivity" />
         <activity android:name=".activity.LoginActivity" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity android:name=".activity.AssignActivity" />
-        <activity android:name=".activity.MobileActivity" />
+        <activity android:name=".activity.MobileCertificationActivity" />
         <activity android:name=".activity.InputCarActivity" />
         <activity android:name=".activity.InputCardActivity" />
         <activity android:name=".activity.InputNewCardActivity" />
+        <activity android:name=".activity.TicketMobileListActivity" />
+        <activity android:name=".activity.TicketPurchaseListActivity" />
+        <activity android:name=".activity.ParkStatusActivity" />
+        <activity android:name=".activity.ManageTicketActivity" />
+        <activity android:name=".activity.ManageLongTicketActivity" />
 
 
         <!-- 네이버 아이디로 로그인에서 사용하는 액티비티를 등록 -->

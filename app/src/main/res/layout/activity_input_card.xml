@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <include
-        layout="@layout/no_nav_toolbar" />
+        layout="@layout/toolbar_empty" />
 
     <RelativeLayout
         android:id="@+id/input_car_menu2"
@@ -30,7 +30,7 @@
             android:layout_toRightOf="@id/input_car_skip"
             android:layout_centerVertical="true"
             android:layout_width="11dp"
-            android:layout_height="16dp"></RelativeLayout>
+            android:layout_height="16dp"/>
     </RelativeLayout>
 
     <ScrollView

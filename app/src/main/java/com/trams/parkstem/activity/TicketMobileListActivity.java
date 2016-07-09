@@ -7,12 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import com.trams.parkstem.R;
 
 /**
- * Created by Noverish on 2016-07-04.
+ * Created by JaeHyo on 2016-07-06.
  */
-public class SplashActivity extends AppCompatActivity{
+public class TicketMobileListActivity extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.activity_ticket_mobile_list);
     }
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.MainActivity"
-    tools:showIn="@layout/app_bar_main"
+    tools:showIn="@layout/activity_main"
     android:id="@+id/content_main_layout">
 
     <ScrollView
@@ -82,6 +82,7 @@
                 </LinearLayout>
 
                 <ImageView
+                    android:id="@+id/activity_highpass_human_image"
                     android:src="@drawable/img_home_person"
                     android:layout_marginTop="40dp"
                     android:layout_width="100dp"

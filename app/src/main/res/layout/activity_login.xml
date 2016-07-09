@@ -9,6 +9,7 @@
     android:paddingTop="310sp">
 
     <LinearLayout
+        android:gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -17,35 +18,28 @@
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="46sp"
-            android:paddingTop="8sp"
+            android:gravity="center_vertical"
             android:background="@drawable/login_naver_bg"
             >
             <RelativeLayout
                 android:layout_width="30sp"
                 android:layout_height="30sp"
-                android:layout_alignParentLeft="true"
                 android:background="@drawable/login_naver_logo"
                 android:layout_marginLeft="41sp"
                 >
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="183sp"
-                android:layout_height="30sp"
+            <TextView
+
                 android:layout_marginLeft="11sp"
-                android:paddingTop="5sp"
-                >
-                <TextView
-                    android:id="@+id/logged_naver"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="left"
-                    android:textSize="20sp"
-                    android:text="네이버로 로그인"
-                    android:typeface="sans"
-                    android:textColor="#ffffffff"
-                    />
-            </RelativeLayout>
+                android:id="@+id/logged_naver"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="20sp"
+                android:text="네이버로 로그인"
+                android:textColor="#ffffffff"
+                />
 
         </LinearLayout>
         <LinearLayout
@@ -54,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="46sp"
             android:layout_marginTop="11sp"
-            android:paddingTop="8sp"
+            android:gravity="center_vertical"
             android:background="@drawable/login_kakao_bg"
             >
             <RelativeLayout
@@ -66,23 +60,16 @@
                 >
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="30sp"
+            <TextView
                 android:layout_marginLeft="11sp"
-                android:paddingTop="5sp"
-                >
-                <TextView
-                    android:id="@+id/logged_kakaotalk"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="left"
-                    android:textSize="20sp"
-                    android:text="카카오계정으로 로그인"
-                    android:typeface="sans"
-                    android:textColor="#ffffffff"
-                    />
-            </RelativeLayout>
+                android:id="@+id/logged_kakaotalk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="20sp"
+                android:text="카카오계정으로 로그인"
+                android:textColor="#ffffffff"
+                />
 
         </LinearLayout>
 
@@ -92,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="46sp"
             android:layout_marginTop="11sp"
-            android:paddingTop="8sp"
+            android:gravity="center_vertical"
             android:background="@drawable/login_fb_bg"
             >
             <RelativeLayout
@@ -104,39 +91,31 @@
                 >
             </RelativeLayout>
 
-            <RelativeLayout
-                android:layout_width="183sp"
-                android:layout_height="30sp"
+            <TextView
+                android:id="@+id/logged_facebook"
                 android:layout_marginLeft="11sp"
-                android:paddingTop="5sp"
-                >
-                <TextView
-                    android:id="@+id/logged_facebook"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="left"
-                    android:textSize="20sp"
-                    android:text="페이스북으로 로그인"
-                    android:typeface="sans"
-                    android:textColor="#ffffffff"
-                    />
-            </RelativeLayout>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textSize="20sp"
+                android:text="페이스북으로 로그인"
+                android:typeface="sans"
+                android:textColor="#ffffffff"
+                />
 
         </LinearLayout>
-        <RelativeLayout
+
+        <TextView
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="19sp"
-            android:layout_width="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            >
-            <TextView
-                android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="이메일로 로그인"
-                android:textSize="20sp"
-                android:textColor="#000000"
-                android:textAlignment="center"
-                />
-        </RelativeLayout>
+            android:text="이메일로 로그인"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:textAlignment="center"
+            />
+
     </LinearLayout>
 </RelativeLayout>

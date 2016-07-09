@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="114dp">
+        
+        <RelativeLayout
+            android:layout_centerInParent="true"
+            android:background="@drawable/btn_menu_ticket_2"
+            android:layout_width="47dp"
+            android:layout_height="23dp" />
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:text="주차권 유효기간은 3개월입니다."
+            android:textColor="#5d5d5d"
+            android:textSize="11sp"
+            android:layout_marginBottom="14dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- space of semi_ticket view -->
+        <!-- 상세정보 구매하기는 ticket_mobile_item 이용-->
+
+    </LinearLayout>
+
+</LinearLayout>
+</ScrollView>
