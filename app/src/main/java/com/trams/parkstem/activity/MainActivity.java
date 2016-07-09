@@ -168,11 +168,11 @@ public class MainActivity extends AppCompatActivity
 
         if(hipassOn) {
             getLayoutInflater().inflate(R.layout.hipass_button_off, hipassButton);
-            SC.HipassOn("Y");
+            SC.hipassOn("Y");
             human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person));
 
         } else {
-            SC.HipassOn("N");
+            SC.hipassOn("N");
             getLayoutInflater().inflate(R.layout.hipass_button_on, hipassButton);
             human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person_2));
 
