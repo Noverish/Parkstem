@@ -12,7 +12,7 @@
         android:largeHeap="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".activity.HomeActivity"
             android:label="@string/app_name"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
@@ -24,7 +24,7 @@
         <activity android:name=".activity.SplashActivity" />
         <activity android:name=".activity.LoginActivity" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity android:name=".activity.AssignActivity" />
-        <activity android:name=".activity.MobileCertificationActivity" />
+        <activity android:name=".activity.MobileCertificationActivityBase" />
         <activity android:name=".activity.InputCarActivity" />
         <activity android:name=".activity.InputCardActivity" />
         <activity android:name=".activity.InputNewCardActivity" />
@@ -33,7 +33,7 @@
         <activity android:name=".activity.ParkStatusActivity" />
         <activity android:name=".activity.ManageTicketActivity" />
         <activity android:name=".activity.ManageLongTicketActivity" />
-
+        <activity android:name=".base_activity.BaseNavigationActivity" />
 
         <!-- 네이버 아이디로 로그인에서 사용하는 액티비티를 등록 -->
         <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity"

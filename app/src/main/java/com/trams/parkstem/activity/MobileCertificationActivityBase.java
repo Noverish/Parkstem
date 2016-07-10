@@ -5,18 +5,18 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.trams.parkstem.R;
+import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 
 /**
  * Created by Noverish on 2016-07-04.
  */
-public class MobileCertificationActivity extends AppCompatActivity {
+public class MobileCertificationActivityBase extends BaseBackSearchActivity {
+    boolean isItMan;
     ImageView man, woman;
     RelativeLayout movetocar, movetocard;
 
@@ -25,8 +25,7 @@ public class MobileCertificationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mobile_certification);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        isItMan = true;
 
         man = (ImageView) findViewById(R.id.activity_certification_man);
         man.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +41,7 @@ public class MobileCertificationActivity extends AppCompatActivity {
                 changeSex(false);
             }
         });
+
 
 
         movetocar = (RelativeLayout) findViewById(R.id.activity_certification_input_car);
@@ -60,8 +60,10 @@ public class MobileCertificationActivity extends AppCompatActivity {
         });
     }
 
-    private void changeSex(boolean change) {
-        if(change){
+    private void changeSex(boolean isItMan) {
+        this.isItMan = isItMan;
+
+        if(isItMan){
             Drawable man1 = ContextCompat.getDrawable(this, R.drawable.btn_m_1);
             man.setImageDrawable(man1);
             Drawable woman1 = ContextCompat.getDrawable(this, R.drawable.btn_w_2);

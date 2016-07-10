@@ -6,9 +6,6 @@
     android:background="#FFFFFF"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/toolbar_empty" />
-
     <RelativeLayout
         android:id="@+id/input_car_menu2"
         android:background="@drawable/btn_2"
@@ -73,8 +70,10 @@
                     android:layout_height="wrap_content" />
             </RelativeLayout>
         </LinearLayout>
-
-
-
     </ScrollView>
+
+    <com.trams.parkstem.custom_view.LocationChangeableListView
+        android:id="@+id/activity_input_card_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

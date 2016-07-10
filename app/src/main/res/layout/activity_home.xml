@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activity.MainActivity"
-    tools:showIn="@layout/activity_main"
+    tools:context=".activity.HomeActivity"
     android:id="@+id/content_main_layout">
 
     <ScrollView
@@ -30,6 +29,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <LinearLayout
+                        android:id="@+id/activity_home_ticket_mobile_button"
                         android:gravity="center"
                         android:background="@drawable/btn_2"
                         android:orientation="horizontal"
@@ -55,6 +55,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/activity_home_ticket_purchase_button"
                         android:gravity="center"
                         android:background="@drawable/btn_2"
                         android:orientation="horizontal"
@@ -178,11 +179,11 @@
                 <TextView
                     android:layout_centerInParent="true"
                     android:textSize="21sp"
-                    android:text="W30,000"
+                    android:text="&#xffe6;30,000"
                     android:textColor="#5d5d5d"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-                <!-- \ 어떻게 출력? 16진수 FFE6 10진수 65510 -->
+                <!-- \ 어떻게 출력? 16진수 FFE6 10진수 65510 &#xffe6;-->
             </LinearLayout>
 
             <LinearLayout

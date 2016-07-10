@@ -5,39 +5,41 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.trams.parkstem.R;
+import com.trams.parkstem.base_activity.BaseBackSearchActivity;
+
+import java.util.Calendar;
 
 /**
  * Created by Noverish on 2016-07-04.
  */
-public class InputNewCardActivity extends AppCompatActivity {
+public class InputNewCardActivity extends BaseBackSearchActivity {
     private static final int CARD_TYPE_PERSON = 0;
     private static final int CARD_TYPE_COMPANY = 1;
     private int cardType;
 
     private HidePasswordView hidePasswordView;
+    private Spinner selectMonthSpinner;
+    private Spinner selectYearSpinner;
 
     private final String TAG = getClass().getSimpleName();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_new_card);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         LinearLayout cardTypeCompanyRadioButton = (LinearLayout) findViewById(R.id.activity_input_new_card_radio_company);
         cardTypeCompanyRadioButton.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +58,9 @@ public class InputNewCardActivity extends AppCompatActivity {
         cardType = CARD_TYPE_PERSON;
 
         hidePasswordView = (HidePasswordView) findViewById(R.id.activity_input_new_card_hide_password_view);
+
+        initDurationSelectSpinners();
+
     }
 
     private void radioButtonOnClick(LinearLayout view) {
@@ -78,6 +83,27 @@ public class InputNewCardActivity extends AppCompatActivity {
             personImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_ground));
             peresonText.setTextColor(ContextCompat.getColor(this, R.color.BLACK));
         }
+    }
+
+    private void initDurationSelectSpinners() {
+        ArrayAdapter<String> monthAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item);
+        for(int i = 1;i<=12;i++) {
+            monthAdapter.add(i + "월");
+        }
+
+        selectMonthSpinner = (Spinner) findViewById(R.id.input_new_card_duration_month);
+        selectMonthSpinner.setAdapter(monthAdapter);
+
+        Calendar now = Calendar.getInstance();
+        int nowYear = now.get(Calendar.YEAR);
+
+        ArrayAdapter<String> yearAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item);
+        for(int i = 0;i<=11;i++) {
+            yearAdapter.add((nowYear + i) + "년");
+        }
+
+        selectYearSpinner = (Spinner) findViewById(R.id.input_new_card_duration_year);
+        selectYearSpinner.setAdapter(yearAdapter);
     }
 
     /**
