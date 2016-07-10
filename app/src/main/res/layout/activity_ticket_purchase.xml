@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="103dp">
+        
+        <RelativeLayout
+            android:layout_centerInParent="true"
+            android:background="@drawable/btn_menu_1month_2"
+            android:layout_width="47dp"
+            android:layout_height="33dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:background="@drawable/img_listbox"
+                android:paddingLeft="43dp"
+                android:paddingRight="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="64dp">
+
+                <RelativeLayout
+                    android:layout_centerVertical="true"
+                    android:id="@+id/ticket_view_usable"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/btn_1"
+                    android:layout_width="99dp"
+                    android:layout_height="30dp">
+                    <TextView
+                        android:textColor="#ffffff"
+                        android:textSize="20sp"
+                        android:text="상세정보"
+                        android:layout_centerInParent="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_width="195dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+
+                        android:textSize="17sp"
+                        android:text="호텔 아르부노 1달 정기권"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:textColor="#5d5d5d"
+                        android:textSize="10sp"
+                        android:text="2016.05.02~2016.06.01"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginLeft="43dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:background="@null"
+            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:hint="홍길동"
+            android:textColorHint="#bcc1c5"
+            android:textColor="#5d5d5d"
+            />
+        <EditText
+            android:background="@null"
+            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:hint="abcdefghij@naver.com"
+            android:textColorHint="#bcc1c5"
+            android:textColor="#5d5d5d"
+            />
+        <EditText
+            android:background="@null"
+            android:layout_marginTop="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:hint="010-1234-5678"
+            android:textColorHint="#bcc1c5"
+            android:textColor="#5d5d5d"
+            />
+
+        <RelativeLayout
+            android:paddingRight="42dp"
+            android:layout_marginTop="21dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+            <EditText
+                android:background="@null"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:hint="12가1234"
+                android:textColorHint="#bcc1c5"
+                android:textColor="#5d5d5d"
+                />
+            <TextView
+                android:textColor="#ffffff"
+                android:textSize="19sp"
+                android:gravity="center"
+                android:text="변경"
+                android:textAlignment="center"
+                android:background="@drawable/btn_1_small"
+                android:layout_alignParentRight="true"
+                android:layout_width="62dp"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:paddingRight="42dp"
+            android:layout_marginTop="17dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+            <EditText
+                android:background="@null"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:hint="카드등록"
+                android:textColorHint="#bcc1c5"
+                android:textColor="#5d5d5d"
+                />
+            <TextView
+                android:textColor="#ffffff"
+                android:textSize="19sp"
+                android:gravity="center"
+                android:text="등록"
+                android:textAlignment="center"
+                android:background="@drawable/btn_1_small"
+                android:layout_alignParentRight="true"
+                android:layout_width="62dp"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="21dp"
+        android:background="@drawable/img_bar"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.4dp"/>
+    <RelativeLayout
+        android:layout_marginTop="25dp"
+        android:paddingLeft="78dp"
+        android:layout_marginRight="42dp"
+        android:layout_width="match_parent"
+        android:layout_height="24dp">
+        <RelativeLayout
+            android:background="@drawable/img_money"
+            android:layout_width="18dp"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="W150,000"
+            android:textSize="22sp"
+            android:textColor="#5d5d5d"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:background="@drawable/btn_1_middle"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:layout_width="172dp"
+        android:layout_height="42dp">
+        
+        <TextView
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            android:text="정기권 구매"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    
+</LinearLayout>
+</ScrollView>
