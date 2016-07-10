@@ -12,8 +12,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <include
-                layout="@layout/toolbar_empty" />
+
 
             <RelativeLayout
                 android:background="@drawable/btn_2"
@@ -41,7 +40,7 @@
         <ImageView
             android:id="@+id/activity_input_car_gray1"
             android:layout_width="match_parent"
-            android:layout_height="87dp"
+            android:layout_height="32dp"
             android:visibility="invisible"
             android:background="@color/semi_transparent_gray"/>
     </RelativeLayout>

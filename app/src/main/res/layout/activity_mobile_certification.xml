@@ -6,9 +6,6 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
-    <include
-        layout="@layout/toolbar_empty" />
-
     <RelativeLayout
         android:id="@+id/cerification_menu2"
         android:background="@drawable/btn_2"
@@ -111,13 +108,13 @@
                     </RelativeLayout>
 
                     <ImageView
-                        android:background="@drawable/btn_m_2"
+                        android:src="@drawable/btn_m_1"
                         android:layout_marginLeft="34dp"
                         android:layout_width="33dp"
                         android:layout_height="33dp"
                         android:id="@+id/activity_certification_man" />
                     <ImageView
-                        android:background="@drawable/btn_w_2"
+                        android:src="@drawable/btn_w_2"
                         android:layout_marginLeft="6dp"
                         android:layout_width="33dp"
                         android:layout_height="33dp"

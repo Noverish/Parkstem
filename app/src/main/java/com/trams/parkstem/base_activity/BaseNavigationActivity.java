@@ -1,38 +1,53 @@
-package com.trams.parkstem.activity;
+package com.trams.parkstem.base_activity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.trams.parkstem.R;
-import com.trams.parkstem.server.ServerClient;
+import com.trams.parkstem.activity.AssignActivityBase;
+import com.trams.parkstem.activity.InputCarActivityBase;
+import com.trams.parkstem.activity.InputCardActivityBase;
+import com.trams.parkstem.activity.InputNewCardActivityBase;
+import com.trams.parkstem.activity.LoginActivity;
+import com.trams.parkstem.activity.ManageLongTicketActivityBase;
+import com.trams.parkstem.activity.ManageTicketActivityBase;
+import com.trams.parkstem.activity.MobileCertificationActivityBase;
+import com.trams.parkstem.activity.ParkStatusActivityBase;
+import com.trams.parkstem.activity.SplashActivity;
+import com.trams.parkstem.activity.TicketMobileListActivityBase;
+import com.trams.parkstem.activity.TicketPurchaseListActivityBase;
 
-public class MainActivity extends AppCompatActivity
+/**
+ * Created by Noverish on 2016-07-09.
+ */
+public class BaseNavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private RelativeLayout hipassButton;
-    private boolean hipassOn;
-
-    private final String TAG = getClass().getSimpleName();
-    ServerClient SC = ServerClient.getInstance();
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        super.setContentView(R.layout.base_activity_nav);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/HelveticaNeueLTStd-LtEx.otf");
+        TextView toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
+        toolbarTitle.setTypeface(myTypeface);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -43,30 +58,13 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        hipassOn = false;
-        hipassButton = (RelativeLayout) findViewById(R.id.activity_hipass_on_off_button);
-        hipassButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onHipassButtonClicked();
-            }
-        });
+    }
 
-        RelativeLayout move1, move2;
-        move1 = (RelativeLayout) findViewById(R.id.activity_hipass_tocarregister);
-        move1.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                movefromHipasstoCarRegister();
-            }
-        });
-        move2 = (RelativeLayout) findViewById(R.id.activity_hipass_tocardregister);
-        move2.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                movefromHipasstoCardRegister();
-            }
-        });
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+        FrameLayout content = (FrameLayout) findViewById(R.id.activity_main_content);
+
+        LayoutInflater.from(this).inflate(layoutResID, content);
     }
 
     @Override
@@ -105,22 +103,27 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
         else if (id == R.id.action_assign) {
-            Intent intent = new Intent(this, AssignActivity.class);
+            Intent intent = new Intent(this, AssignActivityBase.class);
             startActivity(intent);
             return true;
         }
         else if (id == R.id.action_mobile) {
-            Intent intent = new Intent(this, MobileCertificationActivity.class);
+            Intent intent = new Intent(this, MobileCertificationActivityBase.class);
             startActivity(intent);
             return true;
         }
         else if (id == R.id.action_card_new_card) {
-            Intent intent = new Intent(this, InputNewCardActivity.class);
+            Intent intent = new Intent(this, InputNewCardActivityBase.class);
             startActivity(intent);
             return true;
         }
         else if (id == R.id.action_mobile_ticket) {
-            Intent intent = new Intent(this, TicketMobileListActivity.class);
+            Intent intent = new Intent(this, TicketMobileListActivityBase.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.action_purchase_ticket) {
+            Intent intent = new Intent(this, TicketPurchaseListActivityBase.class);
             startActivity(intent);
             return true;
         }
@@ -135,19 +138,19 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_park_status) {
-            Intent intent = new Intent(this, ParkStatusActivity.class);
+            Intent intent = new Intent(this, ParkStatusActivityBase.class);
             startActivity(intent);
         } else if (id == R.id.nav_car_number) {
-            Intent intent = new Intent(this, InputCarActivity.class);
+            Intent intent = new Intent(this, InputCarActivityBase.class);
             startActivity(intent);
         } else if (id == R.id.nav_credit_card) {
-            Intent intent = new Intent(this, InputCardActivity.class);
+            Intent intent = new Intent(this, InputCardActivityBase.class);
             startActivity(intent);
         } else if (id == R.id.nav_long_ticket) {
-            Intent intent = new Intent(this, ManageLongTicketActivity.class);
+            Intent intent = new Intent(this, ManageLongTicketActivityBase.class);
             startActivity(intent);
         } else if (id == R.id.nav_park_ticket) {
-            Intent intent = new Intent(this, ManageTicketActivity.class);
+            Intent intent = new Intent(this, ManageTicketActivityBase.class);
             startActivity(intent);
         } else if (id == R.id.nav_park_list) {
 
@@ -160,34 +163,5 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private void onHipassButtonClicked() {
-        ImageView human = (ImageView) findViewById(R.id.activity_highpass_human_image);
-        hipassButton.removeAllViews();
-
-        if(hipassOn) {
-            getLayoutInflater().inflate(R.layout.hipass_button_off, hipassButton);
-            SC.hipassOn("Y");
-            human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person));
-
-        } else {
-            SC.hipassOn("N");
-            getLayoutInflater().inflate(R.layout.hipass_button_on, hipassButton);
-            human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person_2));
-
-        }
-
-        hipassOn = !hipassOn;
-    }
-
-
-    private void movefromHipasstoCarRegister(){
-        Intent intent = new Intent(this, InputCarActivity.class);
-        startActivity(intent);
-    }
-    private void movefromHipasstoCardRegister(){
-        Intent intent = new Intent(this, InputCardActivity.class);
-        startActivity(intent);
     }
 }

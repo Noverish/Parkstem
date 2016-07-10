@@ -14,11 +14,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".activity.MainActivity">
+        tools:context=".activity.HomeActivity">
 
-        <include layout="@layout/toolbar_empty" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <include layout="@layout/toolbar" />
 
-        <include layout="@layout/activity_home" />
+            <FrameLayout
+                android:id="@+id/activity_main_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+
 
     </android.support.design.widget.CoordinatorLayout>
 

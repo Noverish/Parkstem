@@ -4,8 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -17,12 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.trams.parkstem.R;
+import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.custom_view.LocationChangeableListView;
 
 /**
  * Created by Noverish on 2016-07-04.
  */
-public class InputCarActivity extends AppCompatActivity {
+public class InputCarActivityBase extends BaseBackSearchActivity {
     private EditText carNumberEditText;
     private TextView mainCarNumberTextView;
     private LocationChangeableListView listView;
@@ -44,9 +43,6 @@ public class InputCarActivity extends AppCompatActivity {
                 refresh();
             }
         });
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         RelativeLayout inputNewCarButton = (RelativeLayout) findViewById(R.id.input_new_car_button);
         inputNewCarButton.setOnClickListener(new View.OnClickListener() {
