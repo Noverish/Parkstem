@@ -15,7 +15,7 @@ import com.trams.parkstem.custom_view.LocationChangeableListView;
 /**
  * Created by Noverish on 2016-07-04.
  */
-public class InputCardActivityBase extends BaseBackSearchActivity {
+public class InputCardActivity extends BaseBackSearchActivity {
     private LocationChangeableListView listView;
     private TextView mainCardTextView;
     private RelativeLayout inputNewCardButton;
@@ -26,6 +26,7 @@ public class InputCardActivityBase extends BaseBackSearchActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_card);
+        setToolbarTitle("카드 등록");
 
         mainCardTextView = (TextView) findViewById(R.id.input_first_card);
         
@@ -48,7 +49,7 @@ public class InputCardActivityBase extends BaseBackSearchActivity {
     }
 
     private void register_new_card(){
-        Intent intent = new Intent(this, InputNewCardActivityBase.class);
+        Intent intent = new Intent(this, InputNewCardActivity.class);
         startActivity(intent);
     }
 }

@@ -198,7 +198,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <view class="com.trams.parkstem.activity.InputNewCardActivityBase$HidePasswordView"
+                <view class="com.trams.parkstem.activity.InputNewCardActivity$HidePasswordView"
                     android:id="@+id/activity_input_new_card_hide_password_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

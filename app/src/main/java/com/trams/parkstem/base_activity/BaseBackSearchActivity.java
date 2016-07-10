@@ -21,7 +21,8 @@ import com.trams.parkstem.R;
 /**
  * Created by Noverish on 2016-07-09.
  */
-public class BaseBackSearchActivity extends AppCompatActivity implements SearchView.OnQueryTextListener, View.OnClickListener{
+public class BaseBackSearchActivity extends AppCompatActivity
+        implements SearchView.OnQueryTextListener, View.OnClickListener, SearchView.OnCloseListener{
     private Toolbar toolbar;
     private TextView toolbarTitle;
     private boolean searchEnable;
@@ -83,6 +84,7 @@ public class BaseBackSearchActivity extends AppCompatActivity implements SearchV
             SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
             searchView.setOnQueryTextListener(this);
             searchView.setOnSearchClickListener(this);
+            searchView.setOnCloseListener(this);
         }
         return super.onCreateOptionsMenu(menu);
     }
@@ -100,6 +102,12 @@ public class BaseBackSearchActivity extends AppCompatActivity implements SearchV
     @Override
     public void onClick(View v) {
         setTitleEnable(false);
+    }
+
+    @Override
+    public boolean onClose() {
+        setTitleEnable(true);
+        return false;
     }
 
     @Override

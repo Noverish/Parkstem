@@ -13,7 +13,7 @@ import com.trams.parkstem.server.ServerClient;
 /**
  * Created by Noverish on 2016-07-04.
  */
-public class AssignActivityBase extends BaseBackSearchActivity {
+public class AssignActivity extends BaseBackSearchActivity {
     private ServerClient serverClient;
     private RelativeLayout assignButton;
 

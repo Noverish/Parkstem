@@ -21,7 +21,7 @@ import com.trams.parkstem.custom_view.LocationChangeableListView;
 /**
  * Created by Noverish on 2016-07-04.
  */
-public class InputCarActivityBase extends BaseBackSearchActivity {
+public class InputCarActivity extends BaseBackSearchActivity {
     private EditText carNumberEditText;
     private TextView mainCarNumberTextView;
     private LocationChangeableListView listView;
@@ -32,6 +32,7 @@ public class InputCarActivityBase extends BaseBackSearchActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_car);
+        setToolbarTitle("차량 등록");
         this.inEditStatus = false;
 
         context = this;

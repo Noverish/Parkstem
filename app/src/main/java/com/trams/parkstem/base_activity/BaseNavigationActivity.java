@@ -18,18 +18,18 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.trams.parkstem.R;
-import com.trams.parkstem.activity.AssignActivityBase;
-import com.trams.parkstem.activity.InputCarActivityBase;
-import com.trams.parkstem.activity.InputCardActivityBase;
-import com.trams.parkstem.activity.InputNewCardActivityBase;
+import com.trams.parkstem.activity.AssignActivity;
+import com.trams.parkstem.activity.InputCarActivity;
+import com.trams.parkstem.activity.InputCardActivity;
+import com.trams.parkstem.activity.InputNewCardActivity;
 import com.trams.parkstem.activity.LoginActivity;
-import com.trams.parkstem.activity.ManageLongTicketActivityBase;
-import com.trams.parkstem.activity.ManageTicketActivityBase;
+import com.trams.parkstem.activity.ManageLongTicketActivity;
+import com.trams.parkstem.activity.ManageTicketActivity;
 import com.trams.parkstem.activity.MobileCertificationActivityBase;
-import com.trams.parkstem.activity.ParkStatusActivityBase;
+import com.trams.parkstem.activity.ParkStatusActivity;
 import com.trams.parkstem.activity.SplashActivity;
-import com.trams.parkstem.activity.TicketMobileListActivityBase;
-import com.trams.parkstem.activity.TicketPurchaseListActivityBase;
+import com.trams.parkstem.activity.TicketMobileListActivity;
+import com.trams.parkstem.activity.TicketPurchaseListActivity;
 
 /**
  * Created by Noverish on 2016-07-09.
@@ -103,7 +103,7 @@ public class BaseNavigationActivity extends AppCompatActivity
             return true;
         }
         else if (id == R.id.action_assign) {
-            Intent intent = new Intent(this, AssignActivityBase.class);
+            Intent intent = new Intent(this, AssignActivity.class);
             startActivity(intent);
             return true;
         }
@@ -113,17 +113,17 @@ public class BaseNavigationActivity extends AppCompatActivity
             return true;
         }
         else if (id == R.id.action_card_new_card) {
-            Intent intent = new Intent(this, InputNewCardActivityBase.class);
+            Intent intent = new Intent(this, InputNewCardActivity.class);
             startActivity(intent);
             return true;
         }
         else if (id == R.id.action_mobile_ticket) {
-            Intent intent = new Intent(this, TicketMobileListActivityBase.class);
+            Intent intent = new Intent(this, TicketMobileListActivity.class);
             startActivity(intent);
             return true;
         }
         else if (id == R.id.action_purchase_ticket) {
-            Intent intent = new Intent(this, TicketPurchaseListActivityBase.class);
+            Intent intent = new Intent(this, TicketPurchaseListActivity.class);
             startActivity(intent);
             return true;
         }
@@ -138,19 +138,19 @@ public class BaseNavigationActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_park_status) {
-            Intent intent = new Intent(this, ParkStatusActivityBase.class);
+            Intent intent = new Intent(this, ParkStatusActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_car_number) {
-            Intent intent = new Intent(this, InputCarActivityBase.class);
+            Intent intent = new Intent(this, InputCarActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_credit_card) {
-            Intent intent = new Intent(this, InputCardActivityBase.class);
+            Intent intent = new Intent(this, InputCardActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_long_ticket) {
-            Intent intent = new Intent(this, ManageLongTicketActivityBase.class);
+            Intent intent = new Intent(this, ManageLongTicketActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_park_ticket) {
-            Intent intent = new Intent(this, ManageTicketActivityBase.class);
+            Intent intent = new Intent(this, ManageTicketActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_park_list) {
 

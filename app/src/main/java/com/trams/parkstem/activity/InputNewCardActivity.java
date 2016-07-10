@@ -26,7 +26,7 @@ import java.util.Calendar;
 /**
  * Created by Noverish on 2016-07-04.
  */
-public class InputNewCardActivityBase extends BaseBackSearchActivity {
+public class InputNewCardActivity extends BaseBackSearchActivity {
     private static final int CARD_TYPE_PERSON = 0;
     private static final int CARD_TYPE_COMPANY = 1;
     private int cardType;

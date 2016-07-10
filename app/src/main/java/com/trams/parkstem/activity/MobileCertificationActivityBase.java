@@ -78,11 +78,11 @@ public class MobileCertificationActivityBase extends BaseBackSearchActivity {
     }
 
     private void movetocarRegister(){
-        Intent intent = new Intent(this, InputCarActivityBase.class);
+        Intent intent = new Intent(this, InputCarActivity.class);
         startActivity(intent);
     }
     private void movetocardRegister(){
-        Intent intent = new Intent(this, InputCardActivityBase.class);
+        Intent intent = new Intent(this, InputCardActivity.class);
         startActivity(intent);
     }
 }
