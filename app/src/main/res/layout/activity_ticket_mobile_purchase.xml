@@ -192,7 +192,7 @@
         <TextView
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:text="W6,000"
+            android:text="&#xffe6;6,000"
             android:textSize="22sp"
             android:textColor="#5d5d5d"
             android:layout_width="wrap_content"
