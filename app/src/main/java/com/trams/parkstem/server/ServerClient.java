@@ -283,7 +283,7 @@ public class ServerClient {
             else{
                 throw new ServerErrorException();
             }
-        } catch (JSONException ex) {
+        } catch (JSONException ex){
             ex.printStackTrace();
             throw new ServerErrorException();
         }
@@ -1134,5 +1134,40 @@ public class ServerClient {
 
     //모바일 인증
 
-    //약관관
+    //약관
+    public String clause(final String idx) throws ServerErrorException{
+        String msg;
+        String contents;
+        final String Clause_URL = "http://app.parkstem.com/api/clause.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("idx", idx);
+                result = connect(hashMap, Clause_URL);
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            if(result.getInt("res")==1){
+                msg = result.getString("msg");
+                Log.d("ServerClient", msg);
+                contents = result.getString("contents");
+                return contents;
+            }
+            else{
+                throw new ServerErrorException();
+            }
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            throw new ServerErrorException();
+        }
+    }
 }

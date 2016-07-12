@@ -22,6 +22,7 @@ public class HomeActivity extends BaseNavigationActivity {
     private RelativeLayout hipassButton;
     private boolean hipassOn;
     private Context context;
+    RelativeLayout movetocar, movetocard;
 
     private final String TAG = getClass().getSimpleName();
     ServerClient client = ServerClient.getInstance();
@@ -41,19 +42,19 @@ public class HomeActivity extends BaseNavigationActivity {
             }
         });
 
-        RelativeLayout move1, move2;
-        move1 = (RelativeLayout) findViewById(R.id.activity_hipass_tocarregister);
-        move1.setOnClickListener(new View.OnClickListener(){
+
+        movetocar = (RelativeLayout) findViewById(R.id.activity_certification_input_car);
+        movetocar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                movefromHipasstoCarRegister();
+                movetocarRegister();
             }
         });
-        move2 = (RelativeLayout) findViewById(R.id.activity_hipass_tocardregister);
-        move2.setOnClickListener(new View.OnClickListener(){
+        movetocard = (RelativeLayout) findViewById(R.id.activity_certification_input_card);
+        movetocard.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                movefromHipasstoCardRegister();
+                movetocardRegister();
             }
         });
 
@@ -101,27 +102,32 @@ public class HomeActivity extends BaseNavigationActivity {
         ImageView human = (ImageView) findViewById(R.id.activity_highpass_human_image);
         hipassButton.removeAllViews();
 
-        if(hipassOn) {
-            getLayoutInflater().inflate(R.layout.hipass_button_off, hipassButton);
-            client.hipassOn("Y");
-            human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person));
+        try{
 
-        } else {
-            client.hipassOn("N");
-            getLayoutInflater().inflate(R.layout.hipass_button_on, hipassButton);
-            human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person_2));
+            if(hipassOn) {
+                getLayoutInflater().inflate(R.layout.hipass_button_off, hipassButton);
+                client.hipassOn("Y");
+                human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person));
 
+            } else {
+                client.hipassOn("N");
+                getLayoutInflater().inflate(R.layout.hipass_button_on, hipassButton);
+                human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person_2));
+
+            }
+
+            hipassOn = !hipassOn;
+        }catch(ServerClient.ServerErrorException ex){
+            ex.printStackTrace();
         }
-
-        hipassOn = !hipassOn;
     }
 
 
-    private void movefromHipasstoCarRegister(){
+    private void movetocarRegister(){
         Intent intent = new Intent(this, InputCarActivity.class);
         startActivity(intent);
     }
-    private void movefromHipasstoCardRegister(){
+    private void movetocardRegister(){
         Intent intent = new Intent(this, InputCardActivity.class);
         startActivity(intent);
     }
