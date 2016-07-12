@@ -32,7 +32,7 @@
         android:gravity="right"
         android:textColor="#5d5d5d"
         android:textSize="20sp"
-        android:text="W9,000"
+        android:text="&#xffe6;9,000"
         android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

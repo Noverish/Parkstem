@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <RelativeLayout
         android:background="@drawable/btn_3"
         android:paddingLeft="43dp"
@@ -10,33 +11,41 @@
         android:layout_height="64dp">
 
         <RelativeLayout
-                android:layout_centerVertical="true"
-                android:id="@+id/ticket_view_usable"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/btn_1"
-                android:layout_width="99dp"
-                android:layout_height="30dp">
-                <TextView
-                    android:textColor="#ffffff"
-                    android:textSize="20sp"
-                    android:text="사용가능"
-                    android:layout_centerInParent="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </RelativeLayout>
-            
-        <RelativeLayout
-                android:layout_centerVertical="true"
-                android:layout_width="195dp"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/ticket_mobile_item_name"
-                    android:textSize="16sp"
-                    android:text="호텔 아르부노 1시간 주차권"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </RelativeLayout>
+            android:layout_centerVertical="true"
+            android:id="@+id/ticket_view_usable"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/btn_1"
+            android:layout_width="99dp"
+            android:layout_height="30dp">
+            <ImageView
+                android:src="@drawable/btn_check_w"
+                android:layout_centerInParent="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_width="195dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="#5d5d5d"
+                android:textSize="17sp"
+                android:text="호텔 아르부노 역삼"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="2dp"
+                android:textColor="#5d5d5d"
+                android:textSize="10sp"
+                android:text="르네상스 사거리"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
     </RelativeLayout>
+
     <RelativeLayout
         android:background="@drawable/btn_2"
         android:layout_width="match_parent"
@@ -59,7 +68,7 @@
             android:layout_marginLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -92,16 +101,25 @@
                 android:layout_marginTop="2dp"
                 android:textSize="15sp"
                 android:textColor="#5d5d5d"
-                android:text="1시간 W6,000"
+                android:text="1시간 &#xffe6;6,000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
                 android:textSize="21sp"
                 android:textColor="#c61d23"
-                android:text="1시간 W6,000"
+                android:text="1시간 &#xffe6;6,000"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_marginTop="3dp"
+                android:text="유효기간:2016.05.02~2016.08.09"
+                android:textColor="#5d5d5d"
+                android:textSize="11sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
 
     </LinearLayout>
