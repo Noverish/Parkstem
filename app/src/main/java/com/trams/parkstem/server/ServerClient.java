@@ -10,7 +10,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -78,6 +82,57 @@ public class ServerClient {
 
     }
 
+    //POST방식으로 JSON데이터를 보내는 함수
+    private JSONObject connect(HashMap<String, String> hashMap, String urlin, String urlout) {
+        try {
+            String jsonStr;
+            URL requrl = new URL(urlin);
+            HttpURLConnection req = (HttpURLConnection) requrl.openConnection();
+
+            req.setConnectTimeout(10000);
+            req.setDoOutput(true);
+            req.setRequestProperty("Content-Type", "application/json");
+            req.setRequestProperty("X-Requested-With", "XMLHttpRequest");
+            req.setRequestMethod("POST");
+
+            URL resurl = new URL(urlout);
+            HttpURLConnection res = (HttpURLConnection) resurl.openConnection();
+
+            res.setConnectTimeout(10000);
+            res.setDoInput(true);
+            res.setRequestProperty("Content-Type", "application/json");
+            res.setRequestProperty("X-Requested-With", "XMLHttpRequest");
+            res.setRequestMethod("POST");
+
+
+            JSONObject json = new JSONObject();
+            for(String key : hashMap.keySet()) {
+                json.put(key, hashMap.get(key));
+            }
+
+            OutputStreamWriter wr= new OutputStreamWriter(req.getOutputStream());
+            wr.write(json.toString());
+            wr.flush();
+            wr.close();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(res.getInputStream()));
+
+            String line;
+            jsonStr = "";
+
+            while ((line = reader.readLine()) != null) {
+                jsonStr += line + "\n";
+            }
+            reader.close();
+
+            return new JSONObject(jsonStr);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+
+    }
+
 
     //RES가 0이거나 exception이 발생하면 throw
     public class ServerErrorException extends Exception {
@@ -86,7 +141,29 @@ public class ServerClient {
 
 
     //회원가입 및 로그인 관련 함수
-    public JSONObject login(final String parkstemID, final String parkstemPW) {
+    public static String getSHA256(String str) {
+        String rtnSHA = "";
+
+        try{
+            MessageDigest sh = MessageDigest.getInstance("SHA-256");
+            sh.update(str.getBytes());
+            byte byteData[] = sh.digest();
+            StringBuffer sb = new StringBuffer();
+
+            for(int i = 0 ; i < byteData.length ; i++){
+                sb.append(Integer.toString((byteData[i]&0xff) + 0x100, 16).substring(1));
+            }
+            rtnSHA = sb.toString();
+
+        }catch(NoSuchAlgorithmException e){
+            e.printStackTrace();
+            rtnSHA = null;
+        }
+        return rtnSHA;
+    }
+
+
+    public JSONObject login(final String parkstemID, final String parkstemPW) throws ServerErrorException{
         String msg;
         final String LOGIN_URL = "http://app.parkstem.com/api/member_login.php";
         Thread thread = new Thread(new Runnable() {
@@ -94,7 +171,7 @@ public class ServerClient {
             public void run() {
                 HashMap<String, String> hashMap = new HashMap<>();
                 hashMap.put("parkstemID", parkstemID);
-                hashMap.put("parkstemPW", parkstemPW);
+                hashMap.put("parkstemPW", getSHA256(parkstemPW));
                 result = connect(hashMap, LOGIN_URL);
             }
         });
@@ -107,39 +184,42 @@ public class ServerClient {
         }
 
         try {
-            msg = result.getString("msg");
-            Log.d("ServerClient",msg);
-            uniqueID = result.getString("uniqueID");
-            return result;
+            if(result.getInt("res")==1){
+                msg = result.getString("msg");
+                Log.d("ServerClient",msg);
+                uniqueID = result.getString("uniqueID");
+                return result;
+            }
+            else{
+                throw new ServerErrorException();
+            }
         } catch (JSONException ex) {
             ex.printStackTrace();
-            return null;
+            throw new ServerErrorException();
         }
     }
 
 
-    public boolean regbyemail(final String memberGubun, final String name, final String email, final String mobile, final String nickName, final String ID){
+    public JSONObject regByEmail(final String name, final String email, final String mobile, final String nickName, final String parkstemID, final String parkstemPW) throws ServerErrorException{
         String msg;
         final String JOIN_URL = "http://app.parkstem.com/api/member_join.php";
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
+                long now = System.currentTimeMillis();
+                Date date = new Date(now);
+                SimpleDateFormat CurDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String strCurDate = CurDateFormat.format(date);
+
                 HashMap<String, String> hashMap = new HashMap<>();
-                hashMap.put("memberGubun",memberGubun);
+                hashMap.put("memberGubun","parkstem");
                 hashMap.put("name", name);
                 hashMap.put("email", email);
                 hashMap.put("mobile", mobile);
                 hashMap.put("nickName", nickName);
-                if(memberGubun=="kakao"){
-                    hashMap.put("kakaoID", ID);
-                }
-                else if(memberGubun.equals("fb")){
-                    hashMap.put("facebookID", ID);
-                }
-                else if(memberGubun.equals("naver")){
-                    hashMap.put("naverID", ID);
-                }
-                hashMap.put("parkstemID", ID);
+                hashMap.put("parkstemID", parkstemID);
+                hashMap.put("parkstemPW", getSHA256(parkstemPW));
+                hashMap.put("regDate", strCurDate);
                 result = connect(hashMap, JOIN_URL);
             }
         });
@@ -152,13 +232,156 @@ public class ServerClient {
         }
 
         try {
-            msg = result.getString("msg");
-
-            uniqueID = result.getString("uniqueID");
-            return (result.getInt("res") == 1);
+            if(result.getInt("res")==1){
+                msg = result.getString("msg");
+                Log.d("ServerClient", msg);
+                uniqueID = result.getString("uniqueID");
+                return result;
+            }
+            else{
+                throw new ServerErrorException();
+            }
         } catch (JSONException ex) {
             ex.printStackTrace();
-            return false;
+            throw new ServerErrorException();
+        }
+    }
+
+    public JSONObject regByKakao(final String name, final String email, final String mobile, final String nickName, final String kakaoID) throws ServerErrorException{
+        String msg;
+        final String JOIN_URL = "http://app.parkstem.com/api/member_join.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                long now = System.currentTimeMillis();
+                Date date = new Date(now);
+                SimpleDateFormat CurDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String strCurDate = CurDateFormat.format(date);
+
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("memberGubun","kakao");
+                hashMap.put("name", name);
+                hashMap.put("email", email);
+                hashMap.put("mobile", mobile);
+                hashMap.put("nickName", nickName);
+                hashMap.put("kakaoID", kakaoID);
+                hashMap.put("regDate", strCurDate);
+                result = connect(hashMap, JOIN_URL);
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            if(result.getInt("res")==1){
+                msg = result.getString("msg");
+                Log.d("ServerClient", msg);
+                uniqueID = result.getString("uniqueID");
+                return result;
+            }
+            else{
+                throw new ServerErrorException();
+            }
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            throw new ServerErrorException();
+        }
+    }
+
+    public JSONObject regByNaver(final String name, final String email, final String mobile, final String nickName, final String naverID) throws ServerErrorException{
+        String msg;
+        final String JOIN_URL = "http://app.parkstem.com/api/member_join.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                long now = System.currentTimeMillis();
+                Date date = new Date(now);
+                SimpleDateFormat CurDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String strCurDate = CurDateFormat.format(date);
+
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("memberGubun","naver");
+                hashMap.put("name", name);
+                hashMap.put("email", email);
+                hashMap.put("mobile", mobile);
+                hashMap.put("nickName", nickName);
+                hashMap.put("naverID", naverID);
+                hashMap.put("regDate", strCurDate);
+                result = connect(hashMap, JOIN_URL);
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            if(result.getInt("res")==1){
+                msg = result.getString("msg");
+                Log.d("ServerClient", msg);
+                uniqueID = result.getString("uniqueID");
+                return result;
+            }
+            else{
+                throw new ServerErrorException();
+            }
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            throw new ServerErrorException();
+        }
+    }
+
+    public JSONObject regByFacebook(final String name, final String email, final String mobile, final String nickName, final String facebookID) throws ServerErrorException{
+        String msg;
+        final String JOIN_URL = "http://app.parkstem.com/api/member_join.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                long now = System.currentTimeMillis();
+                Date date = new Date(now);
+                SimpleDateFormat CurDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String strCurDate = CurDateFormat.format(date);
+
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("memberGubun","facebook");
+                hashMap.put("name", name);
+                hashMap.put("email", email);
+                hashMap.put("mobile", mobile);
+                hashMap.put("nickName", nickName);
+                hashMap.put("facebookID", facebookID);
+                hashMap.put("regDate", strCurDate);
+                result = connect(hashMap, JOIN_URL);
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            if(result.getInt("res")==1){
+                msg = result.getString("msg");
+                Log.d("ServerClient", msg);
+                uniqueID = result.getString("uniqueID");
+                return result;
+            }
+            else{
+                throw new ServerErrorException();
+            }
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            throw new ServerErrorException();
         }
     }
 
@@ -669,11 +892,62 @@ public class ServerClient {
         String card_name;
         String reg_date;
     }
+
     /**
-    public CardInfo card_Register() throws ServerErrorException{
-        //일단 보류
+     * 미완성
+     */
+    public CardList card_Register(final String card_name) throws ServerErrorException{
+        String msg;
+        final String CardRegIn_URL = "https://inilite.inicis.com/inibill/inibill_card.jsp";
+        final String CardRegOut_URL = "http://app.parkstem.com/api/card_reg.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("uniqueID", uniqueID + "^" +card_name);
+                hashMap.put("uniqueID", "hotelvey11");
+                hashMap.put("uniqueID", "certification");
+                hashMap.put("uniqueID", "1");
+                hashMap.put("uniqueID", "1");
+                hashMap.put("uniqueID", "AAA");
+                hashMap.put("uniqueID", "good");
+                hashMap.put("uniqueID", "20160427171717");
+                hashMap.put("uniqueID", "");
+                hashMap.put("hashdata", "0c4b70d28e3dfbdf6561d3aff631f8355a3991c965223bd88285a8d9f8c0e935");
+                result = connect(hashMap, CardRegIn_URL, CardRegOut_URL);
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            if(result.getInt("res")==1){
+                CardList cardList = new CardList();
+                cardList.res = result.getInt("res");
+                cardList.msg = result.getString("msg");
+                Log.d("ServerClient", cardList.msg);
+                JSONObject jdata = result.getJSONArray("data").getJSONObject(0);
+                CardInfo cardInfo = new CardInfo();
+                cardInfo.idx = jdata.getInt("idx");
+                cardInfo.sort = jdata.getInt("sort");
+                cardInfo.card_name = jdata.getString("card_name");
+                cardInfo.reg_date = jdata.getString("reg_date");
+                cardList.data.add(cardInfo);
+                return cardList;
+            }
+            else{
+                throw new ServerErrorException();
+            }
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            throw new ServerErrorException();
+        }
     }
-     **/
 
     public CardList cardList() throws ServerErrorException{
         final String CL_URL = "http://app.parkstem.com/api/card_list.php";
@@ -1133,6 +1407,40 @@ public class ServerClient {
     }
 
     //모바일 인증
+    public JSONObject mcertification() throws ServerErrorException{
+        String msg;
+        final String CertIn_URL = "http://app.parkstem.com/api/kmcis_start.php";
+        final String CertOut_URL = "http://app.parkstem.com/api/kmcis_mobile.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("uniqueID", uniqueID);
+                result = connect(hashMap, CertIn_URL, CertOut_URL);
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            if(result.getInt("res")==1){
+                msg = result.getString("msg");
+                Log.d("ServerClient", msg);
+                return result;
+            }
+            else{
+                throw new ServerErrorException();
+            }
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            throw new ServerErrorException();
+        }
+    }
 
     //약관
     public String clause(final String idx) throws ServerErrorException{
