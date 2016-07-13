@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +16,6 @@ import android.widget.RelativeLayout;
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseNavigationActivity;
 import com.trams.parkstem.server.ServerClient;
-
-import org.json.JSONObject;
-
-import java.util.Iterator;
 
 public class HomeActivity extends BaseNavigationActivity {
     ImageView alert; //팝업버튼선언
@@ -97,14 +92,15 @@ public class HomeActivity extends BaseNavigationActivity {
         try{
             ServerClient serverClient = ServerClient.getInstance();
 
-            JSONObject result = serverClient.login("hongid1234", "hongpw1234");
-
+            boolean result = serverClient.login("hongid1234", "hongpw1234");
+/**
             Iterator<String> iter = result.keys();
             while(iter.hasNext()){
                 String key = iter.next();
                 String str = result.getString(key);
                 Log.e("JSON",key + ":" + str);
             }
+ **/
         }
         catch(Exception ex){
             ex.printStackTrace();
