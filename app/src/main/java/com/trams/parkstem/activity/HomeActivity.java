@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseNavigationActivity;
@@ -36,22 +37,6 @@ public class HomeActivity extends BaseNavigationActivity {
             }
         });
 
-        RelativeLayout move1, move2;
-        move1 = (RelativeLayout) findViewById(R.id.activity_hipass_tocarregister);
-        move1.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                movefromHipasstoCarRegister();
-            }
-        });
-        move2 = (RelativeLayout) findViewById(R.id.activity_hipass_tocardregister);
-        move2.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                movefromHipasstoCardRegister();
-            }
-        });
-
         LinearLayout ticketMobile = (LinearLayout) findViewById(R.id.activity_home_ticket_mobile_button);
         ticketMobile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,18 +59,25 @@ public class HomeActivity extends BaseNavigationActivity {
 
     private void onHipassButtonClicked() {
         ImageView human = (ImageView) findViewById(R.id.activity_highpass_human_image);
-        hipassButton.removeAllViews();
 
         if(hipassOn) {
-            getLayoutInflater().inflate(R.layout.hipass_button_off, hipassButton);
-            client.hipassOn("Y");
-            human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person));
-
+            try {
+                client.hipassOn("Y");
+                hipassButton.removeAllViews();
+                getLayoutInflater().inflate(R.layout.hipass_button_off, hipassButton);
+                human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person));
+            } catch (ServerClient.ServerErrorException ex) {
+                Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
+            }
         } else {
-            client.hipassOn("N");
-            getLayoutInflater().inflate(R.layout.hipass_button_on, hipassButton);
-            human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person_2));
-
+            try {
+                client.hipassOn("N");
+                hipassButton.removeAllViews();
+                getLayoutInflater().inflate(R.layout.hipass_button_on, hipassButton);
+                human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person_2));
+            } catch (ServerClient.ServerErrorException ex) {
+                Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
+            }
         }
 
         hipassOn = !hipassOn;
