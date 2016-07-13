@@ -116,6 +116,7 @@
                     <TextView
                         android:textColor="#e5f0d4"
                         android:textSize="17sp"
+                        android:id="@+id/activity_assign_clause"
                         android:text="약관 동의"
                         android:layout_marginLeft="12sp"
                         android:layout_width="wrap_content"

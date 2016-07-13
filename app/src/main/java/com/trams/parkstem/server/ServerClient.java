@@ -10,8 +10,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -141,6 +139,7 @@ public class ServerClient {
 
 
     //회원가입 및 로그인 관련 함수
+    /**
     public static String getSHA256(String str) {
         String rtnSHA = "";
 
@@ -161,7 +160,7 @@ public class ServerClient {
         }
         return rtnSHA;
     }
-
+**/
 
     public JSONObject login(final String parkstemID, final String parkstemPW) throws ServerErrorException{
         String msg;
@@ -171,7 +170,7 @@ public class ServerClient {
             public void run() {
                 HashMap<String, String> hashMap = new HashMap<>();
                 hashMap.put("parkstemID", parkstemID);
-                hashMap.put("parkstemPW", getSHA256(parkstemPW));
+                hashMap.put("parkstemPW", parkstemPW);
                 result = connect(hashMap, LOGIN_URL);
             }
         });
@@ -218,7 +217,7 @@ public class ServerClient {
                 hashMap.put("mobile", mobile);
                 hashMap.put("nickName", nickName);
                 hashMap.put("parkstemID", parkstemID);
-                hashMap.put("parkstemPW", getSHA256(parkstemPW));
+                hashMap.put("parkstemPW", parkstemPW);
                 hashMap.put("regDate", strCurDate);
                 result = connect(hashMap, JOIN_URL);
             }
