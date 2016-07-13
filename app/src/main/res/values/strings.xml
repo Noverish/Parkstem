@@ -16,6 +16,7 @@
     <string name="action_home">홈</string>
     <string name="action_mobile_ticket">모바일 주차권</string>
     <string name="action_purchase_ticket">주차권 구매내역</string>
+    <string name="action_first_screen">초기화면</string>
 
 
 </resources>

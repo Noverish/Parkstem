@@ -6,9 +6,6 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
-    <include
-        layout="@layout/toolbar" />
-
     <RelativeLayout
         android:id="@+id/cerification_menu2"
         android:background="@drawable/btn_2"
