@@ -12,7 +12,7 @@
 
         <RelativeLayout
             android:layout_centerVertical="true"
-            android:id="@+id/ticket_mobile_item_view"
+            android:id="@+id/long_ticket_mobile_item_view"
             android:layout_alignParentRight="true"
             android:background="@drawable/btn_1"
             android:layout_width="99dp"
@@ -33,14 +33,14 @@
             android:layout_width="195dp"
             android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/ticket_mobile_item_name"
+                android:id="@+id/long_ticket_mobile_item_name"
                 android:textColor="#5d5d5d"
                 android:textSize="17sp"
                 android:text="호텔 아르부노 역삼"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
-                android:id="@+id/ticket_mobile_item_place"
+                android:id="@+id/long_ticket_mobile_item_place"
                 android:layout_marginTop="2dp"
                 android:textColor="#5d5d5d"
                 android:textSize="10sp"
@@ -86,7 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:id="@+id/ticket_mobile_item_date"
+                        android:id="@+id/long_ticket_mobile_item_start_date"
                         android:layout_gravity="top"
                         android:textSize="24sp"
                         android:textColor="#5d5d5d"
@@ -94,7 +94,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <ImageView
-                        android:id="@+id/ticket_mobile_item_calender"
+                        android:id="@+id/long_ticket_mobile_item_calender"
                         android:layout_marginLeft="22dp"
                         android:layout_gravity="bottom"
                         android:src="@drawable/btn_calender_on"
@@ -103,7 +103,16 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/ticket_mobile_item_place_2"
+                    android:id="@+id/long_ticket_mobile_item_end_date"
+                    android:textSize="20sp"
+                    android:textColor="#5d5d5d"
+                    android:text="- 2016.06.01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/long_ticket_mobile_item_place_2"
                     android:textSize="15sp"
                     android:textColor="#5d5d5d"
                     android:text="서울 강남구 역삼동 701-1"
@@ -113,28 +122,19 @@
 
 
                 <TextView
-                    android:id="@+id/ticket_mobile_item_before_price"
+                    android:id="@+id/long_ticket_mobile_item_before_price"
                     android:layout_marginTop="2dp"
                     android:textSize="15sp"
                     android:textColor="#5d5d5d"
-                    android:text="1시간 &#xffe6;6,000"
+                    android:text="1달 &#xffe6;200,000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
-                    android:id="@+id/ticket_mobile_item_after_price"
+                    android:id="@+id/long_ticket_mobile_item_after_price"
                     android:textSize="21sp"
                     android:textColor="#c61d23"
-                    android:text="1시간 &#xffe6;6,000"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:id="@+id/ticket_mobile_item_duedate"
-                    android:layout_marginTop="3dp"
-                    android:text="유효기간:2016.05.02~2016.08.09"
-                    android:textColor="#5d5d5d"
-                    android:textSize="11sp"
+                    android:text="1달 &#xffe6;150,000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

@@ -7,7 +7,7 @@
     android:background="#FFFFFF">
 
     <include
-        layout="@layout/toolbar_empty" />
+        layout="@layout/toolbar" />
 
     <RelativeLayout
         android:id="@+id/cerification_menu2"
