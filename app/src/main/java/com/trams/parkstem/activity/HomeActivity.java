@@ -96,6 +96,7 @@ public class HomeActivity extends BaseNavigationActivity {
         Intent intent = new Intent(this, InputCarActivity.class);
         startActivity(intent);
     }
+
     private void movefromHipasstoCardRegister(){
         Intent intent = new Intent(this, InputCardActivity.class);
         startActivity(intent);
