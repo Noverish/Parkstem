@@ -439,9 +439,9 @@ public class ServerClient {
         ArrayList<Payment> data;
     }
     public class Payment{
-        String card_name;
-        int price;
-        Calendar calendar;
+        public String card_name;
+        public int price;
+        public Calendar calendar;
     }
 
     public DashBoard dashboard() throws ServerErrorException{
@@ -1087,9 +1087,9 @@ public class ServerClient {
     }
 
     public class PaymentList{
-        int itemTotalCount;
-        int pageCount;
-        ArrayList<Payment> data;
+        public int itemTotalCount;
+        public int pageCount;
+        public ArrayList<Payment> data;
     }
     public PaymentList hipassPayment() throws ServerErrorException{
 

@@ -43,21 +43,6 @@ public class MobileCertificationActivityBase extends BaseBackSearchActivity {
         });
 
 
-
-        movetocar = (RelativeLayout) findViewById(R.id.activity_certification_input_car);
-        movetocar.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                movetocarRegister();
-            }
-        });
-        movetocard = (RelativeLayout) findViewById(R.id.activity_certification_input_card);
-        movetocard.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                movetocardRegister();
-            }
-        });
     }
 
     private void changeSex(boolean isItMan) {
@@ -77,12 +62,4 @@ public class MobileCertificationActivityBase extends BaseBackSearchActivity {
         }
     }
 
-    private void movetocarRegister(){
-        Intent intent = new Intent(this, InputCarActivity.class);
-        startActivity(intent);
-    }
-    private void movetocardRegister(){
-        Intent intent = new Intent(this, InputCardActivity.class);
-        startActivity(intent);
-    }
 }
