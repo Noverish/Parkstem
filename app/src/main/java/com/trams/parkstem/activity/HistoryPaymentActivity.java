@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -41,6 +43,12 @@ public class HistoryPaymentActivity extends BaseBackSearchActivity {
 
                 if(count%2==0)
                     historyPaymentView.setBackgroundColor(ContextCompat.getColor(this, R.color.btn_3));
+
+                if(count==0){
+                    int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 55, getResources().getDisplayMetrics());
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+                    historyPaymentView.setLayoutParams(layoutParams);
+                }
 
                 content.addView(historyPaymentView);
 
