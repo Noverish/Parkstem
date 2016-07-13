@@ -44,10 +44,9 @@ public class HistoryPaymentActivity extends BaseBackSearchActivity {
 
                 content.addView(historyPaymentView);
 
-                if(count==0) {
-                    LayoutInflater inflater = LayoutInflater.from(this);
-                    inflater.inflate(R.layout.history_payment_item_bar, content);
-                }
+                if(count==0)
+                    LayoutInflater.from(this).inflate(R.layout.history_payment_item_bar, content);
+
                 count++;
             }
         } catch (ServerClient.ServerErrorException ex) {
