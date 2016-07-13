@@ -20,11 +20,13 @@ import java.util.HashMap;
  * Created by monc2 on 2016-07-04.
  */
 public class ServerClient {
+    //모든 함수에 더미 반환값 추가.
     //코드정리
     //1.모든 함수가 JSON 반환하면 안됨.
     //1.exception에 res랑 msg를 넣어서 throw.
     //1.모든 클래스에 res랑 msg랑 uniqueID를 뺀다.
     //uniqueID를 반환하는 함수는 현재의 uniqueID와 같은지 체크하는 코드
+    //dummy 카드 관련 모든것 입차 출차 주차장
 
 
 
@@ -434,18 +436,20 @@ public class ServerClient {
 
     //회원 정보관리 함수
     public class DashBoard{
-        String mycar;
-        String mycard;
-        ArrayList<Payment> data;
+        public String mycar;
+        public String mycard;
+        public ArrayList<Payment> data;
     }
     public class Payment{
-        String card_name;
-        int price;
-        Calendar calendar;
+        public String card_name;
+        public int price;
+        public Calendar calendar;
     }
 
     public DashBoard dashboard() throws ServerErrorException{
         String msg;
+        String date;
+        String[] dates;
         final String DASH_URL = "http://app.parkstem.com/api/dashboard.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -473,8 +477,13 @@ public class ServerClient {
                 JSONObject jdata = result.getJSONArray("data").getJSONObject(0);
                 Payment pm = new Payment();
                 pm.card_name = jdata.getString("card_name");
-                //pm.pay_date = jdata.getString("pay_date");
-                //pm.price = jdata.getString("price");
+
+                date = jdata.getString("pay_date");
+                dates = date.split("-");
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Integer.parseInt(dates[0]),Integer.parseInt(dates[1]), Integer.parseInt(dates[2]));
+                pm.calendar = calendar;
+                pm.price = jdata.getInt("price");
                 dashboard.data.add(pm);
                 return dashboard;
             }
@@ -525,10 +534,10 @@ public class ServerClient {
 
     //주차 현황 함수
     public class RecentCar{
-        String local_id;
-        String in_date;
-        String out_date;
-        String total;
+        public String local_id;
+        public String in_date;
+        public String out_date;
+        public String total;
     }
     public RecentCar recentCar() throws ServerErrorException{
         String msg;
@@ -571,15 +580,15 @@ public class ServerClient {
 
     //주차장정보 함수
     public class ParkInfo{
-        String local_id;
-        String local_name;
-        String local_content;
-        String local_address;
-        String local_phone;
-        String local_photo;
-        String free_time;
-        String park_price;
-        String park_price_time;
+        public String local_id;
+        public String local_name;
+        public String local_content;
+        public String local_address;
+        public String local_phone;
+        public String local_photo;
+        public String free_time;
+        public String park_price;
+        public String park_price_time;
     }
 
     /**이 함수는 data형식으로 값을 받아온다
@@ -633,16 +642,16 @@ public class ServerClient {
 
     //차량관리 함수
     public class CarLists{
-        int itemTotalCount;
-        int pageCount;
-        ArrayList<CarInfo> data;
+        public int itemTotalCount;
+        public int pageCount;
+        public ArrayList<CarInfo> data;
     }
     public class CarInfo {
-        int idx;
-        String uniqueID;
-        int sort;
-        String mycar;
-        String reg_date;
+        public int idx;
+        public String uniqueID;
+        public int sort;
+        public String mycar;
+        public String reg_date;
     }
 
     public CarLists CarRegister(final String mycar) throws ServerErrorException{
@@ -783,14 +792,14 @@ public class ServerClient {
         }
     }
 
-    public JSONObject deleteCar(final String carnum) throws ServerErrorException{
+    public void deleteCar(final String mycar) throws ServerErrorException{
         String msg;
         final String DELETE_URL = "http://app.parkstem.com/api/car_del.php";
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 HashMap<String, String> hashMap = new HashMap<>();
-                hashMap.put("mycar",carnum);
+                hashMap.put("mycar",mycar);
                 result = connect(hashMap, DELETE_URL);
             }
         });
@@ -803,13 +812,12 @@ public class ServerClient {
         }
 
         try {
+            msg = result.getString("msg");
             if(result.getInt("res")==1){
-                msg = result.getString("msg");
                 Log.d("ServerClient",msg);
-                return result;
             }
             else{
-                throw new ServerErrorException();
+                throw new ServerErrorException(result.getInt("res"), msg);
             }
         } catch (JSONException ex) {
             ex.printStackTrace();
@@ -818,13 +826,14 @@ public class ServerClient {
     }
 
     public class CarIn{
-        int res;
-        String msg;
-        String indate;
-        String local_id;
+        public int itemTotalCount;
+        public int pageCount;
+        public String indate;
+        public String local_id;
     }
 
     public CarIn carIn() throws ServerErrorException{
+        String msg;
         final String CARIN_URL = "http://app.parkstem.com/api/car_in.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -843,17 +852,20 @@ public class ServerClient {
         }
 
         try {
+            msg = result.getString("msg");
             if(result.getInt("res")==1){
                 CarIn carin = new CarIn();
-                carin.msg = result.getString("msg");
-                Log.d("ServerClient",carin.msg);
-                carin.res = result.getInt("res");
-                carin.indate = result.getString("indate");
-                carin.local_id = result.getString("local_id");
+                Log.d("ServerClient", msg);
+
+                carin.itemTotalCount = result.getInt("itemTotalCount");
+                carin.pageCount = result.getInt("pageCount");
+                JSONObject jdata = result.getJSONArray("data").getJSONObject(0);
+                carin.indate = jdata.getString("indate");
+                carin.local_id = jdata.getString("local_id");
                 return carin;
             }
             else{
-                throw new ServerErrorException();
+                throw new ServerErrorException(result.getInt("res"), msg);
             }
         } catch (JSONException ex) {
             ex.printStackTrace();
@@ -862,12 +874,13 @@ public class ServerClient {
     }
 
     public class CarOut{
-        int res;
-        String msg;
-        String outdate;
-        String local_id;
+        public int itemTotalCount;
+        public int pageCount;
+        public String outdate;
+        public String local_id;
     }
     public CarOut carOut() throws ServerErrorException{
+        String msg;
         final String CAROUT_URL = "http://app.parkstem.com/api/car_out.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -879,17 +892,28 @@ public class ServerClient {
         });
 
         try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            msg = result.getString("msg");
             if(result.getInt("res")==1){
-                CarOut carout = new CarOut();
-                carout.msg = result.getString("msg");
-                Log.d("ServerClient",carout.msg);
-                carout.res = result.getInt("res");
-                carout.outdate = result.getString("outdate");
-                carout.local_id = result.getString("local_id");
-                return carout;
+                CarOut carOut = new CarOut();
+                Log.d("ServerClient", msg);
+
+                carOut.itemTotalCount = result.getInt("itemTotalCount");
+                carOut.pageCount = result.getInt("pageCount");
+
+                JSONObject jdata = result.getJSONArray("data").getJSONObject(0);
+                carOut.outdate = jdata.getString("outdate");
+                carOut.local_id = jdata.getString("local_id");
+                return carOut;
             }
             else{
-                throw new ServerErrorException();
+                throw new ServerErrorException(result.getInt("res"), msg);
             }
         } catch (JSONException ex) {
             ex.printStackTrace();
@@ -899,15 +923,15 @@ public class ServerClient {
 
     //카드 관련 함수
     public class CardList{
-        int res;
-        String msg;
-        ArrayList<CardInfo>  data;
+        public int itemTotalCount;
+        public int pageCount;
+        public ArrayList<CardInfo>  data;
     }
     public class CardInfo{
-        int idx;
-        int sort;
-        String card_name;
-        String reg_date;
+        public int idx;
+        public int sort;
+        public String card_name;
+        public String reg_date;
     }
 
     /**
@@ -1087,9 +1111,9 @@ public class ServerClient {
     }
 
     public class PaymentList{
-        int itemTotalCount;
-        int pageCount;
-        ArrayList<Payment> data;
+        public int itemTotalCount;
+        public int pageCount;
+        public ArrayList<Payment> data;
     }
     public PaymentList hipassPayment() throws ServerErrorException{
 
@@ -1117,11 +1141,17 @@ public class ServerClient {
                 paymentlist.itemTotalCount = result.getInt("itemTotalCount");
                 paymentlist.pageCount = result.getInt("pageCount");
                 JSONObject jdata = result.getJSONArray("data").getJSONObject(0);
-                Payment payment = new Payment();
-                payment.card_name = jdata.getString("card_name");
-                payment.price = jdata.getString("price");
-                payment.pay_date = jdata.getString("pay_date");
-                paymentlist.data.add(payment);
+                Payment pm = new Payment();
+                pm.card_name = jdata.getString("card_name");
+
+                date = jdata.getString("pay_date");
+                dates = date.split("-");
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Integer.parseInt(dates[0]),Integer.parseInt(dates[1]), Integer.parseInt(dates[2]));
+                pm.calendar = calendar;
+                pm.price = jdata.getInt("price");
+
+                paymentlist.data.add(pm);
                 return paymentlist;
             }
             else{
@@ -1160,20 +1190,18 @@ public class ServerClient {
     }
 
     public class PaymentInfo{
-        int res;
-        String msg;
-        int itemTotalCount;
-        int pageCount;
-        ArrayList<TicketBuyList> data;
+        public int itemTotalCount;
+        public int pageCount;
+        public ArrayList<TicketBuyList> data;
     }
     public class TicketBuyList{
-        String gubun;
-        String local_id;
-        String card_name;
-        String price;
-        String start_date;
-        String end_date;
-        String pay_date;
+        public String gubun;
+        public String local_id;
+        public String card_name;
+        public String price;
+        public String start_date;
+        public String end_date;
+        public String pay_date;
     }
 
     public PaymentInfo ticketpurchase() throws ServerErrorException{
@@ -1225,22 +1253,20 @@ public class ServerClient {
 
     //티켓 관련 함수
     public class TicketLists{
-        int res;
-        String msg;
-        int itemTotalCount;
-        int pageCount;
-        ArrayList<Ticket> data;
+        public int itemTotalCount;
+        public int pageCount;
+        public ArrayList<Ticket> data;
     }
     public class Ticket{
-        int idx;
-        String local_id;
-        String ticket_name;
-        String term;
-        String term_name;
-        String gubun;
-        String original_price;
-        String price;
-        String regdate;
+        public int idx;
+        public String local_id;
+        public String ticket_name;
+        public String term;
+        public String term_name;
+        public String gubun;
+        public String original_price;
+        public String price;
+        public String regdate;
     }
 
     public TicketLists listOfTicket() throws ServerErrorException{
@@ -1293,11 +1319,9 @@ public class ServerClient {
     }
 
     public class LongTicketLists{
-        int res;
-        String msg;
-        int itemTotalCount;
-        int pageCount;
-        ArrayList<Ticket> data;
+        public int itemTotalCount;
+        public int pageCount;
+        public ArrayList<Ticket> data;
     }
     public LongTicketLists listOfLongTicket() throws ServerErrorException{
         final String LTlist_URL = "http://app.parkstem.com/api/longticket_list.php";
@@ -1351,14 +1375,12 @@ public class ServerClient {
     }
 
     public class TicketInfo{
-        int res;
-        String msg;
-        int idx;
-        String local_id;
-        String gubun;
-        String price;
-        String ticket_name;
-        int card_use;
+        public int idx;
+        public String local_id;
+        public String gubun;
+        public String price;
+        public String ticket_name;
+        public int card_use;
     }
     public TicketInfo ticketInfo(final String local_id, final String gubun, final String idx) throws ServerErrorException{
         final String T_INFO_URL = "http://app.parkstem.com/api/ticket_info.php";
