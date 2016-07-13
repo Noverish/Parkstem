@@ -1138,13 +1138,13 @@ public class ServerClient {
         p1.card_name = "국민카드";
         p1.calendar = Calendar.getInstance();
         Payment p2 = new Payment();
-        p1.price = 3000;
-        p1.card_name = "나라사랑카드";
-        p1.calendar = Calendar.getInstance();
+        p2.price = 3000;
+        p2.card_name = "나라사랑카드";
+        p2.calendar = Calendar.getInstance();
         Payment p3 = new Payment();
-        p1.price = 200000;
-        p1.card_name = "삼성카드";
-        p1.calendar = Calendar.getInstance();
+        p3.price = 200000;
+        p3.card_name = "삼성카드";
+        p3.calendar = Calendar.getInstance();
 
         ArrayList<Payment> list = new ArrayList<>();
         list.add(p1);

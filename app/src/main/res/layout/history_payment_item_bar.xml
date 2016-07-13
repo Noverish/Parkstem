@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="#c1e0b7"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="3dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"/>
