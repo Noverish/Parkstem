@@ -25,17 +25,26 @@
                     android:layout_height="wrap_content" />
             </RelativeLayout>
             
-        <RelativeLayout
+        <LinearLayout
+                android:orientation="vertical"
                 android:layout_centerVertical="true"
                 android:layout_width="195dp"
                 android:layout_height="wrap_content">
                 <TextView
-
+                    android:textColor="#5d5d5d"
                     android:textSize="17sp"
-                    android:text="호텔 아르부노 1달 정기권"
+                    android:text="호텔 아르부노 역삼"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-            </RelativeLayout>
+                <TextView
+                    android:layout_marginTop="2dp"
+                    android:textColor="#5d5d5d"
+                    android:textSize="10sp"
+                    android:text="르네상스 사거리"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
     </RelativeLayout>
 
 </LinearLayout>

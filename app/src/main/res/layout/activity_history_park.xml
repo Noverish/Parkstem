@@ -13,9 +13,11 @@
         
         <RelativeLayout
             android:layout_centerInParent="true"
-            android:background="@drawable/img_tickethistory_2"
-            android:layout_width="30dp"
-            android:layout_height="45dp" />
+            android:background="@drawable/btn_parkhistory_2"
+            android:layout_width="48dp"
+            android:layout_height="35dp" />
+
+
     </RelativeLayout>
 
     <LinearLayout
@@ -23,12 +25,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/ticekt_purchage_item" />
-
-        <!-- space of mobile naeyeok view -->
+        <!-- space of parked view -->
 
     </LinearLayout>
-
 
 </LinearLayout>
 </ScrollView>

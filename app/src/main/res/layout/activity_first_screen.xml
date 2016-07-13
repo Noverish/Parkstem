@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
+    <RelativeLayout
+        android:id="@+id/cerification_menu2"
+        android:background="@drawable/btn_2"
+        android:layout_width="match_parent"
+        android:layout_height="32dp">
+
+        <TextView
+            android:id="@+id/input_car_skip"
+            android:layout_centerInParent="true"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            android:text="SKIP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <RelativeLayout
+            android:layout_marginLeft="2dp"
+            android:background="@drawable/btn_skip"
+            android:layout_toRightOf="@id/input_car_skip"
+            android:layout_centerVertical="true"
+            android:layout_width="11dp"
+            android:layout_height="16dp"/>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/certification_layout1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginTop="104dp"
+                android:layout_width="wrap_content"
+                android:layout_height="151dp">
+                <RelativeLayout
+                    android:background="@drawable/btn_greenround"
+                    android:layout_width="113dp"
+                    android:layout_height="113dp">
+                    <RelativeLayout
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/img_phone"
+                        android:layout_width="40dp"
+                        android:layout_height="70dp"/>
+                </RelativeLayout>
+                
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="휴대폰 인증"
+                    android:textSize="15sp"
+                    android:textColor="#5d5d5d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginRight="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="151dp">
+                    <RelativeLayout
+                        android:background="@drawable/btn_greenround"
+                        android:layout_width="113dp"
+                        android:layout_height="113dp">
+                        <RelativeLayout
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/img_car"
+                            android:layout_width="55dp"
+                            android:layout_height="45dp"/>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="차량 등록"
+                        android:textSize="15sp"
+                        android:textColor="#5d5d5d"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_marginLeft="18dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="151dp">
+                    <RelativeLayout
+                        android:background="@drawable/btn_greenround"
+                        android:layout_width="113dp"
+                        android:layout_height="113dp">
+                        <RelativeLayout
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/img_card"
+                            android:layout_width="59dp"
+                            android:layout_height="39dp"/>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="카드 등록"
+                        android:textSize="15sp"
+                        android:textColor="#5d5d5d"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+            </LinearLayout>
+            
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

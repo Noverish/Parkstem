@@ -19,6 +19,9 @@ import android.widget.TextView;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.activity.AssignActivity;
+import com.trams.parkstem.activity.FirstScreenActivity;
+import com.trams.parkstem.activity.HistoryParkActivity;
+import com.trams.parkstem.activity.HistoryPaymentActivity;
 import com.trams.parkstem.activity.InputCarActivity;
 import com.trams.parkstem.activity.InputCardActivity;
 import com.trams.parkstem.activity.InputNewCardActivity;
@@ -27,6 +30,7 @@ import com.trams.parkstem.activity.ManageLongTicketActivity;
 import com.trams.parkstem.activity.ManageTicketActivity;
 import com.trams.parkstem.activity.MobileCertificationActivityBase;
 import com.trams.parkstem.activity.ParkStatusActivity;
+import com.trams.parkstem.activity.SettingActivity;
 import com.trams.parkstem.activity.SplashActivity;
 import com.trams.parkstem.activity.TicketMobileListActivity;
 import com.trams.parkstem.activity.TicketPurchaseListActivity;
@@ -127,6 +131,11 @@ public class BaseNavigationActivity extends AppCompatActivity
             startActivity(intent);
             return true;
         }
+        else if (id == R.id.action_first_screen) {
+            Intent intent = new Intent(this, FirstScreenActivity.class);
+            startActivity(intent);
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -153,11 +162,14 @@ public class BaseNavigationActivity extends AppCompatActivity
             Intent intent = new Intent(this, ManageTicketActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_park_list) {
-
+            Intent intent = new Intent(this, HistoryParkActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_pay_list) {
-
+            Intent intent = new Intent(this, HistoryPaymentActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_setting) {
-
+            Intent intent = new Intent(this, SettingActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

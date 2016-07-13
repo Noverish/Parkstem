@@ -48,7 +48,7 @@ public class ServerClient {
 
 
     //POST방식으로 JSON데이터를 보내는 함수
-    private JSONObject connect(HashMap<String, String> hashMap, String urlStr) {
+    public JSONObject connect(HashMap<String, String> hashMap, String urlStr) {
         try {
             String jsonStr;
             URL url = new URL(urlStr);
