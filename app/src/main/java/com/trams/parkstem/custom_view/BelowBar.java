@@ -14,7 +14,6 @@ import com.trams.parkstem.R;
  */
 public class BelowBar extends LinearLayout {
     TextView car;
-
     RelativeLayout sef;
 
     public BelowBar(Context context) {

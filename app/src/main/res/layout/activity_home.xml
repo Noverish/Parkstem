@@ -114,6 +114,7 @@
 
                 <ImageView
                     android:layout_marginTop="4dp"
+                    android:id="@+id/activity_home_about_hipass"
                     android:src="@drawable/btn_question"
                     android:layout_toRightOf="@+id/highpass_off_text"
                     android:layout_width="22dp"
@@ -235,32 +236,10 @@
 
             </LinearLayout>
 
-            <RelativeLayout
-                android:background="@drawable/input_car_card"
-                android:orientation="horizontal"
+            <com.trams.parkstem.custom_view.BelowBar
+                android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
-                android:layout_height="87dp">
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <RelativeLayout
-                        android:orientation="vertical"
-                        android:id="@+id/activity_hipass_tocarregister"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent">
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:orientation="vertical"
-                        android:id="@+id/activity_hipass_tocardregister"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"/>
-                </LinearLayout>
-            </RelativeLayout>
+                android:layout_height="match_parent"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
