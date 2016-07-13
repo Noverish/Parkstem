@@ -5,28 +5,27 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.trams.parkstem.R;
+import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 
 /**
  * Created by Noverish on 2016-07-04.
  */
-public class MobileCertificationActivity extends AppCompatActivity {
+public class MobileCertificationActivityBase extends BaseBackSearchActivity {
+    boolean isItMan;
     ImageView man, woman;
-    RelativeLayout move1, move2;
+    RelativeLayout movetocar, movetocard;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mobile_certification);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        isItMan = true;
 
         man = (ImageView) findViewById(R.id.activity_certification_man);
         man.setOnClickListener(new View.OnClickListener() {
@@ -43,15 +42,17 @@ public class MobileCertificationActivity extends AppCompatActivity {
             }
         });
 
-        move1 = (RelativeLayout) findViewById(R.id.activity_certification_input_car);
-        move1.setOnClickListener(new View.OnClickListener(){
+
+
+        movetocar = (RelativeLayout) findViewById(R.id.activity_certification_input_car);
+        movetocar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 movetocarRegister();
             }
         });
-        move2 = (RelativeLayout) findViewById(R.id.activity_certification_input_card);
-        move2.setOnClickListener(new View.OnClickListener(){
+        movetocard = (RelativeLayout) findViewById(R.id.activity_certification_input_card);
+        movetocard.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 movetocardRegister();
@@ -59,8 +60,10 @@ public class MobileCertificationActivity extends AppCompatActivity {
         });
     }
 
-    private void changeSex(boolean change) {
-        if(change){
+    private void changeSex(boolean isItMan) {
+        this.isItMan = isItMan;
+
+        if(isItMan){
             Drawable man1 = ContextCompat.getDrawable(this, R.drawable.btn_m_1);
             man.setImageDrawable(man1);
             Drawable woman1 = ContextCompat.getDrawable(this, R.drawable.btn_w_2);

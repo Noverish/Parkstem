@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -17,11 +18,11 @@ import java.util.HashMap;
 public class ServerClient {
     static String uniqueID;
     static String msg;
+    static String res;
 
     static String mycar;
     static String mycard;
     //card_name, price, pay_date
-    static String[][] paymentinfo;
 
     static String local_id;
     static String in_date;
@@ -29,17 +30,13 @@ public class ServerClient {
     static String total;
 
     //idx, uniqueID, sort, mycar, reg_date
-    static String[][] carinfo;
     static String indate;
     static String outdate;
-
-    static String[][] cardlist;
 
     static String itemTotalCount;
     static String pageCount;
 
     //idx, local_id, ticket_name, term, term_name, gubun, original_price, price, regdate
-    static String[][] ticketinfo;
     static String idx;
     static String gubun;
     static String price;
@@ -63,8 +60,8 @@ public class ServerClient {
 
     private final String TAG = getClass().getSimpleName();
 
-    //POST방식으로 JSON데이터를 보내는 함수
 
+    //POST방식으로 JSON데이터를 보내는 함수
     private JSONObject connect(HashMap<String, String> hashMap, String urlStr) {
         try {
             String jsonStr;
@@ -108,7 +105,6 @@ public class ServerClient {
 
 
     //회원가입 및 로그인 관련 함수
-
     public boolean login(final String parkstemID, final String parkstemPW) {
 
         final String LOGIN_URL = "http://app.parkstem.com/api/member_login.php";
@@ -183,7 +179,13 @@ public class ServerClient {
     }
 
     //회원 정보관리 함수
-    public boolean dashboard(){
+    public class Membership{
+        String card_name;
+        String price;
+        String pay_date;
+    }
+
+    public ArrayList<Membership> dashboard(){
         final String DASH_URL = "http://app.parkstem.com/api/dashboard.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -206,17 +208,19 @@ public class ServerClient {
             mycar = result.getString("mycar");
             mycard = result.getString("mycard");
             JSONArray jdata = result.getJSONArray("data");
+            ArrayList<Membership> AL = new ArrayList<Membership>();
             int size = jdata.length();
             for(int i=0;i<size;i++){
-                paymentinfo = new String [size][3];
-                paymentinfo[i][0] = jdata.getJSONObject(i).getString("card_name");
-                paymentinfo[i][1] = jdata.getJSONObject(i).getString("price");
-                paymentinfo[i][2] = jdata.getJSONObject(i).getString("pay_date");
+                Membership payment = new Membership();
+                payment.card_name = jdata.getJSONObject(0).getString("card_name");
+                payment.price = jdata.getJSONObject(0).getString("price");
+                payment.pay_date = jdata.getJSONObject(0).getString("pay_date");
+                AL.add(payment);
             }
-            return (result.getInt("res") == 1);
+            return AL;
         } catch (JSONException ex) {
             ex.printStackTrace();
-            return false;
+            return null;
         }
     }
 
@@ -250,8 +254,8 @@ public class ServerClient {
         }
     }
 
-    //주차 현황 함수
 
+    //주차 현황 함수
     public boolean presentPark(){
         final String DASH_URL = "http://app.parkstem.com/api/car_recent.php";
         Thread thread = new Thread(new Runnable() {
@@ -284,8 +288,19 @@ public class ServerClient {
     }
 
     //차량관리 함수
+    public class CarNumber {
+        String idx;
+        String uniqueID;
+        String sort;
+        String mycar;
+        String reg_date;
+    }
 
-    public boolean registerCar(final String carnumber){
+    public class ServerErrorException extends Exception {
+
+    }
+
+    public boolean registerCar(final String carnumber) throws ServerErrorException{
         final String DASH_URL = "http://app.parkstem.com/api/car_reg.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -307,6 +322,7 @@ public class ServerClient {
         try {
             msg = result.getString("msg");
             JSONArray jdata = result.getJSONArray("data");
+            /**
             int size = jdata.length();
             for(int i=0;i<size;i++){
                 carinfo = new String [size][5];
@@ -316,14 +332,22 @@ public class ServerClient {
                 carinfo[i][3] = jdata.getJSONObject(i).getString("mycar");
                 carinfo[i][4] = jdata.getJSONObject(i).getString("reg_date");
             }
+             **/
+            CarNumber CN = new CarNumber();
+            CN.idx = jdata.getJSONObject(0).getString("idx");
+            CN.uniqueID = jdata.getJSONObject(0).getString("uniqueID");
+            CN.sort = jdata.getJSONObject(0).getString("sort");
+            CN.mycar = jdata.getJSONObject(0).getString("mycar");
+            CN.reg_date = jdata.getJSONObject(0).getString("reg_date");
             return (result.getInt("res") == 1);
         } catch (JSONException ex) {
             ex.printStackTrace();
-            return false;
+            throw new ServerErrorException();
         }
+
     }
 
-    public boolean listOfCar(){
+    public ArrayList<CarNumber> listOfCar(){
         final String Clist_URL = "http://app.parkstem.com/api/car_list.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -344,23 +368,25 @@ public class ServerClient {
         try {
             msg = result.getString("msg");
             JSONArray jdata = result.getJSONArray("data");
+            ArrayList<CarNumber> AL = new ArrayList<CarNumber>();
             int size = jdata.length();
             for(int i=0;i<size;i++){
-                carinfo = new String [size][5];
-                carinfo[i][0] = jdata.getJSONObject(i).getString("idx");
-                carinfo[i][1] = jdata.getJSONObject(i).getString("uniqueID");
-                carinfo[i][2] = jdata.getJSONObject(i).getString("sort");
-                carinfo[i][3] = jdata.getJSONObject(i).getString("mycar");
-                carinfo[i][4] = jdata.getJSONObject(i).getString("reg_date");
+                CarNumber CN = new CarNumber();
+                CN.idx = jdata.getJSONObject(0).getString("idx");
+                CN.uniqueID = jdata.getJSONObject(0).getString("uniqueID");
+                CN.sort = jdata.getJSONObject(0).getString("sort");
+                CN.mycar = jdata.getJSONObject(0).getString("mycar");
+                CN.reg_date = jdata.getJSONObject(0).getString("reg_date");
+                AL.add(CN);
             }
-            return (result.getInt("res") == 1);
+            return AL;
         } catch (JSONException ex) {
             ex.printStackTrace();
-            return false;
+            return null;
         }
     }
 
-    public boolean priorityCar(final String index){
+    public ArrayList<CarNumber> priorityCar(final String index){
         final String Clist_URL = "http://app.parkstem.com/api/car_sort.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -382,19 +408,21 @@ public class ServerClient {
         try {
             msg = result.getString("msg");
             JSONArray jdata = result.getJSONArray("data");
+            ArrayList<CarNumber> AL = new ArrayList<CarNumber>();
             int size = jdata.length();
             for(int i=0;i<size;i++){
-                carinfo = new String [size][5];
-                carinfo[i][0] = jdata.getJSONObject(i).getString("idx");
-                carinfo[i][1] = jdata.getJSONObject(i).getString("uniqueID");
-                carinfo[i][2] = jdata.getJSONObject(i).getString("sort");
-                carinfo[i][3] = jdata.getJSONObject(i).getString("mycar");
-                carinfo[i][4] = jdata.getJSONObject(i).getString("reg_date");
+                CarNumber CN = new CarNumber();
+                CN.idx = jdata.getJSONObject(0).getString("idx");
+                CN.uniqueID = jdata.getJSONObject(0).getString("uniqueID");
+                CN.sort = jdata.getJSONObject(0).getString("sort");
+                CN.mycar = jdata.getJSONObject(0).getString("mycar");
+                CN.reg_date = jdata.getJSONObject(0).getString("reg_date");
+                AL.add(CN);
             }
-            return (result.getInt("res") == 1);
+            return AL;
         } catch (JSONException ex) {
             ex.printStackTrace();
-            return false;
+            return null;
         }
     }
 
@@ -484,10 +512,232 @@ public class ServerClient {
     }
 
     //카드 관련 함수
+    public class CardList{
+        String idx;
+        String sort;
+        String card_name;
+        String reg_date;
+    }
+    public class PaymentList{
+        String gubun;
+        String local_id;
+        String card_name;
+        String price;
+        String start_date;
+        String end_date;
+        String pay_date;
+    }
+
+    public boolean card_Register(){
+        //일단 보류
+        return true;
+    }
+
+    public ArrayList<CardList> cardList(){
+        final String CL_URL = "http://app.parkstem.com/api/card_list.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("uniqueID", uniqueID);
+                result = connect(hashMap, CL_URL);
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            msg = result.getString("msg");
+            res = result.getString("res");
+            JSONArray jdata = result.getJSONArray("data");
+            ArrayList<CardList> cardlists = new ArrayList<CardList>();
+            int size = jdata.length();
+            for(int i=0;i<size;i++){
+                CardList cardlist = new CardList();
+                cardlist.idx = jdata.getJSONObject(0).getString("idx");
+                cardlist.sort = jdata.getJSONObject(0).getString("sort");
+                cardlist.card_name = jdata.getJSONObject(0).getString("card_name");
+                cardlist.reg_date = jdata.getJSONObject(0).getString("reg_date");
+                cardlists.add(cardlist);
+            }
+            return cardlists;
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public ArrayList<CardList> cardPriority(final String idx){
+        final String CS_URL = "http://app.parkstem.com/api/card_sort.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("uniqueID", uniqueID);
+                hashMap.put("idx", idx);
+                result = connect(hashMap, CS_URL);
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            msg = result.getString("msg");
+            res = result.getString("res");
+            JSONArray jdata = result.getJSONArray("data");
+            ArrayList<CardList> cardlists = new ArrayList<CardList>();
+            int size = jdata.length();
+            for(int i=0;i<size;i++){
+                CardList cardlist = new CardList();
+                cardlist.idx = jdata.getJSONObject(0).getString("idx");
+                cardlist.sort = jdata.getJSONObject(0).getString("sort");
+                cardlist.card_name = jdata.getJSONObject(0).getString("card_name");
+                cardlist.reg_date = jdata.getJSONObject(0).getString("reg_date");
+                cardlists.add(cardlist);
+            }
+            return cardlists;
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public boolean cardDelete(final String idx){
+        final String CD_URL = "http://app.parkstem.com/api/card_del.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("uniqueID",uniqueID);
+                hashMap.put("idx",idx);
+                result = connect(hashMap, CD_URL);
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            msg = result.getString("msg");
+            outdate = result.getString("outdate");
+            local_id = result.getString("local_id");
+            return (result.getInt("res") == 1);
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+
+    public ArrayList<Membership> hipassPayment(){
+        final String HiPay_URL = "http://app.parkstem.com/api/pay_list.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("uniqueID", uniqueID);
+                result = connect(hashMap, HiPay_URL);
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            msg = result.getString("msg");
+            itemTotalCount = result.getString("itemTotalCount");
+            pageCount = result.getString("pageCount");
+            JSONArray jdata = result.getJSONArray("data");
+            ArrayList<Membership> memberships = new ArrayList<Membership>();
+            int size = jdata.length();
+            for(int i=0;i<size;i++){
+                Membership membership = new Membership();
+                membership.card_name = jdata.getJSONObject(0).getString("card_name");
+                membership.price = jdata.getJSONObject(0).getString("price");
+                membership.pay_date = jdata.getJSONObject(0).getString("pay_date");
+                memberships.add(membership);
+            }
+            return memberships;
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public ArrayList<PaymentList> ticketpurchase(){
+        final String TicketBuy_URL = "http://app.parkstem.com/api/ticket_buy_list.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("uniqueID", uniqueID);
+                result = connect(hashMap, TicketBuy_URL);
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            msg = result.getString("msg");
+            itemTotalCount = result.getString("itemTotalCount");
+            pageCount = result.getString("pageCount");
+            JSONArray jdata = result.getJSONArray("data");
+            ArrayList<PaymentList> paymentList = new ArrayList<PaymentList>();
+            int size = jdata.length();
+            for(int i=0;i<size;i++){
+                PaymentList paymentLists = new PaymentList();
+                paymentLists.gubun = jdata.getJSONObject(0).getString("gubun");
+                paymentLists.local_id = jdata.getJSONObject(0).getString("local_id");
+                paymentLists.card_name = jdata.getJSONObject(0).getString("card_name");
+                paymentLists.price = jdata.getJSONObject(0).getString("price");
+                paymentLists.start_date = jdata.getJSONObject(0).getString("start_date");
+                paymentLists.end_date = jdata.getJSONObject(0).getString("end_date");
+                paymentLists.pay_date = jdata.getJSONObject(0).getString("pay_date");
+                paymentList.add(paymentLists);
+            }
+            return paymentList;
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
 
     //티켓 관련 함수
+    public class Ticket{
+        String idx;
+        String local_id;
+        String ticket_name;
+        String term;
+        String term_name;
+        String gubun;
+        String original_price;
+        String price;
+        String regdate;
+    }
 
-    public boolean listOfTicket() {
+    public ArrayList<Ticket> listOfTicket() {
         final String Tlist_URL = "http://app.parkstem.com/api/ticket_list.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -510,27 +760,29 @@ public class ServerClient {
             itemTotalCount = result.getString("itemTotalCount");
             pageCount = result.getString("pageCount");
             JSONArray jdata = result.getJSONArray("data");
+            ArrayList<Ticket> ticketlists = new ArrayList<Ticket>();
             int size = jdata.length();
-            for (int i = 0; i < size; i++) {
-                ticketinfo = new String[size][9];
-                ticketinfo[i][0] = jdata.getJSONObject(i).getString("idx");
-                ticketinfo[i][1] = jdata.getJSONObject(i).getString("local_id");
-                ticketinfo[i][2] = jdata.getJSONObject(i).getString("ticket_name");
-                ticketinfo[i][3] = jdata.getJSONObject(i).getString("term");
-                ticketinfo[i][4] = jdata.getJSONObject(i).getString("term_name");
-                ticketinfo[i][0] = jdata.getJSONObject(i).getString("gubun");
-                ticketinfo[i][0] = jdata.getJSONObject(i).getString("original_price");
-                ticketinfo[i][0] = jdata.getJSONObject(i).getString("price");
-                ticketinfo[i][0] = jdata.getJSONObject(i).getString("regdate");
+            for(int i=0;i<size;i++){
+                Ticket ticket = new Ticket();
+                ticket.idx = jdata.getJSONObject(0).getString("idx");
+                ticket.local_id = jdata.getJSONObject(0).getString("local_id");
+                ticket.ticket_name = jdata.getJSONObject(0).getString("ticket_name");
+                ticket.term = jdata.getJSONObject(0).getString("term");
+                ticket.term_name = jdata.getJSONObject(0).getString("term_name");
+                ticket.gubun = jdata.getJSONObject(0).getString("gubun");
+                ticket.original_price = jdata.getJSONObject(0).getString("original_price");
+                ticket.price = jdata.getJSONObject(0).getString("price");
+                ticket.regdate = jdata.getJSONObject(0).getString("regdate");
+                ticketlists.add(ticket);
             }
-            return (result.getInt("res") == 1);
+            return ticketlists;
         } catch (JSONException ex) {
             ex.printStackTrace();
-            return false;
+            return null;
         }
     }
 
-    public boolean listOfLongTicket() {
+    public ArrayList<Ticket> listOfLongTicket() {
         final String LTlist_URL = "http://app.parkstem.com/api/longticket_list.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -553,23 +805,25 @@ public class ServerClient {
             itemTotalCount = result.getString("itemTotalCount");
             pageCount = result.getString("pageCount");
             JSONArray jdata = result.getJSONArray("data");
+            ArrayList<Ticket> ticketlists = new ArrayList<Ticket>();
             int size = jdata.length();
-            for (int i = 0; i < size; i++) {
-                ticketinfo = new String[size][9];
-                ticketinfo[i][0] = jdata.getJSONObject(i).getString("idx");
-                ticketinfo[i][1] = jdata.getJSONObject(i).getString("local_id");
-                ticketinfo[i][2] = jdata.getJSONObject(i).getString("ticket_name");
-                ticketinfo[i][3] = jdata.getJSONObject(i).getString("term");
-                ticketinfo[i][4] = jdata.getJSONObject(i).getString("term_name");
-                ticketinfo[i][0] = jdata.getJSONObject(i).getString("gubun");
-                ticketinfo[i][0] = jdata.getJSONObject(i).getString("original_price");
-                ticketinfo[i][0] = jdata.getJSONObject(i).getString("price");
-                ticketinfo[i][0] = jdata.getJSONObject(i).getString("regdate");
+            for(int i=0;i<size;i++){
+                Ticket ticket = new Ticket();
+                ticket.idx = jdata.getJSONObject(0).getString("idx");
+                ticket.local_id = jdata.getJSONObject(0).getString("local_id");
+                ticket.ticket_name = jdata.getJSONObject(0).getString("ticket_name");
+                ticket.term = jdata.getJSONObject(0).getString("term");
+                ticket.term_name = jdata.getJSONObject(0).getString("term_name");
+                ticket.gubun = jdata.getJSONObject(0).getString("gubun");
+                ticket.original_price = jdata.getJSONObject(0).getString("original_price");
+                ticket.price = jdata.getJSONObject(0).getString("price");
+                ticket.regdate = jdata.getJSONObject(0).getString("regdate");
+                ticketlists.add(ticket);
             }
-            return (result.getInt("res") == 1);
+            return ticketlists;
         } catch (JSONException ex) {
             ex.printStackTrace();
-            return false;
+            return null;
         }
     }
 

@@ -6,9 +6,6 @@
     android:background="#FFFFFF"
     android:orientation="vertical">
 
-    <include
-        layout="@layout/toolbar_empty" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -67,7 +64,7 @@
                     android:layout_height="wrap_content">
                     <ImageView
                         android:id="@+id/activity_input_new_card_radio_person_image"
-                        android:layout_marginLeft="43dp"
+                        android:layout_marginLeft="36dp"
                         android:background="@drawable/img_ground"
                         android:layout_width="30dp"
                         android:layout_height="30dp"/>
@@ -143,30 +140,24 @@
                     android:layout_height="wrap_content" />
 
                 <Spinner
-                    android:layout_toRightOf="@+id/input_new_card_duration"
                     android:id="@+id/input_new_card_duration_month"
-                    android:background="@null"
+                    android:layout_toRightOf="@id/input_new_card_duration"
                     android:layout_marginLeft="36dp"
+                    android:layout_centerVertical="true"
                     android:textSize="20sp"
                     android:textColor="@color/BLACK"
-                    android:hint="1월"
-                    android:singleLine="true"
-                    android:textColorHint="@color/gray"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="20dp" />
 
                 <Spinner
-                    android:layout_toRightOf="@+id/input_new_card_duration"
                     android:id="@+id/input_new_card_duration_year"
-                    android:background="@null"
-                    android:layout_marginLeft="90dp"
+                    android:layout_toRightOf="@id/input_new_card_duration_month"
+                    android:layout_marginLeft="29dp"
+                    android:layout_centerVertical="true"
                     android:textSize="20sp"
                     android:textColor="@color/BLACK"
-                    android:hint="2016년"
-                    android:singleLine="true"
-                    android:textColorHint="@color/gray"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="20dp" />
             </RelativeLayout>
 
             <LinearLayout
@@ -207,15 +198,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <!--com.trams.parkstem.activity.InputNewCardActivity.HidePasswordView
-                    android:id="@+id/activity_input_new_card_hide_password_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/-->
-
                 <view class="com.trams.parkstem.activity.InputNewCardActivity$HidePasswordView"
                     android:id="@+id/activity_input_new_card_hide_password_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="36dp"/>
 
             </LinearLayout>
 
