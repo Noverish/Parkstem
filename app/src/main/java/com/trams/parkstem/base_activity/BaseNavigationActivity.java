@@ -1,39 +1,53 @@
-package com.trams.parkstem.activity;
+package com.trams.parkstem.base_activity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.trams.parkstem.R;
+import com.trams.parkstem.activity.AssignActivity;
+import com.trams.parkstem.activity.InputCarActivity;
+import com.trams.parkstem.activity.InputCardActivity;
+import com.trams.parkstem.activity.InputNewCardActivity;
+import com.trams.parkstem.activity.LoginActivity;
+import com.trams.parkstem.activity.ManageLongTicketActivity;
+import com.trams.parkstem.activity.ManageTicketActivity;
+import com.trams.parkstem.activity.MobileCertificationActivityBase;
+import com.trams.parkstem.activity.ParkStatusActivity;
+import com.trams.parkstem.activity.SplashActivity;
+import com.trams.parkstem.activity.TicketMobileListActivity;
+import com.trams.parkstem.activity.TicketPurchaseListActivity;
 
-public class MainActivity extends AppCompatActivity
+/**
+ * Created by Noverish on 2016-07-09.
+ */
+public class BaseNavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        super.setContentView(R.layout.base_activity_nav);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/HelveticaNeueLTStd-LtEx.otf");
+        TextView toolbarTitle = (TextView) findViewById(R.id.toolbar_title);
+        toolbarTitle.setTypeface(myTypeface);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -43,6 +57,14 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+    }
+
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+        FrameLayout content = (FrameLayout) findViewById(R.id.activity_main_content);
+
+        LayoutInflater.from(this).inflate(layoutResID, content);
     }
 
     @Override
@@ -86,22 +108,22 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
         else if (id == R.id.action_mobile) {
-            Intent intent = new Intent(this, MobileActivity.class);
-            startActivity(intent);
-            return true;
-        }
-        else if (id == R.id.action_car_register) {
-            Intent intent = new Intent(this, InputCarActivity.class);
-            startActivity(intent);
-            return true;
-        }
-        else if (id == R.id.action_card_register) {
-            Intent intent = new Intent(this, InputCardActivity.class);
+            Intent intent = new Intent(this, MobileCertificationActivityBase.class);
             startActivity(intent);
             return true;
         }
         else if (id == R.id.action_card_new_card) {
             Intent intent = new Intent(this, InputNewCardActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.action_mobile_ticket) {
+            Intent intent = new Intent(this, TicketMobileListActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        else if (id == R.id.action_purchase_ticket) {
+            Intent intent = new Intent(this, TicketPurchaseListActivity.class);
             startActivity(intent);
             return true;
         }
@@ -115,17 +137,26 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_park_status) {
+            Intent intent = new Intent(this, ParkStatusActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_car_number) {
+            Intent intent = new Intent(this, InputCarActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_credit_card) {
+            Intent intent = new Intent(this, InputCardActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_long_ticket) {
+            Intent intent = new Intent(this, ManageLongTicketActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_park_ticket) {
+            Intent intent = new Intent(this, ManageTicketActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_park_list) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_pay_list) {
 
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_setting) {
 
         }
 
@@ -133,5 +164,4 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    //유재효
 }

@@ -3,34 +3,36 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_park_status"
+            android:icon="@drawable/btn_menu_car"
+            android:title="주차현황" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_car_number"
+            android:icon="@drawable/btn_menu_number"
+            android:title="차량번호 관리" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_credit_card"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="신용카드 관리" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_long_ticket"
+            android:icon="@drawable/btn_menu_1month"
+            android:title="정기권 관리" />
+        <item
+            android:id="@+id/nav_park_ticket"
+            android:icon="@drawable/btn_menu_ticket"
+            android:title="주차권 관리" />
+        <item
+            android:id="@+id/nav_park_list"
+            android:icon="@drawable/btn_parkhistory"
+            android:title="주차 내역" />
+        <item
+            android:id="@+id/nav_pay_list"
+            android:icon="@drawable/btn_payhistory"
+            android:title="결제 내역" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/btn_setup"
+            android:title="설정" />
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
-
 </menu>

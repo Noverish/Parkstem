@@ -4,7 +4,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="activity_input_car_register">차량등록</string>
+    <string name="activity_input_car_register">차량 등록</string>
 
     <string name="action_splash">스플래쉬 이미지</string>
     <string name="action_login">로그인</string>
@@ -13,4 +13,9 @@
     <string name="action_car_register">차량등록</string>
     <string name="action_card_register">카드등록</string>
     <string name="action_card_new_card">새카드</string>
+    <string name="action_home">홈</string>
+    <string name="action_mobile_ticket">모바일 주차권</string>
+    <string name="action_purchase_ticket">주차권 구매내역</string>
+
+
 </resources>

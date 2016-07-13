@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/btn_bottom"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="87dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/below_bar_center_bar"
+                android:layout_centerInParent="true"
+                android:background="@drawable/img_bottom_bar"
+                android:layout_width="0.4dp"
+                android:layout_height="64dp"></RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginLeft="0.2dp"
+                android:layout_toLeftOf="@+id/below_bar_center_bar"
+                android:id="@+id/activity_certification_input_car"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="13dp"
+                    android:src="@drawable/img_car"
+                    android:layout_width="32dp"
+                    android:layout_height="29dp" />
+
+                <TextView
+                    android:textColor="#5d5d5d"
+                    android:textSize="20sp"
+                    android:id="@+id/below_bar_car_register"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="13dp"
+                    android:text="차량등록"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginRight="0.2dp"
+                android:layout_toRightOf="@+id/below_bar_center_bar"
+                android:id="@+id/activity_certification_input_card"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="13dp"
+                    android:src="@drawable/img_card"
+                    android:layout_width="45dp"
+                    android:layout_height="29dp" />
+
+                <TextView
+                    android:textColor="#5d5d5d"
+                    android:textSize="20sp"
+                    android:id="@+id/below_bar_card_register"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="13dp"
+                    android:text="카드등록"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:background="@drawable/btn_5"
+        android:paddingLeft="43dp"
+        android:paddingRight="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <RelativeLayout
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/btn_4"
+            android:layout_width="99dp"
+            android:layout_height="30dp">
+
+            <ImageView
+                android:src="@drawable/btn_check_w"
+                android:layout_centerInParent="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_width="195dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/long_ticket_purchase_item_name"
+                android:textColor="#5d5d5d"
+                android:textSize="17sp"
+                android:text="호텔 아르부노 역삼"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/long_ticket_purchase_item_place"
+                android:layout_marginTop="2dp"
+                android:textColor="#5d5d5d"
+                android:textSize="10sp"
+                android:text="르네상스 사거리"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:background="@drawable/btn_6"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"></RelativeLayout>
+
+        <LinearLayout
+            android:paddingTop="23dp"
+            android:paddingLeft="17dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="157dp">
+
+
+
+            <ImageView
+                android:id="@+id/ticket_purchase_item_picture"
+                android:src="@drawable/img_place_g"
+                android:layout_width="113dp"
+                android:layout_height="113dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/long_ticket_purchase_item_start_date"
+                        android:layout_gravity="top"
+                        android:textSize="24sp"
+                        android:textColor="#5d5d5d"
+                        android:text="2016.05.02"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:id="@+id/long_ticket_purchase_item_calender"
+                        android:layout_marginLeft="22dp"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/btn_calender_off"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/long_ticket_purchase_item_end_date"
+                    android:textSize="20sp"
+                    android:textColor="#5d5d5d"
+                    android:text="- 2016.06.01"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/long_ticket_purchase_item_place_2"
+                    android:textSize="15sp"
+                    android:textColor="#5d5d5d"
+                    android:text="서울 강남구 역삼동 701-1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+
+
+                <TextView
+                    android:id="@+id/long_ticket_purchase_item_before_price"
+                    android:layout_marginTop="2dp"
+                    android:textSize="15sp"
+                    android:textColor="#5d5d5d"
+                    android:text="1달 &#xffe6;200,000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/long_ticket_purchase_item_after_price"
+                    android:textSize="21sp"
+                    android:textColor="#000000"
+                    android:text="1달 &#xffe6;150,000"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

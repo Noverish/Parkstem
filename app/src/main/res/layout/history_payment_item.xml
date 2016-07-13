@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="horizontal"
+    android:paddingLeft="22dp"
+    android:paddingRight="22dp"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/history_payment_item_date"
+        android:textColor="#5d5d5d"
+        android:textSize="20sp"
+        android:text="4.12"
+        android:layout_gravity="center_vertical"
+        android:layout_width="78dp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/history_payment_item_time"
+        android:textColor="#5d5d5d"
+        android:textSize="20sp"
+        android:text="16:05"
+        android:layout_gravity="center_vertical"
+        android:layout_width="83dp"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/history_payment_item_bank"
+        android:textColor="#5d5d5d"
+        android:textSize="20sp"
+        android:text="KB국민"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/history_payment_item_price"
+        android:gravity="right"
+        android:textColor="#5d5d5d"
+        android:textSize="20sp"
+        android:text="&#xffe6;9,000"
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
