@@ -1472,7 +1472,7 @@ public class ServerClient {
 //                    ticket.idx = jdata.getInt("idx");
 //                    ticket.local_id = jdata.getString("local_id");
 //                    ticket.ticket_name = jdata.getString("ticket_name");
-//                    ticket.term = jdata.getString("term");
+//                    ticket.term = stringToCalendar(jdata.getString("term"));
 //                    ticket.term_name = jdata.getString("term_name");
 //                    ticket.gubun = jdata.getInt("gubun");
 //                    ticket.original_price = jdata.getInt("original_price");
@@ -1497,7 +1497,7 @@ public class ServerClient {
         Ticket t1 = new Ticket();
         t1.price = 12000;
         t1.idx = 12;
-        t1.term = "term1";
+        t1.term = Calendar.getInstance();
         t1.term_name = "term_name1";
         t1.ticket_name = "고급티켓";
         t1.local_id = "12355";
@@ -1507,7 +1507,7 @@ public class ServerClient {
         Ticket t2 = new Ticket();
         t2.price = 14000;
         t2.idx = 13;
-        t2.term = "term2";
+        t2.term = Calendar.getInstance();
         t2.term_name = "term_name2";
         t2.ticket_name = "저급티켓";
         t2.local_id = "12355";
@@ -1559,7 +1559,7 @@ public class ServerClient {
 //                    ticket.idx = jdata.getInt("idx");
 //                    ticket.local_id = jdata.getString("local_id");
 //                    ticket.ticket_name = jdata.getString("ticket_name");
-//                    ticket.term = jdata.getString("term");
+//                    ticket.term = stringToCalendar(jdata.getString("term"));
 //                    ticket.term_name = jdata.getString("term_name");
 //                    ticket.gubun = jdata.getInt("gubun");
 //                    ticket.original_price = jdata.getInt("original_price");
@@ -1584,7 +1584,7 @@ public class ServerClient {
         Ticket t1 = new Ticket();
         t1.price = 12000;
         t1.idx = 12;
-        t1.term = "term1";
+        t1.term = Calendar.getInstance();
         t1.term_name = "term_name1";
         t1.ticket_name = "장기고급티켓";
         t1.local_id = "12355";
@@ -1594,7 +1594,7 @@ public class ServerClient {
         Ticket t2 = new Ticket();
         t2.price = 14000;
         t2.idx = 13;
-        t2.term = "term2";
+        t2.term = Calendar.getInstance();
         t2.term_name = "term_name2";
         t2.ticket_name = "장기저급티켓";
         t2.local_id = "12355";
@@ -1879,7 +1879,7 @@ public class ServerClient {
         public int idx;
         public String local_id;
         public String ticket_name;
-        public String term;
+        public Calendar term;
         public String term_name;
         public int gubun;
         public int original_price;
