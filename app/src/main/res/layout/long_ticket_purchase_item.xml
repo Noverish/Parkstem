@@ -32,7 +32,7 @@
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/long_ticket_purchase_item_name"
-                android:textColor="#5d5d5d"
+                android:textColor="@color/gray_for_text"
                 android:textSize="17sp"
                 android:text="호텔 아르부노 역삼"
                 android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
             <TextView
                 android:id="@+id/long_ticket_purchase_item_place"
                 android:layout_marginTop="2dp"
-                android:textColor="#5d5d5d"
+                android:textColor="@color/gray_for_text"
                 android:textSize="10sp"
                 android:text="르네상스 사거리"
                 android:layout_width="wrap_content"
@@ -87,7 +87,7 @@
                         android:id="@+id/long_ticket_purchase_item_start_date"
                         android:layout_gravity="top"
                         android:textSize="24sp"
-                        android:textColor="#5d5d5d"
+                        android:textColor="@color/gray_for_text"
                         android:text="2016.05.02"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
@@ -103,7 +103,7 @@
                 <TextView
                     android:id="@+id/long_ticket_purchase_item_end_date"
                     android:textSize="20sp"
-                    android:textColor="#5d5d5d"
+                    android:textColor="@color/gray_for_text"
                     android:text="- 2016.06.01"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -112,7 +112,7 @@
                     android:layout_marginTop="5dp"
                     android:id="@+id/long_ticket_purchase_item_place_2"
                     android:textSize="15sp"
-                    android:textColor="#5d5d5d"
+                    android:textColor="@color/gray_for_text"
                     android:text="서울 강남구 역삼동 701-1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -123,7 +123,7 @@
                     android:id="@+id/long_ticket_purchase_item_before_price"
                     android:layout_marginTop="2dp"
                     android:textSize="15sp"
-                    android:textColor="#5d5d5d"
+                    android:textColor="@color/gray_for_text"
                     android:text="1달 &#xffe6;200,000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -131,7 +131,7 @@
                 <TextView
                     android:id="@+id/long_ticket_purchase_item_after_price"
                     android:textSize="21sp"
-                    android:textColor="#000000"
+                    android:textColor="@color/BLACK"
                     android:text="1달 &#xffe6;150,000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />

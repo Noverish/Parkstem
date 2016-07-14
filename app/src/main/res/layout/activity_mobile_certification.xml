@@ -15,7 +15,7 @@
         <TextView
             android:id="@+id/input_car_skip"
             android:layout_centerInParent="true"
-            android:textColor="#ffffff"
+            android:textColor="@color/WHITE"
             android:textSize="22sp"
             android:text="SKIP"
             android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
             <TextView
                 android:layout_marginTop="4dp"
                 android:textSize="22sp"
-                android:textColor="#5d5d5d"
+                android:textColor="@color/gray_for_text"
                 android:text="휴대폰 인증"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -59,7 +59,7 @@
                 android:textAlignment="center"
                 android:hint="이름"
                 android:textColorHint="#bcc1c5"
-                android:textColor="#5d5d5d"
+                android:textColor="@color/gray_for_text"
                 android:layout_marginTop="18dp"
                 android:background="@drawable/box_edit"
                 android:singleLine="true"
@@ -72,7 +72,7 @@
                 android:hint="생년월일"
                 android:singleLine="true"
                 android:textColorHint="#bcc1c5"
-                android:textColor="#5d5d5d"
+                android:textColor="@color/gray_for_text"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/box_edit"
                 android:layout_width="211dp"
@@ -83,7 +83,7 @@
                 android:textAlignment="center"
                 android:hint="휴대폰 번호"
                 android:textColorHint="#bcc1c5"
-                android:textColor="#5d5d5d"
+                android:textColor="@color/gray_for_text"
                 android:layout_marginTop="15dp"
                 android:singleLine="true"
                 android:background="@drawable/box_edit"
@@ -129,7 +129,7 @@
                     android:layout_height="43dp">
                     <TextView
                         android:layout_centerInParent="true"
-                        android:textColor="#ffffff"
+                        android:textColor="@color/WHITE"
                         android:textSize="23sp"
                         android:text="확인"
                         android:layout_width="wrap_content"

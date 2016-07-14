@@ -30,10 +30,13 @@ public class HistoryPaymentView extends LinearLayout {
         name.setText((char)0xffe6 + Essentials.numberWithComma(payment.price));
 
         name = (TextView) findViewById(R.id.history_payment_item_date);
-        Calendar ca = payment.calendar;
-        Log.e("tag",payment.calendar.toString());
+        Calendar ca = payment.pay_date;
 
-        String date =(int)(payment.calendar.get(Calendar.MONTH)+1) + "." +payment.calendar.get(Calendar.DAY_OF_MONTH);
+
+        Log.e("TAG", payment.card_name + " " + payment.pay_date.toString());
+
+
+        String date =(int)(payment.pay_date.get(Calendar.MONTH)+1) + "." +payment.pay_date.get(Calendar.DAY_OF_MONTH);
         name.setText(date);
 
         name = (TextView) findViewById(R.id.history_payment_item_time);

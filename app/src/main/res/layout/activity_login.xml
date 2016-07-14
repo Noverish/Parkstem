@@ -38,7 +38,7 @@
                 android:gravity="left"
                 android:textSize="20sp"
                 android:text="네이버로 로그인"
-                android:textColor="#ffffffff"
+                android:textColor="@color/WHITE"
                 />
 
         </LinearLayout>
@@ -68,7 +68,7 @@
                 android:gravity="left"
                 android:textSize="20sp"
                 android:text="카카오계정으로 로그인"
-                android:textColor="#ffffffff"
+                android:textColor="@color/WHITE"
                 />
 
         </LinearLayout>
@@ -100,7 +100,7 @@
                 android:textSize="20sp"
                 android:text="페이스북으로 로그인"
                 android:typeface="sans"
-                android:textColor="#ffffffff"
+                android:textColor="@color/WHITE"
                 />
 
         </LinearLayout>
@@ -114,7 +114,7 @@
             android:layout_height="wrap_content"
             android:text="이메일로 로그인"
             android:textSize="20sp"
-            android:textColor="#000000"
+            android:textColor="@color/BLACK"
             android:textAlignment="center"
             />
 

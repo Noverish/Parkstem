@@ -65,7 +65,7 @@
 
                 <TextView
                     android:id="@+id/input_first_car_text"
-                    android:textColor="#000000"
+                    android:textColor="@color/BLACK"
                     android:layout_marginTop="55dp"
                     android:textSize="27sp"
                     android:gravity="center"
