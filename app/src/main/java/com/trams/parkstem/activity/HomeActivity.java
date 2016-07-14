@@ -136,12 +136,8 @@ public class HomeActivity extends BaseNavigationActivity {
         Intent intent = new Intent(this, InputCarActivity.class);
         startActivity(intent);
     }
-<<<<<<<<< Temporary merge branch 1
-    private void movetocardRegister(){
-=========
 
-    private void movefromHipasstoCardRegister(){
->>>>>>>>> Temporary merge branch 2
+    private void movetocardRegister(){
         Intent intent = new Intent(this, InputCardActivity.class);
         startActivity(intent);
     }
