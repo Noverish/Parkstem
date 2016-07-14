@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/history_park_item_date"
-        android:textColor="#5d5d5d"
+        android:textColor="@color/gray_for_text"
         android:textSize="20sp"
         android:text="4.12"
         android:layout_gravity="center_vertical"
@@ -18,7 +18,7 @@
     <TextView
         android:id="@+id/history_park_item_name"
         android:gravity="center"
-        android:textColor="#5d5d5d"
+        android:textColor="@color/gray_for_text"
         android:textSize="14sp"
         android:text="센트럴푸르지오\n주차장"
         android:layout_gravity="center_vertical"
@@ -27,7 +27,7 @@
     <TextView
         android:id="@+id/history_park_item_time"
         android:layout_marginLeft="14dp"
-        android:textColor="#5d5d5d"
+        android:textColor="@color/gray_for_text"
         android:textSize="20sp"
         android:text="2h30m"
         android:layout_gravity="center_vertical"
@@ -36,7 +36,7 @@
     <TextView
         android:id="@+id/history_park_item_price"
         android:gravity="right"
-        android:textColor="#5d5d5d"
+        android:textColor="@color/gray_for_text"
         android:textSize="20sp"
         android:text="&#xffe6;36,000"
         android:layout_gravity="center_vertical"

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseNavigationActivity;
@@ -42,22 +43,6 @@ public class HomeActivity extends BaseNavigationActivity {
             }
         });
 
-
-        movetocar = (RelativeLayout) findViewById(R.id.activity_certification_input_car);
-        movetocar.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                movetocarRegister();
-            }
-        });
-        movetocard = (RelativeLayout) findViewById(R.id.activity_certification_input_card);
-        movetocard.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                movetocardRegister();
-            }
-        });
-
         alert = (ImageView) findViewById(R.id.activity_home_about_hipass);
         alert.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -84,60 +69,41 @@ public class HomeActivity extends BaseNavigationActivity {
             }
         });
 
-        test();
-    }
-
-
-    private void test(){
-        try{
-            ServerClient serverClient = ServerClient.getInstance();
-
-            boolean result = serverClient.login("hongid1234", "hongpw1234");
-/**
-            Iterator<String> iter = result.keys();
-            while(iter.hasNext()){
-                String key = iter.next();
-                String str = result.getString(key);
-                Log.e("JSON",key + ":" + str);
-            }
- **/
-        }
-        catch(Exception ex){
-            ex.printStackTrace();
-        }
     }
 
     private void onHipassButtonClicked() {
         ImageView human = (ImageView) findViewById(R.id.activity_highpass_human_image);
-        hipassButton.removeAllViews();
 
-        try{
-
-            if(hipassOn) {
-                getLayoutInflater().inflate(R.layout.hipass_button_off, hipassButton);
+        if(hipassOn) {
+            try {
                 client.hipassOn("Y");
+                hipassButton.removeAllViews();
+                getLayoutInflater().inflate(R.layout.hipass_button_off, hipassButton);
                 human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person));
-
-            } else {
+            } catch (ServerClient.ServerErrorException ex) {
+                Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            try {
                 client.hipassOn("N");
+                hipassButton.removeAllViews();
                 getLayoutInflater().inflate(R.layout.hipass_button_on, hipassButton);
                 human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person_2));
-
+            } catch (ServerClient.ServerErrorException ex) {
+                Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
             }
-
-            hipassOn = !hipassOn;
-        }catch(ServerClient.ServerErrorException ex){
-            ex.printStackTrace();
         }
+
+        hipassOn = !hipassOn;
     }
 
 
-    private void movetocarRegister(){
+    private void movefromHipasstoCarRegister(){
         Intent intent = new Intent(this, InputCarActivity.class);
         startActivity(intent);
     }
 
-    private void movetocardRegister(){
+    private void movefromHipasstoCardRegister(){
         Intent intent = new Intent(this, InputCardActivity.class);
         startActivity(intent);
     }

@@ -55,7 +55,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="3dp"
                         android:text="삭제"
-                        android:textColor="#ba1e45"
+                        android:textColor="@color/red"
                         android:textSize="11sp"/>
                 </LinearLayout>
 

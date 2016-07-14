@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.activity.InputCarActivity;
@@ -54,7 +55,11 @@ public class BelowBar extends LinearLayout {
             }
         });
 
+        TextView carText = (TextView) findViewById(R.id.below_bar_car_text);
+        carText.setText("EMPTY");
 
+        TextView cardText = (TextView) findViewById(R.id.below_bar_card_text);
+        cardText.setText("EMPTY");
 
 
     }

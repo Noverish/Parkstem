@@ -1,6 +1,5 @@
 package com.trams.parkstem.activity;
 
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,7 +14,7 @@ import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 /**
  * Created by Noverish on 2016-07-04.
  */
-public class MobileCertificationActivityBase extends BaseBackSearchActivity {
+public class MobileCertificationActivity extends BaseBackSearchActivity {
     boolean isItMan;
     ImageView man, woman;
     RelativeLayout movetocar, movetocard;
@@ -42,7 +41,6 @@ public class MobileCertificationActivityBase extends BaseBackSearchActivity {
             }
         });
 
-
     }
 
     private void changeSex(boolean isItMan) {
@@ -61,5 +59,4 @@ public class MobileCertificationActivityBase extends BaseBackSearchActivity {
             woman.setImageDrawable(woman1);
         }
     }
-
 }

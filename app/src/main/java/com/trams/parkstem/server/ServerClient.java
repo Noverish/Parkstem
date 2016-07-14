@@ -28,8 +28,6 @@ public class ServerClient {
     //uniqueID를 반환하는 함수는 현재의 uniqueID와 같은지 체크하는 코드
     //dummy 카드 관련 모든것 입차 출차 주차장
 
-
-
     private String uniqueID;
 
     public static ServerClient serverClient;
@@ -1329,13 +1327,13 @@ public class ServerClient {
         p1.card_name = "국민카드";
         p1.pay_date = Calendar.getInstance();
         Payment p2 = new Payment();
-        p1.price = 3000;
-        p1.card_name = "나라사랑카드";
-        p1.pay_date = Calendar.getInstance();
+        p2.price = 3000;
+        p2.card_name = "나라사랑카드";
+        p2.pay_date = Calendar.getInstance();
         Payment p3 = new Payment();
-        p1.price = 200000;
-        p1.card_name = "삼성카드";
-        p1.pay_date = Calendar.getInstance();
+        p3.price = 200000;
+        p3.card_name = "삼성카드";
+        p3.pay_date = Calendar.getInstance();
 
         ArrayList<Payment> list = new ArrayList<>();
         list.add(p1);

@@ -20,7 +20,6 @@
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#B4B4B4"
                 android:layout_gravity="center"
                 android:textSize="15sp"
                 android:text="어차피 이거 동의 안하면 이용 못합니다.\n 그냥 체크하셈여 ㅇㅇ"

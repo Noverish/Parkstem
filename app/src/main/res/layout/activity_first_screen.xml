@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:background="@color/WHITE">
 
     <RelativeLayout
         android:id="@+id/cerification_menu2"
@@ -15,7 +15,7 @@
         <TextView
             android:id="@+id/input_car_skip"
             android:layout_centerInParent="true"
-            android:textColor="#ffffff"
+            android:textColor="@color/WHITE"
             android:textSize="22sp"
             android:text="SKIP"
             android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="휴대폰 인증"
                     android:textSize="15sp"
-                    android:textColor="#5d5d5d"
+                    android:textColor="@color/gray_for_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -91,7 +91,7 @@
                         android:layout_gravity="center_horizontal"
                         android:text="차량 등록"
                         android:textSize="15sp"
-                        android:textColor="#5d5d5d"
+                        android:textColor="@color/gray_for_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
@@ -117,7 +117,7 @@
                         android:layout_gravity="center_horizontal"
                         android:text="카드 등록"
                         android:textSize="15sp"
-                        android:textColor="#5d5d5d"
+                        android:textColor="@color/gray_for_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>

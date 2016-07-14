@@ -28,7 +28,7 @@ import com.trams.parkstem.activity.InputNewCardActivity;
 import com.trams.parkstem.activity.LoginActivity;
 import com.trams.parkstem.activity.ManageLongTicketActivity;
 import com.trams.parkstem.activity.ManageTicketActivity;
-import com.trams.parkstem.activity.MobileCertificationActivityBase;
+import com.trams.parkstem.activity.MobileCertificationActivity;
 import com.trams.parkstem.activity.ParkStatusActivity;
 import com.trams.parkstem.activity.SettingActivity;
 import com.trams.parkstem.activity.SplashActivity;
@@ -112,7 +112,7 @@ public class BaseNavigationActivity extends AppCompatActivity
             return true;
         }
         else if (id == R.id.action_mobile) {
-            Intent intent = new Intent(this, MobileCertificationActivityBase.class);
+            Intent intent = new Intent(this, MobileCertificationActivity.class);
             startActivity(intent);
             return true;
         }
