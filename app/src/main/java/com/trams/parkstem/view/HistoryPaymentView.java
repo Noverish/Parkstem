@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.trams.parkstem.R;
+import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.server.ServerClient;
 
 import java.util.Calendar;
@@ -25,13 +26,14 @@ public class HistoryPaymentView extends LinearLayout {
         name.setText(payment.card_name);
 
         name = (TextView) findViewById(R.id.history_payment_item_price);
-        name.setText((char)0xffe6  + payment.price + "");
+
+        name.setText((char)0xffe6 + Essentials.numberWithComma(payment.price));
 
         name = (TextView) findViewById(R.id.history_payment_item_date);
         Calendar ca = payment.calendar;
         Log.e("tag",payment.calendar.toString());
 
-        String date = payment.calendar.get(Calendar.MONTH) + "." +payment.calendar.get(Calendar.DAY_OF_MONTH);
+        String date =(int)(payment.calendar.get(Calendar.MONTH)+1) + "." +payment.calendar.get(Calendar.DAY_OF_MONTH);
         name.setText(date);
 
         name = (TextView) findViewById(R.id.history_payment_item_time);

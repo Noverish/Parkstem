@@ -1,9 +1,18 @@
 package com.trams.parkstem.activity;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
@@ -28,9 +37,25 @@ public class HistoryPaymentActivity extends BaseBackSearchActivity {
 
         try {
             list = ServerClient.getInstance().hipassPayment();
+            int count=0;
             for(ServerClient.Payment payment: list.data){
                 HistoryPaymentView historyPaymentView = new HistoryPaymentView(this, payment);
+
+                if(count%2==0)
+                    historyPaymentView.setBackgroundColor(ContextCompat.getColor(this, R.color.btn_3));
+
+                if(count==0){
+                    int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 55, getResources().getDisplayMetrics());
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+                    historyPaymentView.setLayoutParams(layoutParams);
+                }
+
                 content.addView(historyPaymentView);
+
+                if(count==0)
+                    LayoutInflater.from(this).inflate(R.layout.history_payment_item_bar, content);
+
+                count++;
             }
         } catch (ServerClient.ServerErrorException ex) {
             Log.e("error!",ex.msg);
