@@ -18,5 +18,10 @@
     <string name="action_purchase_ticket">주차권 구매내역</string>
     <string name="action_first_screen">초기화면</string>
 
-
+    <string name="popup_clause_title">약관</string>
+    <string name="popup_clause_content">어차피 이거 동의 안하면 이용 못합니다.\n 그냥 체크하셈여 ㅇㅇ</string>
+    <string name="popup_hipass_explain_title">하이패스란 무엇인가</string>
+    <string name="popup_hipass_explain_content">빠른-통과</string>
+    <string name="popup_setting_clause_title">서비스 정책 및 약관</string>
+    <string name="popup_setting_clause_content">서비스 정책 및 약관</string>
 </resources>

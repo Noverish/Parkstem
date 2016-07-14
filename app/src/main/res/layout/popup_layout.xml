@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.HomeActivity"
-    android:id="@+id/popup_hipass_content">
+    android:id="@+id/popup_layout_layout">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,12 +17,12 @@
             android:orientation="vertical" >
 
             <TextView
-
+                android:id="@+id/popup_layout_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textSize="15sp"
-                android:text="빠른-통과"
+                android:text=""
                 android:textStyle="bold"
                 android:typeface="normal" />
         </LinearLayout>

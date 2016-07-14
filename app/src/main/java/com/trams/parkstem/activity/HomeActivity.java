@@ -1,14 +1,10 @@
 package com.trams.parkstem.activity;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -16,6 +12,7 @@ import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseNavigationActivity;
+import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.server.ServerClient;
 
 public class HomeActivity extends BaseNavigationActivity {
@@ -47,7 +44,10 @@ public class HomeActivity extends BaseNavigationActivity {
         alert.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                popup_clause();
+                Context context = HomeActivity.this;
+                String title = context.getString(R.string.popup_hipass_explain_title);
+                String content = context.getString(R.string.popup_hipass_explain_content);
+                Essentials.makePopup(context, title, content);
             }
         });
 
@@ -65,6 +65,15 @@ public class HomeActivity extends BaseNavigationActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, TicketPurchaseListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        RelativeLayout moreButton = (RelativeLayout) findViewById(R.id.activity_home_more_button);
+        moreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, HistoryParkActivity.class);
                 startActivity(intent);
             }
         });
@@ -108,24 +117,5 @@ public class HomeActivity extends BaseNavigationActivity {
         startActivity(intent);
     }
 
-    public void popup_clause(){
-        Context mContext = getApplicationContext();
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
 
-        //R.layout.dialog는 xml 파일명이고  R.id.popup은 보여줄 레이아웃 아이디
-        View layout = inflater.inflate(R.layout.popup_hipass, (ViewGroup) findViewById(R.id.popup_hipass_content));
-        AlertDialog.Builder aDialog = new AlertDialog.Builder(this);
-
-        aDialog.setTitle("하이패스란 무엇인가"); //타이틀바 제목
-        aDialog.setView(layout); //dialog.xml 파일을 뷰로 셋팅
-
-        //그냥 닫기버튼을 위한 부분
-        aDialog.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-        //팝업창 생성
-        AlertDialog ad = aDialog.create();
-        ad.show();//보여줌!
-    }
 }
