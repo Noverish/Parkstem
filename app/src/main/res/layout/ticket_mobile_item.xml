@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:background="@drawable/img_listbox"
         android:paddingLeft="43dp"
         android:paddingRight="25dp"
         android:layout_width="match_parent"
