@@ -7,7 +7,7 @@
     android:background="@color/WHITE">
 
     <RelativeLayout
-        android:id="@+id/cerification_menu2"
+        android:id="@+id/activity_first_screen_skip"
         android:background="@drawable/btn_2"
         android:layout_width="match_parent"
         android:layout_height="32dp">
@@ -41,6 +41,7 @@
             android:layout_height="wrap_content">
             
             <LinearLayout
+                android:id="@+id/activity_first_screen_mobile"
                 android:orientation="vertical"
                 android:layout_marginTop="104dp"
                 android:layout_width="wrap_content"
@@ -71,6 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
+                    android:id="@+id/activity_first_screen_car"
                     android:orientation="vertical"
                     android:layout_marginRight="18dp"
                     android:layout_width="wrap_content"
@@ -97,6 +99,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/activity_first_screen_card"
                     android:orientation="vertical"
                     android:layout_marginLeft="18dp"
                     android:layout_width="wrap_content"
