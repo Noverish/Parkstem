@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.trams.parkstem.R;
 import com.trams.parkstem.activity.InputCarActivity;
 import com.trams.parkstem.activity.InputCardActivity;
-import com.trams.parkstem.server.ServerClient;
 
 /**
  * Created by monc2 on 2016-07-09.
@@ -57,37 +56,12 @@ public class BelowBar extends LinearLayout {
         });
 
         TextView carText = (TextView) findViewById(R.id.below_bar_car_text);
+        carText.setText("EMPTY");
+
         TextView cardText = (TextView) findViewById(R.id.below_bar_card_text);
+        cardText.setText("EMPTY");
 
-        try {
-            ServerClient.CarLists list = ServerClient.getInstance().listOfCar();
-            String carNumber;
-            if(list.data.size() == 0) {
-                carNumber = "차량등록";
-            } else {
-                carNumber = list.data.get(0).mycar;
-            }
 
-            carText.setText(carNumber);
-        } catch (ServerClient.ServerErrorException error) {
-            error.printStackTrace();
-            carText.setText(error.msg);
-        }
-
-        try {
-            ServerClient.CardList list = ServerClient.getInstance().cardList();
-            String carNumber;
-            if(list.data.size() == 0) {
-                carNumber = "카드등록";
-            } else {
-                carNumber = list.data.get(0).card_name;
-            }
-
-            cardText.setText(carNumber);
-        } catch (ServerClient.ServerErrorException error) {
-            error.printStackTrace();
-            cardText.setText(error.msg);
-        }
     }
 
 }

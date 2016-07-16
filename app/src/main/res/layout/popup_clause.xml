@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activity.HomeActivity"
-    android:id="@+id/popup_layout_layout">
+    android:id="@+id/popup_clause_content">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -17,12 +17,12 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/popup_layout_content"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textSize="15sp"
-                android:text=""
+                android:text="어차피 이거 동의 안하면 이용 못합니다.\n 그냥 체크하셈여 ㅇㅇ"
                 android:textStyle="bold"
                 android:typeface="normal" />
         </LinearLayout>
