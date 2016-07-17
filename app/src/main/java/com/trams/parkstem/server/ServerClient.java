@@ -46,7 +46,6 @@ public class ServerClient {
 
     private final String TAG = getClass().getSimpleName();
 
-
     //POST방식으로 JSON데이터를 보내는 함수
     public JSONObject connect(HashMap<String, String> hashMap, String urlStr) {
         try {
@@ -1779,6 +1778,8 @@ public class ServerClient {
             throw new ServerErrorException();
         }
     }
+
+
 
 
     //Classes
