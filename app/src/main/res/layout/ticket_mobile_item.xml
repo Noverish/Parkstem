@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/ticket_mobile_item_above_layout"
         android:background="@drawable/img_listbox"
         android:paddingLeft="43dp"
         android:paddingRight="25dp"
@@ -19,6 +20,7 @@
             android:layout_height="30dp">
 
             <TextView
+                android:id="@+id/ticket_mobile_item_button_name"
                 android:textColor="@color/WHITE"
                 android:textSize="20sp"
                 android:text="상세정보"
@@ -41,7 +43,7 @@
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/ticket_mobile_item_place"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="-1dp"
                 android:textColor="@color/gray_for_text"
                 android:textSize="10sp"
                 android:text="르네상스 사거리"
@@ -52,6 +54,7 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/ticket_mobile_item_below_layout"
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -82,6 +85,7 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
+                    android:layout_marginTop="-2dp"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -114,7 +118,7 @@
 
                 <TextView
                     android:id="@+id/ticket_mobile_item_before_price"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="-2dp"
                     android:textSize="15sp"
                     android:textColor="@color/gray_for_text"
                     android:text="1시간 &#xffe6;6,000"
@@ -122,6 +126,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:layout_marginTop="-4dp"
                     android:id="@+id/ticket_mobile_item_after_price"
                     android:textSize="21sp"
                     android:textColor="@color/red_for_money"
@@ -130,8 +135,8 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:layout_marginTop="-2dp"
                     android:id="@+id/ticket_mobile_item_duedate"
-                    android:layout_marginTop="3dp"
                     android:text="유효기간:2016.05.02~2016.08.09"
                     android:textColor="@color/gray_for_text"
                     android:textSize="11sp"

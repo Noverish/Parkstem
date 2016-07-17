@@ -46,7 +46,7 @@ public class SettingActivity extends BaseBackSearchActivity {
                 Context context = SettingActivity.this;
                 String title = context.getString(R.string.popup_setting_clause_title);
                 String content = context.getString(R.string.popup_setting_clause_content);
-                Essentials.makePopup(context, title, content);
+                //Essentials.makePopup(context, title, content);
             }
         });
 
