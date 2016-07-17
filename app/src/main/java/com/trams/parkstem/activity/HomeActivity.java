@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,12 @@ public class HomeActivity extends BaseNavigationActivity {
         this.context = this;
 
         hipassOn = false;
+        try{
+            client.hipassOn("N");
+            Log.d("Hipass", "init : not using hipass");
+        } catch(ServerClient.ServerErrorException ex){
+            Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
+        }
         hipassButton = (RelativeLayout) findViewById(R.id.activity_hipass_on_off_button);
         hipassButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,12 +81,14 @@ public class HomeActivity extends BaseNavigationActivity {
     private void onHipassButtonClicked() {
         ImageView human = (ImageView) findViewById(R.id.activity_highpass_human_image);
 
+        hipassOn = !hipassOn;
+
         if(hipassOn) {
             try {
                 client.hipassOn("Y");
                 hipassButton.removeAllViews();
-                getLayoutInflater().inflate(R.layout.hipass_button_off, hipassButton);
-                human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person));
+                getLayoutInflater().inflate(R.layout.hipass_button_on, hipassButton);
+                human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person_2));
             } catch (ServerClient.ServerErrorException ex) {
                 Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
             }
@@ -87,14 +96,13 @@ public class HomeActivity extends BaseNavigationActivity {
             try {
                 client.hipassOn("N");
                 hipassButton.removeAllViews();
-                getLayoutInflater().inflate(R.layout.hipass_button_on, hipassButton);
-                human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person_2));
+                getLayoutInflater().inflate(R.layout.hipass_button_off, hipassButton);
+                human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person));
             } catch (ServerClient.ServerErrorException ex) {
                 Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
             }
         }
 
-        hipassOn = !hipassOn;
     }
 
 
