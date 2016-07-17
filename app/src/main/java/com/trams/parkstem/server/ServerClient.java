@@ -797,13 +797,13 @@ public class ServerClient {
         ci1.sort = 3;
         ci1.idx = 14;
         ci1.uniqueID = "134";
-        ci1.mycar = "folk";
+        ci1.mycar = "11일1111";
         CarInfo ci2 = new CarInfo();
         ci2.reg_date = Calendar.getInstance();
         ci2.sort = 4;
         ci2.idx = 134;
         ci2.uniqueID = "12";
-        ci2.mycar = "ford";
+        ci2.mycar = "22이2222";
 
 
         ArrayList<CarInfo> list = new ArrayList<>();
