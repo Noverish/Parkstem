@@ -47,7 +47,7 @@ public class HomeActivity extends BaseNavigationActivity {
                 Context context = HomeActivity.this;
                 String title = context.getString(R.string.popup_hipass_explain_title);
                 String content = context.getString(R.string.popup_hipass_explain_content);
-                //Essentials.makePopup(context, title, content);
+                Essentials.makePopup(context, title, content);
             }
         });
 

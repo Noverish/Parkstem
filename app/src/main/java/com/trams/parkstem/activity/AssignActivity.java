@@ -47,7 +47,7 @@ public class AssignActivity extends BaseBackSearchActivity {
                 Context context = AssignActivity.this;
                 String title = context.getString(R.string.popup_clause_title);
                 String content = context.getString(R.string.popup_clause_content);
-                //Essentials.makePopup(context, title, content);
+                Essentials.makePopup(context, title, content);
             }
         });
     }
