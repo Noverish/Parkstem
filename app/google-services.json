@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "631351711500",
+    "project_id": "parkstem-1348"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631351711500:android:1829e3c453a098c4",
+        "android_client_info": {
+          "package_name": "com.trams.parkstem"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ_UBgoTLmm6s_GwSG5DWsQRhwwhweYyI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
