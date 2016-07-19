@@ -31,7 +31,8 @@ import java.util.List;
 public class LocationChangeableListView extends LinearLayout {
     private Context context;
     private boolean inEditMode;
-    private OnMainItemChangeListener listener;
+    private OnEditCompleteListener onEditCompleteListener;
+    private OnItemRemovedListener onItemRemovedListener;
 
     private DragAdapter dragAdapter;
     private NormalAdapter normalAdapter;
@@ -62,26 +63,6 @@ public class LocationChangeableListView extends LinearLayout {
 
         dragAdapter = new DragAdapter(context, listData, R.layout.location_changeable_list_item_editing, R.id.list_item_move_image, false);
         DragListView dragListView = (DragListView) findViewById(R.id.location_changeable_list_view_drag_list_view);
-        dragListView.setDragListListener(new DragListView.DragListListener() {
-            @Override
-            public void onItemDragStarted(int position) {
-                //Toast.makeText(context, "Start - position: " + position, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onItemDragging(int itemPosition, float x, float y) {
-
-            }
-
-            @Override
-            public void onItemDragEnded(int fromPosition, int toPosition) {
-                if (fromPosition != toPosition) {
-                    //Toast.makeText(context, "End - position: " + toPosition, Toast.LENGTH_SHORT).show();
-                    if(listener != null)
-                        listener.onMainItemChanged();
-                }
-            }
-        });
         dragListView.setAdapter(dragAdapter, false);
         dragListView.setLayoutManager(new LinearLayoutManager(context));
         dragListView.setCanDragHorizontally(false);
@@ -116,6 +97,8 @@ public class LocationChangeableListView extends LinearLayout {
             public void onClick(View v) {
                 changeEditMode();
                 normalAdapter.setListData(dragAdapter.getItemList());
+                if(onEditCompleteListener != null)
+                    onEditCompleteListener.onEditCompleted(getMainItem());
             }
         });
 
@@ -149,35 +132,27 @@ public class LocationChangeableListView extends LinearLayout {
         dragAdapter.setItemList(listData);
         normalAdapter.setListData(listData);
 
-        //In start, all view is invisible. So when data added, change their visible
+        //In start, all view is invisible. So when data added, change their visibility to visible
         if(!listData.isEmpty()) {
             inEditMode = true;
             changeEditMode();
         }
     }
 
-    public void addData(String newString) {
-        inEditMode = true;
-        changeEditMode();
-
-        //In start, all view is invisible. So when data added, change their visible
-        listData.add(new Pair<>(0L, newString));
-        setListData(listData);
-    }
-
-
-
-    public String getMainItemContent() {
+    public Pair<Long, String> getMainItem() {
         if(listData.size() != 0)
-            return listData.get(0).second;
+            return listData.get(0);
         else
-            return getResources().getString(R.string.action_car_register);
+            return new Pair<>(0L, getResources().getString(R.string.action_car_register));
     }
 
 
+    public void setOnEditCompleteListener(OnEditCompleteListener listener) {
+        this.onEditCompleteListener = listener;
+    }
 
-    public void setOnMainItemChangeListener(OnMainItemChangeListener listener) {
-        this.listener = listener;
+    public void setOnItemRemovedListener(OnItemRemovedListener listener) {
+        this.onItemRemovedListener = listener;
     }
 
 
@@ -243,7 +218,7 @@ public class LocationChangeableListView extends LinearLayout {
     /**
      * Created by Noverish on 2016-07-07.
      */
-    public static class DragAdapter extends DragItemAdapter<Pair<Long, String>, DragAdapter.ViewHolder> {
+    public class DragAdapter extends DragItemAdapter<Pair<Long, String>, DragAdapter.ViewHolder> {
         private int mLayoutId;
         private int mGrabHandleId;
         private Drawable mainItemImage;
@@ -312,6 +287,8 @@ public class LocationChangeableListView extends LinearLayout {
 
         public void removeSelectedItems() {
             List<Pair<Long, String>> list = getItemList();
+            if(onItemRemovedListener != null)
+                onItemRemovedListener.onItemRemoved(list);
             for(int i = 0;i<list.size();i++) {
                 if(selectedItemList.contains(list.get(i).second)) {
                     removeItem(i);
@@ -351,7 +328,38 @@ public class LocationChangeableListView extends LinearLayout {
         }
     }
 
-    public interface OnMainItemChangeListener {
-        void onMainItemChanged();
+
+    public interface OnEditCompleteListener {
+        void onEditCompleted(Pair<Long, String> mainItem);
+    }
+
+    public interface OnItemRemovedListener {
+        void onItemRemoved(List<Pair<Long, String>> removeItemList);
     }
 }
+
+
+
+
+
+/*
+dragListView.setDragListListener(new DragListView.DragListListener() {
+    @Override
+    public void onItemDragStarted(int position) {
+        //Toast.makeText(context, "Start - position: " + position, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onItemDragging(int itemPosition, float x, float y) {
+
+    }
+
+    @Override
+    public void onItemDragEnded(int fromPosition, int toPosition) {
+        if (fromPosition != toPosition) {
+            //Toast.makeText(context, "End - position: " + toPosition, Toast.LENGTH_SHORT).show();
+        }
+    }
+});
+
+ */

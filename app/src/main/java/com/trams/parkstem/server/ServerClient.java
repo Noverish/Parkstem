@@ -38,8 +38,24 @@ public class ServerClient {
         return serverClient;
     }
 
-    public ServerClient() {
+    private ArrayList<CarInfo> carInfoArrayList = new ArrayList<>();
 
+    public ServerClient() {
+        CarInfo ci1 = new CarInfo();
+        ci1.reg_date = Calendar.getInstance();
+        ci1.sort = 3;
+        ci1.idx = 14;
+        ci1.uniqueID = "134";
+        ci1.mycar = "11일1111";
+        CarInfo ci2 = new CarInfo();
+        ci2.reg_date = Calendar.getInstance();
+        ci2.sort = 4;
+        ci2.idx = 134;
+        ci2.uniqueID = "12";
+        ci2.mycar = "22이2222";
+
+        carInfoArrayList.add(ci1);
+        carInfoArrayList.add(ci2);
     }
 
     private JSONObject result;
@@ -717,26 +733,7 @@ public class ServerClient {
         CarLists carLists = new CarLists();
         carLists.itemTotalCount = 2;
         carLists.pageCount = 1;
-
-        CarInfo ci1 = new CarInfo();
-        ci1.reg_date = Calendar.getInstance();
-        ci1.sort = 1;
-        ci1.idx = 1234;
-        ci1.uniqueID = "1234";
-        ci1.mycar = "BMW";
-        CarInfo ci2 = new CarInfo();
-        ci2.reg_date = Calendar.getInstance();
-        ci2.sort = 2;
-        ci2.idx = 134;
-        ci2.uniqueID = "1235";
-        ci2.mycar = "Benz";
-
-
-        ArrayList<CarInfo> list = new ArrayList<>();
-        list.add(ci1);
-        list.add(ci2);
-
-        carLists.data = list;
+        carLists.data = carInfoArrayList;
         return carLists;
     }
 
@@ -790,26 +787,7 @@ public class ServerClient {
         CarLists carLists = new CarLists();
         carLists.itemTotalCount = 2;
         carLists.pageCount = 1;
-
-        CarInfo ci1 = new CarInfo();
-        ci1.reg_date = Calendar.getInstance();
-        ci1.sort = 3;
-        ci1.idx = 14;
-        ci1.uniqueID = "134";
-        ci1.mycar = "11일1111";
-        CarInfo ci2 = new CarInfo();
-        ci2.reg_date = Calendar.getInstance();
-        ci2.sort = 4;
-        ci2.idx = 134;
-        ci2.uniqueID = "12";
-        ci2.mycar = "22이2222";
-
-
-        ArrayList<CarInfo> list = new ArrayList<>();
-        list.add(ci1);
-        list.add(ci2);
-
-        carLists.data = list;
+        carLists.data = carInfoArrayList;
         return carLists;
     }
 
