@@ -33,6 +33,7 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
         ServerClient.TicketLists list;
         ServerClient.LongTicketLists longlist;
 
+
         try {
             list = ServerClient.getInstance().listOfTicket();
 
