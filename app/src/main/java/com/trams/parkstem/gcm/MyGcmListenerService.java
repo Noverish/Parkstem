@@ -32,6 +32,10 @@ public class MyGcmListenerService extends GcmListenerService {
         String title = data.getString("title");
         String message = data.getString("message");
 
+        Log.e("local_id",data.getString("local_id") + "");
+        Log.e("time",data.getString("time"));
+        Log.e("car_in_out",data.getString("car_in_out"));
+
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Title: " + title);
         Log.d(TAG, "Message: " + message);
