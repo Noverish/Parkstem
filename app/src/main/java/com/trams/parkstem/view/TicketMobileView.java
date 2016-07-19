@@ -1,10 +1,18 @@
 package com.trams.parkstem.view;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Paint;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.trams.parkstem.R;
@@ -119,7 +127,7 @@ public class TicketMobileView extends LinearLayout {
         }
         viewOn = !viewOn;
     }
-}
+
 
     private void refreshDate() {
         String date = calendar.get(Calendar.YEAR) + ".";
