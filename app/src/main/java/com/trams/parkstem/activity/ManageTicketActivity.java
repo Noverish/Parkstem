@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
@@ -28,8 +29,18 @@ public class ManageTicketActivity extends BaseBackSearchActivity {
         try {
             list = ServerClient.getInstance().listOfTicket();
             int count=0;
-            for(ServerClient.Ticket ticket: list.data){
+
+            ServerClient.Ticket ticket;
+            for(int i=0; i < list.data.size(); ++i){
+                ticket = list.data.get(i);
                 TicketMobileView ticketMobileView = new TicketMobileView(this, ticket);
+
+                if(i==list.data.size()-1){
+                    RelativeLayout relativeLayout = (RelativeLayout)(ticketMobileView.findViewById(R.id.ticket_mobile_item_above_layout));
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) relativeLayout.getLayoutParams();
+
+                    layoutParams.bottomMargin=0;
+                }
 
                 content.addView(ticketMobileView);
             }

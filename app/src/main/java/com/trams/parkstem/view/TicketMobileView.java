@@ -1,13 +1,9 @@
 package com.trams.parkstem.view;
 
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Paint;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.DatePicker;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,38 +17,58 @@ import java.util.Calendar;
  * Created by JaeHyo on 2016-07-13.
  */
 public class TicketMobileView extends LinearLayout {
+    private boolean viewOn;
+    private RelativeLayout ticketView;
+
     private Calendar calendar;
 
     public TicketMobileView(final Context context, ServerClient.Ticket ticket) {
         super(context);
 
         LayoutInflater inflater = LayoutInflater.from(context);
-        inflater.inflate(R.layout.ticket_mobile_item, this);
 
-        ImageView calendarImageView = (ImageView) findViewById(R.id.ticket_mobile_item_calender);
-        calendarImageView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                          int dayOfMonth) {
-                        calendar.set(Calendar.YEAR, year);
-                        calendar.set(Calendar.MONTH, monthOfYear);
-                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        try{
+            final Context con = context;
+            inflater.inflate(R.layout.ticket_mobile_item, this);
 
-                        refreshDate();
-                    }
-                };
+            ImageView calendarImageView = (ImageView) findViewById(R.id.ticket_mobile_item_calender);
+            calendarImageView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                              int dayOfMonth) {
+                            calendar.set(Calendar.YEAR, year);
+                            calendar.set(Calendar.MONTH, monthOfYear);
+                            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                new DatePickerDialog(context, dateSetListener,
-                        calendar.get(Calendar.YEAR),
-                        calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DAY_OF_MONTH)).show();
-            }
-        });
+                            refreshDate();
+                        }
+                    };
 
-        try {
+                    new DatePickerDialog(context, dateSetListener,
+                            calendar.get(Calendar.YEAR),
+                            calendar.get(Calendar.MONTH),
+                            calendar.get(Calendar.DAY_OF_MONTH)).show();
+                }
+            });
+
+            viewOn=false;
+            ticketView = (RelativeLayout) findViewById(R.id.ticket_mobile_item_view);
+            ticketView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onMobileTicketViewButtonClicked(con);
+                }
+            });
+
+            ((RelativeLayout) findViewById(R.id.ticket_mobile_item_above_layout)).setBackgroundColor(ContextCompat.getColor(context, R.color.WHITE));
+
+            LinearLayout.LayoutParams layoutParamsOff = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
+            ((LinearLayout) findViewById(R.id.ticket_mobile_item_below_layout)).setLayoutParams(layoutParamsOff);
+            ((RelativeLayout) findViewById(R.id.ticket_mobile_item_bottom_layout)).setLayoutParams(layoutParamsOff);
+
             ServerClient.ParkInfo parkInfo = ServerClient.getInstance().parkInfo(ticket.local_id);
 
             TextView name = (TextView) findViewById(R.id.ticket_mobile_item_name);
@@ -78,6 +94,32 @@ public class TicketMobileView extends LinearLayout {
             Log.e("error!", ex.msg);
         }
     }
+
+
+    private void onMobileTicketViewButtonClicked(Context context) {
+        int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics());
+
+        LinearLayout.LayoutParams layoutParamsOff = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
+        LinearLayout.LayoutParams layoutParamsOn = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams layoutParamsOn_60 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+
+
+        LinearLayout belowcontent = (LinearLayout) findViewById(R.id.ticket_mobile_item_below_layout);
+        RelativeLayout abovecontent = (RelativeLayout) findViewById(R.id.ticket_mobile_item_above_layout);
+        RelativeLayout bottomcontent = (RelativeLayout) findViewById(R.id.ticket_mobile_item_bottom_layout);
+
+        if(viewOn) {
+            abovecontent.setBackgroundColor(ContextCompat.getColor(context, R.color.WHITE));
+            belowcontent.setLayoutParams(layoutParamsOff);
+            bottomcontent.setLayoutParams(layoutParamsOff);
+        } else {
+            abovecontent.setBackgroundColor(ContextCompat.getColor(context, R.color.btn_3));
+            belowcontent.setLayoutParams(layoutParamsOn);
+            bottomcontent.setLayoutParams(layoutParamsOn_60);
+        }
+        viewOn = !viewOn;
+    }
+}
 
     private void refreshDate() {
         String date = calendar.get(Calendar.YEAR) + ".";

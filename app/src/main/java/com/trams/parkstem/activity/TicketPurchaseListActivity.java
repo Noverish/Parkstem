@@ -37,9 +37,11 @@ public class TicketPurchaseListActivity extends BaseBackSearchActivity {
             longlist = ServerClient.getInstance().listOfLongTicket();
 
             for(ServerClient.TicketBuyList ticketBuyList: paymentInfo.data){
+                /*
+                만료일이 지났는지 확인하는 부분
                 if(!ca.after(ticketBuyList.end_date))
                     continue;
-
+                */
                 if(ticketBuyList.gubun==1){
                     for(ServerClient.Ticket ticket: list.data)
                         if(ticket.local_id == ticketBuyList.local_id){

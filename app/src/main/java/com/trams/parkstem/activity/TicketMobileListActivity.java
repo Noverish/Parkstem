@@ -14,7 +14,9 @@ import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.server.ServerClient;
 import com.trams.parkstem.view.HistoryPaymentView;
+import com.trams.parkstem.view.LongTicketMobileListView;
 import com.trams.parkstem.view.LongTicketMobileView;
+import com.trams.parkstem.view.TicketMobileListView;
 import com.trams.parkstem.view.TicketMobileView;
 
 /**
@@ -33,23 +35,24 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
         ServerClient.TicketLists list;
         ServerClient.LongTicketLists longlist;
 
+
         try {
             list = ServerClient.getInstance().listOfTicket();
 
             for(ServerClient.Ticket ticket: list.data){
-                TicketMobileView ticketMobileView = new TicketMobileView(this, ticket);
-                TextView buttonname = (TextView)ticketMobileView.findViewById(R.id.ticket_mobile_item_button_name);
+                TicketMobileListView ticketMobileListView = new TicketMobileListView(this, ticket);
+                TextView buttonname = (TextView)ticketMobileListView.findViewById(R.id.ticket_mobile_item_button_name);
                 buttonname.setText("사용가능");
-                content.addView(ticketMobileView);
+                content.addView(ticketMobileListView);
             }
 
             longlist = ServerClient.getInstance().listOfLongTicket();
 
             for(ServerClient.Ticket ticket: longlist.data){
-                LongTicketMobileView longTicketMobileView = new LongTicketMobileView(this, ticket);
-                TextView buttonname = (TextView)longTicketMobileView.findViewById(R.id.long_ticket_mobile_item_button_name);
+                LongTicketMobileListView longTicketMobileListView = new LongTicketMobileListView(this, ticket);
+                TextView buttonname = (TextView)longTicketMobileListView.findViewById(R.id.long_ticket_mobile_item_button_name);
                 buttonname.setText("사용가능");
-                content.addView(longTicketMobileView);
+                content.addView(longTicketMobileListView);
             }
         } catch (ServerClient.ServerErrorException ex) {
             Log.e("error!",ex.msg);
