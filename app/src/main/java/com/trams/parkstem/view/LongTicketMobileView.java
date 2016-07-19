@@ -4,10 +4,10 @@ import android.content.Context;
 import android.graphics.Paint;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,23 +31,27 @@ public class LongTicketMobileView extends LinearLayout {
         LayoutInflater inflater = LayoutInflater.from(context);
 
         try{
+            inflater.inflate(R.layout.long_ticket_mobile_item, this);
             final Context con = context;
 
             viewOn=false;
             ticketView = (RelativeLayout) findViewById(R.id.long_ticket_mobile_item_view);
-            ticketView.setOnClickListener(new View.OnClickListener() {
+
+            Log.e("fdsa","Fdsa");
+            Log.e("asdf",(ticketView == null) + "");
+
+            ticketView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     onLongMobileTicketViewButtonClicked(con);
                 }
             });
 
-            ((RelativeLayout) findViewById(R.id.ticket_mobile_item_above_layout)).setBackgroundColor(ContextCompat.getColor(context, R.color.WHITE));
+            ((RelativeLayout) findViewById(R.id.long_ticket_mobile_item_above_layout)).setBackgroundColor(ContextCompat.getColor(context, R.color.WHITE));
 
-            LinearLayout.LayoutParams layoutParamsOff = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
-            ((LinearLayout) findViewById(R.id.ticket_mobile_item_below_layout)).setLayoutParams(layoutParamsOff);
-
-            inflater.inflate(R.layout.long_ticket_mobile_item, this);
+            LayoutParams layoutParamsOff = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
+            ((LinearLayout) findViewById(R.id.long_ticket_mobile_item_below_layout)).setLayoutParams(layoutParamsOff);
+            ((RelativeLayout) findViewById(R.id.long_ticket_mobile_item_bottom_layout)).setLayoutParams(layoutParamsOff);
 
             ServerClient.ParkInfo parkInfo = ServerClient.getInstance().parkInfo(ticket.local_id);
 
@@ -92,18 +96,24 @@ public class LongTicketMobileView extends LinearLayout {
         }
     }
     private void onLongMobileTicketViewButtonClicked(Context context) {
-        LinearLayout.LayoutParams layoutParamsOff = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
-        LinearLayout.LayoutParams layoutParamsOn = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics());
+
+        LinearLayout.LayoutParams layoutParamsOn_60 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+        LayoutParams layoutParamsOff = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
+        LayoutParams layoutParamsOn = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         LinearLayout belowcontent = (LinearLayout) findViewById(R.id.long_ticket_mobile_item_below_layout);
         RelativeLayout abovecontent = (RelativeLayout) findViewById(R.id.long_ticket_mobile_item_above_layout);
+        RelativeLayout bottomcontent = (RelativeLayout) findViewById(R.id.long_ticket_mobile_item_bottom_layout);
 
         if(viewOn) {
             abovecontent.setBackgroundColor(ContextCompat.getColor(context, R.color.WHITE));
             belowcontent.setLayoutParams(layoutParamsOff);
+            bottomcontent.setLayoutParams(layoutParamsOff);
         } else {
             abovecontent.setBackgroundColor(ContextCompat.getColor(context, R.color.btn_3));
             belowcontent.setLayoutParams(layoutParamsOn);
+            bottomcontent.setLayoutParams(layoutParamsOn_60);
         }
         viewOn = !viewOn;
     }

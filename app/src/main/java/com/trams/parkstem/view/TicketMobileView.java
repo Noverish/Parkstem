@@ -49,6 +49,7 @@ public class TicketMobileView extends LinearLayout {
 
             LinearLayout.LayoutParams layoutParamsOff = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
             ((LinearLayout) findViewById(R.id.ticket_mobile_item_below_layout)).setLayoutParams(layoutParamsOff);
+            ((RelativeLayout) findViewById(R.id.ticket_mobile_item_bottom_layout)).setLayoutParams(layoutParamsOff);
 
             ServerClient.ParkInfo parkInfo = ServerClient.getInstance().parkInfo(ticket.local_id);
 
@@ -95,18 +96,25 @@ public class TicketMobileView extends LinearLayout {
     }
 
     private void onMobileTicketViewButtonClicked(Context context) {
+        int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics());
+
         LinearLayout.LayoutParams layoutParamsOff = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0);
         LinearLayout.LayoutParams layoutParamsOn = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams layoutParamsOn_60 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+
 
         LinearLayout belowcontent = (LinearLayout) findViewById(R.id.ticket_mobile_item_below_layout);
         RelativeLayout abovecontent = (RelativeLayout) findViewById(R.id.ticket_mobile_item_above_layout);
+        RelativeLayout bottomcontent = (RelativeLayout) findViewById(R.id.ticket_mobile_item_bottom_layout);
 
         if(viewOn) {
             abovecontent.setBackgroundColor(ContextCompat.getColor(context, R.color.WHITE));
             belowcontent.setLayoutParams(layoutParamsOff);
+            bottomcontent.setLayoutParams(layoutParamsOff);
         } else {
             abovecontent.setBackgroundColor(ContextCompat.getColor(context, R.color.btn_3));
             belowcontent.setLayoutParams(layoutParamsOn);
+            bottomcontent.setLayoutParams(layoutParamsOn_60);
         }
         viewOn = !viewOn;
     }

@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ticket_mobile_item_unity"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:layout_marginBottom="-1dp"
         android:id="@+id/ticket_mobile_item_above_layout"
-        android:background="@drawable/img_listbox"
-        android:paddingLeft="43dp"
-        android:paddingRight="25dp"
         android:layout_width="match_parent"
         android:layout_height="64dp">
 
         <RelativeLayout
+            android:background="@drawable/img_listbox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <RelativeLayout
+            android:layout_marginLeft="43dp"
+            android:layout_marginRight="25dp"
             android:layout_centerVertical="true"
             android:id="@+id/ticket_mobile_item_view"
             android:layout_alignParentRight="true"
@@ -30,6 +36,8 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:layout_marginLeft="43dp"
+            android:layout_marginRight="25dp"
             android:orientation="vertical"
             android:layout_centerVertical="true"
             android:layout_width="195dp"
@@ -52,8 +60,8 @@
 
         </LinearLayout>
     </RelativeLayout>
-
     <LinearLayout
+        android:background="@color/WHITE"
         android:id="@+id/ticket_mobile_item_below_layout"
         android:orientation="vertical"
         android:layout_width="wrap_content"
@@ -144,7 +152,28 @@
                     android:layout_height="wrap_content" />
 
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/ticket_mobile_item_bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <RelativeLayout
+            android:id="@+id/ticket_mobile_item_purchase_button"
+            android:layout_marginTop="1dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/btn_1_small"
+            android:layout_width="126dp"
+            android:layout_height="44dp">
+            <TextView
+                android:layout_centerInParent="true"
+                android:textSize="23sp"
+                android:textColor="@color/WHITE"
+                android:text="구매하기"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
 </LinearLayout>

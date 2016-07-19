@@ -1500,7 +1500,7 @@ public class ServerClient {
         t1.term = Calendar.getInstance();
         t1.term_name = "term_name1";
         t1.ticket_name = "고급티켓";
-        t1.local_id = "12355";
+        t1.local_id = "12345";
         t1.gubun = 1;
         t1.original_price = 14000;
         t1.regdate = Calendar.getInstance();
@@ -1597,7 +1597,7 @@ public class ServerClient {
         t2.term = Calendar.getInstance();
         t2.term_name = "term_name2";
         t2.ticket_name = "장기저급티켓";
-        t2.local_id = "12355";
+        t2.local_id = "12365";
         t2.gubun = 2;
         t2.original_price = 15000;
         t2.regdate = Calendar.getInstance();
