@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:background="@color/WHITE"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_marginTop="55dp"
+    android:paddingLeft="45dp"
+    android:paddingRight="45dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:background="@drawable/box_edit"
+        android:layout_height="39dp"
+        android:layout_width="match_parent"
+        >
+        <EditText
+            android:id="@+id/activity_login_by_email_address"
+            android:background="@null"
+            android:textSize="17sp"
+            android:layout_marginRight="31dp"
+            android:textColor="@color/gray_for_text"
+            android:hint="이메일 주소"
+            android:textColorHint="@color/gray"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:background="@drawable/box_edit"
+        android:layout_height="39dp"
+        android:layout_width="match_parent"
+        >
+        <EditText
+            android:id="@+id/activity_login_by_email_password"
+            android:background="@null"
+            android:textSize="17sp"
+            android:layout_marginRight="31dp"
+            android:textColor="@color/gray_for_text"
+            android:hint="비밀번호"
+            android:textColorHint="@color/gray"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/activity_login_by_email_login_button"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/btn_1"
+        android:layout_height="39dp"
+        android:layout_width="match_parent"
+        >
+        <TextView
+            android:layout_centerInParent="true"
+            android:textSize="17sp"
+            android:layout_marginRight="31dp"
+            android:textColor="@color/WHITE"
+            android:text="로그인"
+            android:textColorHint="@color/gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    
+    <TextView
+        android:id="@+id/activity_login_by_email_register"
+        android:textColor="@color/green"
+        android:layout_marginTop="22dp"
+        android:layout_gravity="center_horizontal"
+        android:textSize="17sp"
+        android:text="이메일로 회원가입"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+</ScrollView>
