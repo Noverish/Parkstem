@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:activity=".activity.HomeActivity"
-    android:id="@+id/popup_layout_layout">
+    tools:context=".activity.HomeActivity"
+    android:id="@+id/popup_clause_content">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

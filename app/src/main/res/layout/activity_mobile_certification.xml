@@ -7,7 +7,7 @@
     android:background="#FFFFFF">
 
     <RelativeLayout
-        android:id="@+id/activity_first_screen_skip"
+        android:id="@+id/cerification_menu2"
         android:background="@drawable/btn_2"
         android:layout_width="match_parent"
         android:layout_height="32dp">

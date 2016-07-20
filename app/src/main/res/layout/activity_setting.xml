@@ -37,12 +37,11 @@
             android:layout_height="wrap_content" />
 
         <RelativeLayout
-            android:id="@+id/activity_setting_push_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginRight="46dp"
             android:layout_centerVertical="true"
-            android:layout_alignParentRight="true">
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
             <include layout="@layout/push_button_on" />
         </RelativeLayout>
     </RelativeLayout>
@@ -53,12 +52,11 @@
         android:layout_height="0.8dp"/>
 
     <LinearLayout
-        android:id="@+id/activity_setting_clause"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
         android:paddingLeft="25dp"
         android:gravity="center_vertical"
-        android:background="@drawable/btn_3">
+        android:background="@drawable/btn_3"
+        android:layout_width="match_parent"
+        android:layout_height="65dp">
         <RelativeLayout
             android:background="@drawable/img_home_person_2"
             android:layout_width="33dp"
@@ -78,7 +76,6 @@
         android:layout_height="0.8dp"/>
 
     <LinearLayout
-        android:id="@+id/activity_setting_logout"
         android:paddingLeft="25dp"
         android:gravity="center_vertical"
         android:background="@drawable/btn_3"
@@ -89,6 +86,7 @@
             android:layout_width="33dp"
             android:layout_height="28dp" />
         <TextView
+
             android:textSize="22sp"
             android:text="로그아웃"
             android:layout_marginLeft="26dp"
@@ -102,13 +100,13 @@
         android:layout_height="0.8dp"/>
 
     <LinearLayout
-        android:id="@+id/activity_setting_sign_out"
         android:paddingLeft="25dp"
         android:gravity="center_vertical"
         android:background="@drawable/btn_3"
         android:layout_width="match_parent"
         android:layout_height="65dp">
         <TextView
+
             android:textSize="22sp"
             android:text="계정 탈퇴"
             android:layout_marginLeft="59dp"
