@@ -63,8 +63,7 @@ public class TicketMobileListView extends LinearLayout {
             name = (TextView) findViewById(R.id.ticket_mobile_item_after_price);
             name.setText("1시간 " + (char)0xffe6 + Essentials.numberWithComma(ticket.price) );
 
-            ca.add(Calendar.DAY_OF_MONTH, 99
-            );
+            ca.add(Calendar.DAY_OF_MONTH, 99);
 
             date = "유효기간:" + date + "-" + ca.get(Calendar.YEAR) + ".";
 

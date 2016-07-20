@@ -1,5 +1,7 @@
 package com.trams.parkstem.server;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import org.json.JSONException;
@@ -8,13 +10,16 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 /**
  * Created by monc2 on 2016-07-04.
@@ -1854,6 +1859,8 @@ public class ServerClient {
         public int pageCount;
         public ArrayList<Ticket> data;
     }
+
+
     public class Ticket{
         public int idx;
         public String local_id;
