@@ -37,6 +37,7 @@
         <activity android:name=".activity.ParkStatusActivity" />
         <activity android:name=".activity.ManageTicketActivity" />
         <activity android:name=".activity.ManageLongTicketActivity" />
+        <activity android:name=".activity.ManagePurchaseActivity" />
         <activity android:name=".activity.FirstScreenActivity" />
         <activity android:name=".activity.HistoryParkActivity" />
         <activity android:name=".activity.HistoryPaymentActivity" />
