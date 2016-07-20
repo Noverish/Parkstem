@@ -2,6 +2,7 @@ package com.trams.parkstem.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -15,6 +16,8 @@ import com.trams.parkstem.view.TicketMobileView;
  * Created by Noverish on 2016-07-08.
  */
 public class ManageTicketActivity extends BaseBackSearchActivity {
+    private SwipeRefreshLayout swipeLayout;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,5 +50,20 @@ public class ManageTicketActivity extends BaseBackSearchActivity {
         } catch (ServerClient.ServerErrorException ex) {
             Log.e("error!",ex.msg);
         }
+
+        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.activity_manage_ticket_refresh_layout);
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeLayout.setRefreshing(true);
+                Log.e("Swipe", "Refreshing Number");
+                ( new android.os.Handler()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeLayout.setRefreshing(false);
+                    }
+                }, 3000);
+            }
+        });
     }
 }

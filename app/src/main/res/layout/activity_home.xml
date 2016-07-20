@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activity.HomeActivity"
+    tools:activity=".activity.HomeActivity"
     android:id="@+id/content_main_layout">
 
     <com.trams.parkstem.custom_view.BelowBar

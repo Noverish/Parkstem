@@ -40,6 +40,10 @@ import com.trams.parkstem.activity.TicketPurchaseListActivity;
  */
 public class BaseNavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static final int REQUEST_FINISH = 1;
+    public static final int RESULT_FINISH = 0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,7 +173,7 @@ public class BaseNavigationActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_setting) {
             Intent intent = new Intent(this, SettingActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_FINISH);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

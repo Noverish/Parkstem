@@ -1,15 +1,10 @@
 package com.trams.parkstem.activity;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -17,6 +12,7 @@ import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseNavigationActivity;
+import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.server.ServerClient;
 
 public class HomeActivity extends BaseNavigationActivity {
@@ -36,12 +32,6 @@ public class HomeActivity extends BaseNavigationActivity {
         this.context = this;
 
         hipassOn = false;
-        try{
-            client.hipassOn("N");
-            Log.d("Hipass", "init : not using hipass");
-        } catch(ServerClient.ServerErrorException ex){
-            Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
-        }
         hipassButton = (RelativeLayout) findViewById(R.id.activity_hipass_on_off_button);
         hipassButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +44,10 @@ public class HomeActivity extends BaseNavigationActivity {
         alert.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                popup_clause();
+                Context context = HomeActivity.this;
+                String title = context.getString(R.string.popup_hipass_explain_title);
+                String content = context.getString(R.string.popup_hipass_explain_content);
+                Essentials.makePopup(context, title, content);
             }
         });
 
@@ -76,6 +69,15 @@ public class HomeActivity extends BaseNavigationActivity {
             }
         });
 
+        RelativeLayout moreButton = (RelativeLayout) findViewById(R.id.activity_home_more_button);
+        moreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, HistoryParkActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void onHipassButtonClicked() {
@@ -87,8 +89,8 @@ public class HomeActivity extends BaseNavigationActivity {
             try {
                 client.hipassOn("Y");
                 hipassButton.removeAllViews();
-                getLayoutInflater().inflate(R.layout.hipass_button_on, hipassButton);
-                human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person_2));
+                getLayoutInflater().inflate(R.layout.hipass_button_off, hipassButton);
+                human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person));
             } catch (ServerClient.ServerErrorException ex) {
                 Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
             }
@@ -96,8 +98,8 @@ public class HomeActivity extends BaseNavigationActivity {
             try {
                 client.hipassOn("N");
                 hipassButton.removeAllViews();
-                getLayoutInflater().inflate(R.layout.hipass_button_off, hipassButton);
-                human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person));
+                getLayoutInflater().inflate(R.layout.hipass_button_on, hipassButton);
+                human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person_2));
             } catch (ServerClient.ServerErrorException ex) {
                 Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
             }
@@ -106,24 +108,15 @@ public class HomeActivity extends BaseNavigationActivity {
     }
 
 
-    public void popup_clause(){
-        Context mContext = getApplicationContext();
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(LAYOUT_INFLATER_SERVICE);
-
-        //R.layout.dialog는 xml 파일명이고  R.id.popup은 보여줄 레이아웃 아이디
-        View layout = inflater.inflate(R.layout.popup_hipass, (ViewGroup) findViewById(R.id.popup_hipass_content));
-        AlertDialog.Builder aDialog = new AlertDialog.Builder(this);
-
-        aDialog.setTitle("하이패스란 무엇인가"); //타이틀바 제목
-        aDialog.setView(layout); //dialog.xml 파일을 뷰로 셋팅
-
-        //그냥 닫기버튼을 위한 부분
-        aDialog.setNegativeButton("닫기", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-        //팝업창 생성
-        AlertDialog ad = aDialog.create();
-        ad.show();//보여줌!
+    private void movefromHipasstoCarRegister(){
+        Intent intent = new Intent(this, InputCarActivity.class);
+        startActivity(intent);
     }
+
+    private void movefromHipasstoCardRegister(){
+        Intent intent = new Intent(this, InputCardActivity.class);
+        startActivity(intent);
+    }
+
+
 }

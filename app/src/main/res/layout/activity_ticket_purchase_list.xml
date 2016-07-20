@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<android.support.v4.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_ticket_purchase_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="96dp">
-        
-        <RelativeLayout
-            android:layout_centerInParent="true"
-            android:background="@drawable/img_tickethistory_2"
-            android:layout_width="30dp"
-            android:layout_height="45dp" />
-    </RelativeLayout>
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="96dp">
 
-    <LinearLayout
-        android:id="@+id/activity_ticket_purchase_list_layout"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/img_tickethistory_2"
+                    android:layout_width="30dp"
+                    android:layout_height="45dp" />
+            </RelativeLayout>
 
-        <!-- space of mobile naeyeok view -->
+            <LinearLayout
+                android:id="@+id/activity_ticket_purchase_list_layout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
+                <!-- space of mobile naeyeok view -->
 
-
-</LinearLayout>
-</ScrollView>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</android.support.v4.widget.SwipeRefreshLayout>

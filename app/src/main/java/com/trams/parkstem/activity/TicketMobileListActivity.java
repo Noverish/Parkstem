@@ -2,27 +2,23 @@ package com.trams.parkstem.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.server.ServerClient;
-import com.trams.parkstem.view.HistoryPaymentView;
 import com.trams.parkstem.view.LongTicketMobileListView;
-import com.trams.parkstem.view.LongTicketMobileView;
 import com.trams.parkstem.view.TicketMobileListView;
-import com.trams.parkstem.view.TicketMobileView;
 
 /**
  * Created by JaeHyo on 2016-07-06.
  */
 public class TicketMobileListActivity extends BaseBackSearchActivity {
+    private SwipeRefreshLayout swipeLayout;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +53,21 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
         } catch (ServerClient.ServerErrorException ex) {
             Log.e("error!",ex.msg);
         }
+
+        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.activity_ticket_mobile_refresh_layout);
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeLayout.setRefreshing(true);
+                Log.e("Swipe", "Refreshing Number");
+                ( new android.os.Handler()).postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeLayout.setRefreshing(false);
+                    }
+                }, 3000);
+            }
+        });
 
     }
 }
