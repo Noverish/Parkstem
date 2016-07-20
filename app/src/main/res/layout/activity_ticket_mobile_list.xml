@@ -1,42 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    android:background="@color/WHITE"
+<android.support.v4.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_ticket_mobile_refresh_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <RelativeLayout
+    <ScrollView
+        android:background="@color/WHITE"
         android:layout_width="match_parent"
-        android:layout_height="96dp">
-        
-        <RelativeLayout
-            android:layout_centerInParent="true"
-            android:background="@drawable/btn_menu_ticket_2"
-            android:layout_width="47dp"
-            android:layout_height="28dp" />
-        <TextView
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:text="주차권 유효기간은 100일 입니다."
-            android:textColor="@color/gray_for_text"
-            android:textSize="11sp"
-            android:layout_marginBottom="9dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="96dp">
 
-    <LinearLayout
-        android:id="@+id/activity_ticket_mobile_list_layout"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/btn_menu_ticket_2"
+                    android:layout_width="47dp"
+                    android:layout_height="28dp" />
+                <TextView
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:text="주차권 유효기간은 100일 입니다."
+                    android:textColor="@color/gray_for_text"
+                    android:textSize="11sp"
+                    android:layout_marginBottom="9dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
 
-        <!-- space of mobile ticket view -->
+            <LinearLayout
+                android:id="@+id/activity_ticket_mobile_list_layout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    </LinearLayout>
-
-</LinearLayout>
-</ScrollView>
+                <!-- space of mobile ticket view -->
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</android.support.v4.widget.SwipeRefreshLayout>

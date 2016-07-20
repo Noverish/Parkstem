@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    android:background="@color/WHITE"
+<android.support.v4.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <RelativeLayout
+    android:id="@+id/activity_manage_long_ticket_refresh_layout"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+    <ScrollView
+        android:background="@color/WHITE"
         android:layout_width="match_parent"
-        android:layout_height="114dp">
-        
-        <RelativeLayout
-            android:layout_centerInParent="true"
-            android:background="@drawable/btn_menu_1month_2"
-            android:layout_width="47dp"
-            android:layout_height="33dp" />
-    </RelativeLayout>
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="114dp">
 
-    <LinearLayout
-        android:id="@+id/activity_manage_long_ticket_layout"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/btn_menu_1month_2"
+                    android:layout_width="47dp"
+                    android:layout_height="33dp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/activity_manage_long_ticket_layout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
 
-        <!-- space of semi_ticket view -->
-        <!-- 상세정보 구매하기는 ticket_mobile_item 이용-->
+                <!-- space of semi_ticket view -->
+                <!-- 상세정보 구매하기는 ticket_mobile_item 이용-->
 
-    </LinearLayout>
+            </LinearLayout>
 
-</LinearLayout>
-</ScrollView>
+        </LinearLayout>
+    </ScrollView>
+</android.support.v4.widget.SwipeRefreshLayout>
