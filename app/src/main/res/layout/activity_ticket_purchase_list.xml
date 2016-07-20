@@ -19,11 +19,10 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/activity_ticket_purchase_list_layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <include layout="@layout/ticekt_purchage_item" />
 
         <!-- space of mobile naeyeok view -->
 

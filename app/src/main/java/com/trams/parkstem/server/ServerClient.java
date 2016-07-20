@@ -38,14 +38,29 @@ public class ServerClient {
         return serverClient;
     }
 
-    public ServerClient() {
+    private ArrayList<CarInfo> carInfoArrayList = new ArrayList<>();
 
+    public ServerClient() {
+        CarInfo ci1 = new CarInfo();
+        ci1.reg_date = Calendar.getInstance();
+        ci1.sort = 3;
+        ci1.idx = 14;
+        ci1.uniqueID = "134";
+        ci1.mycar = "11일1111";
+        CarInfo ci2 = new CarInfo();
+        ci2.reg_date = Calendar.getInstance();
+        ci2.sort = 4;
+        ci2.idx = 134;
+        ci2.uniqueID = "12";
+        ci2.mycar = "22이2222";
+
+        carInfoArrayList.add(ci1);
+        carInfoArrayList.add(ci2);
     }
 
     private JSONObject result;
 
     private final String TAG = getClass().getSimpleName();
-
 
     //POST방식으로 JSON데이터를 보내는 함수
     public JSONObject connect(HashMap<String, String> hashMap, String urlStr) {
@@ -718,26 +733,7 @@ public class ServerClient {
         CarLists carLists = new CarLists();
         carLists.itemTotalCount = 2;
         carLists.pageCount = 1;
-
-        CarInfo ci1 = new CarInfo();
-        ci1.reg_date = Calendar.getInstance();
-        ci1.sort = 1;
-        ci1.idx = 1234;
-        ci1.uniqueID = "1234";
-        ci1.mycar = "BMW";
-        CarInfo ci2 = new CarInfo();
-        ci2.reg_date = Calendar.getInstance();
-        ci2.sort = 2;
-        ci2.idx = 134;
-        ci2.uniqueID = "1235";
-        ci2.mycar = "Benz";
-
-
-        ArrayList<CarInfo> list = new ArrayList<>();
-        list.add(ci1);
-        list.add(ci2);
-
-        carLists.data = list;
+        carLists.data = carInfoArrayList;
         return carLists;
     }
 
@@ -791,26 +787,7 @@ public class ServerClient {
         CarLists carLists = new CarLists();
         carLists.itemTotalCount = 2;
         carLists.pageCount = 1;
-
-        CarInfo ci1 = new CarInfo();
-        ci1.reg_date = Calendar.getInstance();
-        ci1.sort = 3;
-        ci1.idx = 14;
-        ci1.uniqueID = "134";
-        ci1.mycar = "folk";
-        CarInfo ci2 = new CarInfo();
-        ci2.reg_date = Calendar.getInstance();
-        ci2.sort = 4;
-        ci2.idx = 134;
-        ci2.uniqueID = "12";
-        ci2.mycar = "ford";
-
-
-        ArrayList<CarInfo> list = new ArrayList<>();
-        list.add(ci1);
-        list.add(ci2);
-
-        carLists.data = list;
+        carLists.data = carInfoArrayList;
         return carLists;
     }
 
@@ -1500,7 +1477,7 @@ public class ServerClient {
         t1.term = Calendar.getInstance();
         t1.term_name = "term_name1";
         t1.ticket_name = "고급티켓";
-        t1.local_id = "12355";
+        t1.local_id = "12345";
         t1.gubun = 1;
         t1.original_price = 14000;
         t1.regdate = Calendar.getInstance();
@@ -1597,7 +1574,7 @@ public class ServerClient {
         t2.term = Calendar.getInstance();
         t2.term_name = "term_name2";
         t2.ticket_name = "장기저급티켓";
-        t2.local_id = "12355";
+        t2.local_id = "12365";
         t2.gubun = 2;
         t2.original_price = 15000;
         t2.regdate = Calendar.getInstance();
@@ -1779,6 +1756,8 @@ public class ServerClient {
             throw new ServerErrorException();
         }
     }
+
+
 
 
     //Classes

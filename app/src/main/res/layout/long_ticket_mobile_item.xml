@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/long_ticket_mobile_item_unity"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:paddingLeft="43dp"
-        android:paddingRight="25dp"
+        android:layout_marginBottom="-1dp"
+        android:id="@+id/long_ticket_mobile_item_above_layout"
+        android:background="@drawable/img_listbox"
         android:layout_width="match_parent"
         android:layout_height="64dp">
 
         <RelativeLayout
+            android:background="@drawable/img_listbox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <RelativeLayout
+            android:layout_marginLeft="43dp"
+            android:layout_marginRight="25dp"
             android:layout_centerVertical="true"
             android:id="@+id/long_ticket_mobile_item_view"
             android:layout_alignParentRight="true"
@@ -17,7 +26,10 @@
             android:layout_width="99dp"
             android:layout_height="30dp">
 
+
+
             <TextView
+                android:id="@+id/long_ticket_mobile_item_button_name"
                 android:textColor="@color/WHITE"
                 android:textSize="20sp"
                 android:text="상세정보"
@@ -27,6 +39,8 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:layout_marginLeft="43dp"
+            android:layout_marginRight="25dp"
             android:orientation="vertical"
             android:layout_centerVertical="true"
             android:layout_width="195dp"
@@ -40,7 +54,7 @@
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/long_ticket_mobile_item_place"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="-1dp"
                 android:textColor="@color/gray_for_text"
                 android:textSize="10sp"
                 android:text="르네상스 사거리"
@@ -51,6 +65,7 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/long_ticket_mobile_item_below_layout"
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -81,6 +96,7 @@
                 android:layout_height="match_parent">
 
                 <LinearLayout
+                    android:layout_marginTop="-2dp"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -102,6 +118,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:layout_marginTop="-6dp"
                     android:id="@+id/long_ticket_mobile_item_end_date"
                     android:textSize="20sp"
                     android:textColor="@color/gray_for_text"
@@ -110,7 +127,6 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
-                    android:layout_marginTop="5dp"
                     android:id="@+id/long_ticket_mobile_item_place_2"
                     android:textSize="15sp"
                     android:textColor="@color/gray_for_text"
@@ -121,8 +137,8 @@
 
 
                 <TextView
+                    android:layout_marginTop="-2dp"
                     android:id="@+id/long_ticket_mobile_item_before_price"
-                    android:layout_marginTop="2dp"
                     android:textSize="15sp"
                     android:textColor="@color/gray_for_text"
                     android:text="1달 &#xffe6;200,000"
@@ -130,6 +146,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:layout_marginTop="-4dp"
                     android:id="@+id/long_ticket_mobile_item_after_price"
                     android:textSize="21sp"
                     android:textColor="@color/red_for_money"
@@ -141,4 +158,24 @@
 
         </LinearLayout>
     </LinearLayout>
+    <RelativeLayout
+        android:id="@+id/long_ticket_mobile_item_bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <RelativeLayout
+            android:id="@+id/long_ticket_mobile_item_purchase_button"
+            android:layout_marginTop="1dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/btn_1_small"
+            android:layout_width="126dp"
+            android:layout_height="44dp">
+            <TextView
+                android:layout_centerInParent="true"
+                android:textSize="23sp"
+                android:textColor="@color/WHITE"
+                android:text="구매하기"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </RelativeLayout>
 </LinearLayout>
