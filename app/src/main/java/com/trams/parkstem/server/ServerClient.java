@@ -2,6 +2,7 @@ package com.trams.parkstem.server;
 
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,7 +29,7 @@ public class ServerClient {
     //uniqueID를 반환하는 함수는 현재의 uniqueID와 같은지 체크하는 코드
     //dummy 카드 관련 모든것 입차 출차 주차장
 
-    private String uniqueID;
+    private String uniqueID = "13617600";
 
     public static ServerClient serverClient;
     public static ServerClient getInstance() {
@@ -738,57 +739,59 @@ public class ServerClient {
     }
 
     public CarLists listOfCar() throws ServerErrorException{
-//        String msg;
-//        final String Clist_URL = "http://app.parkstem.com/api/car_list.php";
-//        Thread thread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                HashMap<String, String> hashMap = new HashMap<>();
-//                hashMap.put("uniqueID",uniqueID);
-//                result = connect(hashMap, Clist_URL);
-//            }
-//        });
-//
-//        try {
-//            thread.start();
-//            thread.join();
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//
-//        try {
-//            msg = result.getString("msg");
-//            if(result.getInt("res")==1){
-//                CarLists carLists = new CarLists();;
-//                Log.d("ServerClient", msg);
-//                carLists.itemTotalCount = result.getInt("itemTotalCount");
-//                carLists.pageCount = result.getInt("pageCount");
-//
-//                JSONArray jarray = result.getJSONArray("data");
-//                for(int i=0;i<jarray.length();i++) {
-//                    JSONObject jdata = jarray.getJSONObject(i);
-//                    CarInfo carInfo = new CarInfo();
-//                    carInfo.idx = jdata.getInt("idx");
-//                    carInfo.uniqueID = jdata.getString("uniqueID");
-//                    carInfo.sort = jdata.getInt("sort");
-//                    carInfo.mycar = jdata.getString("mycar");
-//                    carInfo.reg_date = stringToCalendar(jdata.getString("mycar"));
-//                    carLists.data.add(carInfo);
-//                }
-//                return carLists;
-//            }
-//            else{
-//                throw new ServerErrorException(result.getInt("res"), msg);
-//            }
-//        } catch (JSONException ex) {
-//            ex.printStackTrace();
-//            throw new ServerErrorException();
-//        }
-        CarLists carLists = new CarLists();
-        carLists.itemTotalCount = 2;
-        carLists.pageCount = 1;
-        carLists.data = carInfoArrayList;
-        return carLists;
+        String msg;
+        final String Clist_URL = "http://app.parkstem.com/api/car_list.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("uniqueID",uniqueID);
+                result = connect(hashMap, Clist_URL);
+                Log.e("listOfCar",result.toString());
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            msg = result.getString("msg");
+            if(result.getInt("res")==1){
+                CarLists carLists = new CarLists();;
+                Log.d("ServerClient", msg);
+                carLists.itemTotalCount = result.getInt("itemTotalCount");
+                carLists.pageCount = result.getInt("pageCount");
+                carLists.data = new ArrayList<>();
+
+                JSONArray jarray = result.getJSONArray("data");
+                for(int i=0;i<jarray.length();i++) {
+                    JSONObject jdata = jarray.getJSONObject(i);
+                    CarInfo carInfo = new CarInfo();
+                    //carInfo.idx = jdata.getInt("idx");
+                    //carInfo.uniqueID = jdata.getString("uniqueID");
+                    carInfo.sort = jdata.getInt("sort");
+                    carInfo.mycar = jdata.getString("carNumber");
+                    //carInfo.reg_date = stringToCalendar(jdata.getString("regdate"));
+                    carLists.data.add(carInfo);
+                }
+                return carLists;
+            }
+            else{
+                throw new ServerErrorException(result.getInt("res"), msg);
+            }
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            throw new ServerErrorException();
+        }
+//        CarLists carLists = new CarLists();
+//        carLists.itemTotalCount = 2;
+//        carLists.pageCount = 1;
+//        carLists.data = carInfoArrayList;
+//        return carLists;
     }
 
     public CarLists priorityCar(final String index) throws ServerErrorException{
@@ -899,50 +902,51 @@ public class ServerClient {
     }
 
     public CarIn carIn() throws ServerErrorException{
-//        String msg;
-//        final String CARIN_URL = "http://app.parkstem.com/api/car_in.php";
-//        Thread thread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                HashMap<String, String> hashMap = new HashMap<>();
-//                hashMap.put("uniqueID",uniqueID);
-//                result = connect(hashMap, CARIN_URL);
-//            }
-//        });
-//
-//        try {
-//            thread.start();
-//            thread.join();
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//
-//        try {
-//            msg = result.getString("msg");
-//            if(result.getInt("res")==1){
-//                CarIn carin = new CarIn();
-//                Log.d("ServerClient", msg);
-//
-//                carin.itemTotalCount = result.getInt("itemTotalCount");
-//                carin.pageCount = result.getInt("pageCount");
-//                JSONObject jdata = result.getJSONArray("data").getJSONObject(0);
-//                carin.indate = stringToCalendar(jdata.getString("indate"));
-//                carin.local_id = jdata.getString("local_id");
-//                return carin;
-//            }
-//            else{
-//                throw new ServerErrorException(result.getInt("res"), msg);
-//            }
-//        } catch (JSONException ex) {
-//            ex.printStackTrace();
-//            throw new ServerErrorException();
-//        }
-        CarIn carin = new CarIn();
+        String msg;
+        final String CARIN_URL = "http://app.parkstem.com/api/car_in.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("uniqueID",uniqueID);
+                result = connect(hashMap, CARIN_URL);
+                Log.e("carIn",result.toString());
+            }
+        });
 
-        carin.local_id = "12345";
-        carin.indate = Calendar.getInstance();
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
-        return carin;
+        try {
+            msg = result.getString("msg");
+            if(result.getInt("res")==1){
+                CarIn carin = new CarIn();
+                Log.d("ServerClient", msg);
+
+                carin.itemTotalCount = result.getInt("itemTotalCount");
+                carin.pageCount = result.getInt("pageCount");
+                JSONObject jdata = result.getJSONArray("data").getJSONObject(0);
+                carin.indate = stringToCalendar(jdata.getString("indate"));
+                carin.local_id = jdata.getString("local_id");
+                return carin;
+            }
+            else{
+                throw new ServerErrorException(result.getInt("res"), msg);
+            }
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            throw new ServerErrorException();
+        }
+//        CarIn carin = new CarIn();
+//
+//        carin.local_id = "12345";
+//        carin.indate = Calendar.getInstance();
+//
+//        return carin;
     }
 
     public CarOut carOut() throws ServerErrorException {
@@ -1079,73 +1083,75 @@ public class ServerClient {
     }
 
     public CardList cardList() throws ServerErrorException{
-//        String msg;
-//        final String CL_URL = "http://app.parkstem.com/api/card_list.php";
-//        Thread thread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                HashMap<String, String> hashMap = new HashMap<>();
-//                hashMap.put("uniqueID", uniqueID);
-//                result = connect(hashMap, CL_URL);
-//            }
-//        });
+        String msg;
+        final String CL_URL = "http://app.parkstem.com/api/card_list.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("uniqueID", uniqueID);
+                result = connect(hashMap, CL_URL);
+                Log.e("cardList",result.toString());
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            msg = result.getString("msg");
+            if(result.getInt("res")==1){
+                CardList cardList = new CardList();
+                Log.d("ServerClient", msg);
+                cardList.itemTotalCount= result.getInt("itemTotalCount");
+                cardList.pageCount= result.getInt("pageCount");
+                cardList.data = new ArrayList<>();
+
+                JSONArray jarray = result.getJSONArray("data");
+                for(int i=0;i<jarray.length();i++) {
+                    JSONObject jdata = jarray.getJSONObject(i);
+                    CardInfo cardInfo = new CardInfo();
+                    cardInfo.idx = jdata.getInt("idx");
+                    //cardInfo.sort = jdata.getInt("sort");
+                    cardInfo.card_name = jdata.getString("card_name");
+                    //cardInfo.reg_date = stringToCalendar(jdata.getString("reg_date"));
+                    cardList.data.add(cardInfo);
+                }
+                return cardList;
+            }
+            else{
+                throw new ServerErrorException();
+            }
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            throw new ServerErrorException();
+        }
+//        CardList cardLists = new CardList();
+//        cardLists.itemTotalCount = 2;
+//        cardLists.pageCount = 1;
 //
-//        try {
-//            thread.start();
-//            thread.join();
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
+//        CardInfo ci1 = new CardInfo();
+//        ci1.reg_date = Calendar.getInstance();
+//        ci1.sort = 12;
+//        ci1.idx = 12;
+//        ci1.card_name = "나라사랑카드ver2";
+//        CardInfo ci2 = new CardInfo();
+//        ci2.reg_date = Calendar.getInstance();
+//        ci2.sort = 23;
+//        ci2.idx = 14;
+//        ci2.card_name = "나라사랑카드ver2.2";
 //
-//        try {
-//            msg = result.getString("msg");
-//            if(result.getInt("res")==1){
-//                CardList cardList = new CardList();
-//                Log.d("ServerClient", msg);
-//                cardList.itemTotalCount= result.getInt("itemTotalCount");
-//                cardList.pageCount= result.getInt("pageCount");
 //
-//                JSONArray jarray = result.getJSONArray("data");
-//                for(int i=0;i<jarray.length();i++) {
-//                    JSONObject jdata = jarray.getJSONObject(i);
-//                    CardInfo cardInfo = new CardInfo();
-//                    cardInfo.idx = jdata.getInt("idx");
-//                    cardInfo.sort = jdata.getInt("sort");
-//                    cardInfo.card_name = jdata.getString("card_name");
-//                    cardInfo.reg_date = stringToCalendar(jdata.getString("reg_date"));
-//                    cardList.data.add(cardInfo);
-//                }
-//                return cardList;
-//            }
-//            else{
-//                throw new ServerErrorException();
-//            }
-//        } catch (JSONException ex) {
-//            ex.printStackTrace();
-//            throw new ServerErrorException();
-//        }
-        CardList cardLists = new CardList();
-        cardLists.itemTotalCount = 2;
-        cardLists.pageCount = 1;
-
-        CardInfo ci1 = new CardInfo();
-        ci1.reg_date = Calendar.getInstance();
-        ci1.sort = 12;
-        ci1.idx = 12;
-        ci1.card_name = "나라사랑카드ver2";
-        CardInfo ci2 = new CardInfo();
-        ci2.reg_date = Calendar.getInstance();
-        ci2.sort = 23;
-        ci2.idx = 14;
-        ci2.card_name = "나라사랑카드ver2.2";
-
-
-        ArrayList<CardInfo> list = new ArrayList<>();
-        list.add(ci1);
-        list.add(ci2);
-
-        cardLists.data = list;
-        return cardLists;
+//        ArrayList<CardInfo> list = new ArrayList<>();
+//        list.add(ci1);
+//        list.add(ci2);
+//
+//        cardLists.data = list;
+//        return cardLists;
     }
 
     public CardList cardSort(final String idx) throws ServerErrorException{
@@ -1254,75 +1260,74 @@ public class ServerClient {
     }
 
     public PaymentList hipassPayment() throws ServerErrorException{
+        final String HiPay_URL = "http://app.parkstem.com/api/pay_list.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("uniqueID", uniqueID);
+                result = connect(hashMap, HiPay_URL);
+                Log.e("hipass",result.toString());
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            if(result.getInt("res")==1){
+                PaymentList paymentlist = new PaymentList();
+                paymentlist.itemTotalCount = result.getInt("itemTotalCount");
+                paymentlist.pageCount = result.getInt("pageCount");
+
+                JSONArray jarray = result.getJSONArray("data");
+                for(int i=0;i<jarray.length();i++) {
+                    JSONObject jdata = jarray.getJSONObject(i);
+                    Payment pm = new Payment();
+                    pm.card_name = jdata.getString("card_name");
+                    pm.pay_date = stringToCalendar(jdata.getString("pay_date"));
+                    pm.price = jdata.getInt("price");
+                    paymentlist.data.add(pm);
+                }
+                return paymentlist;
+            }
+            else{
+                throw new ServerErrorException(result.getInt("res"), result.getString("msg"));
+            }
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            throw new ServerErrorException();
+        }
 
 
-//        final String HiPay_URL = "http://app.parkstem.com/api/pay_list.php";
-//        Thread thread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                HashMap<String, String> hashMap = new HashMap<>();
-//                hashMap.put("uniqueID", uniqueID);
-//                result = connect(hashMap, HiPay_URL);
-//            }
-//        });
+//        Payment p1 = new Payment();
+//        p1.price = 10000;
+//        p1.card_name = "국민카드";
+//        p1.pay_date = Calendar.getInstance();
+//        Payment p2 = new Payment();
+//        p2.price = 3000;
+//        p2.card_name = "나라사랑카드";
+//        p2.pay_date = Calendar.getInstance();
+//        Payment p3 = new Payment();
+//        p3.price = 200000;
+//        p3.card_name = "삼성카드";
+//        p3.pay_date = Calendar.getInstance();
 //
-//        try {
-//            thread.start();
-//            thread.join();
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
+//        ArrayList<Payment> list = new ArrayList<>();
+//        list.add(p1);
+//        list.add(p2);
+//        list.add(p3);
 //
-//        try {
-//            if(result.getInt("res")==1){
-//                PaymentList paymentlist = new PaymentList();
-//                paymentlist.itemTotalCount = result.getInt("itemTotalCount");
-//                paymentlist.pageCount = result.getInt("pageCount");
+//        PaymentList paymentList = new PaymentList();
+//        paymentList.pageCount = 1;
+//        paymentList.itemTotalCount = 3;
+//        paymentList.data = list;
 //
-//                JSONArray jarray = result.getJSONArray("data");
-//                for(int i=0;i<jarray.length();i++) {
-//                    JSONObject jdata = jarray.getJSONObject(i);
-//                    Payment pm = new Payment();
-//                    pm.card_name = jdata.getString("card_name");
-//                    pm.pay_date = stringToCalendar(jdata.getString("pay_date"));
-//                    pm.price = jdata.getInt("price");
-//                    paymentlist.data.add(pm);
-//                }
-//                return paymentlist;
-//            }
-//            else{
-//                throw new ServerErrorException(result.getInt("res"), result.getString("msg"));
-//            }
-//        } catch (JSONException ex) {
-//            ex.printStackTrace();
-//            throw new ServerErrorException();
-//        }
-
-
-        Payment p1 = new Payment();
-        p1.price = 10000;
-        p1.card_name = "국민카드";
-        p1.pay_date = Calendar.getInstance();
-        Payment p2 = new Payment();
-        p2.price = 3000;
-        p2.card_name = "나라사랑카드";
-        p2.pay_date = Calendar.getInstance();
-        Payment p3 = new Payment();
-        p3.price = 200000;
-        p3.card_name = "삼성카드";
-        p3.pay_date = Calendar.getInstance();
-
-        ArrayList<Payment> list = new ArrayList<>();
-        list.add(p1);
-        list.add(p2);
-        list.add(p3);
-
-        PaymentList paymentList = new PaymentList();
-        paymentList.pageCount = 1;
-        paymentList.itemTotalCount = 3;
-        paymentList.data = list;
-
-        return paymentList;
+//        return paymentList;
     }
 
     public PaymentInfo ticketpurchase() throws ServerErrorException{
