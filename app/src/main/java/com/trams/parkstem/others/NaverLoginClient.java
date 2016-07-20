@@ -1,11 +1,13 @@
 package com.trams.parkstem.others;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
+import com.trams.parkstem.activity.LoginActivity;
 
 import org.json.JSONObject;
 
@@ -20,16 +22,25 @@ import java.net.URL;
 public class NaverLoginClient {
     private Activity activity;
 
+    private LoginActivity.OnLoginSuccessListener listener;
+
     private OAuthLogin mOAuthLoginModule;
     private OAuthLoginHandler mOAuthLoginHandler;
+    private NaverUserProfile userProfile;
     private static final String OAUTH_CLIENT_ID = "5S_JYLsKtBe7qfx_fd7B";
     private static final String OAUTH_CLIENT_SECRET = "T_MKslJGj3";
     private static final String OAUTH_CLIENT_NAME = "파크스템";
     private String accessToken;
 
-    private NaverUserProfile userProfile;
+    private static NaverLoginClient instance;
+    public static NaverLoginClient getInstance(Activity activity) {
+        if(instance == null)
+            instance = new NaverLoginClient(activity);
 
-    public NaverLoginClient(Activity activity) {
+        return instance;
+    }
+
+    private NaverLoginClient(Activity activity) {
         this.activity = activity;
 
         /**
@@ -50,6 +61,15 @@ public class NaverLoginClient {
 
                     Toast.makeText(NaverLoginClient.this.activity, "로그인에 성공했습니다", Toast.LENGTH_SHORT).show();
 
+                    if(listener != null) {
+                        listener.onLoginSuccess(
+                                LoginActivity.OnLoginSuccessListener.NAVER,
+                                userProfile.name,
+                                userProfile.email,
+                                "",
+                                userProfile.nickName,
+                                "", "", userProfile.email, "", "");
+                    }
                 } else {
                     String errorCode = mOAuthLoginModule.getLastErrorCode(NaverLoginClient.this.activity).getCode();
                     String errorDesc = mOAuthLoginModule.getLastErrorDesc(NaverLoginClient.this.activity);
@@ -72,6 +92,10 @@ public class NaverLoginClient {
 
     public void login() {
         mOAuthLoginModule.startOauthLoginActivity(activity, mOAuthLoginHandler);
+    }
+
+    public void logout(Context context) {
+        mOAuthLoginModule.logout(context);
     }
 
     private void extractUserProfile() {
@@ -116,6 +140,10 @@ public class NaverLoginClient {
 
     public NaverUserProfile getUserProfile() {
         return userProfile;
+    }
+
+    public void setOnLoginSuccessListener(LoginActivity.OnLoginSuccessListener listener) {
+        this.listener = listener;
     }
 
     public class NaverUserProfile {

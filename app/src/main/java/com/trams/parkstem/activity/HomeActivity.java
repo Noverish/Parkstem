@@ -16,14 +16,13 @@ import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.server.ServerClient;
 
 public class HomeActivity extends BaseNavigationActivity {
-    ImageView alert; //팝업버튼선언
+    private ServerClient client = ServerClient.getInstance();
+
     private RelativeLayout hipassButton;
     private boolean hipassOn;
     private Context context;
-    RelativeLayout movetocar, movetocard;
 
     private final String TAG = getClass().getSimpleName();
-    ServerClient client = ServerClient.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class HomeActivity extends BaseNavigationActivity {
             }
         });
 
-        alert = (ImageView) findViewById(R.id.activity_home_about_hipass);
+        ImageView alert = (ImageView) findViewById(R.id.activity_home_about_hipass); //팝업버튼선언
         alert.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -117,5 +116,11 @@ public class HomeActivity extends BaseNavigationActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if(resultCode == RESULT_FINISH)
+            finish();
+    }
 }

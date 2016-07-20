@@ -13,7 +13,10 @@ import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
+import com.trams.parkstem.base_activity.BaseNavigationActivity;
 import com.trams.parkstem.others.Essentials;
+import com.trams.parkstem.others.FacebookLoginClient;
+import com.trams.parkstem.others.NaverLoginClient;
 import com.trams.parkstem.server.ServerClient;
 
 /**
@@ -46,7 +49,7 @@ public class SettingActivity extends BaseBackSearchActivity {
                 Context context = SettingActivity.this;
                 String title = context.getString(R.string.popup_setting_clause_title);
                 String content = context.getString(R.string.popup_setting_clause_content);
-                //Essentials.makePopup(context, title, content);
+                Essentials.makePopup(context, title, content);
             }
         });
 
@@ -80,7 +83,17 @@ public class SettingActivity extends BaseBackSearchActivity {
     }
 
     private void logout() {
+        FacebookLoginClient facebookLoginClient = FacebookLoginClient.getInstance(this);
+        NaverLoginClient naverLoginClient = NaverLoginClient.getInstance(this);
 
+        facebookLoginClient.logout();
+        naverLoginClient.logout(this);
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+
+        setResult(BaseNavigationActivity.RESULT_FINISH);
+        finish();
     }
 
     private void signOut() {
@@ -97,6 +110,9 @@ public class SettingActivity extends BaseBackSearchActivity {
                             Toast.makeText(SettingActivity.this, "회원탈퇴에 성공하였습니다.",Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
                             startActivity(intent);
+
+                            setResult(BaseNavigationActivity.RESULT_FINISH);
+                            finish();
                         } catch (ServerClient.ServerErrorException error) {
                             error.printStackTrace();
                             Toast.makeText(SettingActivity.this, "회원탈퇴에 실패하였습니다. - " + error.msg,Toast.LENGTH_SHORT).show();
@@ -105,5 +121,6 @@ public class SettingActivity extends BaseBackSearchActivity {
                 })
                 .setNegativeButton("취소", null)
                 .show();
+
     }
 }
