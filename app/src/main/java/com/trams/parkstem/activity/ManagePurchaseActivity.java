@@ -27,11 +27,6 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_purchase);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
 
         Intent intent = getIntent();
 
@@ -86,12 +81,17 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
             content.addView(longTicketMobileManageView);
         }
 
-        try{
-            ((TextView)findViewById(R.id.activity_manage_purchase_name)).setText("로그인이름");
-            ((TextView)findViewById(R.id.activity_manage_purchase_email)).setText("이메일");
-            ((TextView)findViewById(R.id.activity_manage_purchase_phonenumber)).setText("풘넘버");
+        ((TextView)findViewById(R.id.activity_manage_purchase_price)).setText((char) 0xffe6 + Essentials.numberWithComma(ticket.price));
+    }
 
-            ((TextView)findViewById(R.id.activity_manage_purchase_price)).setText((char) 0xffe6 + Essentials.numberWithComma(ticket.price));
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        try{
+            ((TextView)findViewById(R.id.activity_manage_purchase_name)).setText(ServerClient.getInstance().login.name);
+            ((TextView)findViewById(R.id.activity_manage_purchase_email)).setText(ServerClient.getInstance().login.email);
+            ((TextView)findViewById(R.id.activity_manage_purchase_phonenumber)).setText(ServerClient.getInstance().login.phone);
 
             TextView carEditButton = (TextView) findViewById(R.id.activity_manage_purchase_car_edit);
             TextView carnum = (TextView)findViewById(R.id.activity_manage_purchase_carnum);

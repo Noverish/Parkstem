@@ -52,6 +52,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22sp"
+            android:hint="홍길동"
+            android:textColorHint="#bcc1c5"
             android:textColor="@color/gray_for_text"
             />
         <TextView
@@ -61,6 +63,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22sp"
+            android:hint="abcdefghij@naver.com"
+            android:textColorHint="#bcc1c5"
             android:textColor="@color/gray_for_text"
             />
         <TextView
@@ -70,6 +74,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="22sp"
+            android:hint="010-1234-5678"
+            android:textColorHint="#bcc1c5"
             android:textColor="@color/gray_for_text"
             />
 
