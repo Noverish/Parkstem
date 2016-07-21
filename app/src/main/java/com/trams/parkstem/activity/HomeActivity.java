@@ -77,12 +77,6 @@ public class HomeActivity extends BaseNavigationActivity {
             }
         });
 
-        try {
-            client.login("hongid1234","hongpw1234");
-        } catch (ServerClient.ServerErrorException ex) {
-            ex.printStackTrace();
-        }
-
     }
 
     private void onHipassButtonClicked() {
