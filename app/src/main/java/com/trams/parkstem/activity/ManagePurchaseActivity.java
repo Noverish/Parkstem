@@ -79,10 +79,19 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
             layoutParams.bottomMargin=0;
 
             content.addView(longTicketMobileManageView);
-         }
+        }
+
+        ((TextView)findViewById(R.id.activity_manage_purchase_price)).setText((char) 0xffe6 + Essentials.numberWithComma(ticket.price));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         try{
-            ((TextView)findViewById(R.id.activity_manage_purchase_price)).setText((char) 0xffe6 + Essentials.numberWithComma(ticket.price));
+            ((TextView)findViewById(R.id.activity_manage_purchase_name)).setText(ServerClient.getInstance().login.name);
+            ((TextView)findViewById(R.id.activity_manage_purchase_email)).setText(ServerClient.getInstance().login.email);
+            ((TextView)findViewById(R.id.activity_manage_purchase_phonenumber)).setText(ServerClient.getInstance().login.phone);
 
             TextView carEditButton = (TextView) findViewById(R.id.activity_manage_purchase_car_edit);
             TextView carnum = (TextView)findViewById(R.id.activity_manage_purchase_carnum);
@@ -93,7 +102,7 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
                 carEditButton.setText("등록");
             }
             else {
-                carnum.setText("메인차량");
+                carnum.setText(ServerClient.getInstance().dashboard().mycar);
                 carnum.setTextColor(ContextCompat.getColor(this, R.color.gray_for_text));
                 carEditButton.setText("변경");
             }
@@ -108,11 +117,11 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
                 cardEditButton.setText("등록");
             }
             else {
-                cardname.setText("메인카드");
+                cardname.setText(ServerClient.getInstance().dashboard().mycard);
                 cardname.setTextColor(ContextCompat.getColor(this, R.color.gray_for_text));
                 cardEditButton.setText("변경");
             }
-            
+
             carEditButton.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
@@ -129,7 +138,6 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
         } catch (ServerClient.ServerErrorException ex) {
             Log.e("error!", ex.msg);
         }
-
     }
 
     private void onCarEditButtonClicked(){

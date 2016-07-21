@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
+        <TextView
             android:id="@+id/activity_manage_purchase_name"
             android:background="@null"
             android:layout_marginTop="25dp"
@@ -56,7 +56,7 @@
             android:textColorHint="#bcc1c5"
             android:textColor="@color/gray_for_text"
             />
-        <EditText
+        <TextView
             android:id="@+id/activity_manage_purchase_email"
             android:background="@null"
             android:layout_marginTop="25dp"
@@ -67,7 +67,7 @@
             android:textColorHint="#bcc1c5"
             android:textColor="@color/gray_for_text"
             />
-        <EditText
+        <TextView
             android:id="@+id/activity_manage_purchase_phonenumber"
             android:background="@null"
             android:layout_marginTop="25dp"
