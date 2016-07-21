@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
+import com.trams.parkstem.server.ServerClient;
 
 import java.util.Calendar;
 
@@ -30,6 +32,11 @@ public class InputNewCardActivity extends BaseBackSearchActivity {
     private static final int CARD_TYPE_PERSON = 0;
     private static final int CARD_TYPE_COMPANY = 1;
     private int cardType;
+
+    private ServerClient serverClient = new ServerClient();
+    private TextView clause1, clause2, clause3, clause4, clause5;
+    private String clause;
+    Context context = this;
 
     private HidePasswordView hidePasswordView;
     private Spinner selectMonthSpinner;
@@ -61,6 +68,93 @@ public class InputNewCardActivity extends BaseBackSearchActivity {
 
         initDurationSelectSpinners();
 
+        clause1 = (TextView) findViewById(R.id.input_card_clause_1);
+        clause2 = (TextView) findViewById(R.id.input_card_clause_2);
+        clause3 = (TextView) findViewById(R.id.input_card_clause_3);
+        clause4 = (TextView) findViewById(R.id.input_card_clause_4);
+        clause5 = (TextView) findViewById(R.id.input_card_clause_5);
+
+        clause1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setClause1();
+            }
+        });
+        clause2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setClause2();
+            }
+        });
+        clause3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setClause3();
+            }
+        });
+        clause4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setClause4();
+            }
+        });
+        clause5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setClause5();
+            }
+        });
+    }
+
+    public void setClause1(){
+        try{
+            WebView webView = new WebView(context);
+            setContentView(webView);
+            clause = serverClient.clause("1");
+            webView.loadData(clause, "text/html; charset=UTF-8", null);
+        } catch(ServerClient.ServerErrorException ex){
+            ex.printStackTrace();
+        }
+    }
+    public void setClause2(){
+        try{
+            WebView webView = new WebView(context);
+            setContentView(webView);
+            clause = serverClient.clause("2");
+            webView.loadData(clause, "text/html; charset=UTF-8", null);
+        } catch(ServerClient.ServerErrorException ex){
+            ex.printStackTrace();
+        }
+    }
+    public void setClause3(){
+        try{
+            WebView webView = new WebView(context);
+            setContentView(webView);
+            clause = serverClient.clause("3");
+            webView.loadData(clause, "text/html; charset=UTF-8", null);
+        } catch(ServerClient.ServerErrorException ex){
+            ex.printStackTrace();
+        }
+    }
+    public void setClause4(){
+        try{
+            WebView webView = new WebView(context);
+            setContentView(webView);
+            clause = serverClient.clause("4");
+            webView.loadData(clause, "text/html; charset=UTF-8", null);
+        } catch(ServerClient.ServerErrorException ex){
+            ex.printStackTrace();
+        }
+    }
+    public void setClause5(){
+        try{
+            WebView webView = new WebView(context);
+            setContentView(webView);
+            clause = serverClient.clause("5");
+            webView.loadData(clause, "text/html; charset=UTF-8", null);
+        } catch(ServerClient.ServerErrorException ex){
+            ex.printStackTrace();
+        }
     }
 
     private void radioButtonOnClick(LinearLayout view) {
