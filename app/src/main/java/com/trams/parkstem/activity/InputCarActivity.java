@@ -44,6 +44,7 @@ public class InputCarActivity extends BaseBackSearchActivity {
 
         listView = (LocationChangeableListView) findViewById(R.id.activity_input_car_list_view);
         listView.setMainItemImage(ContextCompat.getDrawable(this, R.drawable.main_car));
+        listView.setDefaultMainItem(getString(R.string.action_car_register));
         listView.setOnEditCompleteListener(new LocationChangeableListView.OnEditCompleteListener() {
             @Override
             public void onEditCompleted(Pair<Long, String> mainCar) {

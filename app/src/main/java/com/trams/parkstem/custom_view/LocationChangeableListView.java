@@ -39,6 +39,8 @@ public class LocationChangeableListView extends LinearLayout {
     private ArrayList<Pair<Long, String>> listData;
     private LinearLayout normalMode, editMode;
 
+    private String defaultMainItem = "EMPTY";
+
     public LocationChangeableListView(Context context) {
         super(context);
 
@@ -123,6 +125,10 @@ public class LocationChangeableListView extends LinearLayout {
     }
 
 
+    public void setDefaultMainItem(String defaultMainItem) {
+        this.defaultMainItem = defaultMainItem;
+    }
+
     public void setMainItemImage(Drawable mainItemImage) {
         dragAdapter.setMainItemImage(mainItemImage);
     }
@@ -143,7 +149,7 @@ public class LocationChangeableListView extends LinearLayout {
         if(listData.size() != 0)
             return listData.get(0);
         else
-            return new Pair<>(0L, getResources().getString(R.string.action_car_register));
+            return new Pair<>(0L, defaultMainItem);
     }
 
 

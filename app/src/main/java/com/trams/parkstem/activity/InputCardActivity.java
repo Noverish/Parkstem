@@ -41,6 +41,7 @@ public class InputCardActivity extends BaseBackSearchActivity {
 
         listView = (LocationChangeableListView) findViewById(R.id.activity_input_card_list_view);
         listView.setMainItemImage(ContextCompat.getDrawable(this, R.drawable.main_card));
+        listView.setDefaultMainItem(getString(R.string.action_card_register));
         listView.setOnEditCompleteListener(new LocationChangeableListView.OnEditCompleteListener() {
             @Override
             public void onEditCompleted(Pair<Long, String> mainItem) {
@@ -90,6 +91,8 @@ public class InputCardActivity extends BaseBackSearchActivity {
                 Pair<Long, String> pair = new Pair<>((long)info.idx, info.card_name);
                 data.add(pair);
             }
+
+            Log.e("refresh",data.size() + "");
 
             listView.setListData(data);
         } catch (ServerClient.ServerErrorException ex) {
