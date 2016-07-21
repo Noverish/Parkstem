@@ -20,6 +20,7 @@ import java.util.Calendar;
  * Created by JaeHyo on 2016-07-13.
  */
 public class TicketMobileListView extends LinearLayout {
+    private String ticketName;
 
     public TicketMobileListView(Context context, ServerClient.Ticket ticket) {
         super(context);
@@ -37,6 +38,7 @@ public class TicketMobileListView extends LinearLayout {
 
             TextView name = (TextView) findViewById(R.id.ticket_mobile_item_name);
             name.setText(ticket.ticket_name);
+            ticketName = ticket.ticket_name;
 
             name = (TextView) findViewById(R.id.ticket_mobile_item_place);
             name.setText(parkInfo.local_content);
@@ -74,5 +76,9 @@ public class TicketMobileListView extends LinearLayout {
         } catch (ServerClient.ServerErrorException ex) {
             Log.e("error!",ex.msg);
         }
+    }
+
+    public String getTicketName() {
+        return ticketName;
     }
 }

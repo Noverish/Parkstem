@@ -1597,6 +1597,7 @@ public class ServerClient  {
         public Calendar out_date;
         public Calendar pay_date;
         public String price;
+        public String park_time;
     }
     public class TicketPurchaseList {
         public int itemTotalCount;

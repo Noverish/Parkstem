@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -14,6 +16,7 @@ import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseNavigationActivity;
 import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.server.ServerClient;
+import com.trams.parkstem.view.HistoryParkView;
 
 public class HomeActivity extends BaseNavigationActivity {
     private ServerClient client = ServerClient.getInstance();
@@ -39,14 +42,32 @@ public class HomeActivity extends BaseNavigationActivity {
             }
         });
 
+
+        try{
+            ServerClient.ParkHistoryList parkHistoryList = ServerClient.getInstance().parkHistory();
+            if(parkHistoryList.data.size()>0){
+                HistoryParkView historyParkView = new HistoryParkView(this, parkHistoryList.data.get(0));
+                historyParkView.setBackgroundColor(ContextCompat.getColor(this, R.color.btn_3));
+                ((LinearLayout) findViewById(R.id.activity_home_park_list_1)).addView(historyParkView);
+            }
+
+            if(parkHistoryList.data.size()>1){
+                HistoryParkView historyParkView = new HistoryParkView(this, parkHistoryList.data.get(1));
+                historyParkView.setBackgroundColor(ContextCompat.getColor(this, R.color.WHITE));
+                ((LinearLayout) findViewById(R.id.activity_home_park_list_2)).addView(historyParkView);
+            }
+
+        } catch (ServerClient.ServerErrorException ex){
+            Log.e("ERROr!",ex.toString());
+        }
+
         ImageView alert = (ImageView) findViewById(R.id.activity_home_about_hipass); //팝업버튼선언
         alert.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                Log.e("asdf","popup");
                 Context context = HomeActivity.this;
-                String title = context.getString(R.string.popup_hipass_explain_title);
-                String content = context.getString(R.string.popup_hipass_explain_content);
-                Essentials.makePopup(context, title, content);
+                Essentials.makeHipassPopup(context, (ViewGroup) HomeActivity.this.findViewById(R.id.content_main_layout));
             }
         });
 

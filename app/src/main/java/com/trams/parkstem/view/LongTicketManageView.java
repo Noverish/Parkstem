@@ -23,12 +23,12 @@ import java.util.Calendar;
 /**
  * Created by JaeHyo on 2016-07-13.
  */
-public class LongTicketMobileView extends LinearLayout {
+public class LongTicketManageView extends LinearLayout {
     private boolean viewOn;
     private RelativeLayout ticketView;
     private RelativeLayout purchaseButton;
 
-    public LongTicketMobileView(Context context, ServerClient.Ticket ticket) {
+    public LongTicketManageView(Context context, ServerClient.Ticket ticket) {
         super(context);
 
         LayoutInflater inflater = LayoutInflater.from(context);

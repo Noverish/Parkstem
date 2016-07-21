@@ -40,7 +40,13 @@ public class SettingActivity extends BaseBackSearchActivity {
             }
         });
 
-        pushOn = true;
+        pushOn = ServerClient.getInstance().login.pushYN;
+        pushButton.removeAllViews();
+        if(pushOn) {
+            getLayoutInflater().inflate(R.layout.push_button_on, pushButton);
+        } else {
+            getLayoutInflater().inflate(R.layout.push_button_off, pushButton);
+        }
 
         LinearLayout clauseButton = (LinearLayout) findViewById(R.id.activity_setting_clause);
         clauseButton.setOnClickListener(new View.OnClickListener() {
@@ -74,11 +80,22 @@ public class SettingActivity extends BaseBackSearchActivity {
         pushOn = !pushOn;
 
         if(pushOn) {
-            pushButton.removeAllViews();
-            getLayoutInflater().inflate(R.layout.push_button_on, pushButton);
+            try {
+                ServerClient.getInstance().push("Y");
+                pushButton.removeAllViews();
+                getLayoutInflater().inflate(R.layout.push_button_on, pushButton);
+            } catch (ServerClient.ServerErrorException ex) {
+                Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
+            }
+
         } else {
-            pushButton.removeAllViews();
-            getLayoutInflater().inflate(R.layout.push_button_off, pushButton);
+            try {
+                ServerClient.getInstance().push("N");
+                pushButton.removeAllViews();
+                getLayoutInflater().inflate(R.layout.push_button_off, pushButton);
+            } catch (ServerClient.ServerErrorException ex) {
+                Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

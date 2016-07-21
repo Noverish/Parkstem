@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    android:background="@color/WHITE"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-<RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="280dp"
-    android:layout_height="223dp">
+    android:layout_height="223dp"
+    android:background="@color/WHITE">
     <ImageView
         android:src="@drawable/box_hipass"
         android:layout_width="match_parent"
         android:layout_height="223dp" />
     <ImageView
+        android:id="@+id/hipass_popup_close"
         android:layout_alignParentRight="true"
         android:layout_marginTop="22dp"
         android:layout_marginRight="20dp"
@@ -28,28 +25,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <RelativeLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginRight="18dp"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_below="@+id/hipass_popup_whatishipass"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        style="@style/scollbar_style">
         <TextView
+            android:id="@+id/hipass_popup_content"
             android:lineSpacingExtra="7dp"
+            android:layout_marginRight="20dp"
             android:textColor="@color/green"
-            android:text="출차 할 때, 차번인식이\n완료됨과 동시에 신용카드\n자동결제가 되는 시스템이에요.\n이 하이패스 시스템은 사용자가\n원할 떄 ON/OFF가 가능해요."
             android:layout_marginBottom="17dp"
-            android:layout_width="204dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent" />
-        
-        <RelativeLayout
-            android:id="@+id/hipass_popup_scrollbar"
-            android:background="@drawable/btn_scroll"
-            android:layout_alignParentRight="true"
-            android:layout_width="18dp"
-            android:layout_height="74dp"></RelativeLayout>
-
-    </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
-</ScrollView>

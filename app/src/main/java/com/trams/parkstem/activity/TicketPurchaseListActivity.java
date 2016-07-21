@@ -27,7 +27,22 @@ public class TicketPurchaseListActivity extends BaseBackSearchActivity {
         setSearchEnable(true);
         setToolbarTitle("주차권 구매내역");
 
+        reloadData();
+
+        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.activity_ticket_purchase_refresh_layout);
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeLayout.setRefreshing(true);
+                reloadData();
+                swipeLayout.setRefreshing(false);
+            }
+        });
+    }
+
+    private void reloadData() {
         LinearLayout content = (LinearLayout) findViewById(R.id.activity_ticket_purchase_list_layout);
+        content.removeAllViews();
 
         ServerClient.TicketPurchaseList ticketPurchaseList;
         ServerClient.TicketLists list;
@@ -48,16 +63,9 @@ public class TicketPurchaseListActivity extends BaseBackSearchActivity {
                     continue;
                 */
 
-                Log.e("now TicketPurchase",ticketPurchase.toString());
-
                 if(ticketPurchase.gubun==1){
                     for(ServerClient.Ticket ticket: list.data) {
-
-                        Log.e("now ticket", ticket.toString());
-
                         if (ticket.idx == ticketPurchase.idx) {
-                            Log.e("asdf", "asdf");
-
                             TicketUsedView ticketUsedView = new TicketUsedView(this, ticket, ticketPurchase);
                             content.addView(ticketUsedView);
                             break;
@@ -68,7 +76,6 @@ public class TicketPurchaseListActivity extends BaseBackSearchActivity {
                 else if(ticketPurchase.gubun==2){
                     for(ServerClient.Ticket ticket: longlist.data)
                         if(ticket.idx == ticketPurchase.idx){
-                            Log.e("asdf","fdsa");
                             LongTicketUsedView longTicketUsedView = new LongTicketUsedView(this, ticket, ticketPurchase);
                             content.addView(longTicketUsedView);
                             break;
@@ -78,21 +85,5 @@ public class TicketPurchaseListActivity extends BaseBackSearchActivity {
         } catch (ServerClient.ServerErrorException ex) {
             Log.e("error!",ex.msg);
         }
-
-        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.activity_ticket_purchase_refresh_layout);
-        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeLayout.setRefreshing(true);
-                Log.e("Swipe", "Refreshing Number");
-                ( new android.os.Handler()).postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeLayout.setRefreshing(false);
-                    }
-                }, 3000);
-            }
-        });
     }
-
 }
