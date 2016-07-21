@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
@@ -17,11 +18,9 @@ import com.trams.parkstem.server.ServerClient;
  * Created by Noverish on 2016-07-04.
  */
 public class AssignActivity extends BaseBackSearchActivity {
-    TextView alert;
+    private TextView alert;
     private ServerClient serverClient;
     private RelativeLayout assignButton;
-
-    EditText textView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,12 +51,27 @@ public class AssignActivity extends BaseBackSearchActivity {
     }
 
     private void assign() {
-        String name = textView.getText().toString();
+        try {
+            String name = ((EditText) findViewById(R.id.activity_assign_name)).getText().toString();
+            String email = ((EditText) findViewById(R.id.activity_assign_email)).getText().toString();
+            String password = ((EditText) findViewById(R.id.activity_assign_password)).getText().toString();
+            String phone = ((EditText) findViewById(R.id.activity_assign_phone)).getText().toString();
 
-        //boolean success = serverClient.Regbyemail();
+            if(name.equals("")) {
+                Toast.makeText(this, "이름을 입력해 주세요.", Toast.LENGTH_SHORT).show();
+            } else if(!email.matches(".*@.*[.].*")) {
+                Toast.makeText(this, "잘못된 이메일 형식입니다.", Toast.LENGTH_SHORT).show();
+            } else if(password.length() < 4) {
+                Toast.makeText(this, "비밀번호는 4자리 이상이어야 합니다.", Toast.LENGTH_SHORT).show();
+            } else {
+                ServerClient.getInstance().register(name, email, phone, "", email, password);
+                Toast.makeText(this, "회원가입이 성공했습니다", Toast.LENGTH_SHORT).show();
+            }
 
-        //if(success) {
-        //    Toast.makeText(this, "회원가입이 성공했습니다", Toast.LENGTH_LONG).show();
-        //}
+        } catch (NullPointerException nul) {
+            nul.printStackTrace();
+        } catch (ServerClient.ServerErrorException error) {
+            Toast.makeText(this, "회원가입이 실패했습니다. - " + error.msg, Toast.LENGTH_LONG).show();
+        }
     }
 }

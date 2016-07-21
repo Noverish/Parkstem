@@ -26,7 +26,7 @@ import java.util.Calendar;
 /**
  * Created by JaeHyo on 2016-07-13.
  */
-public class TicketMobileView extends LinearLayout {
+public class TicketManageView extends LinearLayout {
     public static final int SHORT_TICKTET = 0;
     public static final int LONG_TICKET = 1;
 
@@ -36,7 +36,7 @@ public class TicketMobileView extends LinearLayout {
 
     private Calendar calendar;
 
-    public TicketMobileView(final Context context, ServerClient.Ticket ticket) {
+    public TicketManageView(final Context context, ServerClient.Ticket ticket) {
         super(context);
 
         LayoutInflater inflater = LayoutInflater.from(context);

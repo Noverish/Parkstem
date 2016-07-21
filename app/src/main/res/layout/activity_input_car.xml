@@ -11,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <FrameLayout
-            android:paddingTop="32dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
@@ -20,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:layout_marginTop="105dp"
+                    android:layout_marginTop="137dp"
                     android:src="@drawable/img_car"
                     android:layout_width="88dp"
                     android:layout_height="76dp" />

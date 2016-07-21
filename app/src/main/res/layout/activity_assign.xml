@@ -27,6 +27,7 @@
                     android:layout_width="270sp"
                     android:layout_height="39sp">
                     <EditText
+                        android:id="@+id/activity_assign_name"
                         android:layout_centerVertical="true"
                         android:background="@null"
                         android:gravity="right"
@@ -47,6 +48,7 @@
                     android:layout_width="270sp"
                     android:layout_height="39sp">
                     <EditText
+                        android:id="@+id/activity_assign_email"
                         android:layout_centerVertical="true"
                         android:background="@null"
                         android:gravity="right"
@@ -67,13 +69,15 @@
                     android:layout_width="270sp"
                     android:layout_height="39sp">
                     <EditText
+                        android:id="@+id/activity_assign_password"
                         android:layout_centerVertical="true"
                         android:background="@null"
                         android:gravity="right"
                         android:hint="비밀번호(4자리 이상)"
+                        android:singleLine="true"
+                        android:inputType="textVisiblePassword"
                         android:textSize="17sp"
                         android:textColorHint="#bcc1c5"
-                        android:singleLine="true"
                         android:textColor="@color/BLACK"
                         android:layout_marginRight="31sp"
                         android:layout_width="match_parent"
@@ -87,14 +91,16 @@
                     android:layout_width="270sp"
                     android:layout_height="39sp">
                     <EditText
+                        android:id="@+id/activity_assign_phone"
                         android:layout_centerVertical="true"
                         android:background="@null"
                         android:gravity="right"
                         android:hint="핸드폰 번호"
-                        android:textSize="17sp"
                         android:singleLine="true"
+                        android:inputType="number"
                         android:textColorHint="#bcc1c5"
                         android:textColor="@color/BLACK"
+                        android:textSize="17sp"
                         android:layout_marginRight="31sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -117,7 +123,7 @@
                         android:textColor="#e5f0d4"
                         android:textSize="17sp"
                         android:id="@+id/activity_assign_clause"
-                        android:text="약관 동의"
+                        android:text="약관 보기"
                         android:layout_marginLeft="12sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />

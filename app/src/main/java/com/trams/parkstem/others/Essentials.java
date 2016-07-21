@@ -4,11 +4,19 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.trams.parkstem.R;
+import com.trams.parkstem.server.ServerClient;
 
 import java.util.Calendar;
 
@@ -61,8 +69,8 @@ public class Essentials {
         View layout = inflater.inflate(R.layout.popup_layout, null);
         AlertDialog.Builder aDialog = new AlertDialog.Builder(context);
 
-        aDialog.setTitle(title); //타이틀바 제목
         aDialog.setView(layout); //dialog.xml 파일을 뷰로 셋팅
+        aDialog.setTitle(title); //타이틀바 제목
         TextView contentTextView = (TextView) layout.findViewById(R.id.popup_layout_content);
         contentTextView.setText(content);
 
@@ -75,6 +83,40 @@ public class Essentials {
         //팝업창 생성
         AlertDialog ad = aDialog.create();
         ad.show();//보여줌!
+    }
+
+    public static void makeHipassPopup(Context context, ViewGroup parent) {
+        LayoutInflater layoutInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View popupView = layoutInflater.inflate(R.layout.hipass_popup, null);
+
+        int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 223, context.getResources().getDisplayMetrics());
+        int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 280, context.getResources().getDisplayMetrics());
+
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height);
+
+        ImageView btnDismiss = (ImageView) popupView.findViewById(R.id.hipass_popup_close);
+        btnDismiss.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                popupWindow.dismiss();
+            }
+        });
+
+        TextView content = (TextView) popupView.findViewById(R.id.hipass_popup_content);
+        try {
+            String str = ServerClient.getInstance().hipass("1");
+            str = str.replaceAll("</div>","");
+            str = str.replaceAll("<div>","\n");
+            str = str.replaceAll("<br />","");
+            str = str.replaceAll("&nbsp;"," ");
+
+            content.setText(str);
+            popupWindow.showAtLocation(parent, Gravity.CENTER, 0, 0);
+        } catch (ServerClient.ServerErrorException ex) {
+            Toast.makeText(context, ex.msg, Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     //String값으로 받은 pay_date등을 Calendar로 변환

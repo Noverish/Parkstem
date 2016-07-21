@@ -10,7 +10,7 @@ import android.widget.RelativeLayout;
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.server.ServerClient;
-import com.trams.parkstem.view.TicketMobileView;
+import com.trams.parkstem.view.TicketManageView;
 
 /**
  * Created by Noverish on 2016-07-08.
@@ -36,16 +36,16 @@ public class ManageTicketActivity extends BaseBackSearchActivity {
             ServerClient.Ticket ticket;
             for(int i=0; i < list.data.size(); ++i){
                 ticket = list.data.get(i);
-                TicketMobileView ticketMobileView = new TicketMobileView(this, ticket);
+                TicketManageView ticketManageView = new TicketManageView(this, ticket);
 
                 if(i==list.data.size()-1){
-                    RelativeLayout relativeLayout = (RelativeLayout)(ticketMobileView.findViewById(R.id.ticket_mobile_item_above_layout));
+                    RelativeLayout relativeLayout = (RelativeLayout)(ticketManageView.findViewById(R.id.ticket_mobile_item_above_layout));
                     LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) relativeLayout.getLayoutParams();
 
                     layoutParams.bottomMargin=0;
                 }
 
-                content.addView(ticketMobileView);
+                content.addView(ticketManageView);
             }
         } catch (ServerClient.ServerErrorException ex) {
             Log.e("error!",ex.msg);

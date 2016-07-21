@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -64,10 +65,9 @@ public class HomeActivity extends BaseNavigationActivity {
         alert.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                Log.e("asdf","popup");
                 Context context = HomeActivity.this;
-                String title = context.getString(R.string.popup_hipass_explain_title);
-                String content = context.getString(R.string.popup_hipass_explain_content);
-                Essentials.makePopup(context, title, content);
+                Essentials.makeHipassPopup(context, (ViewGroup) HomeActivity.this.findViewById(R.id.content_main_layout));
             }
         });
 
