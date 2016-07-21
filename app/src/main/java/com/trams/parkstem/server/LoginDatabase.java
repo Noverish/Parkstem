@@ -33,6 +33,8 @@ public class LoginDatabase {
         this.context = context;
 
         database = readFromInternalStorage();
+        if(database == null)
+            database = new HashMap<>();
     }
 
 
@@ -41,6 +43,8 @@ public class LoginDatabase {
     }
 
     public void setData(String id, String pw) {
+        Log.e("setData",id + " " + pw);
+
         database.clear();
 
         database.put(ID_COLUMN, id);

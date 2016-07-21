@@ -1,7 +1,6 @@
 package com.trams.parkstem.activity;
 
 import android.content.Intent;
-import android.content.IntentSender;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -53,7 +52,7 @@ public class LoginWithEmailActivity extends BaseBackSearchActivity {
             } else if(password.length() < 4) {
                 Toast.makeText(this, "비밀번호는 4자리 이상이어야 합니다.", Toast.LENGTH_SHORT).show();
             } else{
-                ServerClient.getInstance().login(email, password, getIntent().getStringExtra("token"));
+                //ServerClient.getInstance().login(email, password, getIntent().getStringExtra("token"));
 
                 Toast.makeText(this, "로그인에 성공했습니다.",Toast.LENGTH_SHORT).show();
 
@@ -69,10 +68,10 @@ public class LoginWithEmailActivity extends BaseBackSearchActivity {
 
         } catch (NullPointerException nul) {
             nul.printStackTrace();
-        } catch (ServerClient.ServerErrorException ex){
+        }/* catch (ServerClient.ServerErrorException ex){
             ex.printStackTrace();
             Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 
     private  void onEmailRegisterClicked(){

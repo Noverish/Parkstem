@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.trams.parkstem.R;
-import com.trams.parkstem.gcm.GetRegistrationToken;
 import com.trams.parkstem.others.FacebookLoginClient;
 import com.trams.parkstem.others.NaverLoginClient;
 import com.trams.parkstem.server.LoginDatabase;
@@ -33,8 +32,8 @@ public class LoginActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext()); // xml을 불러 오기 전에 해야 됨
         setContentView(R.layout.activity_login);
 
-        GetRegistrationToken getRegistrationToken = new GetRegistrationToken(this);
-        /*try {
+        /*GetRegistrationToken getRegistrationToken = new GetRegistrationToken(this);
+        try {
             gcmDeviceToken = getRegistrationToken.getToken();
         } catch (GetRegistrationToken.GetTokenErrorException ex) {
             Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
@@ -62,10 +61,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onLoginSuccess(int gubun, String name, String email, String mobile, String nickName, String kakaoID, String facebookID, String naverID, String parkstemID, String parkstemPW) {
                 try {
                     ServerClient.getInstance().login(email, "", gcmDeviceToken);
-
-
-
-
                 } catch (ServerClient.ServerErrorException ex) {
                     Toast.makeText(LoginActivity.this, ex.msg, Toast.LENGTH_SHORT).show();
                 }
@@ -90,8 +85,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onLoginSuccess(int gubun, String name, String email, String mobile, String nickName, String kakaoID, String facebookID, String naverID, String parkstemID, String parkstemPW) {
                 try {
                     ServerClient.getInstance().login(email, "", gcmDeviceToken);
-
-
                 } catch (ServerClient.ServerErrorException ex) {
                     Toast.makeText(LoginActivity.this, ex.msg, Toast.LENGTH_SHORT).show();
                 }
@@ -127,7 +120,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
         LinearLayout loginButton = (LinearLayout)findViewById(R.id.login_layout_facebook);
         loginButton.setOnClickListener(new View.OnClickListener() {

@@ -244,7 +244,7 @@ public class ServerClient  {
         }
     }
 
-    private MemberInfo memberInfo() throws ServerErrorException{
+    public MemberInfo memberInfo() throws ServerErrorException{
         String msg;
         final String LOGIN_URL = "http://app.parkstem.com/api/member_login.php";
         Thread thread = new Thread(new Runnable() {
