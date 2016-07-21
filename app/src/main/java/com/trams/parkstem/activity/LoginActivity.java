@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     private NaverLoginClient naverLoginClient;
     private LoginDatabase loginDatabase;
 
-    private String gcmDeviceToken;
+    private String gcmDeviceToken = "null";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,13 +34,13 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         GetRegistrationToken getRegistrationToken = new GetRegistrationToken(this);
-        try {
+        /*try {
             gcmDeviceToken = getRegistrationToken.getToken();
         } catch (GetRegistrationToken.GetTokenErrorException ex) {
             Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
             ex.printStackTrace();
             gcmDeviceToken = "null";
-        }
+        }*/
 
         loginDatabase = LoginDatabase.getInstance(this);
         if(!loginDatabase.isDatabaseClear()) {
@@ -122,7 +122,8 @@ public class LoginActivity extends AppCompatActivity {
         loginbyemail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, AssignActivity.class);
+                Intent intent = new Intent(LoginActivity.this, LoginWithEmailActivity.class);
+                intent.putExtra("token",gcmDeviceToken);
                 startActivity(intent);
             }
         });

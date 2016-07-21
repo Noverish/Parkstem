@@ -30,10 +30,7 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
 
         Intent intent = getIntent();
 
-        //SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.KOREA);
-
-        ServerClient serverClient = ServerClient.getInstance();
-        ServerClient.Ticket ticket = serverClient.new Ticket();
+        ServerClient.Ticket ticket = ServerClient.getInstance().new Ticket();
 
         ticket.gubun = intent.getIntExtra("gubun", -1);
         ticket.local_id = intent.getStringExtra("local_id");
@@ -42,7 +39,9 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
         ticket.price = intent.getStringExtra("price");
         ticket.term_name = intent.getStringExtra("term_name");
         ticket.ticket_name = intent.getStringExtra("t_n");
-        // calendar 함수는 안받아옴. 후일에 혹여 필요해질 시,받아오는 것으로
+        ticket.term.setTimeInMillis(intent.getLongExtra("term",-1));
+        ticket.regdate.setTimeInMillis(intent.getLongExtra("regdate",-1));
+
 
         LinearLayout content = (LinearLayout) findViewById(R.id.activity_manage_purchase_ticket);
         RelativeLayout image = (RelativeLayout) findViewById(R.id.activity_manage_purchase_image);
