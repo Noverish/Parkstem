@@ -39,24 +39,36 @@ public class TicketPurchaseListActivity extends BaseBackSearchActivity {
             list = ServerClient.getInstance().listOfTicket();
             longlist = ServerClient.getInstance().listOfLongTicket();
 
+
+
             for(ServerClient.TicketPurchase ticketPurchase : ticketPurchaseList.data){
                 /*
                 만료일이 지났는지 확인하는 부분
                 if(!ca.after(ticketPurchase.end_date))
                     continue;
                 */
+
+                Log.e("now TicketPurchase",ticketPurchase.toString());
+
                 if(ticketPurchase.gubun==1){
-                    for(ServerClient.Ticket ticket: list.data)
-                        if(ticket.local_id == ticketPurchase.local_id){
+                    for(ServerClient.Ticket ticket: list.data) {
+
+                        Log.e("now ticket", ticket.toString());
+
+                        if (ticket.idx == ticketPurchase.idx) {
+                            Log.e("asdf", "asdf");
+
                             TicketUsedView ticketUsedView = new TicketUsedView(this, ticket, ticketPurchase);
                             content.addView(ticketUsedView);
                             break;
                         }
+                    }
                 }
 
                 else if(ticketPurchase.gubun==2){
                     for(ServerClient.Ticket ticket: longlist.data)
-                        if(ticket.local_id == ticketPurchase.local_id){
+                        if(ticket.idx == ticketPurchase.idx){
+                            Log.e("asdf","fdsa");
                             LongTicketUsedView longTicketUsedView = new LongTicketUsedView(this, ticket, ticketPurchase);
                             content.addView(longTicketUsedView);
                             break;

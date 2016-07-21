@@ -443,7 +443,7 @@ public class ServerClient {
                 recentcar.local_id = result.getString("local_id");
                 recentcar.in_date = Essentials.stringToCalendar(result.getString("in_date"));
                 recentcar.out_date = Essentials.stringToCalendar(result.getString("out_date"));
-                recentcar.total = result.getInt("total");
+                recentcar.total = result.getString("total");
                 return recentcar;
             }
             else{
@@ -1523,7 +1523,7 @@ public class ServerClient {
         public String local_id;
         public Calendar in_date;
         public Calendar out_date;
-        public int total;
+        public String total;
     }
 
     public class ParkInfo{
@@ -1614,6 +1614,22 @@ public class ServerClient {
         public Calendar pay_date;
         public String ticket_name;
         public int ticket_idx;
+
+        @Override
+        public String toString() {
+            return "TicketPurchase{" +
+                    "idx=" + idx +
+                    ", gubun=" + gubun +
+                    ", local_id='" + local_id + '\'' +
+                    ", card_name='" + card_name + '\'' +
+                    ", price='" + price + '\'' +
+                    ", start_date=" + start_date +
+                    ", end_date=" + end_date +
+                    ", pay_date=" + pay_date +
+                    ", ticket_name='" + ticket_name + '\'' +
+                    ", ticket_idx=" + ticket_idx +
+                    '}';
+        }
     }
 
     public class TicketLists{
@@ -1641,6 +1657,26 @@ public class ServerClient {
         public Calendar end_date;
         public Calendar regdate;
         public int allow;
+
+        @Override
+        public String toString() {
+            return "Ticket{" +
+                    "idx=" + idx +
+                    ", local_id='" + local_id + '\'' +
+                    ", ticket_name='" + ticket_name + '\'' +
+                    ", region='" + region + '\'' +
+                    ", term=" + term +
+                    ", term_name='" + term_name + '\'' +
+                    ", available_time=" + available_time +
+                    ", gubun=" + gubun +
+                    ", original_price='" + original_price + '\'' +
+                    ", price='" + price + '\'' +
+                    ", start_date=" + start_date +
+                    ", end_date=" + end_date +
+                    ", regdate=" + regdate +
+                    ", allow=" + allow +
+                    '}';
+        }
     }
 
     public class LongTicketLists{

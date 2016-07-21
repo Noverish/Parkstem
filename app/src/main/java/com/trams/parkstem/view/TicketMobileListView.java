@@ -4,9 +4,7 @@ import android.content.Context;
 import android.graphics.Paint;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -57,11 +55,11 @@ public class TicketMobileListView extends LinearLayout {
             name.setText(date);
 
             name = (TextView) findViewById(R.id.ticket_mobile_item_before_price);
-            name.setText("1시간 " + (char)0xffe6 + Essentials.numberWithComma(ticket.original_price) );
+            name.setText("1시간 " + Essentials.WON_SYMBOL + Essentials.numberWithComma(ticket.original_price) );
             name.setPaintFlags(name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
             name = (TextView) findViewById(R.id.ticket_mobile_item_after_price);
-            name.setText("1시간 " + (char)0xffe6 + Essentials.numberWithComma(ticket.price) );
+            name.setText("1시간 " + Essentials.WON_SYMBOL + Essentials.numberWithComma(ticket.price) );
 
             ca.add(Calendar.DAY_OF_MONTH, 99);
 

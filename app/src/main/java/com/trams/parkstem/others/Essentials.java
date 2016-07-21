@@ -16,6 +16,7 @@ import java.util.Calendar;
  * Created by JaeHyo on 2016-07-13.
  */
 public class Essentials {
+    public static final String WON_SYMBOL = (char) 0xffe6 + "";
 
     public static String numberWithComma(int number) {
         return numberWithComma(String.valueOf(number));
@@ -96,9 +97,15 @@ public class Essentials {
             return calendar;
         } else {
             Log.e("ERROR","stringToCalendar Error - datas.lenght is " + dates.length + " [" + date + "]");
-            calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(0);
-            return calendar;
+            return null;
         }
+    }
+
+    public static String calendarToTime(Calendar calendar) {
+        String amPm = (calendar.get(Calendar.AM_PM) == Calendar.AM) ? "AM" : "PM";
+        String hour = calendar.get(Calendar.HOUR_OF_DAY) + "";
+        String min = calendar.get(Calendar.MINUTE) + "";
+
+        return hour + ":" + numberWithZero(min) + amPm;
     }
 }

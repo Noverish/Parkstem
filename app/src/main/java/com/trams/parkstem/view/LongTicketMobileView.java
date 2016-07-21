@@ -78,11 +78,11 @@ public class LongTicketMobileView extends LinearLayout {
             name.setText(date);
 
             name = (TextView) findViewById(R.id.long_ticket_mobile_item_before_price);
-            name.setText("1달 " + (char)0xffe6 + Essentials.numberWithComma(ticket.original_price) );
+            name.setText("1달 " + Essentials.WON_SYMBOL + Essentials.numberWithComma(ticket.original_price) );
             name.setPaintFlags(name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
             name = (TextView) findViewById(R.id.long_ticket_mobile_item_after_price);
-            name.setText("1달 " + (char)0xffe6 + Essentials.numberWithComma(ticket.price) );
+            name.setText("1달 " + Essentials.WON_SYMBOL + Essentials.numberWithComma(ticket.price) );
 
             ca.add(Calendar.DAY_OF_MONTH, 30);
 

@@ -21,7 +21,6 @@ import com.trams.parkstem.activity.ManagePurchaseActivity;
 import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.server.ServerClient;
 
-import java.io.Serializable;
 import java.util.Calendar;
 
 /**
@@ -99,11 +98,11 @@ public class TicketMobileView extends LinearLayout {
             refreshDate();
 
             name = (TextView) findViewById(R.id.ticket_mobile_item_before_price);
-            name.setText("1시간 " + (char) 0xffe6 + Essentials.numberWithComma(ticket.original_price));
+            name.setText("1시간 " + Essentials.WON_SYMBOL + Essentials.numberWithComma(ticket.original_price));
             name.setPaintFlags(name.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
 
             name = (TextView) findViewById(R.id.ticket_mobile_item_after_price);
-            name.setText("1시간 " + (char) 0xffe6 + Essentials.numberWithComma(ticket.price));
+            name.setText("1시간 " + Essentials.WON_SYMBOL + Essentials.numberWithComma(ticket.price));
 
             final ServerClient.Ticket putticket = ticket;
             purchaseButton = (RelativeLayout) findViewById(R.id.ticket_mobile_item_purchase_button);

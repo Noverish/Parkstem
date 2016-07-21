@@ -29,6 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:id="@+id/activity_park_state_park_name"
                     android:textColor="@color/BLACK"
                     android:textSize="26sp"
                     android:text="A 주차장"
@@ -36,6 +37,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/activity_park_state_park_address"
                     android:textColor="@color/BLACK"
                     android:textSize="15sp"
                     android:text="서울 강남구 역삼동 701-1"
@@ -45,14 +47,14 @@
                 <TextView
                     android:textColor="@color/BLACK"
                     android:textSize="22sp"
-                    android:text="기본 30분 W3,000"
+                    android:text="기본 30분 &#x20a9;3,000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
                 <TextView
                     android:textColor="@color/BLACK"
                     android:textSize="22sp"
-                    android:text="추가 10분 W1,000"
+                    android:text="추가 10분 &#x20a9;1,000"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -64,6 +66,7 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp">
                 <TextView
+                    android:id="@+id/activity_park_state_park_price_time"
                     android:layout_marginTop="20dp"
                     android:textSize="21sp"
                     android:textColor="@color/WHITE"
@@ -122,6 +125,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/activity_park_state_car_in_time"
             android:layout_alignParentRight="true"
             android:layout_gravity="center_vertical|right"
             android:textSize="23sp"
@@ -151,6 +155,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/activity_park_state_car_out_time"
             android:layout_alignParentRight="true"
             android:layout_gravity="center_vertical|right"
             android:textSize="23sp"
@@ -190,6 +195,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/activity_park_state_total_amount"
             android:layout_alignParentRight="true"
             android:layout_gravity="center_vertical|right"
             android:textSize="23sp"

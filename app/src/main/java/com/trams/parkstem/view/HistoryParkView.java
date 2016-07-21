@@ -26,7 +26,7 @@ public class HistoryParkView extends LinearLayout {
 
         name = (TextView) findViewById(R.id.history_park_item_price);
 
-        name.setText((char)0xffe6 + Essentials.numberWithComma(parkHistory.price));
+        name.setText(Essentials.WON_SYMBOL + Essentials.numberWithComma(parkHistory.price));
 
         name = (TextView) findViewById(R.id.history_park_item_date);
         Calendar ca = parkHistory.pay_date;

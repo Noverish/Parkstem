@@ -2,9 +2,9 @@ package com.trams.parkstem.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,7 +112,7 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
                 cardname.setTextColor(ContextCompat.getColor(this, R.color.gray_for_text));
                 cardEditButton.setText("변경");
             }
-
+            
             carEditButton.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
