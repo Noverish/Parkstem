@@ -9,8 +9,8 @@ import android.widget.LinearLayout;
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.server.ServerClient;
-import com.trams.parkstem.view.LongTicketPurchaseView;
-import com.trams.parkstem.view.TicketPurchaseView;
+import com.trams.parkstem.view.LongTicketUsedView;
+import com.trams.parkstem.view.TicketUsedView;
 
 import java.util.Calendar;
 
@@ -29,36 +29,36 @@ public class TicketPurchaseListActivity extends BaseBackSearchActivity {
 
         LinearLayout content = (LinearLayout) findViewById(R.id.activity_ticket_purchase_list_layout);
 
-        ServerClient.PaymentInfo paymentInfo;
+        ServerClient.TicketPurchaseList ticketPurchaseList;
         ServerClient.TicketLists list;
         ServerClient.LongTicketLists longlist;
         Calendar ca= Calendar.getInstance();
 
         try {
-            paymentInfo = ServerClient.getInstance().ticketpurchase();
+            ticketPurchaseList = ServerClient.getInstance().ticketPurchase();
             list = ServerClient.getInstance().listOfTicket();
             longlist = ServerClient.getInstance().listOfLongTicket();
 
-            for(ServerClient.TicketBuyList ticketBuyList: paymentInfo.data){
+            for(ServerClient.TicketPurchase ticketPurchase : ticketPurchaseList.data){
                 /*
                 만료일이 지났는지 확인하는 부분
-                if(!ca.after(ticketBuyList.end_date))
+                if(!ca.after(ticketPurchase.end_date))
                     continue;
                 */
-                if(ticketBuyList.gubun==1){
+                if(ticketPurchase.gubun==1){
                     for(ServerClient.Ticket ticket: list.data)
-                        if(ticket.local_id == ticketBuyList.local_id){
-                            TicketPurchaseView ticketPurchaseView = new TicketPurchaseView(this, ticket, ticketBuyList);
-                            content.addView(ticketPurchaseView);
+                        if(ticket.local_id == ticketPurchase.local_id){
+                            TicketUsedView ticketUsedView = new TicketUsedView(this, ticket, ticketPurchase);
+                            content.addView(ticketUsedView);
                             break;
                         }
                 }
 
-                else if(ticketBuyList.gubun==2){
+                else if(ticketPurchase.gubun==2){
                     for(ServerClient.Ticket ticket: longlist.data)
-                        if(ticket.local_id == ticketBuyList.local_id){
-                            LongTicketPurchaseView longTicketPurchaseView = new LongTicketPurchaseView(this, ticket, ticketBuyList);
-                            content.addView(longTicketPurchaseView);
+                        if(ticket.local_id == ticketPurchase.local_id){
+                            LongTicketUsedView longTicketUsedView = new LongTicketUsedView(this, ticket, ticketPurchase);
+                            content.addView(longTicketUsedView);
                             break;
                         }
                 }

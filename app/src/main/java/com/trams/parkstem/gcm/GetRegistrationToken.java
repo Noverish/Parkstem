@@ -73,7 +73,6 @@ public class GetRegistrationToken extends Thread {
                         PLAY_SERVICES_RESOLUTION_REQUEST).show();
                 exception = new GetTokenErrorException("Google Play Service를 사용 할 수 없습니다. - ResultCode : " + resultCode);
             } else {
-                Log.e("asdf", "This device is not supported.");
                 exception = new GetTokenErrorException("Google Play Service를 사용 할 수 없습니다. - 지원하지 않는 기기 입니다.");
             }
             return false;

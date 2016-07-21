@@ -17,7 +17,6 @@ import com.trams.parkstem.custom_view.LocationChangeableListView;
 import com.trams.parkstem.server.ServerClient;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Noverish on 2016-07-04.
@@ -55,13 +54,11 @@ public class InputCardActivity extends BaseBackSearchActivity {
         });
         listView.setOnItemRemovedListener(new LocationChangeableListView.OnItemRemovedListener() {
             @Override
-            public void onItemRemoved(List<Pair<Long, String>> removeItemList) {
-                for(Pair<Long, String> item : removeItemList) {
-                    try {
-                        serverClient.cardDelete(item.first + "");
-                    } catch (ServerClient.ServerErrorException ex) {
-                        Toast.makeText(InputCardActivity.this, ex.msg, Toast.LENGTH_SHORT).show();
-                    }
+            public void onItemRemoved(Pair<Long, String> removeItemList) {
+                try {
+                    serverClient.cardDelete(removeItemList.first + "");
+                } catch (ServerClient.ServerErrorException ex) {
+                    Toast.makeText(InputCardActivity.this, ex.msg, Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -37,9 +37,6 @@ public class LongTicketMobileManageView extends LinearLayout {
             viewOn=false;
             ticketView = (RelativeLayout) findViewById(R.id.long_ticket_mobile_item_view);
 
-            Log.e("fdsa","Fdsa");
-            Log.e("asdf",(ticketView == null) + "");
-
             ticketView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {

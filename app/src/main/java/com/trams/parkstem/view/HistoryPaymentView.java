@@ -16,27 +16,27 @@ import java.util.Calendar;
  * Created by JaeHyo on 2016-07-13.
  */
 public class HistoryPaymentView extends LinearLayout {
-    public HistoryPaymentView (Context context, ServerClient.Payment payment) {
+    public HistoryPaymentView (Context context, ServerClient.ParkHistory parkHistory) {
         super(context);
 
         LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.history_payment_item, this);
 
         TextView name = (TextView) findViewById(R.id.history_payment_item_bank);
-        name.setText(payment.card_name);
+        name.setText(parkHistory.card_name);
 
         name = (TextView) findViewById(R.id.history_payment_item_price);
 
-        name.setText((char)0xffe6 + Essentials.numberWithComma(payment.price));
+        name.setText((char)0xffe6 + Essentials.numberWithComma(parkHistory.price));
 
         name = (TextView) findViewById(R.id.history_payment_item_date);
-        Calendar ca = payment.pay_date;
+        Calendar ca = parkHistory.pay_date;
 
 
-        Log.e("TAG", payment.card_name + " " + payment.pay_date.toString());
+        Log.e("TAG", parkHistory.card_name + " " + parkHistory.pay_date.toString());
 
 
-        String date =(int)(payment.pay_date.get(Calendar.MONTH)+1) + "." +payment.pay_date.get(Calendar.DAY_OF_MONTH);
+        String date =(int)(parkHistory.pay_date.get(Calendar.MONTH)+1) + "." + parkHistory.pay_date.get(Calendar.DAY_OF_MONTH);
         name.setText(date);
 
         name = (TextView) findViewById(R.id.history_payment_item_time);

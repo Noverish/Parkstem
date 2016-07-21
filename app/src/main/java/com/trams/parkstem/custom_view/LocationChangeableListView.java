@@ -287,12 +287,13 @@ public class LocationChangeableListView extends LinearLayout {
 
         public void removeSelectedItems() {
             List<Pair<Long, String>> list = getItemList();
-            if(onItemRemovedListener != null)
-                onItemRemovedListener.onItemRemoved(list);
+
             for(int i = 0;i<list.size();i++) {
                 if(selectedItemList.contains(list.get(i).second)) {
-                    removeItem(i);
-                    i--;
+                    if(onItemRemovedListener != null)
+                        onItemRemovedListener.onItemRemoved(list.get(i));
+
+                    removeItem(i--);
                 }
             }
             notifyDataSetChanged();
@@ -334,7 +335,7 @@ public class LocationChangeableListView extends LinearLayout {
     }
 
     public interface OnItemRemovedListener {
-        void onItemRemoved(List<Pair<Long, String>> removeItemList);
+        void onItemRemoved(Pair<Long, String> removeItemList);
     }
 }
 

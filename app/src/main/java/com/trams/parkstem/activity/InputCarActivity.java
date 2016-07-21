@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -21,7 +22,6 @@ import com.trams.parkstem.custom_view.LocationChangeableListView;
 import com.trams.parkstem.server.ServerClient;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Noverish on 2016-07-04.
@@ -57,13 +57,12 @@ public class InputCarActivity extends BaseBackSearchActivity {
         });
         listView.setOnItemRemovedListener(new LocationChangeableListView.OnItemRemovedListener() {
             @Override
-            public void onItemRemoved(List<Pair<Long, String>> removeItemList) {
-                for(Pair<Long, String> item : removeItemList) {
-                    try {
-                        serverClient.deleteCar(item.second);
-                    } catch (ServerClient.ServerErrorException ex) {
-                        Toast.makeText(InputCarActivity.this, ex.msg, Toast.LENGTH_SHORT).show();
-                    }
+            public void onItemRemoved(Pair<Long, String> removeItem) {
+                try {
+                    Log.e("deleteCar","item : " + removeItem.first + ", " + removeItem.second);
+                    serverClient.deleteCar(removeItem.second);
+                } catch (ServerClient.ServerErrorException ex) {
+                    Toast.makeText(InputCarActivity.this, ex.msg, Toast.LENGTH_SHORT).show();
                 }
             }
         });

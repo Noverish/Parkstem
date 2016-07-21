@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -15,13 +14,7 @@ import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.server.ServerClient;
 import com.trams.parkstem.view.LongTicketMobileManageView;
-import com.trams.parkstem.view.LongTicketMobileView;
 import com.trams.parkstem.view.TicketMobileManageView;
-import com.trams.parkstem.view.TicketMobileView;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 
 /**
  * Created by Noverish on 2016-07-18.
@@ -36,14 +29,14 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
 
         //SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.KOREA);
 
-        ServerClient serverClient = new ServerClient();
+        ServerClient serverClient = ServerClient.getInstance();
         ServerClient.Ticket ticket = serverClient.new Ticket();
 
         ticket.gubun = intent.getIntExtra("gubun", -1);
         ticket.local_id = intent.getStringExtra("local_id");
         ticket.idx = intent.getIntExtra("idx", -1);
-        ticket.original_price = intent.getIntExtra("original_price", -1);
-        ticket.price = intent.getIntExtra("price", -1);
+        ticket.original_price = intent.getStringExtra("original_price");
+        ticket.price = intent.getStringExtra("price");
         ticket.term_name = intent.getStringExtra("term_name");
         ticket.ticket_name = intent.getStringExtra("t_n");
         // calendar 함수는 안받아옴. 후일에 혹여 필요해질 시,받아오는 것으로

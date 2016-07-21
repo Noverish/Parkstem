@@ -16,8 +16,8 @@ import java.util.Calendar;
 /**
  * Created by JaeHyo on 2016-07-13.
  */
-public class LongTicketPurchaseView extends LinearLayout {
-    public LongTicketPurchaseView(Context context, ServerClient.Ticket ticket, ServerClient.TicketBuyList ticketBuyList) {
+public class LongTicketUsedView extends LinearLayout {
+    public LongTicketUsedView(Context context, ServerClient.Ticket ticket, ServerClient.TicketPurchase ticketPurchase) {
         super(context);
 
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -36,7 +36,7 @@ public class LongTicketPurchaseView extends LinearLayout {
             name = (TextView) findViewById(R.id.long_ticket_purchase_item_place_2);
             name.setText(parkInfo.local_address);
 
-            Calendar ca = ticketBuyList.start_date;
+            Calendar ca = ticketPurchase.start_date;
             String date = ca.get(Calendar.YEAR) + ".";
 
             date += Essentials.numberWithZero(ca.get(Calendar.MONTH) + 1) + ".";
@@ -53,7 +53,7 @@ public class LongTicketPurchaseView extends LinearLayout {
             name = (TextView) findViewById(R.id.long_ticket_purchase_item_after_price);
             name.setText("1달 " + (char)0xffe6 + Essentials.numberWithComma(ticket.price) );
 
-            ca = ticketBuyList.end_date;
+            ca = ticketPurchase.end_date;
 
             date = "- " + ca.get(Calendar.YEAR) + ".";
 

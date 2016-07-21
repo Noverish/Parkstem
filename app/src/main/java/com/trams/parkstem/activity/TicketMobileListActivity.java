@@ -65,7 +65,7 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
                     public void run() {
                         swipeLayout.setRefreshing(false);
                     }
-                }, 3000);
+                }, 10000);
             }
         });
 
