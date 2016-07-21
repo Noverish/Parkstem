@@ -13,11 +13,15 @@ import com.trams.parkstem.server.ServerClient;
 import com.trams.parkstem.view.LongTicketMobileListView;
 import com.trams.parkstem.view.TicketMobileListView;
 
+import java.util.ArrayList;
+
 /**
  * Created by JaeHyo on 2016-07-06.
  */
 public class TicketMobileListActivity extends BaseBackSearchActivity {
     private SwipeRefreshLayout swipeLayout;
+    private ArrayList<TicketMobileListView> ticketMobileListViews = new ArrayList<>();
+    private ArrayList<LongTicketMobileListView> longTicketMobileListViews = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,17 +30,37 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
         setSearchEnable(true);
         setToolbarTitle("모바일 주차권");
 
+        reloadData();
+
+        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.activity_ticket_mobile_refresh_layout);
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeLayout.setRefreshing(true);
+                reloadData();
+                swipeLayout.setRefreshing(false);
+            }
+        });
+
+    }
+
+    private void reloadData() {
         LinearLayout content = (LinearLayout) findViewById(R.id.activity_ticket_mobile_list_layout);
+        content.removeAllViews();
+        ticketMobileListViews.clear();
+        longTicketMobileListViews.clear();
+
+        Log.e("reload","reload");
 
         ServerClient.TicketLists list;
         ServerClient.LongTicketLists longlist;
-
 
         try {
             list = ServerClient.getInstance().listOfTicket();
 
             for(ServerClient.Ticket ticket: list.data){
                 TicketMobileListView ticketMobileListView = new TicketMobileListView(this, ticket);
+                ticketMobileListViews.add(ticketMobileListView);
                 TextView buttonname = (TextView)ticketMobileListView.findViewById(R.id.ticket_mobile_item_button_name);
                 buttonname.setText("사용가능");
                 content.addView(ticketMobileListView);
@@ -46,6 +70,7 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
 
             for(ServerClient.Ticket ticket: longlist.data){
                 LongTicketMobileListView longTicketMobileListView = new LongTicketMobileListView(this, ticket);
+                longTicketMobileListViews.add(longTicketMobileListView);
                 TextView buttonname = (TextView)longTicketMobileListView.findViewById(R.id.long_ticket_mobile_item_button_name);
                 buttonname.setText("사용가능");
                 content.addView(longTicketMobileListView);
@@ -53,21 +78,42 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
         } catch (ServerClient.ServerErrorException ex) {
             Log.e("error!",ex.msg);
         }
+    }
 
-        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.activity_ticket_mobile_refresh_layout);
-        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                swipeLayout.setRefreshing(true);
-                Log.e("Swipe", "Refreshing Number");
-                ( new android.os.Handler()).postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        swipeLayout.setRefreshing(false);
-                    }
-                }, 10000);
+
+
+    private void showSearchResult(String str) {
+        LinearLayout content = (LinearLayout) findViewById(R.id.activity_ticket_mobile_list_layout);
+        content.removeAllViews();
+
+        for(TicketMobileListView listView : ticketMobileListViews) {
+            if(listView.getTicketName().contains(str)) {
+                content.addView(listView);
             }
-        });
+        }
 
+        for(LongTicketMobileListView listView : longTicketMobileListViews) {
+            if(listView.getTicketName().contains(str)) {
+                content.addView(listView);
+            }
+        }
+    }
+
+    @Override
+    public boolean onClose() {
+        reloadData();
+        return super.onClose();
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+
+        return super.onQueryTextSubmit(query);
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        showSearchResult(newText);
+        return super.onQueryTextChange(newText);
     }
 }
