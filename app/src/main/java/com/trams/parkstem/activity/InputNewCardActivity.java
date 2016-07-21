@@ -1,6 +1,7 @@
 package com.trams.parkstem.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,7 +11,6 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,6 +21,11 @@ import android.widget.TextView;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
+import com.trams.parkstem.clause.Clause1;
+import com.trams.parkstem.clause.Clause2;
+import com.trams.parkstem.clause.Clause3;
+import com.trams.parkstem.clause.Clause4;
+import com.trams.parkstem.clause.Clause5;
 import com.trams.parkstem.server.ServerClient;
 
 import java.util.Calendar;
@@ -77,85 +82,41 @@ public class InputNewCardActivity extends BaseBackSearchActivity {
         clause1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setClause1();
+                Intent intent = new Intent(InputNewCardActivity.this , Clause1.class);
+                startActivity(intent);
             }
         });
         clause2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setClause2();
+                Intent intent = new Intent(InputNewCardActivity.this , Clause2.class);
+                startActivity(intent);
             }
         });
         clause3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setClause3();
+                Intent intent = new Intent(InputNewCardActivity.this , Clause3.class);
+                startActivity(intent);
             }
         });
         clause4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setClause4();
+                Intent intent = new Intent(InputNewCardActivity.this , Clause4.class);
+                startActivity(intent);
             }
         });
         clause5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setClause5();
+                Intent intent = new Intent(InputNewCardActivity.this , Clause5.class);
+                startActivity(intent);
             }
         });
     }
 
-    public void setClause1(){
-        try{
-            WebView webView = new WebView(context);
-            setContentView(webView);
-            clause = serverClient.clause("1");
-            webView.loadData(clause, "text/html; charset=UTF-8", null);
-        } catch(ServerClient.ServerErrorException ex){
-            ex.printStackTrace();
-        }
-    }
-    public void setClause2(){
-        try{
-            WebView webView = new WebView(context);
-            setContentView(webView);
-            clause = serverClient.clause("2");
-            webView.loadData(clause, "text/html; charset=UTF-8", null);
-        } catch(ServerClient.ServerErrorException ex){
-            ex.printStackTrace();
-        }
-    }
-    public void setClause3(){
-        try{
-            WebView webView = new WebView(context);
-            setContentView(webView);
-            clause = serverClient.clause("3");
-            webView.loadData(clause, "text/html; charset=UTF-8", null);
-        } catch(ServerClient.ServerErrorException ex){
-            ex.printStackTrace();
-        }
-    }
-    public void setClause4(){
-        try{
-            WebView webView = new WebView(context);
-            setContentView(webView);
-            clause = serverClient.clause("4");
-            webView.loadData(clause, "text/html; charset=UTF-8", null);
-        } catch(ServerClient.ServerErrorException ex){
-            ex.printStackTrace();
-        }
-    }
-    public void setClause5(){
-        try{
-            WebView webView = new WebView(context);
-            setContentView(webView);
-            clause = serverClient.clause("5");
-            webView.loadData(clause, "text/html; charset=UTF-8", null);
-        } catch(ServerClient.ServerErrorException ex){
-            ex.printStackTrace();
-        }
-    }
+
 
     private void radioButtonOnClick(LinearLayout view) {
         ImageView companyImage = (ImageView) findViewById(R.id.activity_input_new_card_radio_company_image);

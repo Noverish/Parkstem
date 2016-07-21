@@ -198,7 +198,7 @@ public class ServerClient  {
         }
     }
 
-    public void register(final String name, final String email, final String mobile, final String nickName, final String parkstemID, final String parkstemPW) throws ServerErrorException{
+    public void register(final String name, final String email, final String mobile, final String nickName, final String parkstemID, final String parkstemPW, final String token) throws ServerErrorException{
         String msg;
         final String JOIN_URL = "http://app.parkstem.com/api/member_join.php";
         Thread thread = new Thread(new Runnable() {
@@ -217,6 +217,7 @@ public class ServerClient  {
                 hashMap.put("nickName", nickName);
                 hashMap.put("parkstemID", parkstemID);
                 hashMap.put("parkstemPW", parkstemPW);
+                hashMap.put("token", token);
                 hashMap.put("regDate", strCurDate);
                 result = connect(hashMap, JOIN_URL);
             }
