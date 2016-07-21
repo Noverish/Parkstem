@@ -167,7 +167,7 @@ public class ServerClient  {
 
         try {
             msg = result.getString("msg");
-            if(result.getInt("res")!=0){
+            if(result.getInt("res") != 0){
                 Log.d("ServerClient",msg);
                 uniqueID = result.getString("uniqueID");
 
@@ -176,20 +176,20 @@ public class ServerClient  {
                 login.phone = result.getString("phone");
                 String push = result.getString("pushYN");
                 String cert = result.getString("certification");
-                if(push =="Y"){
+                if(push =="Y") {
                     login.pushYN = true;
-                }
-                else{
+                } else {
                     login.pushYN = false;
                 }
-                if(cert =="Y"){
+
+                if(cert =="Y") {
                     login.certification = true;
-                }
-                else{
+                } else {
                     login.certification = false;
                 }
             }
-            else{
+            else
+            {
                 throw new ServerErrorException(result.getInt("res"), msg);
             }
         } catch (JSONException ex) {

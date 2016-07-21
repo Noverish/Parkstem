@@ -63,14 +63,24 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     ServerClient.getInstance().login(email, "", gcmDeviceToken);
 
-                    loginDatabase.setData(email);
 
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                    finish();
+
+
                 } catch (ServerClient.ServerErrorException ex) {
                     Toast.makeText(LoginActivity.this, ex.msg, Toast.LENGTH_SHORT).show();
                 }
+
+                loginDatabase.setData(email);
+
+                if(ServerClient.getInstance().login.certification) {
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(LoginActivity.this, FirstScreenActivity.class);
+                    startActivity(intent);
+                }
+
+                finish();
             }
         });
 
@@ -81,14 +91,22 @@ public class LoginActivity extends AppCompatActivity {
                 try {
                     ServerClient.getInstance().login(email, "", gcmDeviceToken);
 
-                    loginDatabase.setData(email);
 
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                    finish();
                 } catch (ServerClient.ServerErrorException ex) {
                     Toast.makeText(LoginActivity.this, ex.msg, Toast.LENGTH_SHORT).show();
                 }
+
+                loginDatabase.setData(email);
+
+                if(ServerClient.getInstance().login.certification) {
+                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(LoginActivity.this, FirstScreenActivity.class);
+                    startActivity(intent);
+                }
+
+                finish();
             }
         });
 
