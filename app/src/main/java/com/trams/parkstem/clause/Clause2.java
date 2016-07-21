@@ -9,7 +9,7 @@ import com.trams.parkstem.server.ServerClient;
 /**
  * Created by monc2 on 2016-07-21.
  */
-public class asdf2 extends AppCompatActivity{
+public class Clause2 extends AppCompatActivity{
     WebView webview = new WebView(this);
     ServerClient serverClient = new ServerClient();
     String clause;
