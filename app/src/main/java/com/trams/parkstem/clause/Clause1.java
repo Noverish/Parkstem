@@ -9,7 +9,7 @@ import com.trams.parkstem.server.ServerClient;
 /**
  * Created by monc2 on 2016-07-21.
  */
-public class Clause1 extends AppCompatActivity {
+public class Clause1 extends AppCompatActivity{
     WebView webview = new WebView(this);
     ServerClient serverClient = new ServerClient();
     String clause;
@@ -21,7 +21,7 @@ public class Clause1 extends AppCompatActivity {
 
         try {
             setContentView(webview);
-            clause = serverClient.clause("1");
+            clause = serverClient.clause("2");
             webview.loadData(clause, "text/html; charset=UTF-8", null);
         } catch (ServerClient.ServerErrorException ex) {
             ex.printStackTrace();
