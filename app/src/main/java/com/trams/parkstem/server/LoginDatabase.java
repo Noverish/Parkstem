@@ -33,8 +33,10 @@ public class LoginDatabase {
         this.context = context;
 
         database = readFromInternalStorage();
-        if(database == null)
-            database = new HashMap<>();
+
+        for(String key : database.keySet()) {
+            Log.e("database","key : " + key + ", value : " + database.get(key));
+        }
     }
 
 
@@ -96,10 +98,17 @@ public class LoginDatabase {
         } catch (Exception e) {
             Log.e("InternalStorage", e.getMessage());
         }
+
+        if(toReturn == null) {
+            Log.e("database","empty database");
+            toReturn = new HashMap<>();
+        }
+
         return toReturn;
     }
 
     public void clearDatabase() {
         context.deleteFile(DATABASE_FILE_NAME);
+        database = readFromInternalStorage();
     }
 }

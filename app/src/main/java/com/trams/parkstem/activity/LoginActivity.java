@@ -45,14 +45,16 @@ public class LoginActivity extends AppCompatActivity {
         if(!loginDatabase.isDatabaseClear()) {
             try {
                 ServerClient.getInstance().login(loginDatabase.getId(), loginDatabase.getPw(), gcmDeviceToken);
-                Toast.makeText(this, "자동 로그인 되었습니다!", Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(this, HomeActivity.class);
-                startActivity(intent);
-                finish();
             } catch (ServerClient.ServerErrorException ex) {
                 Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
             }
+
+            Toast.makeText(this, "자동 로그인 되었습니다!", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         naverLoginClient = NaverLoginClient.getInstance(LoginActivity.this);

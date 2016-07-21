@@ -17,6 +17,7 @@ import com.trams.parkstem.base_activity.BaseNavigationActivity;
 import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.others.FacebookLoginClient;
 import com.trams.parkstem.others.NaverLoginClient;
+import com.trams.parkstem.server.LoginDatabase;
 import com.trams.parkstem.server.ServerClient;
 
 /**
@@ -105,6 +106,8 @@ public class SettingActivity extends BaseBackSearchActivity {
 
         facebookLoginClient.logout();
         naverLoginClient.logout(this);
+
+        LoginDatabase.getInstance(this).clearDatabase();
 
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
