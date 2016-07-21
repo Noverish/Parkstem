@@ -146,9 +146,18 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:id="@+id/activity_home_park_list"
+                android:background="@drawable/btn_3"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                android:id="@+id/activity_home_park_list_1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="58dp"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/activity_home_park_list_2"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"/>
 
         </LinearLayout>
     </ScrollView>

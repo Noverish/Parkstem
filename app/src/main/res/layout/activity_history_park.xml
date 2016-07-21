@@ -21,6 +21,7 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/activity_history_park_content_layout"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

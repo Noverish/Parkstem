@@ -5,51 +5,13 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-
-            <RelativeLayout
-                android:background="@drawable/btn_2"
-                android:layout_width="match_parent"
-                android:layout_height="32dp">
-
-                <TextView
-                    android:id="@+id/input_car_skip"
-                    android:layout_centerInParent="true"
-                    android:textColor="@color/WHITE"
-                    android:textSize="22sp"
-                    android:text="SKIP"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <RelativeLayout
-                    android:layout_marginLeft="2dp"
-                    android:background="@drawable/btn_skip"
-                    android:layout_toRightOf="@id/input_car_skip"
-                    android:layout_centerVertical="true"
-                    android:layout_width="11dp"
-                    android:layout_height="16dp"/>
-            </RelativeLayout>
-        </LinearLayout>
-        <ImageView
-            android:id="@+id/activity_input_car_gray1"
-            android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:visibility="invisible"
-            android:background="@color/semi_transparent_gray"/>
-    </RelativeLayout>
 
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <FrameLayout
+            android:paddingTop="32dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout

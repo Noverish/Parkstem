@@ -140,10 +140,8 @@ public class InputCarActivity extends BaseBackSearchActivity {
     private void setEditStatus() {
         inEditStatus = true;
 
-        ImageView gray1 = (ImageView) findViewById(R.id.activity_input_car_gray1);
         ImageView gray2 = (ImageView) findViewById(R.id.activity_input_car_gray2);
         ImageView gray3 = (ImageView) findViewById(R.id.activity_input_car_gray3);
-        gray1.setVisibility(View.VISIBLE);
         gray2.setVisibility(View.VISIBLE);
         gray3.setVisibility(View.VISIBLE);
 
@@ -157,10 +155,8 @@ public class InputCarActivity extends BaseBackSearchActivity {
     private void setNotEditStatus() {
         inEditStatus = false;
 
-        ImageView gray1 = (ImageView) findViewById(R.id.activity_input_car_gray1);
         ImageView gray2 = (ImageView) findViewById(R.id.activity_input_car_gray2);
         ImageView gray3 = (ImageView) findViewById(R.id.activity_input_car_gray3);
-        gray1.setVisibility(View.INVISIBLE);
         gray2.setVisibility(View.INVISIBLE);
         gray3.setVisibility(View.INVISIBLE);
 

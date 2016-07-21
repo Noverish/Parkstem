@@ -21,20 +21,19 @@ public class HistoryParkView extends LinearLayout {
         LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.history_park_item, this);
 
-        TextView name = (TextView) findViewById(R.id.history_park_item_time);
-        name.setText(parkHistory.card_name);
+        TextView name = (TextView) findViewById(R.id.history_park_item_name);
+        name.setText(parkHistory.local_name);
 
         name = (TextView) findViewById(R.id.history_park_item_price);
-
         name.setText(Essentials.WON_SYMBOL + Essentials.numberWithComma(parkHistory.price));
 
         name = (TextView) findViewById(R.id.history_park_item_date);
-        Calendar ca = parkHistory.pay_date;
+        Calendar ca = parkHistory.out_date;
 
-        String date =(int)(parkHistory.pay_date.get(Calendar.MONTH)+1) + "." + parkHistory.pay_date.get(Calendar.DAY_OF_MONTH);
+        String date =(int)(parkHistory.out_date.get(Calendar.MONTH)+1) + "." + parkHistory.out_date.get(Calendar.DAY_OF_MONTH);
         name.setText(date);
 
         name = (TextView) findViewById(R.id.history_payment_item_time);
-        // hours and minutes sb to input
+//        name.setText(parkHistory.park_time);
     }
 }
