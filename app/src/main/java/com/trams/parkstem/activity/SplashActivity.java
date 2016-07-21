@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.trams.parkstem.R;
 
@@ -20,6 +21,8 @@ public class SplashActivity extends AppCompatActivity{
             @Override
             public void run() {
                 try {
+                    Log.e("run","run");
+
                     Thread.sleep(3000);
 
                     Intent intent = new Intent(SplashActivity.this, LoginActivity.class);

@@ -118,6 +118,8 @@ public class TicketManageView extends LinearLayout {
                     intent.putExtra("price", putticket.price);
                     intent.putExtra("term_name", putticket.term_name);
                     intent.putExtra("t_n", putticket.ticket_name);
+                    intent.putExtra("term", (long)putticket.term.getTimeInMillis());
+                    intent.putExtra("regdate", (long)putticket.regdate.getTimeInMillis());
 
                     context.startActivity(intent);
                 }

@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         >
         <EditText
+            android:gravity="right"
             android:id="@+id/activity_login_by_email_address"
             android:background="@null"
             android:textSize="17sp"
@@ -37,6 +38,7 @@
         android:layout_width="match_parent"
         >
         <EditText
+            android:gravity="right"
             android:id="@+id/activity_login_by_email_password"
             android:background="@null"
             android:textSize="17sp"

@@ -26,6 +26,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.LoginActivity"/>
+        <activity android:name=".activity.LoginWithEmailActivity" />
         <activity android:name=".activity.AssignActivity" />
         <activity android:name=".activity.MobileCertificationActivity" />
         <activity android:name=".activity.InputCarActivity" />

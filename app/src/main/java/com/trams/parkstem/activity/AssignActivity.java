@@ -1,6 +1,7 @@
 package com.trams.parkstem.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -66,6 +67,12 @@ public class AssignActivity extends BaseBackSearchActivity {
             } else {
                 ServerClient.getInstance().register(name, email, phone, "", email, password);
                 Toast.makeText(this, "회원가입이 성공했습니다", Toast.LENGTH_SHORT).show();
+
+                ServerClient.getInstance().login(email, password, getIntent().getStringExtra("token"));
+
+                Intent intent = new Intent(this, FirstScreenActivity.class);
+                startActivity(intent);
+                finish();
             }
 
         } catch (NullPointerException nul) {
