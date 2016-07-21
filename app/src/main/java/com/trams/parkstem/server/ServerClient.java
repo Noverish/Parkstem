@@ -22,7 +22,7 @@ import java.util.HashMap;
 /**
  * Created by monc2 on 2016-07-04.
  */
-public class ServerClient {
+public class ServerClient  {
     //모든 함수에 더미 반환값 추가.
     //코드정리
     //1.모든 함수가 JSON 반환하면 안됨.
@@ -32,6 +32,7 @@ public class ServerClient {
     //dummy 카드 관련 모든것 입차 출차 주차장
 
     private String uniqueID = "13617600";
+    public Login login = new Login();
 
     public static ServerClient serverClient;
     public static ServerClient getInstance() {
@@ -143,7 +144,7 @@ public class ServerClient {
 
 
     //회원가입 및 로그인 관련 함수
-    public Login login(final String parkstemID, final String parkstemPW) throws ServerErrorException{
+    public void login(final String parkstemID, final String parkstemPW, final String token) throws ServerErrorException{
         String msg;
         final String LOGIN_URL = "http://app.parkstem.com/api/member_login.php";
         Thread thread = new Thread(new Runnable() {
@@ -152,6 +153,7 @@ public class ServerClient {
                 HashMap<String, String> hashMap = new HashMap<>();
                 hashMap.put("parkstemID", parkstemID);
                 hashMap.put("parkstemPW", parkstemPW);
+                hashMap.put("token", token);
                 result = connect(hashMap, LOGIN_URL);
             }
         });
@@ -169,11 +171,10 @@ public class ServerClient {
                 Log.d("ServerClient",msg);
                 uniqueID = result.getString("uniqueID");
 
-                Login login = new Login();
                 login.name = result.getString("name");
                 login.email = result.getString("email");
                 login.phone = result.getString("phone");
-                String push = result.getString("certifi");
+                String push = result.getString("pushYN");
                 String cert = result.getString("certification");
                 if(push =="Y"){
                     login.pushYN = true;
@@ -187,7 +188,6 @@ public class ServerClient {
                 else{
                     login.certification = false;
                 }
-                return login;
             }
             else{
                 throw new ServerErrorException(result.getInt("res"), msg);
