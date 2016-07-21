@@ -280,6 +280,7 @@
                 <TextView
                     android:textColor="@color/gray"
                     android:textSize="12sp"
+                    android:id="@+id/input_card_clause_4"
                     android:text="정기과금 이용약관"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -288,6 +289,7 @@
                     android:textColor="@color/gray"
                     android:textSize="12sp"
                     android:text="전자금융거래 이용약관"
+                    android:id="@+id/input_card_clause_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </RelativeLayout>
@@ -300,6 +302,7 @@
                     android:textColor="@color/gray"
                     android:textSize="12sp"
                     android:text="개인정보 수집 및 이용안내"
+                    android:id="@+id/input_card_clause_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <TextView
@@ -307,6 +310,7 @@
                     android:textColor="@color/gray"
                     android:textSize="12sp"
                     android:text="개인정보제공 및 위탁안내"
+                    android:id="@+id/input_card_clause_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </RelativeLayout>
@@ -319,6 +323,7 @@
                     android:textColor="@color/gray"
                     android:textSize="12sp"
                     android:text="고유식별정보 수집 및 이용안내"
+                    android:id="@+id/input_card_clause_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </RelativeLayout>

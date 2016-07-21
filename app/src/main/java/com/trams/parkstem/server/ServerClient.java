@@ -42,7 +42,7 @@ public class ServerClient  {
         return serverClient;
     }
 
-    protected ServerClient() {}
+    public ServerClient() {}
 
     private JSONObject result;
 
