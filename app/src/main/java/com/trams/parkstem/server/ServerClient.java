@@ -29,7 +29,7 @@ public class ServerClient {
     //uniqueID를 반환하는 함수는 현재의 uniqueID와 같은지 체크하는 코드
     //dummy 카드 관련 모든것 입차 출차 주차장
 
-    private String uniqueID;
+    private String uniqueID = "13617600";
 
     public static ServerClient serverClient;
     public static ServerClient getInstance() {
@@ -1562,7 +1562,7 @@ public class ServerClient {
     //모바일 인증
     public void mobileCertification() throws ServerErrorException{
         String msg;
-        final String CertIn_URL = "http://app.parkstem.com/api/kmcis_start.php";
+        final String CertIn_URL = "http://app.parkstem.com/api/kmcis_start.php?uniqueID=" + uniqueID;
         final String CertOut_URL = "http://app.parkstem.com/api/kmcis_mobile.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -1632,7 +1632,75 @@ public class ServerClient {
         }
     }
 
+    public String hipass(final String idx) throws ServerErrorException{
+        String msg;
+        String contents;
+        final String Hipass_URL = "http://app.parkstem.com/api/help.php\n";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("idx", idx);
+                result = connect(hashMap, Hipass_URL);
+            }
+        });
 
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            if(result.getInt("res")==1){
+                msg = result.getString("msg");
+                Log.d("ServerClient", msg);
+                contents = result.getString("contents");
+                return contents;
+            }
+            else{
+                throw new ServerErrorException();
+            }
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            throw new ServerErrorException();
+        }
+    }
+
+    public void push(final String pushYN) throws ServerErrorException{
+        String msg;
+        final String Push_URL = "http://app.parkstem.com/api/push_yn.php";
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("uniqueID", uniqueID);
+                hashMap.put("pushYN", pushYN);
+                result = connect(hashMap, Push_URL);
+            }
+        });
+
+        try {
+            thread.start();
+            thread.join();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            if(result.getInt("res")==1){
+                msg = result.getString("msg");
+                Log.d("ServerClient", msg);
+            }
+            else{
+                throw new ServerErrorException();
+            }
+        } catch (JSONException ex) {
+            ex.printStackTrace();
+            throw new ServerErrorException();
+        }
+    }
 
 
     //Classes
