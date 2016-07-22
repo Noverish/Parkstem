@@ -146,10 +146,10 @@ public class Essentials {
 
     public static String calendarToTime(Calendar calendar) {
         String amPm = (calendar.get(Calendar.AM_PM) == Calendar.AM) ? "AM" : "PM";
-        String hour = calendar.get(Calendar.HOUR_OF_DAY) + "";
+        String hour = calendar.get(Calendar.HOUR) + "";
         String min = calendar.get(Calendar.MINUTE) + "";
 
-        return hour + ":" + numberWithZero(min) + amPm;
+        return hour + ":" + numberWithZero(min) + " " + amPm;
     }
 
     public static String calendarToDate(Calendar calendar) {

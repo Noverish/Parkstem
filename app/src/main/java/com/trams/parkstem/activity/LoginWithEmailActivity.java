@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
+import com.trams.parkstem.others.OnLoginSuccessListener;
 import com.trams.parkstem.server.ServerClient;
 
 /**
@@ -51,7 +52,7 @@ public class LoginWithEmailActivity extends BaseBackSearchActivity {
             } else if(password.length() < 4) {
                 Toast.makeText(this, "비밀번호는 4자리 이상이어야 합니다.", Toast.LENGTH_SHORT).show();
             } else {
-                ServerClient.getInstance().login(email, password, getIntent().getStringExtra("token"));
+                ServerClient.getInstance().login(OnLoginSuccessListener.PARKSTEM, email, password, getIntent().getStringExtra("token"));
 
                 Toast.makeText(this, "로그인에 성공했습니다.",Toast.LENGTH_SHORT).show();
 

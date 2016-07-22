@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity implements OnLoginSuccessLi
         loginDatabase = LoginDatabase.getInstance(this);
         if(!loginDatabase.isDatabaseClear()) {
             try {
-                ServerClient.getInstance().login(loginDatabase.getId(), loginDatabase.getPw(), gcmDeviceToken);
+                ServerClient.getInstance().login(loginDatabase.getGubun(), loginDatabase.getId(), loginDatabase.getPw(), gcmDeviceToken);
 
                 Toast.makeText(this, "자동 로그인 되었습니다!", Toast.LENGTH_SHORT).show();
 
@@ -121,13 +121,13 @@ public class LoginActivity extends AppCompatActivity implements OnLoginSuccessLi
     }
 
     @Override
-    public void onLoginSuccess(int gubun, String name, String email, String mobile, String nickName, String kakaoID, String facebookID, String naverID, String parkstemID, String parkstemPW) {
+    public void onLoginSuccess(String gubun, String name, String email, String mobile, String nickName, String kakaoID, String facebookID, String naverID, String parkstemID, String parkstemPW) {
         try {
-            ServerClient.getInstance().login(email, "", gcmDeviceToken);
+            ServerClient.getInstance().login(gubun, email, "", gcmDeviceToken);
 
-            loginDatabase.setData(email);
+            loginDatabase.setData(gubun, email, "");
 
-            if(ServerClient.getInstance().login.certification) {
+            if (ServerClient.getInstance().login.certification) {
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
             } else {

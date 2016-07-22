@@ -42,7 +42,6 @@ public class HomeActivity extends BaseNavigationActivity {
             }
         });
 
-
         try{
             ServerClient.ParkHistoryList parkHistoryList = ServerClient.getInstance().parkHistory();
             if(parkHistoryList.data.size()>0){
@@ -131,6 +130,8 @@ public class HomeActivity extends BaseNavigationActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        Log.e("TAG",requestCode + " " + resultCode);
 
         if(resultCode == RESULT_FINISH)
             finish();

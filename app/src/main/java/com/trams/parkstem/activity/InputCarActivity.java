@@ -48,12 +48,12 @@ public class InputCarActivity extends BaseBackSearchActivity {
         listView.setOnEditCompleteListener(new LocationChangeableListView.OnEditCompleteListener() {
             @Override
             public void onEditCompleted(Pair<Long, String> mainCar) {
-                refresh();
                 try {
                     serverClient.priorityCar(mainCar.first + "");
                 } catch (ServerClient.ServerErrorException ex) {
                     Toast.makeText(InputCarActivity.this, ex.msg, Toast.LENGTH_SHORT).show();
                 }
+                refresh();
             }
         });
         listView.setOnItemRemovedListener(new LocationChangeableListView.OnItemRemovedListener() {
@@ -125,7 +125,10 @@ public class InputCarActivity extends BaseBackSearchActivity {
             ArrayList<Pair<Long, String>> data = new ArrayList<>();
             for(ServerClient.CarInfo info : infos) {
                 Pair<Long, String> pair = new Pair<>((long)info.idx, info.mycar);
-                data.add(pair);
+                if(info.sort == 0)
+                    data.add(0, pair);
+                else
+                    data.add(pair);
             }
 
             listView.setListData(data);

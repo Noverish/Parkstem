@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.clause.Clause2;
+import com.trams.parkstem.others.OnLoginSuccessListener;
 import com.trams.parkstem.server.ServerClient;
 
 /**
@@ -65,7 +66,7 @@ public class AssignActivity extends BaseBackSearchActivity {
                 ServerClient.getInstance().register(name, email, phone, "", email, password, getIntent().getStringExtra("token"));
                 Toast.makeText(this, "회원가입이 성공했습니다", Toast.LENGTH_SHORT).show();
 
-                ServerClient.getInstance().login(email, password, getIntent().getStringExtra("token"));
+                ServerClient.getInstance().login(OnLoginSuccessListener.PARKSTEM, email, password, getIntent().getStringExtra("token"));
 
                 Intent intent = new Intent(this, FirstScreenActivity.class);
                 startActivity(intent);

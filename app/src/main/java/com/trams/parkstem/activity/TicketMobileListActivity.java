@@ -28,55 +28,47 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
         setSearchEnable(true);
         setToolbarTitle("모바일 주차권");
 
-        reloadData();
+        reloadServerData();
 
         swipeLayout = (SwipeRefreshLayout) findViewById(R.id.activity_ticket_mobile_refresh_layout);
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 swipeLayout.setRefreshing(true);
-                reloadData();
+                reloadServerData();
                 swipeLayout.setRefreshing(false);
             }
         });
-
     }
 
-    private void reloadData() {
-        LinearLayout content = (LinearLayout) findViewById(R.id.activity_ticket_mobile_list_layout);
-        content.removeAllViews();
+    private void showData() {
+        showSearchResult("");
+    }
+
+    private void reloadServerData() {
         ticketMobileListViews.clear();
         longTicketMobileListViews.clear();
 
-        Log.e("reload","reload");
-
-        ServerClient.TicketLists list;
-        ServerClient.LongTicketLists longlist;
-
         try {
-            list = ServerClient.getInstance().listOfTicket();
+            ServerClient.TicketLists list = ServerClient.getInstance().listOfTicket();
 
             for(ServerClient.Ticket ticket: list.data){
                 TicketView ticketView = new TicketView(this, ticket, TicketView.SHORT_TICKET, "사용가능", false, true, false);
-                content.addView(ticketView);
+                ticketMobileListViews.add(ticketView);
             }
 
-            longlist = ServerClient.getInstance().listOfLongTicket();
+            ServerClient.LongTicketLists longlist = ServerClient.getInstance().listOfLongTicket();
 
             for(ServerClient.Ticket ticket: longlist.data){
                 TicketView ticketView = new TicketView(this, ticket, TicketView.LONG_TICKET, "사용가능", false, true, false);
-
-//                LongTicketMobileListView longTicketMobileListView = new LongTicketMobileListView(this, ticket);
-//                longTicketMobileListViews.add(longTicketMobileListView);
-//                TextView buttonname = (TextView)longTicketMobileListView.findViewById(R.id.long_ticket_mobile_item_button_name);
-//                buttonname.setText("사용가능");
-                content.addView(ticketView);
+                longTicketMobileListViews.add(ticketView);
             }
         } catch (ServerClient.ServerErrorException ex) {
             Log.e("error!",ex.msg);
         }
-    }
 
+        showData();
+    }
 
 
     private void showSearchResult(String str) {
@@ -98,7 +90,7 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
 
     @Override
     public boolean onClose() {
-        reloadData();
+        showData();
         return super.onClose();
     }
 
