@@ -147,9 +147,9 @@ public class ServerClient  {
 
     //회원가입 및 로그인 관련 함수
     public void login(final String memberGubun, final String parkstemID, final String parkstemPW, final String token) throws ServerErrorException {
-        Log.e(TAG,"login : " + memberGubun + ", " + parkstemID + ", " + parkstemPW + ", " + token);
+        /*Log.e(TAG,"login : " + memberGubun + ", " + parkstemID + ", " + parkstemPW + ", " + token);
 
-        /*String msg;
+        String msg;
         final String LOGIN_URL = "http://app.parkstem.com/api/member_login.php";
         Thread thread = new Thread(new Runnable() {
             @Override

@@ -42,7 +42,6 @@ public class HomeActivity extends BaseNavigationActivity {
             }
         });
 
-
         try{
             ServerClient.ParkHistoryList parkHistoryList = ServerClient.getInstance().parkHistory();
             if(parkHistoryList.data.size()>0){
