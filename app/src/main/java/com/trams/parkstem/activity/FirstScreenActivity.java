@@ -8,20 +8,21 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.trams.parkstem.R;
-import com.trams.parkstem.base_activity.BaseNavigationActivity;
+import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.certification.Mobilecertification;
 import com.trams.parkstem.server.ServerClient;
 
 /**
  * Created by Noverish on 2016-07-12.
  */
-public class FirstScreenActivity extends BaseNavigationActivity {
+public class FirstScreenActivity extends BaseBackSearchActivity {
     RelativeLayout btnToMobileCertificate, btnToCarRegister, btnToCardRegister;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_screen);
+        setBackEnable(false);
 
         btnToMobileCertificate = (RelativeLayout) findViewById(R.id.activity_first_moblie_certificate);
         btnToMobileCertificate.setOnClickListener(new View.OnClickListener() {

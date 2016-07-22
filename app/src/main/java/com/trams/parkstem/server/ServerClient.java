@@ -1164,10 +1164,19 @@ public class ServerClient  {
                     ticketPurchase.local_id = jdata.getString("local_id");
                     ticketPurchase.card_name = jdata.getString("card_name");
                     ticketPurchase.ticket_name = jdata.getString("ticket_name");
+                    ticketPurchase.original_price = jdata.getString("original_price");
                     ticketPurchase.price = jdata.getString("price");
                     ticketPurchase.start_date = Essentials.stringToCalendar(jdata.getString("start_date"));
                     ticketPurchase.end_date = Essentials.stringToCalendar(jdata.getString("end_date"));
                     ticketPurchase.pay_date = Essentials.stringToCalendar(jdata.getString("pay_date"));
+                    ticketPurchase.region = jdata.getString("region");
+                    ticketPurchase.term = Essentials.stringToCalendar(jdata.getString("term"));
+                    ticketPurchase.term_name = jdata.getString("term_name");
+                    ticketPurchase.available_time = jdata.getString("available_time");
+                    ticketPurchase.user_name = jdata.getString("user_name");
+                    ticketPurchase.user_email = jdata.getString("user_email");
+                    ticketPurchase.user_phone = jdata.getString("user_phone");
+                    ticketPurchase.allow = jdata.getString("allow").equals("Y");
                     paymentinfo.data.add(ticketPurchase);
                 }
                 return paymentinfo;
@@ -1546,21 +1555,21 @@ public class ServerClient  {
         public String total;
     }
 
-    public class ParkInfo{
-        public String local_id;
-        public String local_name;
-        public String local_content;
-        public String local_address;
-        public String new_address;
-        public String short_address;
-        public String local_phone;
-        public String local_photo1;
-        public String local_photo2;
-        public int free_time;
-        public String park_price;
-        public int park_price_time;
-        public int base_minute;
-        public String base_price;
+    public static class ParkInfo{
+        public String local_id = "";
+        public String local_name = "";
+        public String local_content = "";
+        public String local_address = "";
+        public String new_address = "";
+        public String short_address = "";
+        public String local_phone = "";
+        public String local_photo1 = "";
+        public String local_photo2 = "";
+        public int free_time = -1;
+        public String park_price = "";
+        public int park_price_time = -1;
+        public int base_minute = -1;
+        public String base_price = "";
     }
 
     public class CarLists{
@@ -1635,10 +1644,19 @@ public class ServerClient  {
         public int gubun;
         public String local_id;
         public String card_name;
+        public String original_price;
         public String price;
         public Calendar start_date;
         public Calendar end_date;
         public Calendar pay_date;
+        public String region;
+        public Calendar term;
+        public String term_name;
+        public String available_time;
+        public String user_name;
+        public String user_email;
+        public String user_phone;
+        public boolean allow;
         public String ticket_name;
         public int ticket_idx;
 

@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class TicketMobileListActivity extends BaseBackSearchActivity {
     private SwipeRefreshLayout swipeLayout;
     private ArrayList<TicketView> ticketMobileListViews = new ArrayList<>();
-    private ArrayList<TicketView> longTicketMobileListViews = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,21 +46,15 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
 
     private void reloadServerData() {
         ticketMobileListViews.clear();
-        longTicketMobileListViews.clear();
 
         try {
-            ServerClient.TicketLists list = ServerClient.getInstance().listOfTicket();
+            ServerClient.TicketPurchaseList list = ServerClient.getInstance().ticketPurchase();
 
-            for(ServerClient.Ticket ticket: list.data){
-                TicketView ticketView = new TicketView(this, ticket, TicketView.SHORT_TICKET, "사용가능", false, true, false);
-                ticketMobileListViews.add(ticketView);
-            }
-
-            ServerClient.LongTicketLists longlist = ServerClient.getInstance().listOfLongTicket();
-
-            for(ServerClient.Ticket ticket: longlist.data){
-                TicketView ticketView = new TicketView(this, ticket, TicketView.LONG_TICKET, "사용가능", false, true, false);
-                longTicketMobileListViews.add(ticketView);
+            for(ServerClient.TicketPurchase purchase: list.data){
+                if(purchase.allow) {
+                    TicketView ticketView = new TicketView(this, purchase, "사용가능", false, true, false);
+                    ticketMobileListViews.add(ticketView);
+                }
             }
         } catch (ServerClient.ServerErrorException ex) {
             Log.e("error!",ex.msg);
@@ -70,19 +63,12 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
         showData();
     }
 
-
     private void showSearchResult(String str) {
         LinearLayout content = (LinearLayout) findViewById(R.id.activity_ticket_mobile_list_layout);
         content.removeAllViews();
 
         for(TicketView listView : ticketMobileListViews) {
-            if(listView.getTicket().ticket_name.contains(str)) {
-                content.addView(listView);
-            }
-        }
-
-        for(TicketView listView : longTicketMobileListViews) {
-            if(listView.getTicket().ticket_name.contains(str)) {
+            if(listView.getTicketName().contains(str)) {
                 content.addView(listView);
             }
         }

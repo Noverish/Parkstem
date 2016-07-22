@@ -45,7 +45,7 @@ public class ManageTicketActivity extends BaseBackSearchActivity {
             ServerClient.TicketLists list = ServerClient.getInstance().listOfTicket();
 
             for (ServerClient.Ticket ticket : list.data) {
-                TicketView ticketView = new TicketView(this, ticket, TicketView.SHORT_TICKET, "상세정보", true, false, true);
+                TicketView ticketView = new TicketView(this, ticket, "상세정보", true, false, true);
                 ticketViews.add(ticketView);
             }
         } catch (ServerClient.ServerErrorException ex) {
@@ -64,7 +64,7 @@ public class ManageTicketActivity extends BaseBackSearchActivity {
         content.removeAllViews();
 
         for(TicketView ticketView : ticketViews)
-            if(ticketView.getTicket().ticket_name.contains(result))
+            if(ticketView.getTicketName().contains(result))
                 content.addView(ticketView);
     }
 

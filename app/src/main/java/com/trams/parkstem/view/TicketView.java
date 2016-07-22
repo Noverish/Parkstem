@@ -1,13 +1,14 @@
 package com.trams.parkstem.view;
 
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -25,46 +26,194 @@ import java.util.Calendar;
  * Created by Noverish on 2016-07-21.
  */
 public class TicketView extends LinearLayout {
-    public static boolean LONG_TICKET = true;
-    public static boolean SHORT_TICKET = false;
-
     private Context context;
-    private Calendar calendar = Calendar.getInstance();
 
-    private RelativeLayout showDetailButton;
     private ServerClient.Ticket ticket;
+    private TicketViewData data;
+
+    private TextView ticketName;
+    private TextView shortAddress;
+    private TextView buttonNameText;
+    private RelativeLayout showDetailButton;
+
+    private LinearLayout endDateLayout;
+    private TextView startDate;
+    private TextView endDate;
+
+    private TextView newAddress;
+    private TextView oldAddress;
+
+    private TextView beforePriceTerm;
+    private TextView beforePrice;
+    private TextView afterPriceTerm;
+    private TextView afterPrice;
+
+    private LinearLayout expiryDateLayout;
+    private TextView expiryDateStart;
+    private TextView expiryDateEnd;
 
     private boolean detailOpen = true;
-    private boolean isItLongTicket;
 
-    public TicketView(final Context contextParam, ServerClient.Ticket ticket, boolean isItLongTicket, String buttonName, boolean purchaseButtonOn, boolean alwaysOpened, boolean calendarButton) {
+    public TicketView(final Context contextParam, ServerClient.Ticket ticket, String buttonName, boolean purchaseButtonOn, boolean alwaysOpened, boolean calendarButton) {
         super(contextParam);
-        this.context = contextParam;
         this.ticket = ticket;
-        this.isItLongTicket = isItLongTicket;
+        init(contextParam);
 
-        LayoutInflater inflater = LayoutInflater.from(contextParam);
+        setData(ticket, buttonName);
+
+        applyOptions(ticket.gubun == ServerClient.Ticket.LONG_TICKET_GUBUN, purchaseButtonOn, alwaysOpened, calendarButton);
+    }
+
+    public TicketView(final Context contextParam, ServerClient.TicketPurchase purchase, String buttonName, boolean purchaseButtonOn, boolean alwaysOpened, boolean calendarButton) {
+        super(contextParam);
+        init(contextParam);
+
+        setData(purchase, buttonName);
+
+        applyOptions(purchase.gubun == ServerClient.Ticket.LONG_TICKET_GUBUN, purchaseButtonOn, alwaysOpened, calendarButton);
+    }
+
+    private void init(Context contextParam) {
+        this.context = contextParam;
+
+        LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.ticket_item, this, true);
 
-        LinearLayout totalLayout = (LinearLayout) findViewById(R.id.ticket_item);
+        ticketName = (TextView) findViewById(R.id.long_ticket_mobile_item_name);
+        shortAddress = (TextView) findViewById(R.id.long_ticket_mobile_item_place);
+        buttonNameText = (TextView) findViewById(R.id.long_ticket_mobile_item_button_name);
+        showDetailButton = (RelativeLayout) findViewById(R.id.long_ticket_mobile_item_view);
 
-        findViewById(R.id.long_ticket_mobile_item_above_layout).setBackgroundColor(ContextCompat.getColor(contextParam, R.color.btn_3));
+        endDateLayout = (LinearLayout) findViewById(R.id.ticket_item_end_date_layout);
+        startDate = (TextView) findViewById(R.id.long_ticket_mobile_item_start_date);
+        endDate = (TextView) findViewById(R.id.long_ticket_mobile_item_end_date);
 
+        newAddress = (TextView) findViewById(R.id.ticket_view_new_address);
+        oldAddress = (TextView) findViewById(R.id.ticket_view_old_address);
+
+        beforePriceTerm = (TextView) findViewById(R.id.long_ticket_mobile_item_before_price_term_name);
+        beforePrice = (TextView) findViewById(R.id.long_ticket_mobile_item_before_price_amount);
+        afterPriceTerm = (TextView) findViewById(R.id.long_ticket_mobile_item_after_price_term_name) ;
+        afterPrice = (TextView) findViewById(R.id.long_ticket_mobile_item_after_price_amount);
+
+        expiryDateLayout = (LinearLayout) findViewById(R.id.ticket_item_due_date_layout);
+        expiryDateStart = (TextView) findViewById(R.id.ticket_item_due_date_start);
+        expiryDateEnd = (TextView) findViewById(R.id.ticket_item_due_date_end);
+    }
+
+    private void setData(ServerClient.Ticket ticket, String buttonName) {
+        ServerClient.ParkInfo parkInfo;
+        try {
+            parkInfo = ServerClient.getInstance().parkInfo(ticket.local_id);
+        } catch (ServerClient.ServerErrorException ex) {
+            ex.printStackTrace();
+            Toast.makeText(context, "주차장 정보를 불러오는데 실패했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
+            parkInfo = new ServerClient.ParkInfo();
+        }
+
+        if(ticket.gubun == ServerClient.Ticket.SHORT_TICEKT_GUBUN) {
+            data = new TicketViewData(ticket.ticket_name, parkInfo.short_address, buttonName,
+                    Calendar.getInstance(), null,
+                    parkInfo.new_address, parkInfo.local_address,
+                    ticket.term_name, ticket.original_price, ticket.price,
+                    Calendar.getInstance(), ticket.term);
+
+            fillData(data);
+        } else {
+            data = new TicketViewData(ticket.ticket_name, parkInfo.short_address, buttonName,
+                    ticket.start_date, ticket.end_date,
+                    parkInfo.new_address, parkInfo.local_address,
+                    ticket.term_name, ticket.original_price, ticket.price,
+                    null, null);
+
+            fillData(data);
+        }
+    }
+
+    private void setData(ServerClient.TicketPurchase purchase, String buttonName) {
+        ServerClient.ParkInfo parkInfo;
+        try {
+            parkInfo = ServerClient.getInstance().parkInfo(purchase.local_id);
+        } catch (ServerClient.ServerErrorException ex) {
+            ex.printStackTrace();
+            Toast.makeText(context, "주차장 정보를 불러오는데 실패했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
+
+            parkInfo = new ServerClient.ParkInfo();
+        }
+
+        if(purchase.gubun == ServerClient.Ticket.SHORT_TICEKT_GUBUN) {
+            data = new TicketViewData(purchase.ticket_name, parkInfo.short_address, buttonName,
+                    Calendar.getInstance(), null,
+                    parkInfo.new_address, parkInfo.local_address,
+                    purchase.term_name, purchase.original_price, purchase.price,
+                    Calendar.getInstance(), purchase.term);
+
+            fillData(data);
+        } else {
+            data = new TicketViewData(purchase.ticket_name, parkInfo.short_address, buttonName,
+                    purchase.start_date, purchase.end_date,
+                    parkInfo.new_address, parkInfo.local_address,
+                    purchase.term_name, purchase.original_price, purchase.price,
+                    null, null);
+
+            fillData(data);
+        }
+    }
+
+    private void fillData(TicketViewData data) {
+
+        this.ticketName.setText(data.ticketName);
+        this.shortAddress.setText(data.shortAddress);
+        this.buttonNameText.setText(data.buttonName);
+
+        if(data.startDate != null)
+            this.startDate.setText(Essentials.calendarToDate(data.startDate));
+        else
+            this.startDate.setText("");
+
+        if(data.endDate != null)
+            this.endDate.setText(Essentials.calendarToDate(data.endDate));
+        else
+            this.endDate.setText("");
+
+        this.newAddress.setText(data.newAddress);
+        this.oldAddress.setText(data.oldAddress);
+
+        this.beforePriceTerm.setText(data.priceTerm);
+        this.beforePrice.setText(Essentials.numberWithComma(data.beforePrice));
+        this.afterPriceTerm.setText(data.priceTerm);
+        this.afterPrice.setText(Essentials.numberWithComma(data.afterPrice));
+
+        Log.e("asdf",(expiryDateStart == null) + "" );
+
+        if(data.expiryDateStart != null)
+            this.expiryDateStart.setText(Essentials.calendarToDate(data.expiryDateStart));
+        else
+            this.expiryDateStart.setText("");
+
+        if(data.expiryDateEnd != null)
+            this.expiryDateEnd.setText(Essentials.calendarToDate(data.expiryDateEnd));
+        else
+            this.expiryDateEnd.setText("");
+    }
+
+    private void applyOptions(boolean isItLongTicket, boolean purchaseButtonOn, boolean alwaysOpened, boolean calendarButton) {
         //구매 버튼 여부에 따라 구매버튼 삭제
         RelativeLayout purchaseButton = (RelativeLayout) findViewById(R.id.long_ticket_mobile_item_bottom_layout);
         if(purchaseButtonOn) {
             purchaseButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onPurchaseButtonClicked();
+                    Intent intent = new Intent(context, ManagePurchaseActivity.class);
+                    intent.putExtra("ticket",ticket);
+                    context.startActivity(intent);
                 }
             });
         } else {
-            ((ViewGroup) purchaseButton.getParent()).removeView(purchaseButton);
+            removeView(purchaseButton);
         }
 
         if(!alwaysOpened) {
-            showDetailButton = (RelativeLayout) findViewById(R.id.long_ticket_mobile_item_view);
             showDetailButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -72,12 +221,16 @@ public class TicketView extends LinearLayout {
                 }
             });
 
+            detailOpen = true;
             onShowDetailButtonClicked();
+        } else {
+            RelativeLayout abovecontent = (RelativeLayout) findViewById(R.id.long_ticket_mobile_item_above_layout);
+            abovecontent.setBackgroundColor(ContextCompat.getColor(context, R.color.btn_3));
         }
 
         ImageView calendarImageView = (ImageView) findViewById(R.id.long_ticket_mobile_item_calender);
         if(calendarButton) {
-            calendarImageView.setOnClickListener(new OnClickListener() {
+            /*calendarImageView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -97,63 +250,17 @@ public class TicketView extends LinearLayout {
                             calendar.get(Calendar.MONTH),
                             calendar.get(Calendar.DAY_OF_MONTH)).show();
                 }
-            });
+            });*/
         } else {
-            ViewGroup parent = (ViewGroup) calendarImageView.getParent();
-            parent.removeView(calendarImageView); //평범하게 this.removeView(view) 하면 안됨;;
+            removeView(calendarImageView);
         }
 
 
-        TextView startDate = (TextView) findViewById(R.id.long_ticket_mobile_item_start_date);
         if(isItLongTicket) {
-            startDate.setText(Essentials.calendarToDate(ticket.start_date));
-
-            TextView endDate = (TextView) findViewById(R.id.long_ticket_mobile_item_end_date);
-            endDate.setText(Essentials.calendarToDate(ticket.end_date));
-
-            View dueDateLayout = findViewById(R.id.ticket_item_due_date_layout);
-            ((ViewGroup) dueDateLayout.getParent()).removeView(dueDateLayout);//평범하게 this.removeView(view) 하면 안됨;;
+            removeView(expiryDateLayout);
         } else {
-            startDate.setText(Essentials.calendarToDate(calendar));
-
-            View dueDateLayout = findViewById(R.id.ticket_item_end_date_layout);
-            ((ViewGroup) dueDateLayout.getParent()).removeView(dueDateLayout);//평범하게 this.removeView(view) 하면 안됨;;
-
-            TextView dueDateStart = (TextView) findViewById(R.id.ticket_item_due_date_start);
-            dueDateStart.setText(Essentials.calendarToDate(calendar));
-
-            TextView dueDateEnd = (TextView) findViewById(R.id.ticket_item_due_date_end);
-            dueDateEnd.setText(Essentials.calendarToDate(ticket.term));
+            removeView(endDateLayout);
         }
-
-        TextView buttonNameText = (TextView) findViewById(R.id.long_ticket_mobile_item_button_name);
-        TextView ticketName = (TextView) findViewById(R.id.long_ticket_mobile_item_name);
-        TextView parkAddress = (TextView) findViewById(R.id.long_ticket_mobile_item_place_2);
-        TextView beforePriceTerm = (TextView) findViewById(R.id.long_ticket_mobile_item_before_price_term_name);
-        TextView beforePrice = (TextView) findViewById(R.id.long_ticket_mobile_item_before_price_amount);
-        TextView afterPriceTerm = (TextView) findViewById(R.id.long_ticket_mobile_item_after_price_term_name) ;
-        TextView afterPrice = (TextView) findViewById(R.id.long_ticket_mobile_item_after_price_amount);
-        TextView shortAddress = (TextView) findViewById(R.id.long_ticket_mobile_item_place);
-
-        buttonNameText.setText(buttonName);
-
-        ticketName.setText(ticket.ticket_name);
-
-        try {
-            ServerClient.ParkInfo parkInfo = ServerClient.getInstance().parkInfo(ticket.local_id);
-            parkAddress.setText(parkInfo.local_address);
-            shortAddress.setText(parkInfo.short_address);
-        } catch (ServerClient.ServerErrorException ex) {
-            Toast.makeText(contextParam, ex.msg, Toast.LENGTH_SHORT).show();
-            parkAddress.setText("");
-            shortAddress.setText("");
-        }
-
-
-        beforePriceTerm.setText(ticket.term_name);
-        beforePrice.setText(Essentials.numberWithComma(ticket.original_price));
-        afterPriceTerm.setText(ticket.term_name);
-        afterPrice.setText(Essentials.numberWithComma(ticket.price));
     }
 
     private void onShowDetailButtonClicked() {
@@ -177,8 +284,8 @@ public class TicketView extends LinearLayout {
         }
     }
 
-    private void refreshDate() {
-        /*TextView startDate = (TextView) findViewById(R.id.long_ticket_mobile_item_start_date);
+    /*private void refreshDate() {
+        TextView startDate = (TextView) findViewById(R.id.long_ticket_mobile_item_start_date);
         startDate.setText(Essentials.calendarToDate(calendar));
 
         Calendar expiration = (Calendar) calendar.clone();
@@ -192,16 +299,134 @@ public class TicketView extends LinearLayout {
         expiryDateStart.setText(calendar);
 
         TextView expiryDateEnd = (TextView) findViewById(R.id.ticket_item_due_date_end);
-        expiryDateEnd.setText(expiryEnd);*/
+        expiryDateEnd.setText(expiryEnd);
+    }*/
+
+    public String getTicketName() {
+        return data.ticketName;
     }
 
-    private void onPurchaseButtonClicked() {
-        Intent intent = new Intent(context, ManagePurchaseActivity.class);
-        intent.putExtra("ticket",ticket);
-        context.startActivity(intent);
+
+    @Override
+    public void removeView(View view) {
+        ((ViewGroup) view.getParent()).removeView(view);
     }
 
-    public ServerClient.Ticket getTicket() {
-        return ticket;
+    private static class TicketViewData implements Parcelable {
+        private String ticketName;
+        private String shortAddress;
+        private String buttonName;
+        private Calendar startDate;
+        private Calendar endDate;
+        private String newAddress;
+        private String oldAddress;
+        private String priceTerm;
+        private String beforePrice;
+        private String afterPrice;
+        private Calendar expiryDateStart;
+        private Calendar expiryDateEnd;
+
+        public TicketViewData(String ticketName, String shortAddress, String buttonName, Calendar startDate, Calendar endDate, String newAddress, String oldAddress, String priceTerm, String beforePrice, String afterPrice, Calendar expiryDateStart, Calendar expiryDateEnd) {
+            this.ticketName = ticketName;
+            this.shortAddress = shortAddress;
+            this.buttonName = buttonName;
+            this.startDate = startDate;
+            this.endDate = endDate;
+            this.newAddress = newAddress;
+            this.oldAddress = oldAddress;
+            this.priceTerm = priceTerm;
+            this.beforePrice = beforePrice;
+            this.afterPrice = afterPrice;
+            this.expiryDateStart = expiryDateStart;
+            this.expiryDateEnd = expiryDateEnd;
+        }
+
+        public TicketViewData(Parcel in) {
+            String[] data = new String[12];
+
+            in.readStringArray(data);
+
+            startDate = Calendar.getInstance();
+            endDate = Calendar.getInstance();
+            expiryDateStart = Calendar.getInstance();
+            expiryDateEnd = Calendar.getInstance();
+
+            this.ticketName = data[0];
+            this.shortAddress = data[1];
+            this.buttonName = data[2];
+            this.startDate.setTimeInMillis(Long.parseLong(data[3]));
+            this.endDate.setTimeInMillis(Long.parseLong(data[4]));
+            this.newAddress = data[5];
+            this.oldAddress = data[6];
+            this.priceTerm = data[7];
+            this.beforePrice = data[8];
+            this.afterPrice = data[9];
+            this.expiryDateStart.setTimeInMillis(Long.parseLong(data[10]));
+            this.expiryDateEnd.setTimeInMillis(Long.parseLong(data[11]));
+
+            if(startDate.getTimeInMillis() == 0)
+                startDate = null;
+
+            if(endDate.getTimeInMillis() == 0)
+                endDate = null;
+
+            if(expiryDateStart.getTimeInMillis() == 0)
+                expiryDateStart = null;
+
+            if(expiryDateEnd.getTimeInMillis() == 0)
+                expiryDateEnd = null;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            if(startDate == null) {
+                startDate = Calendar.getInstance();
+                startDate.setTimeInMillis(0);
+            }
+
+            if(endDate == null) {
+                endDate = Calendar.getInstance();
+                endDate.setTimeInMillis(0);
+            }
+
+            if(expiryDateStart == null) {
+                expiryDateStart = Calendar.getInstance();
+                expiryDateStart.setTimeInMillis(0);
+            }
+
+            if(expiryDateEnd == null) {
+                expiryDateEnd = Calendar.getInstance();
+                expiryDateEnd.setTimeInMillis(0);
+            }
+
+            dest.writeStringArray(new String[] {
+                    this.ticketName,
+                    this.shortAddress,
+                    this.buttonName,
+                    this.startDate.getTimeInMillis() + "",
+                    this.endDate.getTimeInMillis() + "",
+                    this.newAddress,
+                    this.oldAddress + "",
+                    this.priceTerm + "",
+                    this.beforePrice,
+                    this.afterPrice,
+                    this.expiryDateStart.getTimeInMillis() + "",
+                    this.expiryDateEnd.getTimeInMillis() + ""});
+        }
+
+        public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+            public TicketViewData createFromParcel(Parcel in) {
+                return new TicketViewData(in);
+            }
+
+            public TicketViewData[] newArray(int size) {
+                return new TicketViewData[size];
+            }
+        };
     }
 }

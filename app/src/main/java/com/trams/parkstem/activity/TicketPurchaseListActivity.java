@@ -9,16 +9,16 @@ import android.widget.LinearLayout;
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.server.ServerClient;
-import com.trams.parkstem.view.LongTicketUsedView;
-import com.trams.parkstem.view.TicketUsedView;
+import com.trams.parkstem.view.TicketView;
 
-import java.util.Calendar;
+import java.util.ArrayList;
 
 /**
  * Created by Noverish on 2016-07-08.
  */
 public class TicketPurchaseListActivity extends BaseBackSearchActivity {
     private SwipeRefreshLayout swipeLayout;
+    private ArrayList<TicketView> ticketMobileListViews = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,63 +27,67 @@ public class TicketPurchaseListActivity extends BaseBackSearchActivity {
         setSearchEnable(true);
         setToolbarTitle("주차권 구매내역");
 
-        reloadData();
+        reloadServerData();
 
         swipeLayout = (SwipeRefreshLayout) findViewById(R.id.activity_ticket_purchase_refresh_layout);
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 swipeLayout.setRefreshing(true);
-                reloadData();
+                reloadServerData();
                 swipeLayout.setRefreshing(false);
             }
         });
     }
 
-    private void reloadData() {
-        LinearLayout content = (LinearLayout) findViewById(R.id.activity_ticket_purchase_list_layout);
-        content.removeAllViews();
+    private void showData() {
+        showSearchResult("");
+    }
 
-        ServerClient.TicketPurchaseList ticketPurchaseList;
-        ServerClient.TicketLists list;
-        ServerClient.LongTicketLists longlist;
-        Calendar ca= Calendar.getInstance();
+    private void reloadServerData() {
+        ticketMobileListViews.clear();
 
         try {
-            ticketPurchaseList = ServerClient.getInstance().ticketPurchase();
-            list = ServerClient.getInstance().listOfTicket();
-            longlist = ServerClient.getInstance().listOfLongTicket();
+            ServerClient.TicketPurchaseList list = ServerClient.getInstance().ticketPurchase();
 
-
-
-            for(ServerClient.TicketPurchase ticketPurchase : ticketPurchaseList.data){
-                /*
-                만료일이 지났는지 확인하는 부분
-                if(!ca.after(ticketPurchase.end_date))
-                    continue;
-                */
-
-                if(ticketPurchase.gubun==1){
-                    for(ServerClient.Ticket ticket: list.data) {
-                        if (ticket.idx == ticketPurchase.idx) {
-                            TicketUsedView ticketUsedView = new TicketUsedView(this, ticket, ticketPurchase);
-                            content.addView(ticketUsedView);
-                            break;
-                        }
-                    }
-                }
-
-                else if(ticketPurchase.gubun==2){
-                    for(ServerClient.Ticket ticket: longlist.data)
-                        if(ticket.idx == ticketPurchase.idx){
-                            LongTicketUsedView longTicketUsedView = new LongTicketUsedView(this, ticket, ticketPurchase);
-                            content.addView(longTicketUsedView);
-                            break;
-                        }
+            for(ServerClient.TicketPurchase purchase: list.data){
+                if(!purchase.allow) {
+                    TicketView ticketView = new TicketView(this, purchase, "사용가능", false, true, false);
+                    ticketMobileListViews.add(ticketView);
                 }
             }
         } catch (ServerClient.ServerErrorException ex) {
             Log.e("error!",ex.msg);
         }
+
+        showData();
+    }
+
+    private void showSearchResult(String str) {
+        LinearLayout content = (LinearLayout) findViewById(R.id.activity_ticket_purchase_list_layout);
+        content.removeAllViews();
+
+        for(TicketView listView : ticketMobileListViews) {
+            if(listView.getTicketName().contains(str)) {
+                content.addView(listView);
+            }
+        }
+    }
+
+    @Override
+    public boolean onClose() {
+        showData();
+        return super.onClose();
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return super.onQueryTextSubmit(query);
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        showSearchResult(newText);
+        return super.onQueryTextChange(newText);
     }
 }

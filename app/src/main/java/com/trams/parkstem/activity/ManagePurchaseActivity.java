@@ -37,7 +37,7 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
         RelativeLayout image = (RelativeLayout) findViewById(R.id.activity_manage_purchase_image);
 
         if (ticket.gubun == 1) {
-            TicketView ticketView = new TicketView(this, ticket, TicketView.SHORT_TICKET, "상세정보", false, false, true);
+            TicketView ticketView = new TicketView(this, ticket, "상세정보", false, false, true);
             content.addView(ticketView);
         }
 
@@ -51,10 +51,11 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
             image.setLayoutParams(rlayoutParams);
             image.setBackground(ContextCompat.getDrawable(this, R.drawable.btn_menu_1month_2));
 
-            TicketView ticketView = new TicketView(this, ticket, TicketView.LONG_TICKET, "상세정보", false, false, false);
+            TicketView ticketView = new TicketView(this, ticket, "상세정보", false, false, false);
             content.addView(ticketView);
         }
 
+        Log.e("purchase", Essentials.numberWithComma(ticket.price));
         ((TextView)findViewById(R.id.activity_manage_purchase_price)).setText((char) 0xffe6 + Essentials.numberWithComma(ticket.price));
 
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.activity_manage_purchase_complete_button);

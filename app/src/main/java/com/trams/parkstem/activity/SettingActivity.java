@@ -1,6 +1,5 @@
 package com.trams.parkstem.activity;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +13,7 @@ import android.widget.Toast;
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.base_activity.BaseNavigationActivity;
-import com.trams.parkstem.others.Essentials;
+import com.trams.parkstem.clause.Clause2;
 import com.trams.parkstem.others.FacebookLoginClient;
 import com.trams.parkstem.others.KakaoLoginClient;
 import com.trams.parkstem.others.NaverLoginClient;
@@ -54,10 +53,8 @@ public class SettingActivity extends BaseBackSearchActivity {
         clauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = SettingActivity.this;
-                String title = context.getString(R.string.popup_setting_clause_title);
-                String content = context.getString(R.string.popup_setting_clause_content);
-                Essentials.makePopup(context, title, content);
+                Intent intent = new Intent(SettingActivity.this, Clause2.class);
+                startActivity(intent);
             }
         });
 

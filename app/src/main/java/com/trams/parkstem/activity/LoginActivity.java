@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.facebook.FacebookSdk;
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseNavigationActivity;
+import com.trams.parkstem.gcm.GetRegistrationToken;
 import com.trams.parkstem.others.FacebookLoginClient;
 import com.trams.parkstem.others.KakaoLoginClient;
 import com.trams.parkstem.others.NaverLoginClient;
@@ -36,14 +37,14 @@ public class LoginActivity extends AppCompatActivity implements OnLoginSuccessLi
         FacebookSdk.sdkInitialize(getApplicationContext()); // xml을 불러 오기 전에 해야 됨
         setContentView(R.layout.activity_login);
 
-        /*GetRegistrationToken getRegistrationToken = new GetRegistrationToken(this);
+        GetRegistrationToken getRegistrationToken = new GetRegistrationToken(this);
         try {
             gcmDeviceToken = getRegistrationToken.getToken();
         } catch (GetRegistrationToken.GetTokenErrorException ex) {
             Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
             ex.printStackTrace();
             gcmDeviceToken = "null";
-        }*/
+        }
 
         loginDatabase = LoginDatabase.getInstance(this);
         if(!loginDatabase.isDatabaseClear()) {
