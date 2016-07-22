@@ -9,18 +9,17 @@ import com.trams.parkstem.server.ServerClient;
 /**
  * Created by monc2 on 2016-07-21.
  */
-public class Clause1 extends AppCompatActivity {
-    WebView webview = new WebView(this);
+public class Clause1 extends AppCompatActivity{
     ServerClient serverClient = new ServerClient();
     String clause;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        WebView webview = new WebView(this);
         setContentView(webview);
 
         try {
-            setContentView(webview);
             clause = serverClient.clause("1");
             webview.loadData(clause, "text/html; charset=UTF-8", null);
         } catch (ServerClient.ServerErrorException ex) {
