@@ -8,7 +8,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -44,11 +44,10 @@ import com.trams.parkstem.others.Essentials;
 /**
  * Created by Noverish on 2016-07-09.
  */
-public class BaseNavigationActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class BaseNavigationActivity extends AppCompatActivity {
 
-    public static final int REQUEST_FINISH = 1;
-    public static final int RESULT_FINISH = 0;
+    public static final int REQUEST_FINISH = 1004;
+    public static final int RESULT_FINISH = 444;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,9 +67,6 @@ public class BaseNavigationActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
         registBroadcastReceiver();
 
@@ -152,11 +148,18 @@ public class BaseNavigationActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public void onNavigationItemSelected(View view) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        int id = view.getId();
+
+        /*LinearLayout parkStatus = (LinearLayout) findViewById(R.id.nav_park_status);
+        LinearLayout parkStatus = (LinearLayout) findViewById(R.id.nav_car_number);
+        LinearLayout parkStatus = (LinearLayout) findViewById(R.id.nav_credit_card);
+        LinearLayout parkStatus = (LinearLayout) findViewById(R.id.nav_long_ticket);
+        LinearLayout parkStatus = (LinearLayout) findViewById(R.id.nav_park_ticket);
+        LinearLayout parkStatus = (LinearLayout) findViewById(R.id.nav_park_list);
+        LinearLayout parkStatus = (LinearLayout) findViewById(R.id.nav_pay_list);
+        LinearLayout parkStatus = (LinearLayout) findViewById(R.id.nav_setting);*/
 
         if (id == R.id.nav_park_status) {
             Intent intent = new Intent(this, ParkStatusActivity.class);
@@ -186,7 +189,6 @@ public class BaseNavigationActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 
     private BroadcastReceiver mRegistrationBroadcastReceiver;

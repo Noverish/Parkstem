@@ -132,6 +132,8 @@ public class HomeActivity extends BaseNavigationActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        Log.e("TAG",requestCode + " " + resultCode);
+
         if(resultCode == RESULT_FINISH)
             finish();
     }
