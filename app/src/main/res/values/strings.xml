@@ -30,6 +30,6 @@
 
     <string name="gcm_defaultSenderId">631351711500</string>
     <string name="facebook_app_id">1822115311350886</string>
-
+    <string name="kakao_app_key">a4d442851f490c7c2390b18c99a9b682</string>
 
 </resources>

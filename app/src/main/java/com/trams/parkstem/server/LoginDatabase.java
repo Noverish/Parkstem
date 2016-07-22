@@ -110,5 +110,7 @@ public class LoginDatabase {
     public void clearDatabase() {
         context.deleteFile(DATABASE_FILE_NAME);
         database = readFromInternalStorage();
+
+        Log.e("database","database cleared");
     }
 }

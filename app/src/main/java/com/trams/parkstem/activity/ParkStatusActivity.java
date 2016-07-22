@@ -25,14 +25,29 @@ public class ParkStatusActivity extends BaseBackSearchActivity {
 
             TextView parkName = (TextView) findViewById(R.id.activity_park_state_park_name);
             TextView parkAddress = (TextView) findViewById(R.id.activity_park_state_park_address);
-            TextView parkPriceTime = (TextView) findViewById(R.id.activity_park_state_park_price_time);
+            TextView baseMinute = (TextView) findViewById(R.id.activity_park_state_base_minute);
+            TextView basePrice = (TextView) findViewById(R.id.activity_park_state_base_price);
+            TextView parkPriceTime1 = (TextView) findViewById(R.id.activity_park_state_park_price_time1);
+            TextView parkPrice = (TextView) findViewById(R.id.activity_park_state_park_price);
+
+            TextView parkPriceTime2 = (TextView) findViewById(R.id.activity_park_state_park_price_time2);
+
             TextView carInTime = (TextView) findViewById(R.id.activity_park_state_car_in_time);
-            TextView carOutItme = (TextView)findViewById(R.id.activity_park_state_car_out_time);
+            TextView carOutTime = (TextView)findViewById(R.id.activity_park_state_car_out_time);
             TextView totalAmount = (TextView) findViewById(R.id.activity_park_state_total_amount);
+
+
+
 
             parkName.setText(parkInfo.local_name);
             parkAddress.setText(parkInfo.local_address);
-            parkPriceTime.setText(parkInfo.park_price_time + "");
+
+            baseMinute.setText(parkInfo.base_minute + "");
+            basePrice.setText(parkInfo.base_price);
+
+            parkPriceTime1.setText(parkInfo.park_price_time + "");
+            parkPriceTime2.setText(parkInfo.park_price_time + "");
+            parkPrice.setText(parkInfo.park_price);
 
             if(recentCar.in_date != null)
                 carInTime.setText(Essentials.calendarToTime(recentCar.in_date));
@@ -40,9 +55,9 @@ public class ParkStatusActivity extends BaseBackSearchActivity {
                 carInTime.setText("");
 
             if(recentCar.out_date != null)
-                carOutItme.setText(Essentials.calendarToTime(recentCar.out_date));
+                carOutTime.setText(Essentials.calendarToTime(recentCar.out_date));
             else
-                carOutItme.setText("");
+                carOutTime.setText("");
 
 
             if(!recentCar.total.equals(""))

@@ -98,6 +98,7 @@ public class HomeActivity extends BaseNavigationActivity {
             }
         });
 
+
     }
 
     private void onHipassButtonClicked() {

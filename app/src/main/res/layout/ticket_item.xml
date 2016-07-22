@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ticket_item"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--android:layout_marginBottom="-1dp"-->
+    <RelativeLayout
+        android:id="@+id/long_ticket_mobile_item_above_layout"
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <RelativeLayout
+            android:background="@drawable/img_listbox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <RelativeLayout
+            android:layout_marginLeft="43dp"
+            android:layout_marginRight="25dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/long_ticket_mobile_item_view"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/btn_1"
+            android:layout_width="99dp"
+            android:layout_height="30dp">
+
+            <TextView
+                android:id="@+id/long_ticket_mobile_item_button_name"
+                android:textColor="@color/WHITE"
+                android:textSize="20sp"
+                android:text="상세정보"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="43dp"
+            android:layout_marginRight="25dp"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_width="195dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/long_ticket_mobile_item_name"
+                android:textColor="@color/gray_for_text"
+                android:textSize="17sp"
+                android:text="주차권 이름"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/long_ticket_mobile_item_place"
+                android:layout_marginTop="-1dp"
+                android:textColor="@color/gray_for_text"
+                android:textSize="10sp"
+                android:text="주차장 이름"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/long_ticket_mobile_item_below_layout"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:background="@drawable/btn_2"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"/>
+
+        <LinearLayout
+            android:paddingTop="23dp"
+            android:paddingLeft="17dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="157dp">
+
+
+
+            <ImageView
+                android:id="@+id/ticket_mobile_item_picture"
+                android:src="@drawable/img_place"
+                android:layout_width="113dp"
+                android:layout_height="113dp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginLeft="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_marginTop="-2dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/long_ticket_mobile_item_start_date"
+                        android:layout_gravity="top"
+                        android:textSize="24sp"
+                        android:textColor="@color/gray_for_text"
+                        android:text="7777.77.77"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <ImageView
+                        android:id="@+id/long_ticket_mobile_item_calender"
+                        android:layout_marginLeft="22dp"
+                        android:layout_gravity="bottom"
+                        android:background="@drawable/btn_calender_on"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ticket_item_end_date_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-6dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" - "
+                        android:textSize="20sp"
+                        android:textColor="@color/gray_for_text" />
+
+                    <TextView
+                        android:id="@+id/long_ticket_mobile_item_end_date"
+                        android:textSize="20sp"
+                        android:textColor="@color/gray_for_text"
+                        android:text="7777.77.77"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/long_ticket_mobile_item_place_2"
+                    android:textSize="15sp"
+                    android:textColor="@color/gray_for_text"
+                    android:text="서울 강남구 역삼동 701-1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-2dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/long_ticket_mobile_item_before_price_term_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="3dp"
+                        android:text="7달"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray_for_text" />
+
+                    <TextView
+                        android:textSize="15sp"
+                        android:textColor="@color/gray_for_text"
+                        android:text="&#xffe6;"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/long_ticket_mobile_item_before_price_amount"
+                        android:textSize="15sp"
+                        android:textColor="@color/gray_for_text"
+                        android:text="77,777"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-4dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/long_ticket_mobile_item_after_price_term_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:text="7달"
+                        android:textSize="21sp"
+                        android:textColor="@color/red_for_money" />
+
+                    <TextView
+                        android:textSize="21sp"
+                        android:textColor="@color/red_for_money"
+                        android:text="&#xffe6;"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/long_ticket_mobile_item_after_price_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="77,777"
+                        android:textSize="21sp"
+                        android:textColor="@color/red_for_money" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ticket_item_due_date_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="-2dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="유효기간:"
+                        android:textColor="@color/gray_for_text"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/ticket_item_due_date_start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="7777.77.77"
+                        android:textColor="@color/gray_for_text"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="~"
+                        android:textColor="@color/gray_for_text"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/ticket_item_due_date_end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="7777.77.77"
+                        android:textColor="@color/gray_for_text"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/long_ticket_mobile_item_bottom_layout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+            <RelativeLayout
+                android:id="@+id/long_ticket_mobile_item_purchase_button"
+                android:layout_marginTop="1dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/btn_1_small"
+                android:layout_width="126dp"
+                android:layout_height="44dp">
+                <TextView
+                    android:layout_centerInParent="true"
+                    android:textSize="23sp"
+                    android:textColor="@color/WHITE"
+                    android:text="구매하기"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

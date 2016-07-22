@@ -7,7 +7,6 @@ import android.widget.Toast;
 
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
-import com.trams.parkstem.activity.LoginActivity;
 
 import org.json.JSONObject;
 
@@ -22,7 +21,7 @@ import java.net.URL;
 public class NaverLoginClient {
     private Activity activity;
 
-    private LoginActivity.OnLoginSuccessListener listener;
+    private OnLoginSuccessListener listener;
 
     private OAuthLogin mOAuthLoginModule;
     private OAuthLoginHandler mOAuthLoginHandler;
@@ -59,11 +58,9 @@ public class NaverLoginClient {
 
                     extractUserProfile();
 
-                    Toast.makeText(NaverLoginClient.this.activity, "로그인에 성공했습니다", Toast.LENGTH_SHORT).show();
-
                     if(listener != null) {
                         listener.onLoginSuccess(
-                                LoginActivity.OnLoginSuccessListener.NAVER,
+                                OnLoginSuccessListener.NAVER,
                                 userProfile.name,
                                 userProfile.email,
                                 "",
@@ -142,7 +139,7 @@ public class NaverLoginClient {
         return userProfile;
     }
 
-    public void setOnLoginSuccessListener(LoginActivity.OnLoginSuccessListener listener) {
+    public void setOnLoginSuccessListener(OnLoginSuccessListener listener) {
         this.listener = listener;
     }
 

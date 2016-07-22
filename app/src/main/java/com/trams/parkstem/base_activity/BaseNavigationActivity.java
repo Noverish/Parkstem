@@ -1,11 +1,15 @@
 package com.trams.parkstem.base_activity;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -34,6 +38,8 @@ import com.trams.parkstem.activity.SettingActivity;
 import com.trams.parkstem.activity.SplashActivity;
 import com.trams.parkstem.activity.TicketMobileListActivity;
 import com.trams.parkstem.activity.TicketPurchaseListActivity;
+import com.trams.parkstem.gcm.MyGcmListenerService;
+import com.trams.parkstem.others.Essentials;
 
 /**
  * Created by Noverish on 2016-07-09.
@@ -65,6 +71,8 @@ public class BaseNavigationActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        registBroadcastReceiver();
 
     }
 
@@ -179,5 +187,22 @@ public class BaseNavigationActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
+    public void registBroadcastReceiver(){
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action = intent.getAction();
+
+                if(action.equals(MyGcmListenerService.PUSH_RECEIVE)){
+                    Essentials.alertParkState(BaseNavigationActivity.this);
+                }
+            }
+        };
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(MyGcmListenerService.PUSH_RECEIVE));
     }
 }

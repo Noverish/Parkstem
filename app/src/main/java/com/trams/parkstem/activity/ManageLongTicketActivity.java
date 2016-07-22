@@ -5,12 +5,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.server.ServerClient;
-import com.trams.parkstem.view.LongTicketManageView;
+import com.trams.parkstem.view.TicketView;
 
 /**
  * Created by Noverish on 2016-07-08.
@@ -34,18 +33,21 @@ public class ManageLongTicketActivity extends BaseBackSearchActivity {
             int count=0;
 
             ServerClient.Ticket ticket;
-            for(int i=0; i<list.data.size(); i++){
+            for(int i=0; i<list.data.size(); i++) {
                 ticket = list.data.get(i);
-                LongTicketManageView longTicketManageView = new LongTicketManageView(this, ticket);
+                TicketView ticketView = new TicketView(this, ticket, TicketView.LONG_TICKET, "상세정보", true, false, false);
+               /* LongTicketManageView longTicketManageView = new LongTicketManageView(this, ticket);
 
-                if(i==list.data.size()-1){
-                    RelativeLayout relativeLayout = (RelativeLayout)(longTicketManageView.findViewById(R.id.long_ticket_mobile_item_above_layout));
+                */
+
+                /*if (i == list.data.size() - 1) {
+                    RelativeLayout relativeLayout = (RelativeLayout) (longTicketView.findViewById(R.id.long_ticket_mobile_item_above_layout));
                     LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) relativeLayout.getLayoutParams();
 
-                    layoutParams.bottomMargin=0;
-                }
+                    layoutParams.bottomMargin = 0;
+                }*/
 
-                content.addView(longTicketManageView);
+                content.addView(ticketView);
             }
         } catch (ServerClient.ServerErrorException ex) {
             Log.e("error!",ex.msg);

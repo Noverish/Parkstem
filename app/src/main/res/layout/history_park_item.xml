@@ -28,7 +28,7 @@
         android:layout_marginLeft="14dp"
         android:textColor="@color/gray_for_text"
         android:textSize="20sp"
-        android:text="2h30m"
+        android:text="-h--m"
         android:layout_gravity="center_vertical"
         android:layout_width="79dp"
         android:layout_height="wrap_content" />

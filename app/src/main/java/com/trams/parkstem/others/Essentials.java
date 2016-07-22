@@ -1,5 +1,6 @@
 package com.trams.parkstem.others;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -127,15 +128,15 @@ public class Essentials {
         dates = date.split("\\D");
         calendar = Calendar.getInstance();
         if(dates.length == 3){
-            calendar.set(Integer.parseInt(dates[0]),Integer.parseInt(dates[1]), Integer.parseInt(dates[2]));
+            calendar.set(Integer.parseInt(dates[0]),Integer.parseInt(dates[1]) - 1, Integer.parseInt(dates[2]));
             return calendar;
         }
         else if(dates.length == 5){
-            calendar.set(Integer.parseInt(dates[0]),Integer.parseInt(dates[1]), Integer.parseInt(dates[2]),Integer.parseInt(dates[3]),Integer.parseInt(dates[4]));
+            calendar.set(Integer.parseInt(dates[0]),Integer.parseInt(dates[1]) - 1, Integer.parseInt(dates[2]),Integer.parseInt(dates[3]),Integer.parseInt(dates[4]));
             return calendar;
         }
         else if(dates.length == 6){
-            calendar.set(Integer.parseInt(dates[0]),Integer.parseInt(dates[1]), Integer.parseInt(dates[2]),Integer.parseInt(dates[3]),Integer.parseInt(dates[4]), Integer.parseInt(dates[5]));
+            calendar.set(Integer.parseInt(dates[0]),Integer.parseInt(dates[1]) - 1, Integer.parseInt(dates[2]),Integer.parseInt(dates[3]),Integer.parseInt(dates[4]), Integer.parseInt(dates[5]));
             return calendar;
         } else {
             Log.e("ERROR","stringToCalendar Error - datas.lenght is " + dates.length + " [" + date + "]");
@@ -149,5 +150,41 @@ public class Essentials {
         String min = calendar.get(Calendar.MINUTE) + "";
 
         return hour + ":" + numberWithZero(min) + amPm;
+    }
+
+    public static String calendarToDate(Calendar calendar) {
+        String date = calendar.get(Calendar.YEAR) + ".";
+        date += Essentials.numberWithZero(calendar.get(Calendar.MONTH) + 1) + ".";
+        date += Essentials.numberWithZero(calendar.get(Calendar.DAY_OF_MONTH));
+
+        return date;
+    }
+
+    public static void alertParkState(Activity activity) {
+        try {
+            ServerClient.RecentCar recentCar = ServerClient.getInstance().recentCar();
+            ServerClient.ParkInfo parkInfo = ServerClient.getInstance().parkInfo(recentCar.local_id);
+
+            if(recentCar.in_date != null && recentCar.out_date == null) {
+                new android.support.v7.app.AlertDialog.Builder(activity)
+                        .setIcon(android.R.drawable.ic_dialog_info)
+                        .setTitle("입차")
+                        .setMessage(parkInfo.local_name + " " + Essentials.calendarToTime(recentCar.in_date) + " 입차")
+                        .setPositiveButton("확인", null)
+                        .show();
+            } else if (recentCar.in_date != null){
+                new android.support.v7.app.AlertDialog.Builder(activity)
+                        .setIcon(android.R.drawable.ic_dialog_info)
+                        .setTitle("출차")
+                        .setMessage(parkInfo.local_name + " " + Essentials.calendarToTime(recentCar.out_date) + " 출차")
+                        .setPositiveButton("확인", null)
+                        .show();
+            } else {
+
+            }
+
+        } catch (ServerClient.ServerErrorException error) {
+            error.printStackTrace();
+        }
     }
 }

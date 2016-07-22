@@ -5,12 +5,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.server.ServerClient;
-import com.trams.parkstem.view.TicketManageView;
+import com.trams.parkstem.view.TicketView;
 
 /**
  * Created by Noverish on 2016-07-08.
@@ -36,16 +35,8 @@ public class ManageTicketActivity extends BaseBackSearchActivity {
             ServerClient.Ticket ticket;
             for(int i=0; i < list.data.size(); ++i){
                 ticket = list.data.get(i);
-                TicketManageView ticketManageView = new TicketManageView(this, ticket);
-
-                if(i==list.data.size()-1){
-                    RelativeLayout relativeLayout = (RelativeLayout)(ticketManageView.findViewById(R.id.ticket_mobile_item_above_layout));
-                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) relativeLayout.getLayoutParams();
-
-                    layoutParams.bottomMargin=0;
-                }
-
-                content.addView(ticketManageView);
+                TicketView ticketView = new TicketView(this, ticket, TicketView.SHORT_TICKET, "상세정보", true, false, true);
+                content.addView(ticketView);
             }
         } catch (ServerClient.ServerErrorException ex) {
             Log.e("error!",ex.msg);
