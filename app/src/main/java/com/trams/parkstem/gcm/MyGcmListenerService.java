@@ -55,9 +55,10 @@ public class MyGcmListenerService extends GcmListenerService {
      * @param message
      */
     private void sendNotification(String title, String message) {
-        PendingIntent intent = PendingIntent.getActivity(this, 0,
-                new Intent(getApplicationContext(), ParkStatusActivity.class),
-                PendingIntent.FLAG_ONE_SHOT);
+        Intent intent = new Intent(getApplicationContext(), ParkStatusActivity.class);
+        intent.putExtra("alert",true);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent , PendingIntent.FLAG_ONE_SHOT);
 
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -74,7 +75,7 @@ public class MyGcmListenerService extends GcmListenerService {
                         .setContentText(parkInfo.local_name + " " + Essentials.calendarToTime(recentCar.in_date) + " 입차")
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setTicker("파크스템")
-                        .setContentIntent(intent)
+                        .setContentIntent(pendingIntent)
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
                         .build();
@@ -85,7 +86,7 @@ public class MyGcmListenerService extends GcmListenerService {
                         .setContentText(parkInfo.local_name + " " + Essentials.calendarToTime(recentCar.out_date) + " 출차")
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setTicker("파크스템")
-                        .setContentIntent(intent)
+                        .setContentIntent(pendingIntent)
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
                         .build();

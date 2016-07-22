@@ -1,5 +1,6 @@
 package com.trams.parkstem.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.TextView;
@@ -36,9 +37,6 @@ public class ParkStatusActivity extends BaseBackSearchActivity {
             TextView carOutTime = (TextView)findViewById(R.id.activity_park_state_car_out_time);
             TextView totalAmount = (TextView) findViewById(R.id.activity_park_state_total_amount);
 
-
-
-
             parkName.setText(parkInfo.local_name);
             parkAddress.setText(parkInfo.local_address);
 
@@ -68,6 +66,21 @@ public class ParkStatusActivity extends BaseBackSearchActivity {
 
         } catch (ServerClient.ServerErrorException ex) {
             Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        Intent intent = getIntent();
+
+        if(intent != null) {
+            boolean alert = intent.getBooleanExtra("alert", false);
+
+            if(alert) {
+                Essentials.alertParkState(this);
+            }
         }
     }
 }
