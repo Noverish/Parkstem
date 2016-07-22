@@ -32,7 +32,7 @@
                     android:id="@+id/activity_park_state_park_name"
                     android:textColor="@color/BLACK"
                     android:textSize="26sp"
-                    android:text="A 주차장"
+                    android:text="주차장 이름"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -40,23 +40,74 @@
                     android:id="@+id/activity_park_state_park_address"
                     android:textColor="@color/BLACK"
                     android:textSize="15sp"
-                    android:text="서울 강남구 역삼동 701-1"
+                    android:text="주차장 주소"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <TextView
-                    android:textColor="@color/BLACK"
-                    android:textSize="22sp"
-                    android:text="기본 30분 &#x20a9;3,000"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/BLACK"
+                        android:textSize="22sp"
+                        android:text="기본 " />
+                    <TextView
+                        android:id="@+id/activity_park_state_base_minute"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/BLACK"
+                        android:textSize="22sp"
+                        android:text="77" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/BLACK"
+                        android:textSize="22sp"
+                        android:text="분 &#x20a9;" />
+                    <TextView
+                        android:id="@+id/activity_park_state_base_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/BLACK"
+                        android:textSize="22sp"
+                        android:text="7,777" />
+                </LinearLayout>
 
-                <TextView
-                    android:textColor="@color/BLACK"
-                    android:textSize="22sp"
-                    android:text="추가 10분 &#x20a9;1,000"
+
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/BLACK"
+                        android:textSize="22sp"
+                        android:text="추가 " />
+                    <TextView
+                        android:id="@+id/activity_park_state_park_price_time1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/BLACK"
+                        android:textSize="22sp"
+                        android:text="77" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/BLACK"
+                        android:textSize="22sp"
+                        android:text="분 &#x20a9;" />
+                    <TextView
+                        android:id="@+id/activity_park_state_park_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/BLACK"
+                        android:textSize="22sp"
+                        android:text="7,777" />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -66,12 +117,12 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp">
                 <TextView
-                    android:id="@+id/activity_park_state_park_price_time"
+                    android:id="@+id/activity_park_state_park_price_time2"
                     android:layout_marginTop="20dp"
+                    android:text="77"
                     android:textSize="21sp"
                     android:textColor="@color/WHITE"
                     android:layout_alignParentRight="true"
-                    android:text="30"
                     android:layout_marginRight="28dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -129,7 +180,7 @@
             android:layout_alignParentRight="true"
             android:layout_gravity="center_vertical|right"
             android:textSize="23sp"
-            android:text="2:00PM"
+            android:text="BLANK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
@@ -159,7 +210,7 @@
             android:layout_alignParentRight="true"
             android:layout_gravity="center_vertical|right"
             android:textSize="23sp"
-            android:text="4:05PM"
+            android:text="BLANK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
@@ -199,7 +250,7 @@
             android:layout_alignParentRight="true"
             android:layout_gravity="center_vertical|right"
             android:textSize="23sp"
-            android:text="&#x20a9;12,000"
+            android:text="&#x20a9;BLANK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>

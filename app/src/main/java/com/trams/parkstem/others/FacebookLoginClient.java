@@ -17,7 +17,6 @@ import com.facebook.Profile;
 import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.trams.parkstem.activity.LoginActivity;
 
 import org.json.JSONObject;
 
@@ -29,7 +28,7 @@ import java.util.Arrays;
 public class FacebookLoginClient  {
     private Activity activity;
 
-    private LoginActivity.OnLoginSuccessListener listener;
+    private OnLoginSuccessListener listener;
 
     private CallbackManager callbackManager = null;
     private AccessTokenTracker accessTokenTracker = null;
@@ -67,7 +66,7 @@ public class FacebookLoginClient  {
 
             if(listener != null)
                 listener.onLoginSuccess(
-                        LoginActivity.OnLoginSuccessListener.FACEBOOK,
+                        OnLoginSuccessListener.FACEBOOK,
                         profile.getName(),
                         parameters.getString("email"),
                         "",
@@ -127,7 +126,7 @@ public class FacebookLoginClient  {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void setOnLoginSuccessListener(LoginActivity.OnLoginSuccessListener onLoginSuccessListener) {
+    public void setOnLoginSuccessListener(OnLoginSuccessListener onLoginSuccessListener) {
         listener = onLoginSuccessListener;
     }
 

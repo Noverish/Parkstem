@@ -61,27 +61,28 @@ public class BelowBar extends LinearLayout {
 
         try {
             ServerClient.DashBoard dashBoard = ServerClient.getInstance().dashboard();
+
             String carNumber = dashBoard.mycar;
             if(carNumber.equals(""))
                 carNumber = "차량등록";
 
+            String cardName = dashBoard.mycard;
+            if(cardName.equals(""))
+                cardName = "카드등록";
+
+            cardText.setText(cardName);
             carText.setText(carNumber);
         } catch (ServerClient.ServerErrorException error) {
             error.printStackTrace();
             carText.setText(error.msg);
-        }
-
-        try {
-            ServerClient.DashBoard dashBoard = ServerClient.getInstance().dashboard();
-            String carNumber = dashBoard.mycard;
-            if(carNumber.equals(""))
-                carNumber = "카드등록";
-
-            cardText.setText(carNumber);
-        } catch (ServerClient.ServerErrorException error) {
-            error.printStackTrace();
             cardText.setText(error.msg);
         }
+
+
+
+
+
+
     }
 
 }

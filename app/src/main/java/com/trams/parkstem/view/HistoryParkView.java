@@ -33,7 +33,7 @@ public class HistoryParkView extends LinearLayout {
         String date =(int)(parkHistory.out_date.get(Calendar.MONTH)+1) + "." + parkHistory.out_date.get(Calendar.DAY_OF_MONTH);
         name.setText(date);
 
-        name = (TextView) findViewById(R.id.history_payment_item_time);
-//        name.setText(parkHistory.park_time);
+        name = (TextView) findViewById(R.id.history_park_item_time);
+        name.setText(parkHistory.cal_time);
     }
 }

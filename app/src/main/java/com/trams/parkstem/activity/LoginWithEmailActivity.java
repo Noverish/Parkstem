@@ -22,7 +22,6 @@ public class LoginWithEmailActivity extends BaseBackSearchActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_by_email);
-        setBackEnable(false);
 
         RelativeLayout LoginButton = (RelativeLayout) findViewById(R.id.activity_login_by_email_login_button);
         TextView EmailRegister = (TextView) findViewById(R.id.activity_login_by_email_register);
@@ -51,8 +50,8 @@ public class LoginWithEmailActivity extends BaseBackSearchActivity {
                 Toast.makeText(this, "잘못된 이메일 형식입니다.", Toast.LENGTH_SHORT).show();
             } else if(password.length() < 4) {
                 Toast.makeText(this, "비밀번호는 4자리 이상이어야 합니다.", Toast.LENGTH_SHORT).show();
-            } else{
-                //ServerClient.getInstance().login(email, password, getIntent().getStringExtra("token"));
+            } else {
+                ServerClient.getInstance().login(email, password, getIntent().getStringExtra("token"));
 
                 Toast.makeText(this, "로그인에 성공했습니다.",Toast.LENGTH_SHORT).show();
 
@@ -64,14 +63,10 @@ public class LoginWithEmailActivity extends BaseBackSearchActivity {
                     startActivity(intent);
                 }
             }
-
-
-        } catch (NullPointerException nul) {
-            nul.printStackTrace();
-        }/* catch (ServerClient.ServerErrorException ex){
+        } catch (ServerClient.ServerErrorException ex){
             ex.printStackTrace();
             Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
-        }*/
+        }
     }
 
     private  void onEmailRegisterClicked(){

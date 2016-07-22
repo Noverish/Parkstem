@@ -11,20 +11,24 @@ import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.trams.parkstem.R;
+import com.trams.parkstem.base_activity.BaseNavigationActivity;
 import com.trams.parkstem.others.FacebookLoginClient;
+import com.trams.parkstem.others.KakaoLoginClient;
 import com.trams.parkstem.others.NaverLoginClient;
+import com.trams.parkstem.others.OnLoginSuccessListener;
 import com.trams.parkstem.server.LoginDatabase;
 import com.trams.parkstem.server.ServerClient;
 
 /**
  * Created by Noverish on 2016-07-04.
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements OnLoginSuccessListener {
     private FacebookLoginClient facebookLoginClient;
     private NaverLoginClient naverLoginClient;
+    private KakaoLoginClient kakaoLoginClient;
     private LoginDatabase loginDatabase;
 
-    private String gcmDeviceToken = "null";
+    private String gcmDeviceToken = "token";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,70 +50,46 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 ServerClient.getInstance().login(loginDatabase.getId(), loginDatabase.getPw(), gcmDeviceToken);
 
+                Toast.makeText(this, "자동 로그인 되었습니다!", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(this, HomeActivity.class);
+                startActivity(intent);
+                finish();
             } catch (ServerClient.ServerErrorException ex) {
-                Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "자동 로그인에 실패 했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
             }
-
-            Toast.makeText(this, "자동 로그인 되었습니다!", Toast.LENGTH_SHORT).show();
-
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
-            finish();
         }
 
-        naverLoginClient = NaverLoginClient.getInstance(LoginActivity.this);
-        naverLoginClient.setOnLoginSuccessListener(new OnLoginSuccessListener() {
-            @Override
-            public void onLoginSuccess(int gubun, String name, String email, String mobile, String nickName, String kakaoID, String facebookID, String naverID, String parkstemID, String parkstemPW) {
-                try {
-                    ServerClient.getInstance().login(email, "", gcmDeviceToken);
-                } catch (ServerClient.ServerErrorException ex) {
-                    Toast.makeText(LoginActivity.this, ex.msg, Toast.LENGTH_SHORT).show();
-                }
+        naverLoginClient = NaverLoginClient.getInstance(this);
+        naverLoginClient.setOnLoginSuccessListener(this);
 
-                loginDatabase.setData(email);
+        facebookLoginClient = FacebookLoginClient.getInstance(this);
+        facebookLoginClient.setOnLoginSuccessListener(this);
 
-                if(ServerClient.getInstance().login.certification) {
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(LoginActivity.this, FirstScreenActivity.class);
-                    startActivity(intent);
-                }
-
-                finish();
-            }
-        });
-
-        facebookLoginClient = FacebookLoginClient.getInstance(LoginActivity.this);
-        facebookLoginClient.setOnLoginSuccessListener(new OnLoginSuccessListener() {
-            @Override
-            public void onLoginSuccess(int gubun, String name, String email, String mobile, String nickName, String kakaoID, String facebookID, String naverID, String parkstemID, String parkstemPW) {
-                try {
-                    ServerClient.getInstance().login(email, "", gcmDeviceToken);
-                } catch (ServerClient.ServerErrorException ex) {
-                    Toast.makeText(LoginActivity.this, ex.msg, Toast.LENGTH_SHORT).show();
-                }
-
-                loginDatabase.setData(email);
-
-                if(ServerClient.getInstance().login.certification) {
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
-                } else {
-                    Intent intent = new Intent(LoginActivity.this, FirstScreenActivity.class);
-                    startActivity(intent);
-                }
-
-                finish();
-            }
-        });
+        kakaoLoginClient = KakaoLoginClient.getInstance(this);
+        kakaoLoginClient.setOnLoginSuccessListener(this);
 
         LinearLayout naverLoginButton = (LinearLayout) findViewById(R.id.activity_login_naver);
         naverLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 naverLoginClient.login();
+            }
+        });
+
+        LinearLayout kakaoLoginButton = (LinearLayout) findViewById(R.id.login_layout_kakaotalk);
+        kakaoLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                kakaoLoginClient.login();
+            }
+        });
+
+        LinearLayout facebookLoginButton = (LinearLayout)findViewById(R.id.login_layout_facebook);
+        facebookLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                facebookLoginClient.login();
             }
         });
 
@@ -120,14 +100,6 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, LoginWithEmailActivity.class);
                 intent.putExtra("token",gcmDeviceToken);
                 startActivity(intent);
-            }
-        });
-
-        LinearLayout loginButton = (LinearLayout)findViewById(R.id.login_layout_facebook);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                facebookLoginClient.login();
             }
         });
     }
@@ -142,17 +114,30 @@ public class LoginActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         facebookLoginClient.onActivityResult(requestCode, resultCode, data);
+        kakaoLoginClient.onActivityResult(requestCode, resultCode, data);
 
+        if(resultCode == BaseNavigationActivity.RESULT_FINISH)
+            finish();
     }
 
-    public interface OnLoginSuccessListener {
-        int NAVER = 0;
-        int FACEBOOK = 1;
-        int KAKAO = 2;
-        int PARKSTEM = 3;
+    @Override
+    public void onLoginSuccess(int gubun, String name, String email, String mobile, String nickName, String kakaoID, String facebookID, String naverID, String parkstemID, String parkstemPW) {
+        try {
+            ServerClient.getInstance().login(email, "", gcmDeviceToken);
 
-        void onLoginSuccess(
-                int gubun, String name, String email, String mobile, String nickName,
-                String kakaoID, String facebookID, String naverID, String parkstemID, String parkstemPW);
+            loginDatabase.setData(email);
+
+            if(ServerClient.getInstance().login.certification) {
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(LoginActivity.this, FirstScreenActivity.class);
+                startActivity(intent);
+            }
+
+            finish();
+        } catch (ServerClient.ServerErrorException ex) {
+            Toast.makeText(LoginActivity.this, "로그인에 실패 했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
+        }
     }
 }

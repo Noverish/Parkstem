@@ -16,6 +16,7 @@ import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.base_activity.BaseNavigationActivity;
 import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.others.FacebookLoginClient;
+import com.trams.parkstem.others.KakaoLoginClient;
 import com.trams.parkstem.others.NaverLoginClient;
 import com.trams.parkstem.server.LoginDatabase;
 import com.trams.parkstem.server.ServerClient;
@@ -103,9 +104,11 @@ public class SettingActivity extends BaseBackSearchActivity {
     private void logout() {
         FacebookLoginClient facebookLoginClient = FacebookLoginClient.getInstance(this);
         NaverLoginClient naverLoginClient = NaverLoginClient.getInstance(this);
+        KakaoLoginClient kakaoLoginClient = KakaoLoginClient.getInstance(this);
 
         facebookLoginClient.logout();
         naverLoginClient.logout(this);
+        kakaoLoginClient.logout();
 
         LoginDatabase.getInstance(this).clearDatabase();
 
@@ -128,11 +131,11 @@ public class SettingActivity extends BaseBackSearchActivity {
                         try {
                             ServerClient.getInstance().memberDelete();
                             Toast.makeText(SettingActivity.this, "회원탈퇴에 성공하였습니다.",Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
-                            startActivity(intent);
 
-                            setResult(BaseNavigationActivity.RESULT_FINISH);
-                            finish();
+                            logout();
+
+                            KakaoLoginClient kakaoLoginClient = KakaoLoginClient.getInstance(SettingActivity.this);
+                            kakaoLoginClient.signOut();
                         } catch (ServerClient.ServerErrorException error) {
                             error.printStackTrace();
                             Toast.makeText(SettingActivity.this, "회원탈퇴에 실패하였습니다. - " + error.msg,Toast.LENGTH_SHORT).show();

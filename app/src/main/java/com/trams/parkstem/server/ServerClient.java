@@ -1,5 +1,7 @@
 package com.trams.parkstem.server;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.trams.parkstem.others.Essentials;
@@ -144,8 +146,10 @@ public class ServerClient  {
 
 
     //회원가입 및 로그인 관련 함수
-    public void login(final String parkstemID, final String parkstemPW, final String token) throws ServerErrorException{
-        String msg;
+    public void login(final String parkstemID, final String parkstemPW, final String token) throws ServerErrorException {
+        Log.e(TAG,"login : " + parkstemID + ", " + parkstemPW + ", " + token);
+
+        /*String msg;
         final String LOGIN_URL = "http://app.parkstem.com/api/member_login.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -195,10 +199,18 @@ public class ServerClient  {
         } catch (JSONException ex) {
             ex.printStackTrace();
             throw new ServerErrorException();
-        }
+        }*/
+
+        login.name = "나이름";
+        login.email = "email@email.com";
+        login.phone = "000-000-0000";
+        login.certification = true;
+        login.pushYN = false;
     }
 
     public void register(final String name, final String email, final String mobile, final String nickName, final String parkstemID, final String parkstemPW, final String token) throws ServerErrorException{
+        Log.e(TAG,"register : " + name + ", " + email + ", " + mobile + ", " + nickName + ", " + parkstemID + ", " + parkstemPW + ", " + token);
+
         String msg;
         final String JOIN_URL = "http://app.parkstem.com/api/member_join.php";
         Thread thread = new Thread(new Runnable() {
@@ -243,9 +255,13 @@ public class ServerClient  {
             ex.printStackTrace();
             throw new ServerErrorException();
         }
+
+
     }
 
     public MemberInfo memberInfo() throws ServerErrorException{
+        Log.e(TAG,"memberInfo");
+
         String msg;
         final String LOGIN_URL = "http://app.parkstem.com/api/member_login.php";
         Thread thread = new Thread(new Runnable() {
@@ -294,9 +310,18 @@ public class ServerClient  {
             ex.printStackTrace();
             throw new ServerErrorException();
         }
+
+        /*MemberInfo memberInfo = new MemberInfo();
+        memberInfo.name = "나이름";
+        memberInfo.certification = true;
+        memberInfo.pushYN = false;
+
+        return memberInfo;*/
     }
 
     public void memberDelete() throws ServerErrorException{
+        Log.e(TAG,"memberDelete");
+
         String msg;
         final String DEL_URL = "http://app.parkstem.com/api/member_del.php";
         Thread thread = new Thread(new Runnable() {
@@ -332,6 +357,8 @@ public class ServerClient  {
 
     //회원 정보관리 함수
     public DashBoard dashboard() throws ServerErrorException{
+        Log.e(TAG,"dashboard");
+
         String msg;
         final String DASH_URL = "http://app.parkstem.com/api/dashboard.php";
         Thread thread = new Thread(new Runnable() {
@@ -381,6 +408,8 @@ public class ServerClient  {
     } //확인완료
 
     public void hipassOn(final String hipass) throws ServerErrorException{
+        Log.e(TAG,"hipassOn : " + hipass);
+
         String msg;
         final String LOGIN_URL = "http://app.parkstem.com/api/hipass.php";
         Thread thread = new Thread(new Runnable() {
@@ -418,6 +447,8 @@ public class ServerClient  {
 
     //주차 현황 함수
     public RecentCar recentCar() throws ServerErrorException{
+        Log.e(TAG,"RecentCar");
+
         String msg;
         final String Recent_URL = "http://app.parkstem.com/api/car_recent.php";
         Thread thread = new Thread(new Runnable() {
@@ -470,8 +501,10 @@ public class ServerClient  {
      * 확인 필요
      * **/
     public ParkInfo parkInfo(final String local_id) throws ServerErrorException{
-        /*String msg;
-        final String Parkinfo_URL = "http://app.parkstem.com/api/car_recent.php";
+        Log.e(TAG,"parkInfo : " + local_id);
+
+        String msg;
+        final String Parkinfo_URL = "http://app.parkstem.com/api/park_info.php";
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -499,11 +532,16 @@ public class ServerClient  {
                 parkinfo.local_name = jdata.getString("local_name");
                 parkinfo.local_content = jdata.getString("local_content");
                 parkinfo.local_address = jdata.getString("local_address");
+                parkinfo.new_address = jdata.getString("new_address");
+                parkinfo.short_address = jdata.getString("short_address");
                 parkinfo.local_phone = jdata.getString("local_phone");
-                parkinfo.local_photo = jdata.getString("local_photo");
+                parkinfo.local_photo1 = jdata.getString("local_photo1");
+                parkinfo.local_photo2 = jdata.getString("local_photo2");
                 parkinfo.free_time = jdata.getInt("free_time");
                 parkinfo.park_price = jdata.getString("park_price");
                 parkinfo.park_price_time = jdata.getInt("park_price_time");
+                parkinfo.base_minute = jdata.getInt("base_minute");
+                parkinfo.base_price = jdata.getString("base_price");
                 return parkinfo;
             }
             else{
@@ -512,26 +550,14 @@ public class ServerClient  {
         } catch (JSONException ex) {
             ex.printStackTrace();
             throw new ServerErrorException();
-        }*/
-
-
-        ParkInfo info = new ParkInfo();
-        info.local_id = "001";
-        info.local_name = "주차장 이름";
-        info.local_content = "주차장 설명";
-        info.local_address = "주차장 주소";
-        info.local_phone = "000-000-0000";
-        info.local_photo = "주차장 이미지.png";
-        info.free_time = 0;
-        info.park_price = "7,777";
-        info.park_price_time = 77;
-        return info;
-
-    } //확인불가 - 주차장 아이디를 모름, sql에러 메세지가 포함됨
+        }
+    } //확인완료
 
     /**mycar에서 2자리숫자+한글 글자 하나+4자리 숫자를 조합했을 때 앞의 두 자리 숫자만 저장되는 경우가 많음**/
     //차량관리 함수
     public CarLists CarRegister(final String mycar) throws ServerErrorException{
+        Log.e(TAG,"listOfCar");
+
         String msg;
         final String DASH_URL = "http://app.parkstem.com/api/car_reg.php";
         Thread thread = new Thread(new Runnable() {
@@ -589,6 +615,8 @@ public class ServerClient  {
      * @throws ServerErrorException
      */
     public CarLists listOfCar() throws ServerErrorException{
+        Log.e(TAG,"listOfCar");
+
         String msg;
         final String Clist_URL = "http://app.parkstem.com/api/car_list.php";
         Thread thread = new Thread(new Runnable() {
@@ -619,7 +647,7 @@ public class ServerClient  {
                 for(int i=0;i<jarray.length();i++) {
                     JSONObject jdata = jarray.getJSONObject(i);
                     CarInfo carInfo = new CarInfo();
-                    //carInfo.idx = jdata.getInt("idx");
+                    carInfo.idx = jdata.getInt("idx");
                     //carInfo.uniqueID = jdata.getString("uniqueID");
                     carInfo.sort = jdata.getInt("sort");
                     carInfo.mycar = jdata.getString("carNumber");
@@ -643,6 +671,8 @@ public class ServerClient  {
     } //확인완료
 
     public CarLists priorityCar(final String index) throws ServerErrorException{
+        Log.e(TAG,"priorityCar : " + index);
+
         String msg;
         final String Clist_URL = "http://app.parkstem.com/api/car_sort.php";
         Thread thread = new Thread(new Runnable() {
@@ -690,33 +720,11 @@ public class ServerClient  {
             ex.printStackTrace();
             throw new ServerErrorException();
         }
-        /*CarLists carLists = new CarLists();
-        carLists.itemTotalCount = 2;
-        carLists.pageCount = 1;
-
-        CarInfo ci1 = new CarInfo();
-        ci1.reg_date = Calendar.getInstance();
-        ci1.sort = 5;
-        ci1.idx = 234;
-        ci1.uniqueID = "14";
-        ci1.mycar = "BMK";
-        CarInfo ci2 = new CarInfo();
-        ci2.reg_date = Calendar.getInstance();
-        ci2.sort = 2;
-        ci2.idx = 134;
-        ci2.uniqueID = "5";
-        ci2.mycar = "SM5";
-
-
-        ArrayList<CarInfo> list = new ArrayList<>();
-        list.add(ci1);
-        list.add(ci2);
-
-        carLists.data = list;
-        return carLists;*/
     } //확인완료
 
     public void deleteCar(final String mycar) throws ServerErrorException{
+        Log.e(TAG,"deleteCar : " + mycar);
+
         String msg;
         final String DELETE_URL = "http://app.parkstem.com/api/car_del.php";
         Thread thread = new Thread(new Runnable() {
@@ -750,6 +758,8 @@ public class ServerClient  {
     } //확인완료
 
     public CarIn carIn() throws ServerErrorException{
+        Log.e(TAG,"carIn");
+
         String msg;
         final String CARIN_URL = "http://app.parkstem.com/api/car_in.php";
         Thread thread = new Thread(new Runnable() {
@@ -796,9 +806,11 @@ public class ServerClient  {
             ex.printStackTrace();
             throw new ServerErrorException();
         }
-    } //확인불가 - sql에러 메세지가 포함됨
+    } //확인불가 - data가 비어있음
 
     public CarOut carOut() throws ServerErrorException {
+        Log.e(TAG,"carOut");
+
         String msg;
         final String CAROUT_URL = "http://app.parkstem.com/api/car_out.php";
         Thread thread = new Thread(new Runnable() {
@@ -844,7 +856,7 @@ public class ServerClient  {
             ex.printStackTrace();
             throw new ServerErrorException();
         }
-    } //확인불가 - sql에러 메세지가 포함됨
+    } //확인불가 - data가 비어있음
 
 
     //카드 관련 함수
@@ -1062,6 +1074,8 @@ public class ServerClient  {
     } //확인불가 - 실패할 수도 있어서 못하겠다
 
     public ParkHistoryList parkHistory() throws ServerErrorException{
+        Log.e(TAG,"parkHistory");
+
         final String HiPay_URL = "http://app.parkstem.com/api/pay_list.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -1092,8 +1106,10 @@ public class ServerClient  {
                     pm.card_name = jdata.getString("card_name");
                     pm.local_id = jdata.getString("local_id");
                     pm.local_name = jdata.getString("local_name");
+                    pm.in_date = Essentials.stringToCalendar(jdata.getString("in_date"));
                     pm.out_date = Essentials.stringToCalendar(jdata.getString("out_date"));
                     pm.pay_date = Essentials.stringToCalendar(jdata.getString("pay_date"));
+                    pm.cal_time = jdata.getString("cal_time");
                     pm.price = jdata.getString("price");
                     paymentlist.data.add(pm);
                 }
@@ -1109,6 +1125,8 @@ public class ServerClient  {
     } //확인완료
 
     public TicketPurchaseList ticketPurchase() throws ServerErrorException{
+        Log.e(TAG,"ticketPurchase");
+
         String msg;
         final String TicketBuy_URL = "http://app.parkstem.com/api/ticket_buy_list.php";
         Thread thread = new Thread(new Runnable() {
@@ -1164,7 +1182,7 @@ public class ServerClient  {
 
 
     //티켓 관련 함수
-    private TicketLists listOfAllTicktes() throws ServerErrorException {
+    private TicketLists listOfAllTickets() throws ServerErrorException {
         String msg;
         final String Tlist_URL = "http://app.parkstem.com/api/ticket_list.php";
         Thread thread = new Thread(new Runnable() {
@@ -1203,7 +1221,7 @@ public class ServerClient  {
                     ticket.region = jdata.getString("region");
                     ticket.gubun = jdata.getInt("gubun");
                     ticket.available_time = jdata.getInt("available_time");
-                    ticket.allow = jdata.getInt("allow");
+                    ticket.allow = jdata.getString("allow").equals("Y");
                     ticket.original_price = jdata.getString("original_price");
                     ticket.price = jdata.getString("price");
                     ticket.start_date = Essentials.stringToCalendar(jdata.getString("start_date"));
@@ -1226,7 +1244,7 @@ public class ServerClient  {
         TicketLists allTickets;
 
         try {
-            allTickets = listOfAllTicktes();
+            allTickets = listOfAllTickets();
         } catch (ServerErrorException ex) {
             throw ex;
         }
@@ -1246,7 +1264,7 @@ public class ServerClient  {
         TicketLists allTickets;
 
         try {
-            allTickets = listOfAllTicktes();
+            allTickets = listOfAllTickets();
 
             longTicketLists.itemTotalCount = allTickets.itemTotalCount;
             longTicketLists.pageCount = allTickets.pageCount;
@@ -1532,11 +1550,16 @@ public class ServerClient  {
         public String local_name;
         public String local_content;
         public String local_address;
+        public String new_address;
+        public String short_address;
         public String local_phone;
-        public String local_photo;
+        public String local_photo1;
+        public String local_photo2;
         public int free_time;
         public String park_price;
         public int park_price_time;
+        public int base_minute;
+        public String base_price;
     }
 
     public class CarLists{
@@ -1595,10 +1618,11 @@ public class ServerClient  {
         public String card_name;
         public String local_id;
         public String local_name;
+        public Calendar in_date;
         public Calendar out_date;
         public Calendar pay_date;
         public String price;
-        public String park_time;
+        public String cal_time;
     }
     public class TicketPurchaseList {
         public int itemTotalCount;
@@ -1617,21 +1641,6 @@ public class ServerClient  {
         public String ticket_name;
         public int ticket_idx;
 
-        @Override
-        public String toString() {
-            return "TicketPurchase{" +
-                    "idx=" + idx +
-                    ", gubun=" + gubun +
-                    ", local_id='" + local_id + '\'' +
-                    ", card_name='" + card_name + '\'' +
-                    ", price='" + price + '\'' +
-                    ", start_date=" + start_date +
-                    ", end_date=" + end_date +
-                    ", pay_date=" + pay_date +
-                    ", ticket_name='" + ticket_name + '\'' +
-                    ", ticket_idx=" + ticket_idx +
-                    '}';
-        }
     }
 
     public class TicketLists{
@@ -1641,7 +1650,7 @@ public class ServerClient  {
     }
 
 
-    public class Ticket{
+    public static class Ticket implements Parcelable {
         public static final int LONG_TICKET_GUBUN = 2;
         public static final int SHORT_TICEKT_GUBUN = 1;
 
@@ -1658,27 +1667,69 @@ public class ServerClient  {
         public Calendar start_date;
         public Calendar end_date;
         public Calendar regdate;
-        public int allow;
+        public boolean allow;
+
+        public Ticket() {
+
+        }
+
+        public Ticket(Parcel in) {
+            String[] data = new String[14];
+
+            in.readStringArray(data);
+            this.idx = Integer.parseInt(data[0]);
+            this.local_id = data[1];
+            this.ticket_name = data[2];
+            this.region = data[3];
+            this.term = Calendar.getInstance();
+            this.term.setTimeInMillis(Long.parseLong(data[4]));
+            this.term_name = data[5];
+            this.available_time = Integer.parseInt(data[6]);
+            this.gubun = Integer.parseInt(data[7]);
+            this.original_price = data[8];
+            this.price = data[9];
+            this.start_date = Calendar.getInstance();
+            this.start_date.setTimeInMillis(Long.parseLong(data[10]));
+            this.end_date = Calendar.getInstance();
+            this.end_date.setTimeInMillis(Long.parseLong(data[11]));
+            this.regdate = Calendar.getInstance();
+            this.regdate.setTimeInMillis(Long.parseLong(data[12]));
+            this.allow = Boolean.parseBoolean(data[13]);
+        }
 
         @Override
-        public String toString() {
-            return "Ticket{" +
-                    "idx=" + idx +
-                    ", local_id='" + local_id + '\'' +
-                    ", ticket_name='" + ticket_name + '\'' +
-                    ", region='" + region + '\'' +
-                    ", term=" + term +
-                    ", term_name='" + term_name + '\'' +
-                    ", available_time=" + available_time +
-                    ", gubun=" + gubun +
-                    ", original_price='" + original_price + '\'' +
-                    ", price='" + price + '\'' +
-                    ", start_date=" + start_date +
-                    ", end_date=" + end_date +
-                    ", regdate=" + regdate +
-                    ", allow=" + allow +
-                    '}';
+        public int describeContents() {
+            return 0;
         }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeStringArray(new String[] {
+                    this.idx + "",
+                    this.local_id,
+                    this.ticket_name,
+                    this.region,
+                    this.term.getTimeInMillis() + "",
+                    this.term_name,
+                    this.available_time + "",
+                    this.gubun + "",
+                    this.original_price,
+                    this.price,
+                    this.start_date.getTimeInMillis() + "",
+                    this.end_date.getTimeInMillis() + "",
+                    this.regdate.getTimeInMillis() + "",
+                    this.allow + ""});
+        }
+
+        public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+            public Ticket createFromParcel(Parcel in) {
+                return new Ticket(in);
+            }
+
+            public Ticket[] newArray(int size) {
+                return new Ticket[size];
+            }
+        };
     }
 
     public class LongTicketLists{

@@ -5,13 +5,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.server.ServerClient;
-import com.trams.parkstem.view.LongTicketMobileListView;
-import com.trams.parkstem.view.TicketMobileListView;
+import com.trams.parkstem.view.TicketView;
 
 import java.util.ArrayList;
 
@@ -20,8 +18,8 @@ import java.util.ArrayList;
  */
 public class TicketMobileListActivity extends BaseBackSearchActivity {
     private SwipeRefreshLayout swipeLayout;
-    private ArrayList<TicketMobileListView> ticketMobileListViews = new ArrayList<>();
-    private ArrayList<LongTicketMobileListView> longTicketMobileListViews = new ArrayList<>();
+    private ArrayList<TicketView> ticketMobileListViews = new ArrayList<>();
+    private ArrayList<TicketView> longTicketMobileListViews = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,21 +57,20 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
             list = ServerClient.getInstance().listOfTicket();
 
             for(ServerClient.Ticket ticket: list.data){
-                TicketMobileListView ticketMobileListView = new TicketMobileListView(this, ticket);
-                ticketMobileListViews.add(ticketMobileListView);
-                TextView buttonname = (TextView)ticketMobileListView.findViewById(R.id.ticket_mobile_item_button_name);
-                buttonname.setText("사용가능");
-                content.addView(ticketMobileListView);
+                TicketView ticketView = new TicketView(this, ticket, TicketView.SHORT_TICKET, "사용가능", false, true, false);
+                content.addView(ticketView);
             }
 
             longlist = ServerClient.getInstance().listOfLongTicket();
 
             for(ServerClient.Ticket ticket: longlist.data){
-                LongTicketMobileListView longTicketMobileListView = new LongTicketMobileListView(this, ticket);
-                longTicketMobileListViews.add(longTicketMobileListView);
-                TextView buttonname = (TextView)longTicketMobileListView.findViewById(R.id.long_ticket_mobile_item_button_name);
-                buttonname.setText("사용가능");
-                content.addView(longTicketMobileListView);
+                TicketView ticketView = new TicketView(this, ticket, TicketView.LONG_TICKET, "사용가능", false, true, false);
+
+//                LongTicketMobileListView longTicketMobileListView = new LongTicketMobileListView(this, ticket);
+//                longTicketMobileListViews.add(longTicketMobileListView);
+//                TextView buttonname = (TextView)longTicketMobileListView.findViewById(R.id.long_ticket_mobile_item_button_name);
+//                buttonname.setText("사용가능");
+                content.addView(ticketView);
             }
         } catch (ServerClient.ServerErrorException ex) {
             Log.e("error!",ex.msg);
@@ -86,14 +83,14 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
         LinearLayout content = (LinearLayout) findViewById(R.id.activity_ticket_mobile_list_layout);
         content.removeAllViews();
 
-        for(TicketMobileListView listView : ticketMobileListViews) {
-            if(listView.getTicketName().contains(str)) {
+        for(TicketView listView : ticketMobileListViews) {
+            if(listView.getTicket().ticket_name.contains(str)) {
                 content.addView(listView);
             }
         }
 
-        for(LongTicketMobileListView listView : longTicketMobileListViews) {
-            if(listView.getTicketName().contains(str)) {
+        for(TicketView listView : longTicketMobileListViews) {
+            if(listView.getTicket().ticket_name.contains(str)) {
                 content.addView(listView);
             }
         }
@@ -107,7 +104,6 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-
         return super.onQueryTextSubmit(query);
     }
 

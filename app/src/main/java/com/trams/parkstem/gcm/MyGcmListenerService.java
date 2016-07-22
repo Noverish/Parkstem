@@ -9,6 +9,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
@@ -21,6 +22,7 @@ import com.trams.parkstem.activity.ParkStatusActivity;
 public class MyGcmListenerService extends GcmListenerService {
 
     private static final String TAG = "MyGcmListenerService";
+    public static final String PUSH_RECEIVE = "push_receive";
 
     /**
      *
@@ -63,12 +65,18 @@ public class MyGcmListenerService extends GcmListenerService {
                 .setContentTitle(title)
                 .setContentText(message)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setTicker("티꺼워")
+                .setTicker("파크스템")
                 .setContentIntent(intent)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
                 .build();
 
         manager.notify(1, noti);
+
+        Log.e("Send","Broadcast");
+
+        LocalBroadcastManager.getInstance(this)
+                .sendBroadcast(new Intent(PUSH_RECEIVE));
+
     }
 }
