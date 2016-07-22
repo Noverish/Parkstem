@@ -22,6 +22,8 @@ public class HttpImageThread extends Thread {
 
     public HttpImageThread(String urlStr) {
         this.urlStr = urlStr;
+
+        start();
     }
 
     public void run() {
@@ -84,6 +86,12 @@ public class HttpImageThread extends Thread {
     }
 
     public Bitmap getImage() {
+        try {
+            join();
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
         return BitmapFactory.decodeByteArray(image , 0, image.length);
     }
 

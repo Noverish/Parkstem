@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.trams.parkstem.R;
 import com.trams.parkstem.activity.ManagePurchaseActivity;
 import com.trams.parkstem.others.Essentials;
+import com.trams.parkstem.others.HttpImageThread;
 import com.trams.parkstem.server.ServerClient;
 
 import java.util.Calendar;
@@ -116,6 +117,9 @@ public class TicketView extends LinearLayout {
         ServerClient.ParkInfo parkInfo;
         try {
             parkInfo = ServerClient.getInstance().parkInfo(ticket.local_id);
+
+            HttpImageThread thread = new HttpImageThread(parkInfo.local_photo1);
+            parkImage.setImageBitmap(thread.getImage());
         } catch (ServerClient.ServerErrorException ex) {
             ex.printStackTrace();
             Toast.makeText(context, "주차장 정보를 불러오는데 실패했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
@@ -145,6 +149,9 @@ public class TicketView extends LinearLayout {
         ServerClient.ParkInfo parkInfo;
         try {
             parkInfo = ServerClient.getInstance().parkInfo(purchase.local_id);
+
+            HttpImageThread thread = new HttpImageThread(parkInfo.local_photo1);
+            parkImage.setImageBitmap(thread.getImage());
         } catch (ServerClient.ServerErrorException ex) {
             ex.printStackTrace();
             Toast.makeText(context, "주차장 정보를 불러오는데 실패했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
@@ -279,7 +286,6 @@ public class TicketView extends LinearLayout {
         showDetailButton.setBackground(ContextCompat.getDrawable(context, R.drawable.btn_4));
 
         showDetailButton.removeAllViews();
-
 
         int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, getResources().getDisplayMetrics());
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(size, size);

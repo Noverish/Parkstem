@@ -1,14 +1,17 @@
 package com.trams.parkstem.activity;
 
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.others.Essentials;
+import com.trams.parkstem.others.HttpImageThread;
 import com.trams.parkstem.server.ServerClient;
 
 /**
@@ -24,6 +27,8 @@ public class ParkStatusActivity extends BaseBackSearchActivity {
             ServerClient.RecentCar recentCar = ServerClient.getInstance().recentCar();
             ServerClient.ParkInfo parkInfo = ServerClient.getInstance().parkInfo(recentCar.local_id);
 
+            ImageView imageView = (ImageView) findViewById(R.id.activity_park_state_image);
+
             TextView parkName = (TextView) findViewById(R.id.activity_park_state_park_name);
             TextView parkAddress = (TextView) findViewById(R.id.activity_park_state_park_address);
             TextView baseMinute = (TextView) findViewById(R.id.activity_park_state_base_minute);
@@ -36,6 +41,9 @@ public class ParkStatusActivity extends BaseBackSearchActivity {
             TextView carInTime = (TextView) findViewById(R.id.activity_park_state_car_in_time);
             TextView carOutTime = (TextView)findViewById(R.id.activity_park_state_car_out_time);
             TextView totalAmount = (TextView) findViewById(R.id.activity_park_state_total_amount);
+
+            HttpImageThread thread = new HttpImageThread(parkInfo.local_photo1);
+            imageView.setBackground(new BitmapDrawable(getResources(), thread.getImage()));
 
             parkName.setText(parkInfo.local_name);
             parkAddress.setText(parkInfo.local_address);
