@@ -168,14 +168,14 @@ public class Essentials {
             if(recentCar.in_date != null && recentCar.out_date == null) {
                 new android.support.v7.app.AlertDialog.Builder(activity)
                         .setIcon(android.R.drawable.ic_dialog_info)
-                        .setTitle("입차")
+                        .setTitle("차량 입차")
                         .setMessage(parkInfo.local_name + " " + Essentials.calendarToTime(recentCar.in_date) + " 입차")
                         .setPositiveButton("확인", null)
                         .show();
             } else if (recentCar.in_date != null){
                 new android.support.v7.app.AlertDialog.Builder(activity)
                         .setIcon(android.R.drawable.ic_dialog_info)
-                        .setTitle("출차")
+                        .setTitle("차량 출차")
                         .setMessage(parkInfo.local_name + " " + Essentials.calendarToTime(recentCar.out_date) + " 출차")
                         .setPositiveButton("확인", null)
                         .show();

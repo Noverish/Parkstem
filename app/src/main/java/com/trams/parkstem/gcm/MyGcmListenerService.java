@@ -15,6 +15,8 @@ import android.util.Log;
 import com.google.android.gms.gcm.GcmListenerService;
 import com.trams.parkstem.R;
 import com.trams.parkstem.activity.ParkStatusActivity;
+import com.trams.parkstem.others.Essentials;
+import com.trams.parkstem.server.ServerClient;
 
 /**
  * Created by Noverish on 2016-07-18.
@@ -61,17 +63,40 @@ public class MyGcmListenerService extends GcmListenerService {
 
         Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-        Notification noti = new NotificationCompat.Builder(getApplicationContext())
-                .setContentTitle(title)
-                .setContentText(message)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setTicker("파크스템")
-                .setContentIntent(intent)
-                .setAutoCancel(true)
-                .setSound(defaultSoundUri)
-                .build();
 
-        manager.notify(1, noti);
+        try {
+            ServerClient.RecentCar recentCar = ServerClient.getInstance().recentCar();
+            ServerClient.ParkInfo parkInfo = ServerClient.getInstance().parkInfo(recentCar.local_id);
+
+            if(recentCar.in_date != null && recentCar.out_date == null) {
+                Notification noti = new NotificationCompat.Builder(getApplicationContext())
+                        .setContentTitle("차량 입차")
+                        .setContentText(parkInfo.local_name + " " + Essentials.calendarToTime(recentCar.in_date) + " 입차")
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setTicker("파크스템")
+                        .setContentIntent(intent)
+                        .setAutoCancel(true)
+                        .setSound(defaultSoundUri)
+                        .build();
+                manager.notify(1, noti);
+            } else if (recentCar.in_date != null){
+                Notification noti = new NotificationCompat.Builder(getApplicationContext())
+                        .setContentTitle("차량 출차")
+                        .setContentText(parkInfo.local_name + " " + Essentials.calendarToTime(recentCar.out_date) + " 출차")
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setTicker("파크스템")
+                        .setContentIntent(intent)
+                        .setAutoCancel(true)
+                        .setSound(defaultSoundUri)
+                        .build();
+                manager.notify(1, noti);
+            } else {
+
+            }
+
+        } catch (ServerClient.ServerErrorException error) {
+            error.printStackTrace();
+        }
 
         Log.e("Send","Broadcast");
 

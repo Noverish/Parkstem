@@ -1,18 +1,13 @@
 package com.trams.parkstem.base_activity;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,14 +33,12 @@ import com.trams.parkstem.activity.SettingActivity;
 import com.trams.parkstem.activity.SplashActivity;
 import com.trams.parkstem.activity.TicketMobileListActivity;
 import com.trams.parkstem.activity.TicketPurchaseListActivity;
-import com.trams.parkstem.gcm.MyGcmListenerService;
-import com.trams.parkstem.others.Essentials;
+import com.trams.parkstem.server.ServerClient;
 
 /**
  * Created by Noverish on 2016-07-09.
  */
-public class BaseNavigationActivity extends AppCompatActivity {
-
+public class BaseNavigationActivity extends BaseActivity {
     public static final int REQUEST_FINISH = 1004;
     public static final int RESULT_FINISH = 444;
 
@@ -68,8 +61,11 @@ public class BaseNavigationActivity extends AppCompatActivity {
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        registBroadcastReceiver();
+        TextView userNameInNav = (TextView) findViewById(R.id.parkstem_menu_bar_user_name);
+        userNameInNav.setText(ServerClient.getInstance().login.name);
 
+        TextView menuBarParkstem = (TextView) findViewById(R.id.parkstem_menu_bar_parkstem);
+        menuBarParkstem.setTypeface(myTypeface);
     }
 
     @Override
@@ -92,7 +88,7 @@ public class BaseNavigationActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        //getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -108,38 +104,31 @@ public class BaseNavigationActivity extends AppCompatActivity {
             Intent intent = new Intent(this, SplashActivity.class);
             startActivity(intent);
             return true;
-        }
-        else if (id == R.id.action_login) {
+        } else if (id == R.id.action_login) {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             return true;
-        }
-        else if (id == R.id.action_assign) {
+        } else if (id == R.id.action_assign) {
             Intent intent = new Intent(this, AssignActivity.class);
             startActivity(intent);
             return true;
-        }
-        else if (id == R.id.action_mobile) {
+        } else if (id == R.id.action_mobile) {
             Intent intent = new Intent(this, MobileCertificationActivity.class);
             startActivity(intent);
             return true;
-        }
-        else if (id == R.id.action_card_new_card) {
+        } else if (id == R.id.action_card_new_card) {
             Intent intent = new Intent(this, InputNewCardActivity.class);
             startActivity(intent);
             return true;
-        }
-        else if (id == R.id.action_mobile_ticket) {
+        } else if (id == R.id.action_mobile_ticket) {
             Intent intent = new Intent(this, TicketMobileListActivity.class);
             startActivity(intent);
             return true;
-        }
-        else if (id == R.id.action_purchase_ticket) {
+        } else if (id == R.id.action_purchase_ticket) {
             Intent intent = new Intent(this, TicketPurchaseListActivity.class);
             startActivity(intent);
             return true;
-        }
-        else if (id == R.id.action_first_screen) {
+        } else if (id == R.id.action_first_screen) {
             Intent intent = new Intent(this, FirstScreenActivity.class);
             startActivity(intent);
             return true;
@@ -191,20 +180,4 @@ public class BaseNavigationActivity extends AppCompatActivity {
         drawer.closeDrawer(GravityCompat.START);
     }
 
-    private BroadcastReceiver mRegistrationBroadcastReceiver;
-    public void registBroadcastReceiver(){
-        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                String action = intent.getAction();
-
-                if(action.equals(MyGcmListenerService.PUSH_RECEIVE)){
-                    Essentials.alertParkState(BaseNavigationActivity.this);
-                }
-            }
-        };
-
-        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
-                new IntentFilter(MyGcmListenerService.PUSH_RECEIVE));
-    }
 }

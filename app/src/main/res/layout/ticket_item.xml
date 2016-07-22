@@ -67,6 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <RelativeLayout
+            android:id="@+id/split_bar"
             android:background="@drawable/btn_2"
             android:layout_width="match_parent"
             android:layout_height="3dp"/>
@@ -78,13 +79,11 @@
             android:layout_width="match_parent"
             android:layout_height="157dp">
 
-
-
             <ImageView
                 android:id="@+id/ticket_mobile_item_picture"
                 android:src="@drawable/img_place"
                 android:layout_width="113dp"
-                android:layout_height="113dp" />
+                android:layout_height="113dp"/>
 
             <LinearLayout
                 android:orientation="vertical"
@@ -202,6 +201,7 @@
                         android:textColor="@color/red_for_money" />
 
                     <TextView
+                        android:id="@+id/long_ticket_mobile_item_won"
                         android:textSize="21sp"
                         android:textColor="@color/red_for_money"
                         android:text="&#xffe6;"

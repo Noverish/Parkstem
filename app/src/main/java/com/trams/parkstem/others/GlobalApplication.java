@@ -14,11 +14,12 @@ public class GlobalApplication extends Application {
     private static volatile Activity currentActivity = null;
 
     public static Activity getCurrentActivity() {
-        Log.e("TAG", "++ currentActivity : " + (currentActivity != null ? currentActivity.getClass().getSimpleName() : ""));
+        Log.e("TAG", "++ getCurrentActivity : " + (currentActivity != null ? currentActivity.getClass().getSimpleName() : "null"));
         return currentActivity;
     }
 
     public static void setCurrentActivity(Activity currentActivity) {
+        Log.e("TAG", "++ setCurrentActivity : " + (currentActivity != null ? currentActivity.getClass().getSimpleName() : "null"));
         GlobalApplication.currentActivity = currentActivity;
     }
 
@@ -37,5 +38,7 @@ public class GlobalApplication extends Application {
         super.onCreate();
         mInstance = this;
         KakaoSDK.init(new KakaoSDKAdapter());
+
+        FontsOverride.setDefaultFont(this, "DEFAULT", "fonts/HelveticaNeueLTStd-LtEx.otf");
     }
 }

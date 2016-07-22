@@ -53,6 +53,7 @@ public class TicketPurchaseListActivity extends BaseBackSearchActivity {
             for(ServerClient.TicketPurchase purchase: list.data){
                 if(!purchase.allow) {
                     TicketView ticketView = new TicketView(this, purchase, "사용가능", false, true, false);
+                    ticketView.makeUsed();
                     ticketMobileListViews.add(ticketView);
                 }
             }

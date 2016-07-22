@@ -15,6 +15,7 @@ import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.custom_view.LocationChangeableListView;
 import com.trams.parkstem.server.ServerClient;
+import com.trams.parkstem.webview.CardRegister;
 
 import java.util.ArrayList;
 
@@ -76,7 +77,7 @@ public class InputCardActivity extends BaseBackSearchActivity {
     }
 
     private void register_new_card(){
-        Intent intent = new Intent(this, InputNewCardActivity.class);
+        Intent intent = new Intent(this, CardRegister.class);
         startActivity(intent);
     }
 
@@ -91,8 +92,6 @@ public class InputCardActivity extends BaseBackSearchActivity {
                 Pair<Long, String> pair = new Pair<>((long)info.idx, info.card_name);
                 data.add(pair);
             }
-
-            Log.e("refresh",data.size() + "");
 
             listView.setListData(data);
         } catch (ServerClient.ServerErrorException ex) {

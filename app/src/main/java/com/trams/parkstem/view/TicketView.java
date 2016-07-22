@@ -2,10 +2,13 @@ package com.trams.parkstem.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,10 +34,14 @@ public class TicketView extends LinearLayout {
     private ServerClient.Ticket ticket;
     private TicketViewData data;
 
+    private RelativeLayout abovecontent;
+
     private TextView ticketName;
     private TextView shortAddress;
     private TextView buttonNameText;
     private RelativeLayout showDetailButton;
+
+    private ImageView parkImage;
 
     private LinearLayout endDateLayout;
     private TextView startDate;
@@ -79,10 +86,14 @@ public class TicketView extends LinearLayout {
         LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.ticket_item, this, true);
 
+        abovecontent = (RelativeLayout) findViewById(R.id.long_ticket_mobile_item_above_layout);
+
         ticketName = (TextView) findViewById(R.id.long_ticket_mobile_item_name);
         shortAddress = (TextView) findViewById(R.id.long_ticket_mobile_item_place);
         buttonNameText = (TextView) findViewById(R.id.long_ticket_mobile_item_button_name);
         showDetailButton = (RelativeLayout) findViewById(R.id.long_ticket_mobile_item_view);
+
+        parkImage = (ImageView) findViewById(R.id.ticket_mobile_item_picture);
 
         endDateLayout = (LinearLayout) findViewById(R.id.ticket_item_end_date_layout);
         startDate = (TextView) findViewById(R.id.long_ticket_mobile_item_start_date);
@@ -263,6 +274,40 @@ public class TicketView extends LinearLayout {
         }
     }
 
+    public void makeUsed() {
+        abovecontent.setBackground(ContextCompat.getDrawable(context, R.drawable.btn_5));
+        showDetailButton.setBackground(ContextCompat.getDrawable(context, R.drawable.btn_4));
+
+        showDetailButton.removeAllViews();
+
+
+        int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, getResources().getDisplayMetrics());
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(size, size);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+
+        ImageView imageView = new ImageView(context);
+        imageView.setLayoutParams(params);
+
+        imageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.btn_check_w));
+
+        showDetailButton.addView(imageView);
+
+        RelativeLayout splitBar = (RelativeLayout) findViewById(R.id.split_bar);
+        splitBar.setBackground(ContextCompat.getDrawable(context, R.drawable.btn_6));
+
+        int grayForText = ContextCompat.getColor(context, R.color.gray_for_text);
+
+        afterPriceTerm.setTextColor(grayForText);
+        TextView won = (TextView) findViewById(R.id.long_ticket_mobile_item_won);
+        won.setTextColor(grayForText);
+        afterPrice.setTextColor(grayForText);
+
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setSaturation(0);
+        ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
+        parkImage.setColorFilter(filter);
+    }
+
     private void onShowDetailButtonClicked() {
 //        int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 60, getResources().getDisplayMetrics());
 //
@@ -271,7 +316,6 @@ public class TicketView extends LinearLayout {
         LayoutParams layoutParamsOn = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         LinearLayout belowcontent = (LinearLayout) findViewById(R.id.long_ticket_mobile_item_below_layout);
-        RelativeLayout abovecontent = (RelativeLayout) findViewById(R.id.long_ticket_mobile_item_above_layout);
 
         detailOpen = !detailOpen;
 

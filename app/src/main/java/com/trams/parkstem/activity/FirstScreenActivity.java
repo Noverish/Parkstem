@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
-import com.trams.parkstem.certification.Mobilecertification;
 import com.trams.parkstem.server.ServerClient;
 import com.trams.parkstem.webview.Mobilecertification;
 
