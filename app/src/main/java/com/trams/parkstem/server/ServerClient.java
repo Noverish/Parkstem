@@ -33,7 +33,7 @@ public class ServerClient  {
     //uniqueID를 반환하는 함수는 현재의 uniqueID와 같은지 체크하는 코드
     //dummy 카드 관련 모든것 입차 출차 주차장
 
-    private String uniqueID = "13617600";
+    public String uniqueID = "13617600";
     public Login login = new Login();
 
     public static ServerClient serverClient;

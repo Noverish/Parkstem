@@ -1,5 +1,6 @@
 package com.trams.parkstem.activity;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,6 +11,7 @@ import android.widget.RelativeLayout;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
+import com.trams.parkstem.certification.Mobilecertification;
 
 /**
  * Created by Noverish on 2016-07-04.
@@ -58,5 +60,10 @@ public class MobileCertificationActivity extends BaseBackSearchActivity {
             Drawable woman1 = ContextCompat.getDrawable(this, R.drawable.btn_w_1);
             woman.setImageDrawable(woman1);
         }
+    }
+
+    public void mobileCertification(View v) {
+        Intent intent = new Intent(this, Mobilecertification.class);
+        startActivity(intent);
     }
 }

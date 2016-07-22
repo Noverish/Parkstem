@@ -50,6 +50,9 @@
         <activity android:name=".clause.Clause3" />
         <activity android:name=".clause.Clause4" />
         <activity android:name=".clause.Clause5" />
+        <activity android:name=".certification.Mobilecertification" />
+        <activity android:name=".certification.CardRegister" />
+
 
         <!-- 네이버 아이디로 로그인에서 사용하는 액티비티를 등록 -->
         <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity"
