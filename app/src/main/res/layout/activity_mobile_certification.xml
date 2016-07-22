@@ -125,8 +125,10 @@
                 <RelativeLayout
                     android:layout_marginTop="20dp"
                     android:background="@drawable/btn_1_small"
+                    android:id="@+id/activity_mobile_certification_certification"
                     android:layout_width="77dp"
-                    android:layout_height="43dp">
+                    android:layout_height="43dp"
+                    android:onClick="mobileCertification">
                     <TextView
                         android:layout_centerInParent="true"
                         android:textColor="@color/WHITE"
