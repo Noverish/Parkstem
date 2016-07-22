@@ -26,8 +26,8 @@ import com.trams.parkstem.clause.Clause2;
 import com.trams.parkstem.clause.Clause3;
 import com.trams.parkstem.clause.Clause4;
 import com.trams.parkstem.clause.Clause5;
-import com.trams.parkstem.others.GlobalApplication;
 import com.trams.parkstem.server.ServerClient;
+import com.trams.parkstem.webview.CardRegister;
 
 import java.util.Calendar;
 
@@ -262,5 +262,9 @@ public class InputNewCardActivity extends BaseBackSearchActivity {
         }
     }
 
+    public void newCardRegister(View v) {
+        Intent intent = new Intent(this, CardRegister.class);
+        startActivity(intent);
+    }
 
 }

@@ -11,6 +11,7 @@ import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.certification.Mobilecertification;
 import com.trams.parkstem.server.ServerClient;
+import com.trams.parkstem.webview.Mobilecertification;
 
 /**
  * Created by Noverish on 2016-07-12.
