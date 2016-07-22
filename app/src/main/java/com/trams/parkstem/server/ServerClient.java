@@ -146,8 +146,8 @@ public class ServerClient  {
 
 
     //회원가입 및 로그인 관련 함수
-    public void login(final String parkstemID, final String parkstemPW, final String token) throws ServerErrorException {
-        Log.e(TAG,"login : " + parkstemID + ", " + parkstemPW + ", " + token);
+    public void login(final String memberGubun, final String parkstemID, final String parkstemPW, final String token) throws ServerErrorException {
+        Log.e(TAG,"login : " + memberGubun + ", " + parkstemID + ", " + parkstemPW + ", " + token);
 
         /*String msg;
         final String LOGIN_URL = "http://app.parkstem.com/api/member_login.php";
@@ -155,6 +155,7 @@ public class ServerClient  {
             @Override
             public void run() {
                 HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("memberGubun", memberGubun);
                 hashMap.put("parkstemID", parkstemID);
                 hashMap.put("parkstemPW", parkstemPW);
                 hashMap.put("token", token);
@@ -205,7 +206,7 @@ public class ServerClient  {
         login.email = "email@email.com";
         login.phone = "000-000-0000";
         login.certification = true;
-        login.pushYN = false;
+        login.pushYN = true;
     }
 
     public void register(final String name, final String email, final String mobile, final String nickName, final String parkstemID, final String parkstemPW, final String token) throws ServerErrorException{
@@ -263,7 +264,7 @@ public class ServerClient  {
         Log.e(TAG,"memberInfo");
 
         String msg;
-        final String LOGIN_URL = "http://app.parkstem.com/api/member_login.php";
+        final String LOGIN_URL = "http://app.parkstem.com/api/member_info.php";
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -1690,10 +1691,18 @@ public class ServerClient  {
             this.price = data[9];
             this.start_date = Calendar.getInstance();
             this.start_date.setTimeInMillis(Long.parseLong(data[10]));
+            if(start_date.getTimeInMillis() == 0)
+                start_date = null;
+
             this.end_date = Calendar.getInstance();
             this.end_date.setTimeInMillis(Long.parseLong(data[11]));
+            if(end_date.getTimeInMillis() == 0)
+                end_date = null;
+
             this.regdate = Calendar.getInstance();
             this.regdate.setTimeInMillis(Long.parseLong(data[12]));
+            if(regdate.getTimeInMillis() == 0)
+                regdate = null;
             this.allow = Boolean.parseBoolean(data[13]);
         }
 
@@ -1704,6 +1713,21 @@ public class ServerClient  {
 
         @Override
         public void writeToParcel(Parcel dest, int flags) {
+            if(start_date == null) {
+                start_date = Calendar.getInstance();
+                start_date.setTimeInMillis(0);
+            }
+
+            if(end_date == null) {
+                end_date = Calendar.getInstance();
+                end_date.setTimeInMillis(0);
+            }
+
+            if(regdate == null) {
+                regdate = Calendar.getInstance();
+                regdate.setTimeInMillis(0);
+            }
+
             dest.writeStringArray(new String[] {
                     this.idx + "",
                     this.local_id,

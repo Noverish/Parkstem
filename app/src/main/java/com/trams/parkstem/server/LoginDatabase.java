@@ -19,6 +19,7 @@ public class LoginDatabase {
 
     private static final String ID_COLUMN = "id";
     private static final String PW_COLUMN = "pw";
+    private static final String GUBUN_COLUMN = "gubun";
     private HashMap<String, String> database = new HashMap<>();
 
     private static LoginDatabase loginDatabase;
@@ -39,19 +40,14 @@ public class LoginDatabase {
         }
     }
 
-
-    public void setData(String id) {
-        setData(id, "");
-    }
-
-    public void setData(String id, String pw) {
-        Log.e("setData",id + " " + pw);
+    public void setData(String gubun, String id, String pw) {
+        Log.e("setData",gubun + " " + id + " " + pw);
 
         database.clear();
 
+        database.put(GUBUN_COLUMN, gubun);
         database.put(ID_COLUMN, id);
-        if(!pw.equals(""))
-            database.put(PW_COLUMN, pw);
+        database.put(PW_COLUMN, pw);
 
         saveToInternalStorage(database);
     }
@@ -61,10 +57,11 @@ public class LoginDatabase {
     }
 
     public String getPw() {
-        if(database.size() == 2)
-            return database.get(PW_COLUMN);
-        else
-            return "";
+        return database.get(PW_COLUMN);
+    }
+
+    public String getGubun() {
+        return database.get(GUBUN_COLUMN);
     }
 
     public boolean isDatabaseClear() {
