@@ -1,28 +1,38 @@
 package com.trams.parkstem.webview;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import com.trams.parkstem.R;
+import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.server.ServerClient;
 
 /**
  * Created by monc2 on 2016-07-22.
  */
-public class CardRegister extends AppCompatActivity {
+public class CardRegister extends BaseBackSearchActivity {
     ServerClient serverClient = new ServerClient();
     String clause;
+    WebView webview;
+
+    @Override
+    public void onBackPressed() {
+        if (webview.canGoBack()) {
+            webview.goBack();
+        } else {
+            super.onBackPressed();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        WebView webview = new WebView(this);
-        setContentView(webview);
+        setContentView(R.layout.webview_card_register);
+        setBackEnable(false);
+        webview = (WebView) findViewById(R.id.webview_card_register);
 
-        webview = new WebView(this);
-        setContentView(webview);
         webview.getSettings().setJavaScriptEnabled(true);
         webview.setWebViewClient(new WebViewClient() {
             @Override
