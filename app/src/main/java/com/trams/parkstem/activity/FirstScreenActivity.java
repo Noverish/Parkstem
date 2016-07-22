@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseNavigationActivity;
 import com.trams.parkstem.server.ServerClient;
+import com.trams.parkstem.webview.Mobilecertification;
 
 /**
  * Created by Noverish on 2016-07-12.
@@ -56,7 +57,7 @@ public class FirstScreenActivity extends BaseNavigationActivity {
     }
 
     public void toMobileCerticication(){
-        Intent intent = new Intent(this, MobileCertificationActivity.class);
+        Intent intent = new Intent(this, Mobilecertification.class);
         startActivity(intent);
     }
     public void toCarRegister(){
