@@ -9,7 +9,7 @@
     android:paddingTop="310sp">
 
     <LinearLayout
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -29,7 +29,6 @@
             </RelativeLayout>
 
             <TextView
-
                 android:layout_marginLeft="11sp"
                 android:id="@+id/logged_naver"
                 android:layout_width="match_parent"
