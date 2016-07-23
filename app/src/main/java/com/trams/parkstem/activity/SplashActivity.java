@@ -27,62 +27,26 @@ public class SplashActivity extends AppCompatActivity{
     private boolean backgroundProcessDone = false;
     private boolean sleepDone = false;
     private boolean goToLoginActivity = true;
+    private String autoLoginFailMessage = null;
+
+    private AutoLoginThread autoLoginThread;
+    private SleepThread sleepThread;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        Thread processThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    registBroadcastReceiver();
-                    getInstanceIdToken();
+        registBroadcastReceiver();
+        getInstanceIdToken();
 
-                    LoginDatabase loginDatabase = LoginDatabase.getInstance(SplashActivity.this);
-                    if(!loginDatabase.isDatabaseClear()) {
-                        try {
-                            ServerClient.getInstance().login(loginDatabase.getGubun(), loginDatabase.getId(), loginDatabase.getPw(), gcmDeviceToken);
-
-                            Toast.makeText(SplashActivity.this, "자동 로그인 되었습니다!", Toast.LENGTH_SHORT).show();
-
-                            goToLoginActivity = false;
-                        } catch (ServerClient.ServerErrorException ex) {
-                            Toast.makeText(SplashActivity.this, "자동 로그인에 실패 했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    backgroundProcessDone = true;
-
-                    if(sleepDone) {
-                        changeActivity();
-                    }
-                } catch (Exception ex) {
-
-                }
-            }
-        });
-        processThread.start();
-
-        Thread sleepThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(1500);
-                } catch (InterruptedException ex) {
-
-                }
-
-                sleepDone = true;
-                if(backgroundProcessDone) {
-                    changeActivity();
-                }
-            }
-        });
-        sleepThread.start();
+        SleepThread thread = new SleepThread(1500);
     }
 
     private void changeActivity() {
+        if(autoLoginFailMessage != null)
+            Toast.makeText(this, autoLoginFailMessage, Toast.LENGTH_SHORT).show();
+
         if (goToLoginActivity) {
             Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
             intent.putExtra("token",gcmDeviceToken);
@@ -133,6 +97,10 @@ public class SplashActivity extends AppCompatActivity{
                     String token = intent.getStringExtra("token");
                     Log.e("GCM","COMPLETE - " + token);
                     gcmDeviceToken = token;
+
+
+                    Log.e("AutoLoginThread","start");
+                    autoLoginThread = new AutoLoginThread();
                 }
             }
         };
@@ -178,5 +146,61 @@ public class SplashActivity extends AppCompatActivity{
             return false;
         }
         return true;
+    }
+
+
+
+    private class AutoLoginThread extends Thread {
+
+        public AutoLoginThread() {
+            Log.e("AutoLoginThread","AutoLoginThread");
+            start();
+        }
+
+        @Override
+        public void run() {
+            super.run();
+
+            LoginDatabase loginDatabase = LoginDatabase.getInstance(SplashActivity.this);
+            if(!loginDatabase.isDatabaseClear()) {
+                try {
+                    ServerClient.getInstance().login(loginDatabase.getGubun(), loginDatabase.getId(), loginDatabase.getPw(), gcmDeviceToken);
+
+                    goToLoginActivity = false;
+                } catch (ServerClient.ServerErrorException ex) {
+                    autoLoginFailMessage = "자동 로그인에 실패했습니다 - " + ex;
+                }
+            }
+
+            backgroundProcessDone = true;
+            if(sleepDone) {
+                changeActivity();
+            }
+        }
+    }
+
+    private class SleepThread extends Thread {
+        private long sleepMillis;
+
+        private SleepThread(long sleepMillis) {
+            this.sleepMillis = sleepMillis;
+            start();
+        }
+
+        @Override
+        public void run() {
+            super.run();
+
+            try {
+                Thread.sleep(sleepMillis);
+            } catch (InterruptedException ex) {
+
+            }
+
+            sleepDone = true;
+            if(backgroundProcessDone) {
+                changeActivity();
+            }
+        }
     }
 }

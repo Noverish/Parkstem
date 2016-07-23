@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.FacebookSdk;
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseNavigationActivity;
 import com.trams.parkstem.others.FacebookLoginClient;
@@ -33,7 +32,6 @@ public class LoginActivity extends AppCompatActivity implements OnLoginSuccessLi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext()); // xml을 불러 오기 전에 해야 됨
         setContentView(R.layout.activity_login);
 
         gcmDeviceToken = getIntent().getStringExtra("token");
