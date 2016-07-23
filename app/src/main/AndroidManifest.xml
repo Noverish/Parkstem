@@ -16,8 +16,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:largeHeap="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".activity.HomeActivity" />
+        android:theme="@style/AppTheme"
+        android:screenOrientation="portrait">
         <activity
             android:name=".activity.SplashActivity"
             android:label="@string/app_name" >
@@ -27,6 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.HomeActivity" />
         <activity android:name=".activity.LoginActivity"/>
         <activity android:name=".activity.LoginWithEmailActivity" />
         <activity android:name=".activity.AssignActivity" />
@@ -93,6 +94,12 @@
             </intent-filter>
         </service>
         <!-- [END instanceId_listener_service] -->
+
+        <!-- [START gcm_registration_service] -->
+        <service
+            android:name="com.trams.parkstem.gcm.RegistrationIntentService"
+            android:exported="false"></service>
+        <!-- [END gcm_registration_service] -->
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

@@ -13,7 +13,7 @@ public class MyInstanceIDListenerService extends InstanceIDListenerService {
 
     @Override
     public void onTokenRefresh() {
-        Intent intent = new Intent(this, GetRegistrationToken.class);
+        Intent intent = new Intent(this, RegistrationIntentService.class);
         startService(intent);
     }
 }
