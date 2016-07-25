@@ -48,7 +48,7 @@ public class HomeActivity extends BaseNavigationActivity {
             dashBoard = client.dashboard();
             hipassOn = dashBoard.hipass;
         } catch (ServerClient.ServerErrorException ex) {
-            Toast.makeText(this, "정보를 불러오는데 실패했습니다 - " + ex, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "정보를 불러오는데 실패했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
             hipassOn = false;
         }
 

@@ -32,6 +32,8 @@ public class SplashActivity extends AppCompatActivity{
     private AutoLoginThread autoLoginThread;
     private SleepThread sleepThread;
 
+    private android.os.Handler handler = new android.os.Handler();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +47,13 @@ public class SplashActivity extends AppCompatActivity{
 
     private void changeActivity() {
         if(autoLoginFailMessage != null)
-            Toast.makeText(this, autoLoginFailMessage, Toast.LENGTH_SHORT).show();
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(SplashActivity.this, autoLoginFailMessage, Toast.LENGTH_SHORT).show();
+                }
+            });
+
 
         if (goToLoginActivity) {
             Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
@@ -162,7 +170,7 @@ public class SplashActivity extends AppCompatActivity{
 
                     goToLoginActivity = false;
                 } catch (ServerClient.ServerErrorException ex) {
-                    autoLoginFailMessage = "자동 로그인에 실패했습니다 - " + ex;
+                    autoLoginFailMessage = "자동 로그인에 실패했습니다 - " + ex.msg;
                 }
             }
 

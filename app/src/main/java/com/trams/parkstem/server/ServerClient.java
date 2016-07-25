@@ -149,7 +149,8 @@ public class ServerClient  {
     public void login(final String memberGubun, final String parkstemID, final String parkstemPW, final String token) throws ServerErrorException {
         Log.e(TAG,"login : " + memberGubun + ", " + parkstemID + ", " + parkstemPW + ", " + token);
 
-        /*String msg;
+        /*int res;
+        String msg;
         final String LOGIN_URL = "http://app.parkstem.com/api/member_login.php";
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -172,7 +173,10 @@ public class ServerClient  {
 
         try {
             msg = result.getString("msg");
-            if(result.getInt("res") != 0){
+            res = result.getInt("res");
+            Log.e("login res",res + "");
+
+            if(res != 0){
                 Log.d("ServerClient",msg);
                 uniqueID = result.getString("uniqueID");
 
@@ -181,20 +185,13 @@ public class ServerClient  {
                 login.phone = result.getString("phone");
                 String push = result.getString("pushYN");
                 String cert = result.getString("certification");
-                if(push =="Y") {
-                    login.pushYN = true;
-                } else {
-                    login.pushYN = false;
-                }
 
-                if(cert =="Y") {
-                    login.certification = true;
-                } else {
-                    login.certification = false;
-                }
+                login.pushYN = push.equals("Y");
+                login.certification = cert.equals("Y");
             }
             else
             {
+                Log.e("throw","던진다!");
                 throw new ServerErrorException(result.getInt("res"), msg);
             }
         } catch (JSONException ex) {
