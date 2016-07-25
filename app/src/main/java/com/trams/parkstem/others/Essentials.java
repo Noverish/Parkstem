@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -139,7 +138,7 @@ public class Essentials {
             calendar.set(Integer.parseInt(dates[0]),Integer.parseInt(dates[1]) - 1, Integer.parseInt(dates[2]),Integer.parseInt(dates[3]),Integer.parseInt(dates[4]), Integer.parseInt(dates[5]));
             return calendar;
         } else {
-            Log.e("ERROR","stringToCalendar Error - datas.lenght is " + dates.length + " [" + date + "]");
+//            Log.e("ERROR","stringToCalendar Error - datas.lenght is " + dates.length + " [" + date + "]");
             return null;
         }
     }

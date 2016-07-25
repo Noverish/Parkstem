@@ -380,6 +380,7 @@ public class ServerClient  {
                 dashboard.mycard = result.getString("mycard");
                 dashboard.itemTotalCount = result.getInt("itemTotalCount");
                 dashboard.pageCount = result.getInt("pageCount");
+                dashboard.hipass = result.getString("hipass").equals("Y");
 
                 JSONArray jarray = result.getJSONArray("data");
                 for(int i=0;i<jarray.length();i++){
@@ -1533,6 +1534,7 @@ public class ServerClient  {
         public String mycard;
         public int itemTotalCount;
         public int pageCount;
+        public boolean hipass;
         public ArrayList<Dash> data = new ArrayList<>();
     }
     public class Dash{

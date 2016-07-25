@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -38,15 +37,8 @@ public class FacebookLoginClient  {
         public void onSuccess(LoginResult loginResult) {
             accessToken = loginResult.getAccessToken();
             Profile profile = Profile.getCurrentProfile();
-            Toast.makeText(activity, loginResult.getAccessToken().getUserId(), Toast.LENGTH_LONG).show();
+//            Toast.makeText(activity, loginResult.getAccessToken().getUserId(), Toast.LENGTH_LONG).show();
             // Toast.makeText(getActivity().getApplicationContext(), loginResult.getAccessToken().getToken(), Toast.LENGTH_LONG).show();
-            Log.e("profile",profile.getFirstName());
-            Log.e("profile",profile.getLastName());
-            Log.e("profile",profile.getId());
-            Log.e("profile",profile.getMiddleName());
-            Log.e("profile",profile.getName());
-            Log.e("profile",profile.getLinkUri().toString());
-            Log.e("profile",profile.getProfilePictureUri(100, 100).toString());
 
             GraphRequest request = GraphRequest.newMeRequest(
                     loginResult.getAccessToken(),
@@ -64,6 +56,8 @@ public class FacebookLoginClient  {
             request.setParameters(parameters);
             request.executeAsync();
 
+            Log.e("FacebookLoginSuccess","Id : " + profile.getId() + ", name : " + profile.getName() + ", email : " + parameters.getString("email"));
+
             if(listener != null)
                 listener.onLoginSuccess(
                         OnLoginSuccessListener.FACEBOOK,
@@ -76,7 +70,7 @@ public class FacebookLoginClient  {
 
         @Override
         public void onCancel() {
-            Toast.makeText(activity, "User sign in canceled!", Toast.LENGTH_LONG).show();
+//            Toast.makeText(activity, "User sign in canceled!", Toast.LENGTH_LONG).show();
         }
 
         @Override

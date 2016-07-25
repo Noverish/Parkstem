@@ -3,7 +3,6 @@ package com.trams.parkstem.others;
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.nhn.android.naverlogin.OAuthLogin;
 import com.nhn.android.naverlogin.OAuthLoginHandler;
@@ -57,6 +56,7 @@ public class NaverLoginClient {
                     String tokenType = mOAuthLoginModule.getTokenType(NaverLoginClient.this.activity);
 
                     extractUserProfile();
+                    Log.e("NaverLoginSuccess",userProfile.toString());
 
                     if(listener != null) {
                         listener.onLoginSuccess(
@@ -70,8 +70,8 @@ public class NaverLoginClient {
                 } else {
                     String errorCode = mOAuthLoginModule.getLastErrorCode(NaverLoginClient.this.activity).getCode();
                     String errorDesc = mOAuthLoginModule.getLastErrorDesc(NaverLoginClient.this.activity);
-                    Toast.makeText(NaverLoginClient.this.activity, "errorCode:" + errorCode
-                            + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(NaverLoginClient.this.activity, "errorCode:" + errorCode
+//                            + ", errorDesc:" + errorDesc, Toast.LENGTH_SHORT).show();
                 }
             };
         };
@@ -119,8 +119,6 @@ public class NaverLoginClient {
                     reader.close();
 
                     userProfile = new NaverUserProfile(new JSONObject(jsonStr));
-
-                    Log.e("extractUserProfile",userProfile.toString());
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }

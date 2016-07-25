@@ -147,25 +147,18 @@ public class KakaoLoginClient {
                 if (ErrorCode == ClientErrorCode) {
                     Toast.makeText(activity, "카카오톡 서버의 네트워크가 불안정합니다. 잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.d("TAG" , "오류로 카카오로그인 실패 ");
+                    Log.e("TAG" , "오류로 카카오로그인 실패 ");
                 }
             }
 
             @Override
             public void onSessionClosed(ErrorResult errorResult) {
-                Log.d("TAG" , "오류로 카카오로그인 실패 ");
+                Log.e("TAG" , "오류로 카카오로그인 실패 ");
             }
 
             @Override
             public void onSuccess(UserProfile userProfile) {
-                Log.e("ALL",userProfile.toString());
-                Log.e("ID",userProfile.getId() + "");
-                Log.e("UUID",userProfile.getUUID() + "");
-                Log.e("ServiceUserID",userProfile.getServiceUserId() + "");
-                Log.e("NickName",userProfile.getNickname());
-                Log.e("Profile",userProfile.getProfileImagePath());
-                Log.e("Thumbnail",userProfile.getThumbnailImagePath());
-                Log.e("Property",userProfile.getProperties().toString());
+                Log.e("NaverLoginSuccess","Id : " + userProfile.getId() + ", ServiceUserID : " + userProfile.getServiceUserId() +", nickName : " + userProfile.getServiceUserId());
 
                 if(listener != null) {
                     listener.onLoginSuccess(OnLoginSuccessListener.KAKAO, "", userProfile.getId() + "", "", "", "", "", "", "", "");

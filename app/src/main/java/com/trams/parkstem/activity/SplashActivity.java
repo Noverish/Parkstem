@@ -88,18 +88,14 @@ public class SplashActivity extends AppCompatActivity{
 
                 if(action.equals(QuickstartPreferences.REGISTRATION_READY)){
                     // 액션이 READY일 경우
-                    Log.e("GCM","READY");
                 } else if(action.equals(QuickstartPreferences.REGISTRATION_GENERATING)){
                     // 액션이 GENERATING일 경우
-                    Log.e("GCM","GENERATING");
                 } else if(action.equals(QuickstartPreferences.REGISTRATION_COMPLETE)){
                     // 액션이 COMPLETE일 경우
                     String token = intent.getStringExtra("token");
                     Log.e("GCM","COMPLETE - " + token);
                     gcmDeviceToken = token;
 
-
-                    Log.e("AutoLoginThread","start");
                     autoLoginThread = new AutoLoginThread();
                 }
             }
@@ -151,9 +147,7 @@ public class SplashActivity extends AppCompatActivity{
 
 
     private class AutoLoginThread extends Thread {
-
         public AutoLoginThread() {
-            Log.e("AutoLoginThread","AutoLoginThread");
             start();
         }
 

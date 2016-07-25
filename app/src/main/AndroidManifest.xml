@@ -61,7 +61,11 @@
         <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginInAppBrowserActivity"
             android:label="OAuth2.0 In-app"/>
 
-
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <!-- [START gcm_receiver] -->
         <receiver
