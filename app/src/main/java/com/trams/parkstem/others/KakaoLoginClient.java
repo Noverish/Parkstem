@@ -45,7 +45,7 @@ public class KakaoLoginClient {
 
     public void login() {
         // 카카오 세션을 오픈한다
-        Log.e("open","open");
+//        Log.e("open","open");
         mKakaocallback = new SessionCallback();
         com.kakao.auth.Session.getCurrentSession().addCallback(mKakaocallback);
         com.kakao.auth.Session.getCurrentSession().checkAndImplicitOpen();
@@ -109,7 +109,7 @@ public class KakaoLoginClient {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
-            Log.e("result",requestCode + " " + resultCode + " " + data);
+//            Log.e("result",requestCode + " " + resultCode + " " + data);
         }
     }
 
@@ -120,7 +120,7 @@ public class KakaoLoginClient {
     private class SessionCallback implements ISessionCallback {
         @Override
         public void onSessionOpened() {
-            Log.e("TAG" , "세션 오픈됨");
+//            Log.e("TAG" , "세션 오픈됨");
             // 사용자 정보를 가져옴, 회원가입 미가입시 자동가입 시킴
             KakaorequestMe();
         }
@@ -136,7 +136,7 @@ public class KakaoLoginClient {
      * 사용자의 상태를 알아 보기 위해 me API 호출을 한다.
      */
     protected void KakaorequestMe() {
-        Log.e("TAG","request me");
+//        Log.e("TAG","request me");
 
         UserManagement.requestMe(new MeResponseCallback() {
             @Override
@@ -158,7 +158,7 @@ public class KakaoLoginClient {
 
             @Override
             public void onSuccess(UserProfile userProfile) {
-                Log.e("NaverLoginSuccess","Id : " + userProfile.getId() + ", ServiceUserID : " + userProfile.getServiceUserId() +", nickName : " + userProfile.getServiceUserId());
+                Log.e("KakaoLoginSuccess","Id : " + userProfile.getId() + ", ServiceUserID : " + userProfile.getServiceUserId() +", nickName : " + userProfile.getNickname());
 
                 if(listener != null) {
                     listener.onLoginSuccess(OnLoginSuccessListener.KAKAO, "", userProfile.getId() + "", "", "", "", "", "", "", "");

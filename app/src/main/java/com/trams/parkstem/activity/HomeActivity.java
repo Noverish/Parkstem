@@ -33,7 +33,6 @@ public class HomeActivity extends BaseNavigationActivity {
         setContentView(R.layout.activity_home);
         this.context = this;
 
-        hipassOn = false;
         hipassButton = (RelativeLayout) findViewById(R.id.activity_hipass_on_off_button);
         hipassButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +40,19 @@ public class HomeActivity extends BaseNavigationActivity {
                 onHipassButtonClicked();
             }
         });
+
+        ServerClient.DashBoard dashBoard;
+        ServerClient.ParkHistory[] parkHistories = new ServerClient.ParkHistory[2];
+
+        try {
+            dashBoard = client.dashboard();
+            hipassOn = dashBoard.hipass;
+        } catch (ServerClient.ServerErrorException ex) {
+            Toast.makeText(this, "정보를 불러오는데 실패했습니다 - " + ex, Toast.LENGTH_SHORT).show();
+            hipassOn = false;
+        }
+
+        showHipassButton(hipassOn);
 
         try{
             ServerClient.ParkHistoryList parkHistoryList = ServerClient.getInstance().parkHistory();
@@ -101,30 +113,32 @@ public class HomeActivity extends BaseNavigationActivity {
     }
 
     private void onHipassButtonClicked() {
-        ImageView human = (ImageView) findViewById(R.id.activity_highpass_human_image);
 
         hipassOn = !hipassOn;
 
-        if(hipassOn) {
-            try {
+        try {
+            if (hipassOn)
                 client.hipassOn("Y");
-                hipassButton.removeAllViews();
-                getLayoutInflater().inflate(R.layout.hipass_button_on, hipassButton);
-                human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person_2));
-            } catch (ServerClient.ServerErrorException ex) {
-                Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            try {
+            else
                 client.hipassOn("N");
-                hipassButton.removeAllViews();
-                getLayoutInflater().inflate(R.layout.hipass_button_off, hipassButton);
-                human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person));
-            } catch (ServerClient.ServerErrorException ex) {
-                Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
-            }
+            showHipassButton(hipassOn);
+        } catch (ServerClient.ServerErrorException ex) {
+            Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
         }
+    }
 
+    private void showHipassButton(boolean hipassOn) {
+        ImageView human = (ImageView) findViewById(R.id.activity_highpass_human_image);
+
+        hipassButton.removeAllViews();
+
+        if(hipassOn) {
+            getLayoutInflater().inflate(R.layout.hipass_button_on, hipassButton);
+            human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person_2));
+        } else {
+            getLayoutInflater().inflate(R.layout.hipass_button_off, hipassButton);
+            human.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.img_home_person));
+        }
     }
 
     @Override

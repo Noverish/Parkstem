@@ -136,7 +136,7 @@ public class SplashActivity extends AppCompatActivity{
                 GooglePlayServicesUtil.getErrorDialog(resultCode, this,
                         PLAY_SERVICES_RESOLUTION_REQUEST).show();
             } else {
-                Log.i(TAG, "This device is not supported.");
+                Toast.makeText(this, "구글 플레이 서비스를 이용할 수 없는 기기입니다.", Toast.LENGTH_SHORT).show();
                 finish();
             }
             return false;
