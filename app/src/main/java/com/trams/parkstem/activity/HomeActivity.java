@@ -76,7 +76,6 @@ public class HomeActivity extends BaseNavigationActivity {
         alert.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Log.e("asdf","popup");
                 Context context = HomeActivity.this;
                 Essentials.makeHipassPopup(context, (ViewGroup) HomeActivity.this.findViewById(R.id.content_main_layout));
             }
