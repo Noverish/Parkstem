@@ -1,5 +1,6 @@
 package com.trams.parkstem.view;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.ColorMatrix;
@@ -7,11 +8,11 @@ import android.graphics.ColorMatrixColorFilter;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -31,6 +32,7 @@ import java.util.Calendar;
  */
 public class TicketView extends LinearLayout {
     private Context context;
+    private Calendar calendar;
 
     private ServerClient.Ticket ticket;
     private TicketViewData data;
@@ -202,8 +204,6 @@ public class TicketView extends LinearLayout {
         this.afterPriceTerm.setText(data.priceTerm);
         this.afterPrice.setText(Essentials.numberWithComma(data.afterPrice));
 
-        Log.e("asdf",(expiryDateStart == null) + "" );
-
         if(data.expiryDateStart != null)
             this.expiryDateStart.setText(Essentials.calendarToDate(data.expiryDateStart));
         else
@@ -248,7 +248,7 @@ public class TicketView extends LinearLayout {
 
         ImageView calendarImageView = (ImageView) findViewById(R.id.long_ticket_mobile_item_calender);
         if(calendarButton) {
-            /*calendarImageView.setOnClickListener(new OnClickListener() {
+            calendarImageView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
@@ -268,7 +268,7 @@ public class TicketView extends LinearLayout {
                             calendar.get(Calendar.MONTH),
                             calendar.get(Calendar.DAY_OF_MONTH)).show();
                 }
-            });*/
+            });
         } else {
             removeView(calendarImageView);
         }
@@ -334,23 +334,9 @@ public class TicketView extends LinearLayout {
         }
     }
 
-    /*private void refreshDate() {
-        TextView startDate = (TextView) findViewById(R.id.long_ticket_mobile_item_start_date);
+    private void refreshDate() {
         startDate.setText(Essentials.calendarToDate(calendar));
-
-        Calendar expiration = (Calendar) calendar.clone();
-        expiration.add(Calendar.DAY_OF_MONTH, 100);
-
-        String expiryEnd = expiration.get(Calendar.YEAR) + ".";
-        expiryEnd += Essentials.numberWithZero(expiration.get(Calendar.MONTH) + 1) + ".";
-        expiryEnd += Essentials.numberWithZero(expiration.get(Calendar.DAY_OF_MONTH));
-
-        TextView expiryDateStart = (TextView) findViewById(R.id.ticket_item_due_date_start);
-        expiryDateStart.setText(calendar);
-
-        TextView expiryDateEnd = (TextView) findViewById(R.id.ticket_item_due_date_end);
-        expiryDateEnd.setText(expiryEnd);
-    }*/
+    }
 
     public String getTicketName() {
         return data.ticketName;

@@ -43,6 +43,19 @@ public class SplashActivity extends AppCompatActivity{
         getInstanceIdToken();
 
         SleepThread thread = new SleepThread(1500);
+
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    ServerClient.getInstance().memberInfo();
+                } catch (ServerClient.ServerErrorException ex) {
+                    Log.e("asdf",ex.msg);
+                }
+            }
+        });
+
+        thread1.start();
     }
 
     private void changeActivity() {

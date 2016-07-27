@@ -12,6 +12,7 @@ import com.trams.parkstem.server.ServerClient;
 import com.trams.parkstem.view.TicketView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by Noverish on 2016-07-08.
@@ -42,10 +43,10 @@ public class ManageTicketActivity extends BaseBackSearchActivity {
 
     private void reloadServerData() {
         try {
-            ServerClient.TicketLists list = ServerClient.getInstance().listOfTicket();
+            ServerClient.TicketLists list = ServerClient.getInstance().listOfTicket(Calendar.getInstance());
 
             for (ServerClient.Ticket ticket : list.data) {
-                TicketView ticketView = new TicketView(this, ticket, "상세정보", true, false, true);
+                TicketView ticketView = new TicketView(this, ticket, "상세정보", true, false, false);
                 ticketViews.add(ticketView);
             }
         } catch (ServerClient.ServerErrorException ex) {

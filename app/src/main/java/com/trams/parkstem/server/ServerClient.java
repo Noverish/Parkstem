@@ -149,7 +149,7 @@ public class ServerClient  {
     public void login(final String memberGubun, final String parkstemID, final String parkstemPW, final String token) throws ServerErrorException {
         Log.e(TAG,"login : " + memberGubun + ", " + parkstemID + ", " + parkstemPW + ", " + token);
 
-        /*int res;
+        int res;
         String msg;
         final String LOGIN_URL = "http://app.parkstem.com/api/member_login.php";
         Thread thread = new Thread(new Runnable() {
@@ -182,7 +182,7 @@ public class ServerClient  {
 
                 login.name = result.getString("name");
                 login.email = result.getString("email");
-                login.phone = result.getString("phone");
+                login.phone = result.getString("mobile");
                 String push = result.getString("pushYN");
                 String cert = result.getString("certification");
 
@@ -197,13 +197,13 @@ public class ServerClient  {
         } catch (JSONException ex) {
             ex.printStackTrace();
             throw new ServerErrorException();
-        }*/
+        }
 
-        login.name = "나이름";
+        /*login.name = "나이름";
         login.email = "email@email.com";
         login.phone = "000-000-0000";
         login.certification = true;
-        login.pushYN = true;
+        login.pushYN = true;*/
     }
 
     public void register(final String name, final String email, final String mobile, final String nickName, final String parkstemID, final String parkstemPW, final String token) throws ServerErrorException{
@@ -1183,7 +1183,13 @@ public class ServerClient  {
 
 
     //티켓 관련 함수
-    private TicketLists listOfAllTickets() throws ServerErrorException {
+    private TicketLists listOfAllTickets(Calendar now) throws ServerErrorException {
+        String tmp = "";
+        tmp += now.get(Calendar.YEAR);
+        tmp += "-" + Essentials.numberWithZero(now.get(Calendar.MONTH));
+        tmp += "-" + Essentials.numberWithZero(now.get(Calendar.DAY_OF_MONTH));
+        final String nowDate = tmp;
+
         String msg;
         final String Tlist_URL = "http://app.parkstem.com/api/ticket_list.php";
         Thread thread = new Thread(new Runnable() {
@@ -1191,6 +1197,7 @@ public class ServerClient  {
             public void run() {
                 HashMap<String, String> hashMap = new HashMap<>();
                 hashMap.put("uniqueID", uniqueID);
+                hashMap.put("start_date",nowDate);
                 result = connect(hashMap, Tlist_URL);
             }
         });
@@ -1241,11 +1248,11 @@ public class ServerClient  {
         }
     } //확인완료
 
-    public TicketLists listOfTicket() throws ServerErrorException{
+    public TicketLists listOfTicket(Calendar now) throws ServerErrorException{
         TicketLists allTickets;
 
         try {
-            allTickets = listOfAllTickets();
+            allTickets = listOfAllTickets(now);
         } catch (ServerErrorException ex) {
             throw ex;
         }
@@ -1260,12 +1267,12 @@ public class ServerClient  {
         return allTickets;
     } //확인완료
 
-    public LongTicketLists listOfLongTicket() throws ServerErrorException{
+    public LongTicketLists listOfLongTicket(Calendar now) throws ServerErrorException{
         LongTicketLists longTicketLists = new LongTicketLists();
         TicketLists allTickets;
 
         try {
-            allTickets = listOfAllTickets();
+            allTickets = listOfAllTickets(now);
 
             longTicketLists.itemTotalCount = allTickets.itemTotalCount;
             longTicketLists.pageCount = allTickets.pageCount;
