@@ -151,9 +151,17 @@ public class Essentials {
         return hour + ":" + numberWithZero(min) + " " + amPm;
     }
 
-    public static String calendarToDate(Calendar calendar) {
+    public static String calendarToDateWithDot(Calendar calendar) {
         String date = calendar.get(Calendar.YEAR) + ".";
         date += Essentials.numberWithZero(calendar.get(Calendar.MONTH) + 1) + ".";
+        date += Essentials.numberWithZero(calendar.get(Calendar.DAY_OF_MONTH));
+
+        return date;
+    }
+
+    public static String calendarToDateWithBar(Calendar calendar) {
+        String date = calendar.get(Calendar.YEAR) + "-";
+        date += Essentials.numberWithZero(calendar.get(Calendar.MONTH) + 1) + "-";
         date += Essentials.numberWithZero(calendar.get(Calendar.DAY_OF_MONTH));
 
         return date;

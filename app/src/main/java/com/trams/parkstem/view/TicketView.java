@@ -186,12 +186,12 @@ public class TicketView extends LinearLayout {
         this.buttonNameText.setText(data.buttonName);
 
         if(data.startDate != null)
-            this.startDate.setText(Essentials.calendarToDate(data.startDate));
+            this.startDate.setText(Essentials.calendarToDateWithDot(data.startDate));
         else
             this.startDate.setText("");
 
         if(data.endDate != null)
-            this.endDate.setText(Essentials.calendarToDate(data.endDate));
+            this.endDate.setText(Essentials.calendarToDateWithDot(data.endDate));
         else
             this.endDate.setText("");
 
@@ -326,7 +326,7 @@ public class TicketView extends LinearLayout {
     }
 
     private void refreshDate() {
-        startDate.setText(Essentials.calendarToDate(calendar));
+        startDate.setText(Essentials.calendarToDateWithDot(calendar));
     }
 
     public String getTicketName() {

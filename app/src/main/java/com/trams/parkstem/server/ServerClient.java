@@ -15,11 +15,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by monc2 on 2016-07-04.
@@ -206,52 +206,34 @@ public class ServerClient  {
     public void register(final String name, final String email, final String mobile, final String nickName, final String parkstemID, final String parkstemPW, final String token) throws ServerErrorException{
         Log.e(TAG,"register : " + name + ", " + email + ", " + mobile + ", " + nickName + ", " + parkstemID + ", " + parkstemPW + ", " + token);
 
-        String msg;
+        JSONObject result;
+        String uniqueID;
+
         final String JOIN_URL = "http://app.parkstem.com/api/member_join.php";
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                long now = System.currentTimeMillis();
-                Date date = new Date(now);
-                SimpleDateFormat CurDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String strCurDate = CurDateFormat.format(date);
-
-                HashMap<String, String> hashMap = new HashMap<>();
-                hashMap.put("memberGubun","parkstem");
-                hashMap.put("name", name);
-                hashMap.put("email", email);
-                hashMap.put("mobile", mobile);
-                hashMap.put("nickName", nickName);
-                hashMap.put("parkstemID", parkstemID);
-                hashMap.put("parkstemPW", parkstemPW);
-                hashMap.put("token", token);
-                hashMap.put("regDate", strCurDate);
-                result = connect(hashMap, JOIN_URL);
-            }
-        });
+        String date = Essentials.calendarToDateWithBar(Calendar.getInstance());
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("memberGubun","parkstem");
+        hashMap.put("name", name);
+        hashMap.put("email", email);
+        hashMap.put("mobile", mobile);
+        hashMap.put("nickName", nickName);
+        hashMap.put("parkstemID", parkstemID);
+        hashMap.put("parkstemPW", parkstemPW);
+        hashMap.put("token", token);
+        hashMap.put("regDate", date);
 
         try {
-            thread.start();
-            thread.join();
-        } catch (Exception ex) {
+            ConnectThread thread = new ConnectThread(JOIN_URL, hashMap);
+            result = thread.getResult();
+
+            uniqueID = result.getString("uniqueID");
+        } catch (ServerErrorException ex) {
             ex.printStackTrace();
-        }
-
-        try {
-            msg = result.getString("msg");
-            if(result.getInt("res")==1){
-                Log.d("ServerClient", msg);
-                uniqueID = result.getString("uniqueID");
-            }
-            else{
-                throw new ServerErrorException(result.getInt("res"),msg);
-            }
+            throw ex;
         } catch (JSONException ex) {
             ex.printStackTrace();
-            throw new ServerErrorException();
+            throw new ServerErrorException(0, "JSON ERROR");
         }
-
-
     }
 
     public MemberInfo memberInfo() throws ServerErrorException{
@@ -430,42 +412,30 @@ public class ServerClient  {
     public RecentCar recentCar() throws ServerErrorException{
         Log.e(TAG,"RecentCar");
 
-        String msg;
+        JSONObject result;
+
         final String Recent_URL = "http://app.parkstem.com/api/car_recent.php";
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                HashMap<String, String> hashMap = new HashMap<>();
-                hashMap.put("uniqueID",uniqueID);
-                result = connect(hashMap, Recent_URL);
-            }
-        });
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("uniqueID",uniqueID);
 
         try {
-            thread.start();
-            thread.join();
-        } catch (Exception ex) {
+            ConnectThread thread = new ConnectThread(Recent_URL, hashMap);
+            result = thread.getResult();
+
+            RecentCar recentcar = new RecentCar();
+            recentcar.local_id = result.getString("local_id");
+            recentcar.in_date = Essentials.stringToCalendar(result.getString("in_date"));
+            recentcar.out_date = Essentials.stringToCalendar(result.getString("out_date"));
+            recentcar.total = result.getString("total");
+            return recentcar;
+        }  catch (ServerErrorException ex) {
             ex.printStackTrace();
-        }
-
-        try {
-            msg = result.getString("msg");
-            if(result.getInt("res")==1){
-                RecentCar recentcar = new RecentCar();
-                Log.d("ServerClient",msg);
-                recentcar.local_id = result.getString("local_id");
-                recentcar.in_date = Essentials.stringToCalendar(result.getString("in_date"));
-                recentcar.out_date = Essentials.stringToCalendar(result.getString("out_date"));
-                recentcar.total = result.getString("total");
-                return recentcar;
-            }
-            else{
-                throw new ServerErrorException(result.getInt("res"),msg);
-            }
+            throw ex;
         } catch (JSONException ex) {
             ex.printStackTrace();
-            throw new ServerErrorException();
+            throw new ServerErrorException(0, "JSON ERROR");
         }
+
         /*RecentCar recentCar = new RecentCar();
         recentCar.local_id = "132654";
         recentCar.in_date = Calendar.getInstance();
@@ -1853,18 +1823,27 @@ public class ServerClient  {
 
                 Log.e("jsonStr",jsonStr);
 
-                result = new JSONObject(jsonStr);
+                Pattern pattern = Pattern.compile("[{].*[}]");
+                Matcher matcher = pattern.matcher(jsonStr);
+
+                if(matcher.find())
+                    result = new JSONObject(matcher.group());
+                else
+                    result = null;
             } catch (Exception ex) {
                 ex.printStackTrace();
                 result = null;
             }
         }
 
-        public JSONObject getResult() {
+        public JSONObject getResult() throws ServerErrorException{
             try {
                 join();
+                if(result == null)
+                    throw new ServerErrorException(0, "JSON ERROR");
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
+                throw new ServerErrorException(0, "Thread Join ERROR");
             }
 
             return result;
