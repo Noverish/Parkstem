@@ -183,11 +183,8 @@ public class ServerClient  {
                 login.name = result.getString("name");
                 login.email = result.getString("email");
                 login.phone = result.getString("mobile");
-                String push = result.getString("pushYN");
-                String cert = result.getString("certification");
-
-                login.pushYN = push.equals("Y");
-                login.certification = cert.equals("Y");
+                login.pushYN = result.getString("pushYN").equals("Y");
+                login.certification = result.getString("certification").equals("Y");
             }
             else
             {
@@ -260,6 +257,8 @@ public class ServerClient  {
     public MemberInfo memberInfo() throws ServerErrorException{
         Log.e(TAG,"memberInfo");
 
+        //{"res":"1","msg":"회원정보입니다.","name":"","email":"","mobile":"","certification":"","pushYN":"","token":"","uniqueID":""}
+
         String msg;
         final String LOGIN_URL = "http://app.parkstem.com/api/member_info.php";
         Thread thread = new Thread(new Runnable() {
@@ -281,24 +280,14 @@ public class ServerClient  {
             msg = result.getString("msg");
             if(result.getInt("res")==1){
                 Log.d("ServerClient",msg);
-                uniqueID = result.getString("uniqueID");
+                //uniqueID = result.getString("uniqueID");
 
                 MemberInfo memberInfo = new MemberInfo();
                 memberInfo.name = result.getString("name");
-                String push = result.getString("certifi");
-                String cert = result.getString("certification");
-                if(push =="Y"){
-                    memberInfo.pushYN = true;
-                }
-                else{
-                    memberInfo.pushYN = false;
-                }
-                if(cert =="Y"){
-                    memberInfo.certification = true;
-                }
-                else{
-                    memberInfo.certification = false;
-                }
+                memberInfo.email = result.getString("email");
+                memberInfo.mobile = result.getString("mobile");
+                memberInfo.pushYN = result.getString("pushYN").equals("Y");
+                memberInfo.certification = result.getString("certification").equals("Y");
                 return memberInfo;
             }
             else{
@@ -1117,7 +1106,7 @@ public class ServerClient  {
     } //확인완료
 
     public TicketPurchaseList ticketPurchase() throws ServerErrorException{
-        Log.e(TAG,"ticketPurchase");
+        Log.e(TAG,"ticketPurchase : " + uniqueID);
 
         String msg;
         final String TicketBuy_URL = "http://app.parkstem.com/api/ticket_buy_list.php";
@@ -1160,8 +1149,7 @@ public class ServerClient  {
                     ticketPurchase.start_date = Essentials.stringToCalendar(jdata.getString("start_date"));
                     ticketPurchase.end_date = Essentials.stringToCalendar(jdata.getString("end_date"));
                     ticketPurchase.pay_date = Essentials.stringToCalendar(jdata.getString("pay_date"));
-                    ticketPurchase.region = jdata.getString("region");
-                    ticketPurchase.term = Essentials.stringToCalendar(jdata.getString("term"));
+                    ticketPurchase.term = jdata.getString("term");
                     ticketPurchase.term_name = jdata.getString("term_name");
                     ticketPurchase.available_time = jdata.getString("available_time");
                     ticketPurchase.user_name = jdata.getString("user_name");
@@ -1184,11 +1172,7 @@ public class ServerClient  {
 
     //티켓 관련 함수
     private TicketLists listOfAllTickets(Calendar now) throws ServerErrorException {
-        String tmp = "";
-        tmp += now.get(Calendar.YEAR);
-        tmp += "-" + Essentials.numberWithZero(now.get(Calendar.MONTH));
-        tmp += "-" + Essentials.numberWithZero(now.get(Calendar.DAY_OF_MONTH));
-        final String nowDate = tmp;
+        Log.e(TAG,"listOfAllTickets : " + uniqueID);
 
         String msg;
         final String Tlist_URL = "http://app.parkstem.com/api/ticket_list.php";
@@ -1197,7 +1181,6 @@ public class ServerClient  {
             public void run() {
                 HashMap<String, String> hashMap = new HashMap<>();
                 hashMap.put("uniqueID", uniqueID);
-                hashMap.put("start_date",nowDate);
                 result = connect(hashMap, Tlist_URL);
             }
         });
@@ -1223,17 +1206,19 @@ public class ServerClient  {
                     Ticket ticket = new Ticket();
                     ticket.idx = jdata.getInt("idx");
                     ticket.local_id = jdata.getString("local_id");
-                    ticket.ticket_name = jdata.getString("ticket_name");
-                    ticket.term = Essentials.stringToCalendar(jdata.getString("term"));
-                    ticket.term_name = jdata.getString("term_name");
-                    ticket.region = jdata.getString("region");
                     ticket.gubun = jdata.getInt("gubun");
+                    ticket.ticket_name = jdata.getString("ticket_name");
+                    ticket.local_address = jdata.getString("local_address");
+                    ticket.term = jdata.getString("term");
+                    ticket.term_name = jdata.getString("term_name");
                     ticket.available_time = jdata.getInt("available_time");
-                    ticket.allow = jdata.getString("allow").equals("Y");
-                    ticket.original_price = jdata.getString("original_price");
-                    ticket.price = jdata.getString("price");
                     ticket.start_date = Essentials.stringToCalendar(jdata.getString("start_date"));
                     ticket.end_date = Essentials.stringToCalendar(jdata.getString("end_date"));
+                    ticket.start_available_time = jdata.getString("start_available_time");
+                    ticket.end_available_time = jdata.getString("end_available_time");
+                    ticket.original_price = jdata.getString("original_price");
+                    ticket.price = jdata.getString("price");
+                    ticket.allow = jdata.getString("allow").equals("Y");
                     ticket.regdate = Essentials.stringToCalendar(jdata.getString("regdate"));
                     ticketLists.data.add(ticket);
                 }
@@ -1292,7 +1277,13 @@ public class ServerClient  {
         return longTicketLists;
     } //확인완료
 
-    public TicketInfo ticketInfo(final String local_id, final String gubun, final String idx) throws ServerErrorException{
+    public TicketInfo ticketInfo(final String local_id, final String gubun, final String idx, final Calendar now) throws ServerErrorException{
+        String tmp = "";
+        tmp += now.get(Calendar.YEAR);
+        tmp += "-" + Essentials.numberWithZero(now.get(Calendar.MONTH));
+        tmp += "-" + Essentials.numberWithZero(now.get(Calendar.DAY_OF_MONTH));
+        final String nowDate = tmp;
+
         String msg;
         final String T_INFO_URL = "http://app.parkstem.com/api/ticket_info.php";
         Thread thread = new Thread(new Runnable() {
@@ -1303,6 +1294,7 @@ public class ServerClient  {
                 hashMap.put("local_id",local_id);
                 hashMap.put("gubun",gubun);
                 hashMap.put("idx",idx);
+                hashMap.put("start_date",nowDate);
                 result = connect(hashMap, T_INFO_URL);
             }
         });
@@ -1529,6 +1521,8 @@ public class ServerClient  {
     }
     public class MemberInfo{
         public String name;
+        public String email;
+        public String mobile;
         public boolean certification;
         public boolean pushYN;
     }
@@ -1648,8 +1642,7 @@ public class ServerClient  {
         public Calendar start_date;
         public Calendar end_date;
         public Calendar pay_date;
-        public String region;
-        public Calendar term;
+        public String term;
         public String term_name;
         public String available_time;
         public String user_name;
@@ -1675,8 +1668,7 @@ public class ServerClient  {
         public int idx;
         public String local_id;
         public String ticket_name;
-        public String region;
-        public Calendar term;
+        public String term;
         public String term_name;
         public int available_time;
         public int gubun;
@@ -1686,41 +1678,46 @@ public class ServerClient  {
         public Calendar end_date;
         public Calendar regdate;
         public boolean allow;
+        public String local_address;
+        public String start_available_time;
+        public String end_available_time;
 
         public Ticket() {
 
         }
 
         public Ticket(Parcel in) {
-            String[] data = new String[14];
+            String[] data = new String[16];
 
             in.readStringArray(data);
             this.idx = Integer.parseInt(data[0]);
             this.local_id = data[1];
             this.ticket_name = data[2];
-            this.region = data[3];
-            this.term = Calendar.getInstance();
-            this.term.setTimeInMillis(Long.parseLong(data[4]));
-            this.term_name = data[5];
-            this.available_time = Integer.parseInt(data[6]);
-            this.gubun = Integer.parseInt(data[7]);
-            this.original_price = data[8];
-            this.price = data[9];
+            this.term = data[3];
+            this.term_name = data[4];
+            this.available_time = Integer.parseInt(data[5]);
+            this.gubun = Integer.parseInt(data[6]);
+            this.original_price = data[7];
+            this.price = data[8];
             this.start_date = Calendar.getInstance();
-            this.start_date.setTimeInMillis(Long.parseLong(data[10]));
+            this.start_date.setTimeInMillis(Long.parseLong(data[9]));
             if(start_date.getTimeInMillis() == 0)
                 start_date = null;
 
             this.end_date = Calendar.getInstance();
-            this.end_date.setTimeInMillis(Long.parseLong(data[11]));
+            this.end_date.setTimeInMillis(Long.parseLong(data[10]));
             if(end_date.getTimeInMillis() == 0)
                 end_date = null;
 
             this.regdate = Calendar.getInstance();
-            this.regdate.setTimeInMillis(Long.parseLong(data[12]));
+            this.regdate.setTimeInMillis(Long.parseLong(data[11]));
             if(regdate.getTimeInMillis() == 0)
                 regdate = null;
-            this.allow = Boolean.parseBoolean(data[13]);
+            this.allow = Boolean.parseBoolean(data[12]);
+
+            this.local_address = data[13];
+            this.start_available_time = data[14];
+            this.end_available_time = data[15];
         }
 
         @Override
@@ -1749,8 +1746,7 @@ public class ServerClient  {
                     this.idx + "",
                     this.local_id,
                     this.ticket_name,
-                    this.region,
-                    this.term.getTimeInMillis() + "",
+                    this.term + "",
                     this.term_name,
                     this.available_time + "",
                     this.gubun + "",
@@ -1759,7 +1755,10 @@ public class ServerClient  {
                     this.start_date.getTimeInMillis() + "",
                     this.end_date.getTimeInMillis() + "",
                     this.regdate.getTimeInMillis() + "",
-                    this.allow + ""});
+                    this.allow + "",
+                    this.local_address,
+                    this.start_available_time,
+                    this.end_available_time});
         }
 
         public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
@@ -1802,6 +1801,73 @@ public class ServerClient  {
         public ServerErrorException(int res, String msg) {
             this.res = res;
             this.msg = msg;
+        }
+    }
+
+
+    private class ConnectThread extends Thread {
+        private JSONObject result;
+        private String urlStr = "";
+        private HashMap<String, String> data = new HashMap<>();
+
+        private ConnectThread(String urlStr, HashMap<String, String> data) {
+            this.urlStr = urlStr;
+            this.data = data;
+
+            start();
+        }
+
+        @Override
+        public void run() {
+            try {
+                String jsonStr;
+                URL url = new URL(urlStr);
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+                con.setConnectTimeout(10000);
+                con.setDoOutput(true);
+                con.setDoInput(true);
+                con.setRequestProperty("Content-Type", "application/json");
+                con.setRequestProperty("X-Requested-With", "XMLHttpRequest");
+                con.setRequestMethod("POST");
+
+                JSONObject json = new JSONObject();
+                for(String key : data.keySet()) {
+                    json.put(key, data.get(key));
+                }
+
+                OutputStreamWriter wr= new OutputStreamWriter(con.getOutputStream());
+                wr.write(json.toString());
+                wr.flush();
+                wr.close();
+
+                BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+                String line;
+                jsonStr = "";
+
+                while ((line = reader.readLine()) != null) {
+                    jsonStr += line + "\n";
+                }
+                reader.close();
+
+                Log.e("jsonStr",jsonStr);
+
+                result = new JSONObject(jsonStr);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                result = null;
+            }
+        }
+
+        public JSONObject getResult() {
+            try {
+                join();
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+
+            return result;
         }
     }
 

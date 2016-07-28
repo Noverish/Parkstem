@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
@@ -20,6 +21,7 @@ import java.util.Calendar;
 public class ManageTicketActivity extends BaseBackSearchActivity {
     private SwipeRefreshLayout swipeLayout;
     private ArrayList<TicketView> ticketViews = new ArrayList<>();
+    private TextView termName;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,6 +29,8 @@ public class ManageTicketActivity extends BaseBackSearchActivity {
         setContentView(R.layout.activity_manage_ticket);
         setSearchEnable(true);
         setToolbarTitle("주차권 관리");
+
+        termName = (TextView) findViewById(R.id.activity_manage_ticket_term_name);
 
         reloadServerData();
 
@@ -49,6 +53,8 @@ public class ManageTicketActivity extends BaseBackSearchActivity {
                 TicketView ticketView = new TicketView(this, ticket, "상세정보", true, false, false);
                 ticketViews.add(ticketView);
             }
+
+            termName.setText(list.data.get(0).term_name);
         } catch (ServerClient.ServerErrorException ex) {
             Log.e("error!", ex.msg);
         }

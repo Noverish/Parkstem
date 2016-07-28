@@ -59,8 +59,7 @@ public class TicketView extends LinearLayout {
     private TextView afterPrice;
 
     private LinearLayout expiryDateLayout;
-    private TextView expiryDateStart;
-    private TextView expiryDateEnd;
+    private TextView term;
 
     private boolean detailOpen = true;
 
@@ -85,6 +84,7 @@ public class TicketView extends LinearLayout {
 
     private void init(Context contextParam) {
         this.context = contextParam;
+        calendar = Calendar.getInstance();
 
         LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.ticket_item, this, true);
@@ -111,8 +111,7 @@ public class TicketView extends LinearLayout {
         afterPrice = (TextView) findViewById(R.id.long_ticket_mobile_item_after_price_amount);
 
         expiryDateLayout = (LinearLayout) findViewById(R.id.ticket_item_due_date_layout);
-        expiryDateStart = (TextView) findViewById(R.id.ticket_item_due_date_start);
-        expiryDateEnd = (TextView) findViewById(R.id.ticket_item_due_date_end);
+        term = (TextView) findViewById(R.id.ticket_item_term);
     }
 
     private void setData(ServerClient.Ticket ticket, String buttonName) {
@@ -130,18 +129,18 @@ public class TicketView extends LinearLayout {
 
         if(ticket.gubun == ServerClient.Ticket.SHORT_TICEKT_GUBUN) {
             data = new TicketViewData(ticket.ticket_name, parkInfo.short_address, buttonName,
-                    Calendar.getInstance(), null,
+                    calendar, null,
                     parkInfo.new_address, parkInfo.local_address,
-                    ticket.term_name, ticket.original_price, ticket.price,
-                    Calendar.getInstance(), ticket.term);
+                    ticket.available_time + "시간", ticket.original_price, ticket.price,
+                    ticket.term);
 
             fillData(data);
         } else {
             data = new TicketViewData(ticket.ticket_name, parkInfo.short_address, buttonName,
                     ticket.start_date, ticket.end_date,
                     parkInfo.new_address, parkInfo.local_address,
-                    ticket.term_name, ticket.original_price, ticket.price,
-                    null, null);
+                    "1달", ticket.original_price, ticket.price,
+                    "");
 
             fillData(data);
         }
@@ -163,18 +162,18 @@ public class TicketView extends LinearLayout {
 
         if(purchase.gubun == ServerClient.Ticket.SHORT_TICEKT_GUBUN) {
             data = new TicketViewData(purchase.ticket_name, parkInfo.short_address, buttonName,
-                    Calendar.getInstance(), null,
+                    calendar, null,
                     parkInfo.new_address, parkInfo.local_address,
-                    purchase.term_name, purchase.original_price, purchase.price,
-                    Calendar.getInstance(), purchase.term);
+                    purchase.available_time + "시간", purchase.original_price, purchase.price,
+                    purchase.term);
 
             fillData(data);
         } else {
             data = new TicketViewData(purchase.ticket_name, parkInfo.short_address, buttonName,
                     purchase.start_date, purchase.end_date,
                     parkInfo.new_address, parkInfo.local_address,
-                    purchase.term_name, purchase.original_price, purchase.price,
-                    null, null);
+                    "1달", purchase.original_price, purchase.price,
+                    "");
 
             fillData(data);
         }
@@ -204,15 +203,7 @@ public class TicketView extends LinearLayout {
         this.afterPriceTerm.setText(data.priceTerm);
         this.afterPrice.setText(Essentials.numberWithComma(data.afterPrice));
 
-        if(data.expiryDateStart != null)
-            this.expiryDateStart.setText(Essentials.calendarToDate(data.expiryDateStart));
-        else
-            this.expiryDateStart.setText("");
-
-        if(data.expiryDateEnd != null)
-            this.expiryDateEnd.setText(Essentials.calendarToDate(data.expiryDateEnd));
-        else
-            this.expiryDateEnd.setText("");
+        this.term.setText(data.term);
     }
 
     private void applyOptions(boolean isItLongTicket, boolean purchaseButtonOn, boolean alwaysOpened, boolean calendarButton) {
@@ -359,10 +350,9 @@ public class TicketView extends LinearLayout {
         private String priceTerm;
         private String beforePrice;
         private String afterPrice;
-        private Calendar expiryDateStart;
-        private Calendar expiryDateEnd;
+        private String term;
 
-        public TicketViewData(String ticketName, String shortAddress, String buttonName, Calendar startDate, Calendar endDate, String newAddress, String oldAddress, String priceTerm, String beforePrice, String afterPrice, Calendar expiryDateStart, Calendar expiryDateEnd) {
+        public TicketViewData(String ticketName, String shortAddress, String buttonName, Calendar startDate, Calendar endDate, String newAddress, String oldAddress, String priceTerm, String beforePrice, String afterPrice, String term) {
             this.ticketName = ticketName;
             this.shortAddress = shortAddress;
             this.buttonName = buttonName;
@@ -373,19 +363,16 @@ public class TicketView extends LinearLayout {
             this.priceTerm = priceTerm;
             this.beforePrice = beforePrice;
             this.afterPrice = afterPrice;
-            this.expiryDateStart = expiryDateStart;
-            this.expiryDateEnd = expiryDateEnd;
+            this.term = term;
         }
 
         public TicketViewData(Parcel in) {
-            String[] data = new String[12];
+            String[] data = new String[11];
 
             in.readStringArray(data);
 
             startDate = Calendar.getInstance();
             endDate = Calendar.getInstance();
-            expiryDateStart = Calendar.getInstance();
-            expiryDateEnd = Calendar.getInstance();
 
             this.ticketName = data[0];
             this.shortAddress = data[1];
@@ -397,20 +384,13 @@ public class TicketView extends LinearLayout {
             this.priceTerm = data[7];
             this.beforePrice = data[8];
             this.afterPrice = data[9];
-            this.expiryDateStart.setTimeInMillis(Long.parseLong(data[10]));
-            this.expiryDateEnd.setTimeInMillis(Long.parseLong(data[11]));
+            this.term = data[10];
 
             if(startDate.getTimeInMillis() == 0)
                 startDate = null;
 
             if(endDate.getTimeInMillis() == 0)
                 endDate = null;
-
-            if(expiryDateStart.getTimeInMillis() == 0)
-                expiryDateStart = null;
-
-            if(expiryDateEnd.getTimeInMillis() == 0)
-                expiryDateEnd = null;
         }
 
         @Override
@@ -430,15 +410,6 @@ public class TicketView extends LinearLayout {
                 endDate.setTimeInMillis(0);
             }
 
-            if(expiryDateStart == null) {
-                expiryDateStart = Calendar.getInstance();
-                expiryDateStart.setTimeInMillis(0);
-            }
-
-            if(expiryDateEnd == null) {
-                expiryDateEnd = Calendar.getInstance();
-                expiryDateEnd.setTimeInMillis(0);
-            }
 
             dest.writeStringArray(new String[] {
                     this.ticketName,
@@ -451,8 +422,7 @@ public class TicketView extends LinearLayout {
                     this.priceTerm + "",
                     this.beforePrice,
                     this.afterPrice,
-                    this.expiryDateStart.getTimeInMillis() + "",
-                    this.expiryDateEnd.getTimeInMillis() + ""});
+                    this.term + ""});
         }
 
         public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {

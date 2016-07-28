@@ -24,9 +24,9 @@
                     android:layout_height="23dp" />
 
                 <TextView
+                    android:id="@+id/activity_manage_ticket_term_name"
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentBottom="true"
-                    android:text="주차권 유효기간은 100일 입니다."
                     android:textColor="@color/gray_for_text"
                     android:textSize="11sp"
                     android:layout_marginBottom="14dp"

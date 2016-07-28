@@ -64,7 +64,7 @@
     <LinearLayout
         android:id="@+id/long_ticket_mobile_item_below_layout"
         android:orientation="vertical"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout
             android:id="@+id/split_bar"
@@ -231,25 +231,10 @@
                         android:textSize="11sp" />
 
                     <TextView
-                        android:id="@+id/ticket_item_due_date_start"
+                        android:id="@+id/ticket_item_term"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="7777.77.77"
-                        android:textColor="@color/gray_for_text"
-                        android:textSize="11sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="~"
-                        android:textColor="@color/gray_for_text"
-                        android:textSize="11sp" />
-
-                    <TextView
-                        android:id="@+id/ticket_item_due_date_end"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="7777.77.77"
+                        android:text="7777.77.77~7777.77.77"
                         android:textColor="@color/gray_for_text"
                         android:textSize="11sp" />
 
