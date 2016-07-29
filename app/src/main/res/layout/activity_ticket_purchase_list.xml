@@ -22,6 +22,13 @@
                     android:layout_height="45dp" />
             </RelativeLayout>
 
+            <TextView
+                android:id="@+id/activity_ticket_purchase_list_no_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="주차권 사용내역이 없습니다."/>
+
             <LinearLayout
                 android:id="@+id/activity_ticket_purchase_list_layout"
                 android:orientation="vertical"

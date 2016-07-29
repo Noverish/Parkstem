@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
@@ -49,6 +50,11 @@ public class TicketPurchaseListActivity extends BaseBackSearchActivity {
 
         try {
             ServerClient.TicketPurchaseList list = ServerClient.getInstance().ticketPurchase();
+
+            if(list.data.size() != 0) {
+                TextView textView = (TextView) findViewById(R.id.activity_ticket_purchase_list_no_item);
+                swipeLayout.removeView(textView);
+            }
 
             for(ServerClient.TicketPurchase purchase: list.data){
                 if(!purchase.allow) {

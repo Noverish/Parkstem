@@ -23,6 +23,14 @@
                     android:layout_height="33dp" />
             </RelativeLayout>
 
+
+            <TextView
+                android:id="@+id/activity_manage_login_ticket_list_no_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="정기권이 없습니다."/>
+
             <LinearLayout
                 android:id="@+id/activity_manage_long_ticket_layout"
                 android:orientation="vertical"

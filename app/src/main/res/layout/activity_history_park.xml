@@ -16,9 +16,14 @@
             android:background="@drawable/btn_parkhistory_2"
             android:layout_width="48dp"
             android:layout_height="35dp" />
-
-
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/activity_history_park_no_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="주차내역이 없습니다."/>
 
     <LinearLayout
         android:id="@+id/activity_history_park_content_layout"

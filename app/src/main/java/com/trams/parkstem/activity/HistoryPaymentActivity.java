@@ -8,6 +8,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
@@ -31,6 +32,12 @@ public class HistoryPaymentActivity extends BaseBackSearchActivity {
         try {
             list = ServerClient.getInstance().parkHistory();
             int count=0;
+
+            if(list.data.size() != 0) {
+                TextView textView = (TextView) findViewById(R.id.activity_history_payment_no_item);
+                ((ViewGroup)textView.getParent()).removeView(textView);
+            }
+
             for(ServerClient.ParkHistory parkHistory : list.data){
                 HistoryPaymentView historyPaymentView = new HistoryPaymentView(this, parkHistory);
 

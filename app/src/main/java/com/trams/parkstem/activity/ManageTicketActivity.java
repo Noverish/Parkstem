@@ -49,6 +49,10 @@ public class ManageTicketActivity extends BaseBackSearchActivity {
         try {
             ServerClient.TicketLists list = ServerClient.getInstance().listOfTicket(Calendar.getInstance());
 
+            if(list.data.size() != 0) {
+                TextView textView = (TextView) findViewById(R.id.activity_manage_ticket_list_no_item);
+                swipeLayout.removeView(textView);
+            }
             for (ServerClient.Ticket ticket : list.data) {
                 TicketView ticketView = new TicketView(this, ticket, "상세정보", true, false, false);
                 ticketViews.add(ticketView);
