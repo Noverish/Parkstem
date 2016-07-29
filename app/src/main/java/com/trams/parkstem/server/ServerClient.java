@@ -156,7 +156,7 @@ public class ServerClient  {
     public void login(final String memberGubun, final String parkstemID, final String parkstemPW, final String token) throws ServerErrorException {
         Log.e(TAG,"login : " + memberGubun + ", " + parkstemID + ", " + parkstemPW + ", " + token);
 
-        /*int res;
+        int res;
         String msg;
         final String LOGIN_URL = "http://app.parkstem.com/api/member_login.php";
         Thread thread = new Thread(new Runnable() {
@@ -201,13 +201,13 @@ public class ServerClient  {
         } catch (JSONException ex) {
             ex.printStackTrace();
             throw new ServerErrorException();
-        }*/
+        }
 
-        login.name = "나이름";
+        /*login.name = "나이름";
         login.email = "email@email.com";
         login.phone = "000-000-0000";
         login.certification = true;
-        login.pushYN = true;
+        login.pushYN = true;*/
     }
 
     public void register(final String name, final String email, final String mobile, final String nickName, final String parkstemID, final String parkstemPW, final String token) throws ServerErrorException{
