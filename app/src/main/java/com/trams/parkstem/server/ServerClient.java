@@ -461,6 +461,10 @@ public class ServerClient  {
     public ParkInfo parkInfo(final String local_id) throws ServerErrorException{
         Log.e(TAG,"parkInfo : " + local_id);
 
+        if(local_id.equals("")) {
+            return new ParkInfo();
+        }
+
         String msg;
         final String Parkinfo_URL = "http://app.parkstem.com/api/park_info.php";
         Thread thread = new Thread(new Runnable() {
@@ -503,7 +507,7 @@ public class ServerClient  {
                 return parkinfo;
             }
             else{
-                throw new ServerErrorException(result.getInt("res"), msg);
+                throw new ServerErrorException(result.getInt("res"), "주차장 정보를 불러오는데 오류가 발생했습니다" + msg);
             }
         } catch (JSONException ex) {
             ex.printStackTrace();
@@ -1532,11 +1536,11 @@ public class ServerClient  {
         public String local_phone = "";
         public String local_photo1 = "";
         public String local_photo2 = "";
-        public int free_time = -1;
-        public String park_price = "";
-        public int park_price_time = -1;
-        public int base_minute = -1;
-        public String base_price = "";
+        public int free_time = 0;
+        public String park_price = "0";
+        public int park_price_time = 0;
+        public int base_minute = 0;
+        public String base_price = "0";
     }
 
     public class CarLists{

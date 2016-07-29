@@ -28,7 +28,9 @@ public class HttpImageThread extends Thread {
 
     public void run() {
         image = getImageBitmapByteArrayFromUrl();
-        Log.i("[Log]Grow","Size is " + (image.length/1024) + "KB for " + urlStr);
+
+        if(image != null)
+            Log.i("[Log]Grow","Size is " + (image.length/1024) + "KB for " + urlStr);
     }
 
     private byte[] getImageBitmapByteArrayFromUrl() {

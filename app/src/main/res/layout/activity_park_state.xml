@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/BLACK"
                         android:textSize="22sp"
-                        android:text="77" />
+                        android:text="0" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/BLACK"
                         android:textSize="22sp"
-                        android:text="7,777" />
+                        android:text="0" />
                 </LinearLayout>
 
 
@@ -103,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/BLACK"
                         android:textSize="22sp"
-                        android:text="77" />
+                        android:text="0" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/BLACK"
                         android:textSize="22sp"
-                        android:text="7,777" />
+                        android:text="0" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -129,7 +129,7 @@
                 <TextView
                     android:id="@+id/activity_park_state_park_price_time2"
                     android:layout_marginTop="20dp"
-                    android:text="77"
+                    android:text="0"
                     android:textSize="21sp"
                     android:textColor="@color/WHITE"
                     android:layout_alignParentRight="true"
@@ -187,7 +187,6 @@
             android:layout_alignParentRight="true"
             android:layout_gravity="center_vertical|right"
             android:textSize="23sp"
-            android:text="BLANK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
@@ -217,7 +216,6 @@
             android:layout_alignParentRight="true"
             android:layout_gravity="center_vertical|right"
             android:textSize="23sp"
-            android:text="BLANK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
@@ -257,7 +255,7 @@
             android:layout_alignParentRight="true"
             android:layout_gravity="center_vertical|right"
             android:textSize="23sp"
-            android:text="&#x20a9;BLANK"
+            android:text="&#x20a9;0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>

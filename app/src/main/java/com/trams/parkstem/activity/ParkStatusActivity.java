@@ -42,8 +42,12 @@ public class ParkStatusActivity extends BaseBackSearchActivity {
             TextView carOutTime = (TextView)findViewById(R.id.activity_park_state_car_out_time);
             TextView totalAmount = (TextView) findViewById(R.id.activity_park_state_total_amount);
 
-            HttpImageThread thread = new HttpImageThread(parkInfo.local_photo1);
-            imageView.setBackground(new BitmapDrawable(getResources(), thread.getImage()));
+            try {
+                HttpImageThread thread = new HttpImageThread(parkInfo.local_photo1);
+                imageView.setBackground(new BitmapDrawable(getResources(), thread.getImage()));
+            } catch (NullPointerException ex) {
+
+            }
 
             parkName.setText(parkInfo.local_name);
             parkAddress.setText(parkInfo.local_address);
