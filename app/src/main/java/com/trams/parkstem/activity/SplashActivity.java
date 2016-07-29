@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
@@ -67,6 +69,13 @@ public class SplashActivity extends AppCompatActivity{
         }
     }
 
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private final String TAG = getClass().getSimpleName();
 
@@ -104,7 +113,15 @@ public class SplashActivity extends AppCompatActivity{
                     Log.e("GCM","COMPLETE - " + token);
                     gcmDeviceToken = token;
 
-                    autoLoginThread = new AutoLoginThread();
+                    if(isNetworkAvailable()) {
+                        autoLoginThread = new AutoLoginThread();
+                    } else {
+                        autoLoginFailMessage = "네트워크에 연결되어 있지 않습니다.";
+                        LoginDatabase.getInstance(SplashActivity.this).clearDatabase();
+                        goToLoginActivity = true;
+                        backgroundProcessDone = true;
+                    }
+
                 }
             }
         };
