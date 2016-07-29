@@ -35,6 +35,7 @@ public class ServerClient  {
 
     public String uniqueID = "13617600";
     public Login login = new Login();
+    public MemberInfo info = new MemberInfo();
 
     public static ServerClient serverClient;
     public static ServerClient getInstance() {
@@ -44,7 +45,13 @@ public class ServerClient  {
         return serverClient;
     }
 
-    public ServerClient() {}
+    public ServerClient() {
+        try {
+            info = memberInfo();
+        } catch (ServerErrorException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     private JSONObject result;
 
@@ -149,7 +156,7 @@ public class ServerClient  {
     public void login(final String memberGubun, final String parkstemID, final String parkstemPW, final String token) throws ServerErrorException {
         Log.e(TAG,"login : " + memberGubun + ", " + parkstemID + ", " + parkstemPW + ", " + token);
 
-        /*int res;
+        int res;
         String msg;
         final String LOGIN_URL = "http://app.parkstem.com/api/member_login.php";
         Thread thread = new Thread(new Runnable() {
@@ -194,13 +201,13 @@ public class ServerClient  {
         } catch (JSONException ex) {
             ex.printStackTrace();
             throw new ServerErrorException();
-        }*/
+        }
 
-        login.name = "나이름";
+        /*login.name = "나이름";
         login.email = "email@email.com";
         login.phone = "000-000-0000";
         login.certification = true;
-        login.pushYN = true;
+        login.pushYN = true;*/
     }
 
     public void register(final String name, final String email, final String mobile, final String nickName, final String parkstemID, final String parkstemPW, final String token) throws ServerErrorException{
@@ -1126,6 +1133,7 @@ public class ServerClient  {
                     ticketPurchase.user_email = jdata.getString("user_email");
                     ticketPurchase.user_phone = jdata.getString("user_phone");
                     ticketPurchase.allow = jdata.getString("allow").equals("Y");
+                    ticketPurchase.ticket_used = jdata.getString("ticket_used");
                     paymentinfo.data.add(ticketPurchase);
                 }
                 return paymentinfo;
@@ -1247,13 +1255,7 @@ public class ServerClient  {
         return longTicketLists;
     } //확인완료
 
-    public TicketInfo ticketInfo(final String local_id, final String gubun, final String idx, final Calendar now) throws ServerErrorException{
-        String tmp = "";
-        tmp += now.get(Calendar.YEAR);
-        tmp += "-" + Essentials.numberWithZero(now.get(Calendar.MONTH));
-        tmp += "-" + Essentials.numberWithZero(now.get(Calendar.DAY_OF_MONTH));
-        final String nowDate = tmp;
-
+    public TicketInfo ticketInfo(final String idx) throws ServerErrorException{
         String msg;
         final String T_INFO_URL = "http://app.parkstem.com/api/ticket_info.php";
         Thread thread = new Thread(new Runnable() {
@@ -1261,10 +1263,7 @@ public class ServerClient  {
             public void run() {
                 HashMap<String, String> hashMap = new HashMap<>();
                 hashMap.put("uniqueID",uniqueID);
-                hashMap.put("local_id",local_id);
-                hashMap.put("gubun",gubun);
                 hashMap.put("idx",idx);
-                hashMap.put("start_date",nowDate);
                 result = connect(hashMap, T_INFO_URL);
             }
         });
@@ -1286,7 +1285,8 @@ public class ServerClient  {
                 ticketInfo.gubun = result.getInt("gubun");
                 ticketInfo.price = result.getString("price");
                 ticketInfo.ticket_name = result.getString("ticket_name");
-                //ticketInfo.card_use = result.getBoolean("card_use");
+                ticketInfo.card_use = result.getString("card_use").equals("Y");
+                ticketInfo.certification = result.getString("certification").equals("Y");
                 return ticketInfo;
             }
             else{
@@ -1298,7 +1298,7 @@ public class ServerClient  {
         }
     } //확인완료
 
-    public void ticketInfoRegister(final String gubun, final String idx, final String user_name, final String user_phone, final String user_email) throws ServerErrorException{
+    public void ticketInfoRegister(final String gubun, final String idx, final String user_name, final String user_phone, final String user_email, final Calendar date) throws ServerErrorException{
         String msg;
         final String TIREG_URL = "http://app.parkstem.com/api/ticket_pay.php";
         Thread thread = new Thread(new Runnable() {
@@ -1311,6 +1311,10 @@ public class ServerClient  {
                 hashMap.put("user_name",user_name);
                 hashMap.put("user_phone",user_phone);
                 hashMap.put("user_email",user_email);
+                if(Integer.parseInt(gubun) == Ticket.LONG_TICKET_GUBUN) {
+                    String str = Essentials.calendarToDateWithBar(date);
+                    hashMap.put("start_date", str);
+                }
                 result = connect(hashMap, TIREG_URL);
             }
         });
@@ -1621,6 +1625,7 @@ public class ServerClient  {
         public boolean allow;
         public String ticket_name;
         public int ticket_idx;
+        public String ticket_used;
 
     }
 
@@ -1754,7 +1759,8 @@ public class ServerClient  {
         public int gubun;
         public String price;
         public String ticket_name;
-        //public boolean card_use;
+        public boolean card_use;
+        public boolean certification;
     }
 
 

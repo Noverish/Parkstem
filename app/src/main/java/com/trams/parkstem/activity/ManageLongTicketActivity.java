@@ -26,7 +26,7 @@ public class ManageLongTicketActivity extends BaseBackSearchActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_long_ticket);
         setSearchEnable(true);
-        setToolbarTitle("정기권 관리");
+        setToolbarTitle("정기권 구매");
 
         reloadServerData();
 

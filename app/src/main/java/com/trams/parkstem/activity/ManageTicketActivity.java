@@ -28,7 +28,7 @@ public class ManageTicketActivity extends BaseBackSearchActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_ticket);
         setSearchEnable(true);
-        setToolbarTitle("주차권 관리");
+        setToolbarTitle("주차권 구매");
 
         termName = (TextView) findViewById(R.id.activity_manage_ticket_term_name);
 

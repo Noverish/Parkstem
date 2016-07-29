@@ -8,6 +8,7 @@ import android.graphics.ColorMatrixColorFilter;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,7 @@ public class TicketView extends LinearLayout {
     private Calendar calendar;
 
     private ServerClient.Ticket ticket;
+    private ServerClient.TicketPurchase purchase;
     private TicketViewData data;
 
     private RelativeLayout abovecontent;
@@ -62,6 +64,7 @@ public class TicketView extends LinearLayout {
     private TextView term;
 
     private boolean detailOpen = true;
+    private boolean isItLongTicket;
 
     public TicketView(final Context contextParam, ServerClient.Ticket ticket, String buttonName, boolean purchaseButtonOn, boolean alwaysOpened, boolean calendarButton) {
         super(contextParam);
@@ -147,6 +150,8 @@ public class TicketView extends LinearLayout {
     }
 
     private void setData(ServerClient.TicketPurchase purchase, String buttonName) {
+        this.purchase = purchase;
+
         ServerClient.ParkInfo parkInfo;
         try {
             parkInfo = ServerClient.getInstance().parkInfo(purchase.local_id);
@@ -162,7 +167,7 @@ public class TicketView extends LinearLayout {
 
         if(purchase.gubun == ServerClient.Ticket.SHORT_TICEKT_GUBUN) {
             data = new TicketViewData(purchase.ticket_name, parkInfo.short_address, buttonName,
-                    calendar, null,
+                    purchase.pay_date, null,
                     parkInfo.new_address, parkInfo.local_address,
                     purchase.available_time + "시간", purchase.original_price, purchase.price,
                     purchase.term);
@@ -206,18 +211,28 @@ public class TicketView extends LinearLayout {
         this.term.setText(data.term);
     }
 
-    private void applyOptions(boolean isItLongTicket, boolean purchaseButtonOn, boolean alwaysOpened, boolean calendarButton) {
+    private void applyOptions(boolean isItLongTicket, boolean purchaseButtonOn, boolean alwaysOpened, final boolean calendarButton) {
+        this.isItLongTicket = isItLongTicket;
+
+        if(isItLongTicket) {
+            removeView(expiryDateLayout);
+        } else {
+            removeView(endDateLayout);
+            String str = startDate.getText().toString();
+            startDate.setText(str + " 구매");
+        }
+
         //구매 버튼 여부에 따라 구매버튼 삭제
         RelativeLayout purchaseButton = (RelativeLayout) findViewById(R.id.long_ticket_mobile_item_bottom_layout);
         if(purchaseButtonOn) {
             purchaseButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(context, ManagePurchaseActivity.class);
-                    intent.putExtra("ticket",ticket);
-                    context.startActivity(intent);
+                    onClickPurchaseButton();
                 }
             });
+
+            startDate.setText(startDate.getText().toString().replace("구매",""));
         } else {
             removeView(purchaseButton);
         }
@@ -263,46 +278,69 @@ public class TicketView extends LinearLayout {
         } else {
             removeView(calendarImageView);
         }
-
-
-        if(isItLongTicket) {
-            removeView(expiryDateLayout);
-        } else {
-            removeView(endDateLayout);
-        }
     }
 
     public void makeUsed() {
-        abovecontent.setBackground(ContextCompat.getDrawable(context, R.drawable.btn_5));
-        showDetailButton.setBackground(ContextCompat.getDrawable(context, R.drawable.btn_4));
+        int grayForText = ContextCompat.getColor(context, R.color.gray_for_text);
+        int black = ContextCompat.getColor(context, R.color.BLACK);
 
+        //above layout 색 변경
+        abovecontent.setBackground(ContextCompat.getDrawable(context, R.drawable.btn_5));
+
+        //show detail button 설정
+        showDetailButton.setBackground(ContextCompat.getDrawable(context, R.drawable.btn_4));
         showDetailButton.removeAllViews();
 
         int size = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30, getResources().getDisplayMetrics());
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(size, size);
         params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-
         ImageView imageView = new ImageView(context);
         imageView.setLayoutParams(params);
-
         imageView.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.btn_check_w));
-
         showDetailButton.addView(imageView);
 
+        //split bar 설정
         RelativeLayout splitBar = (RelativeLayout) findViewById(R.id.split_bar);
         splitBar.setBackground(ContextCompat.getDrawable(context, R.drawable.btn_6));
 
-        int grayForText = ContextCompat.getColor(context, R.color.gray_for_text);
-
-        afterPriceTerm.setTextColor(grayForText);
+        afterPriceTerm.setTextColor(black);
         TextView won = (TextView) findViewById(R.id.long_ticket_mobile_item_won);
-        won.setTextColor(grayForText);
-        afterPrice.setTextColor(grayForText);
+        won.setTextColor(black);
+        afterPrice.setTextColor(black);
 
+        //주차장 사진 흑백처리
         ColorMatrix matrix = new ColorMatrix();
         matrix.setSaturation(0);
         ColorMatrixColorFilter filter = new ColorMatrixColorFilter(matrix);
         parkImage.setColorFilter(filter);
+
+        //사용완료 도장 보이게 함
+        ImageView usedView = (ImageView) findViewById(R.id.ticket_item_used);
+        usedView.setVisibility(VISIBLE);
+
+        //시작 날짜 "구매" 글자 변경
+        if(!isItLongTicket) {
+            startDate.setText(startDate.getText().toString().replace("구매","사용"));
+        }
+
+        //term 색 변경
+        try {
+            TextView term1 = (TextView) findViewById(R.id.ticket_item_term1);
+            TextView term2 = (TextView) findViewById(R.id.ticket_item_term2);
+            term.setTextColor(grayForText);
+            term1.setTextColor(grayForText);
+            term2.setTextColor(grayForText);
+        } catch (NullPointerException ex) {
+
+        }
+
+        if(!isItLongTicket) {
+            try {
+                startDate.setText(purchase.ticket_used);
+            } catch (NullPointerException ex) {
+
+            }
+        }
     }
 
     private void onShowDetailButtonClicked() {
@@ -327,12 +365,63 @@ public class TicketView extends LinearLayout {
 
     private void refreshDate() {
         startDate.setText(Essentials.calendarToDateWithDot(calendar));
+        Calendar oneMonthLater = calendar;
+        oneMonthLater.add(Calendar.MONTH, 1);
+        endDate.setText(Essentials.calendarToDateWithDot(oneMonthLater));
     }
 
     public String getTicketName() {
         return data.ticketName;
     }
 
+    public void setDate(Calendar calendar) {
+        this.calendar = calendar;
+        refreshDate();
+    }
+
+    public Calendar getDate() {
+        return calendar;
+    }
+
+    public void deleteGUMEword() {
+        startDate.setText(startDate.getText().toString().replace("구매",""));
+    }
+
+    private void onClickPurchaseButton() {
+        boolean ok;
+        int idx = 1;
+        ServerClient.TicketInfo ticketInfo;
+
+        if(ticket != null) {
+            idx = ticket.idx;
+        } else if(purchase != null) {
+            idx = purchase.idx;
+        } else {
+            Log.e("NEVER HAPPEN","there is no idx");
+        }
+
+        try {
+            ticketInfo = ServerClient.getInstance().ticketInfo(idx + "");
+
+            if(!ticketInfo.card_use) {
+                Toast.makeText(context, "결제 카드가 등록되어 있지 않습니다.",Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if (!ticketInfo.certification) {
+                Toast.makeText(context, "본인 인증이 되어 있지 않습니다.",Toast.LENGTH_SHORT).show();
+                return;
+            }
+        } catch (ServerClient.ServerErrorException ex) {
+            Toast.makeText(context, "티켓 정보를 불러오는데 문제가 발생하였습니다. - " + ex.msg,Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Intent intent = new Intent(context, ManagePurchaseActivity.class);
+        intent.putExtra("ticket",ticket);
+        intent.putExtra("calendar",calendar.getTimeInMillis());
+        context.startActivity(intent);
+    }
 
     @Override
     public void removeView(View view) {

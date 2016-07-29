@@ -20,11 +20,14 @@ import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.server.ServerClient;
 import com.trams.parkstem.view.TicketView;
 
+import java.util.Calendar;
+
 /**
  * Created by Noverish on 2016-07-18.
  */
 public class ManagePurchaseActivity extends BaseBackSearchActivity {
     ServerClient.Ticket ticket;
+    TicketView ticketView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,7 +40,9 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
         RelativeLayout image = (RelativeLayout) findViewById(R.id.activity_manage_purchase_image);
 
         if (ticket.gubun == 1) {
-            TicketView ticketView = new TicketView(this, ticket, "상세정보", false, false, true);
+            ((TextView) findViewById(R.id.activity_manage_purchase_duetext)).setText(ticket.term_name);
+
+            ticketView = new TicketView(this, ticket, "상세정보", false, false, false);
             content.addView(ticketView);
         }
 
@@ -51,9 +56,14 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
             image.setLayoutParams(rlayoutParams);
             image.setBackground(ContextCompat.getDrawable(this, R.drawable.btn_menu_1month_2));
 
-            TicketView ticketView = new TicketView(this, ticket, "상세정보", false, false, false);
+            ticketView = new TicketView(this, ticket, "상세정보", false, false, true);
             content.addView(ticketView);
+
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(getIntent().getLongExtra("calendar",0));
+            ticketView.setDate(calendar);
         }
+        ticketView.deleteGUMEword();
 
         Log.e("purchase", Essentials.numberWithComma(ticket.price));
         ((TextView)findViewById(R.id.activity_manage_purchase_price)).setText((char) 0xffe6 + Essentials.numberWithComma(ticket.price));
@@ -157,7 +167,7 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
     private void realPurchase() {
         try {
             ServerClient.Login login = ServerClient.getInstance().login;
-            ServerClient.getInstance().ticketInfoRegister(ticket.gubun + "", ticket.idx + "", login.name, login.phone, login.email);
+            ServerClient.getInstance().ticketInfoRegister(ticket.gubun + "", ticket.idx + "", login.name, login.phone, login.email, ticketView.getDate());
 
             String title = (ticket.gubun == 1) ? "주차권 구매" : "정기권 구매";
             String content = title + "가\n완료 되었습니다.";

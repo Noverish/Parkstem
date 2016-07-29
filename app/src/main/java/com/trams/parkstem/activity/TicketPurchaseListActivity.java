@@ -25,7 +25,7 @@ public class TicketPurchaseListActivity extends BaseBackSearchActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ticket_purchase_list);
         setSearchEnable(true);
-        setToolbarTitle("주차권 구매내역");
+        setToolbarTitle("주차권 사용내역");
 
         reloadServerData();
 
