@@ -45,13 +45,7 @@ public class ServerClient  {
         return serverClient;
     }
 
-    public ServerClient() {
-        try {
-            info = memberInfo();
-        } catch (ServerErrorException ex) {
-            ex.printStackTrace();
-        }
-    }
+    private ServerClient() {}
 
     private JSONObject result;
 
@@ -254,6 +248,7 @@ public class ServerClient  {
             @Override
             public void run() {
                 HashMap<String, String> hashMap = new HashMap<>();
+                hashMap.put("uniqueID",uniqueID);
                 result = connect(hashMap, LOGIN_URL);
             }
         });
