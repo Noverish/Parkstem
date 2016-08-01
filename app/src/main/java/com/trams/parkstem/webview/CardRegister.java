@@ -30,7 +30,7 @@ public class CardRegister extends BaseBackSearchActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webview_card_register);
-        setBackEnable(false);
+        setBackEnable(true);
         webview = (WebView) findViewById(R.id.webview_card_register);
 
         webview.getSettings().setJavaScriptEnabled(true);
