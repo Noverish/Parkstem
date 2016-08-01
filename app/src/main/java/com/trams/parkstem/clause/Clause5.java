@@ -10,7 +10,7 @@ import com.trams.parkstem.server.ServerClient;
  * Created by monc2 on 2016-07-21.
  */
 public class Clause5 extends AppCompatActivity{
-    ServerClient serverClient = new ServerClient();
+    ServerClient serverClient = ServerClient.getInstance();
     String clause;
 
     @Override

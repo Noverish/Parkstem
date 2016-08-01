@@ -13,7 +13,7 @@ import com.trams.parkstem.server.ServerClient;
  * Created by monc2 on 2016-07-22.
  */
 public class Mobilecertification extends BaseBackSearchActivity {
-    ServerClient serverClient = new ServerClient();
+    ServerClient serverClient = ServerClient.getInstance();
     String clause;
     WebView webview;
 
@@ -38,8 +38,12 @@ public class Mobilecertification extends BaseBackSearchActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 if (url.contains("mobile.php")) {
-                    Toast.makeText(Mobilecertification.this, "success", Toast.LENGTH_LONG).show();
-                    finish();
+                    try {
+                        if(ServerClient.getInstance().memberInfo().certification)
+                            Toast.makeText(Mobilecertification.this, "휴대폰 인증에 성공했습니다", Toast.LENGTH_SHORT).show();
+                    } catch (ServerClient.ServerErrorException ex) {
+                        Toast.makeText(Mobilecertification.this, "휴대폰 인증에 실패했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
+                    }
                 }
 //                if (Uri.parse(url).getHost().equals("app.parkstem.com/api/kmcis_mobile.php")) {
 //                    try{

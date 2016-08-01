@@ -26,7 +26,6 @@ import com.trams.parkstem.clause.Clause2;
 import com.trams.parkstem.clause.Clause3;
 import com.trams.parkstem.clause.Clause4;
 import com.trams.parkstem.clause.Clause5;
-import com.trams.parkstem.server.ServerClient;
 import com.trams.parkstem.webview.CardRegister;
 
 import java.util.Calendar;
@@ -39,7 +38,6 @@ public class InputNewCardActivity extends BaseBackSearchActivity {
     private static final int CARD_TYPE_COMPANY = 1;
     private int cardType;
 
-    private ServerClient serverClient = new ServerClient();
     private TextView clause1, clause2, clause3, clause4, clause5;
     private String clause;
     Context context = this;

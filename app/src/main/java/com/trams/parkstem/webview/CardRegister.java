@@ -7,13 +7,11 @@ import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
-import com.trams.parkstem.server.ServerClient;
 
 /**
  * Created by monc2 on 2016-07-22.
  */
 public class CardRegister extends BaseBackSearchActivity {
-    ServerClient serverClient = new ServerClient();
     String clause;
     WebView webview;
 
