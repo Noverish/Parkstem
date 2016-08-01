@@ -47,16 +47,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="30dp">
                         <ImageView
+                            android:layout_marginLeft="12dp"
                             android:background="@drawable/img_mobileticket_2"
                             android:layout_width="23dp"
                             android:layout_height="16dp">
                         </ImageView>
 
-                        <TextView
+                        <com.trams.parkstem.view.AutoResizeTextView
                             android:textSize="19sp"
                             android:textColor="@color/WHITE"
                             android:text="모바일 주차권"
+                            android:maxLines="1"
                             android:layout_marginLeft="11dp"
+                            android:layout_marginRight="8dp"
+                            android:gravity="center"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -74,15 +78,19 @@
                         android:layout_height="30dp">
                         <ImageView
                             android:background="@drawable/img_tickethistory"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="8dp"
                             android:layout_width="12dp"
                             android:layout_height="20dp">
                         </ImageView>
 
-                        <TextView
+                        <com.trams.parkstem.view.AutoResizeTextView
                             android:textSize="19sp"
                             android:textColor="@color/WHITE"
                             android:text="주차권 사용내역"
-                            android:layout_marginLeft="8dp"
+                            android:maxLines="1"
+                            android:gravity="center"
+                            android:layout_marginRight="8dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
