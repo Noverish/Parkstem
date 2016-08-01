@@ -63,20 +63,24 @@ public class SplashActivity extends AppCompatActivity{
             SplashActivity.this.startActivity(intent);
             finish();
         } else {
-            if(ServerClient.getInstance().login.certification) {
-                Intent intent = new Intent(this, HomeActivity.class);
-                startActivity(intent);
-                finish();
-            } else {
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(SplashActivity.this, "모바일 인증을 해야합니다.", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                Intent intent = new Intent(this, FirstScreenActivity.class);
-                startActivity(intent);
-                finish();
+            try {
+                if (ServerClient.getInstance().memberInfo().certification) {
+                    Intent intent = new Intent(this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(SplashActivity.this, "모바일 인증을 해야합니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    Intent intent = new Intent(this, FirstScreenActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            } catch (ServerClient.ServerErrorException ex) {
+                Toast.makeText(SplashActivity.this, "모바일 인증여부를 확인하는데 에러가 발생했습니다. - " + ex, Toast.LENGTH_SHORT).show();
             }
         }
     }

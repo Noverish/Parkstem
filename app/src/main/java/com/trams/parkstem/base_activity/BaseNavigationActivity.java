@@ -62,7 +62,7 @@ public class BaseNavigationActivity extends BaseActivity {
         toggle.syncState();
 
         TextView userNameInNav = (TextView) findViewById(R.id.parkstem_menu_bar_user_name);
-        userNameInNav.setText(ServerClient.getInstance().login.name);
+        userNameInNav.setText(ServerClient.getInstance().getUserName());
 
         TextView menuBarParkstem = (TextView) findViewById(R.id.parkstem_menu_bar_parkstem);
         menuBarParkstem.setTypeface(myTypeface);

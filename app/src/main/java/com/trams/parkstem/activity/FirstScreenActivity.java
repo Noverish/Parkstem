@@ -71,15 +71,19 @@ public class FirstScreenActivity extends BaseBackSearchActivity {
     }
 
     private void skip() {
-        if (ServerClient.getInstance().login.certification) {
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
-            finish();
-        } else {
-            Toast.makeText(this, "휴대폰 인증이 되어 있지 않아 휴대폰 인증 페이지로 넘어가겠습니다.", Toast.LENGTH_SHORT).show();
+        try {
+            if (ServerClient.getInstance().memberInfo().certification) {
+                Intent intent = new Intent(this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                Toast.makeText(this, "휴대폰 인증이 되어 있지 않아 휴대폰 인증 페이지로 넘어가겠습니다.", Toast.LENGTH_SHORT).show();
 
-            Intent intent = new Intent(this, Mobilecertification.class);
-            startActivity(intent);
+                Intent intent = new Intent(this, Mobilecertification.class);
+                startActivity(intent);
+            }
+        } catch (ServerClient.ServerErrorException ex) {
+            Toast.makeText(this, "모바일 인증 여부를 확인하는데 에러가 발생했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
         }
     }
 }

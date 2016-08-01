@@ -92,6 +92,6 @@ public class Mobilecertification extends BaseBackSearchActivity {
         });
 
 
-        webview.loadUrl("http://app.parkstem.com/api/kmcis_start.php?uniqueID=" + serverClient.uniqueID);
+        webview.loadUrl("http://app.parkstem.com/api/kmcis_start.php?uniqueID=" + serverClient.getUniqueID());
     }
 }

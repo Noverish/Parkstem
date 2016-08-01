@@ -33,9 +33,12 @@ public class ServerClient  {
     //uniqueID를 반환하는 함수는 현재의 uniqueID와 같은지 체크하는 코드
     //dummy 카드 관련 모든것 입차 출차 주차장
 
-    public String uniqueID = "13617600";
-    public Login login = new Login();
-    public MemberInfo info = new MemberInfo();
+    private String uniqueID = "13617600";
+    private String userName;
+    private String userEmail;
+    private String userMobile;
+    private boolean userCertification;
+    private boolean userPush;
 
     public static ServerClient serverClient;
     public static ServerClient getInstance() {
@@ -181,11 +184,11 @@ public class ServerClient  {
                 Log.d("ServerClient",msg);
                 uniqueID = result.getString("uniqueID");
 
-                login.name = result.getString("name");
-                login.email = result.getString("email");
-                login.phone = result.getString("mobile");
-                login.pushYN = result.getString("pushYN").equals("Y");
-                login.certification = result.getString("certification").equals("Y");
+                userName = result.getString("name");
+                userEmail = result.getString("email");
+                userMobile = result.getString("mobile");
+                userPush = result.getString("pushYN").equals("Y");
+                userCertification = result.getString("certification").equals("Y");
             }
             else
             {
@@ -267,11 +270,11 @@ public class ServerClient  {
                 //uniqueID = result.getString("uniqueID");
 
                 MemberInfo memberInfo = new MemberInfo();
-                memberInfo.name = result.getString("name");
-                memberInfo.email = result.getString("email");
-                memberInfo.mobile = result.getString("mobile");
-                memberInfo.pushYN = result.getString("pushYN").equals("Y");
-                memberInfo.certification = result.getString("certification").equals("Y");
+                userName = memberInfo.name = result.getString("name");
+                userEmail = memberInfo.email = result.getString("email");
+                userMobile = memberInfo.mobile = result.getString("mobile");
+                userPush = memberInfo.pushYN = result.getString("pushYN").equals("Y");
+                userCertification = memberInfo.certification = result.getString("certification").equals("Y");
                 return memberInfo;
             }
             else{
@@ -1486,6 +1489,29 @@ public class ServerClient  {
         }
     }
 
+    public String getUniqueID() {
+        return uniqueID;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public String getUserMobile() {
+        return userMobile;
+    }
+
+    public boolean isUserCertification() {
+        return userCertification;
+    }
+
+    public boolean isUserPush() {
+        return userPush;
+    }
 
     //Classes
     public class Login{

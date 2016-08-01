@@ -59,7 +59,7 @@ public class LoginWithEmailActivity extends BaseBackSearchActivity {
 
                 Toast.makeText(this, "로그인에 성공했습니다.",Toast.LENGTH_SHORT).show();
 
-                if(ServerClient.getInstance().login.certification) {
+                if(ServerClient.getInstance().memberInfo().certification) {
                     Intent intent = new Intent(this, HomeActivity.class);
                     startActivity(intent);
                 } else  {

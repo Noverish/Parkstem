@@ -85,9 +85,9 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
         try{
             ServerClient.DashBoard dashBoard = ServerClient.getInstance().dashboard();
 
-            ((TextView)findViewById(R.id.activity_manage_purchase_name)).setText(ServerClient.getInstance().login.name);
-            ((TextView)findViewById(R.id.activity_manage_purchase_email)).setText(ServerClient.getInstance().login.email);
-            ((TextView)findViewById(R.id.activity_manage_purchase_phonenumber)).setText(ServerClient.getInstance().login.phone);
+            ((TextView)findViewById(R.id.activity_manage_purchase_name)).setText(ServerClient.getInstance().getUserName());
+            ((TextView)findViewById(R.id.activity_manage_purchase_email)).setText(ServerClient.getInstance().getUserName());
+            ((TextView)findViewById(R.id.activity_manage_purchase_phonenumber)).setText(ServerClient.getInstance().getUserMobile());
 
             TextView carEditButton = (TextView) findViewById(R.id.activity_manage_purchase_car_edit);
             TextView carnum = (TextView)findViewById(R.id.activity_manage_purchase_carnum);
@@ -166,8 +166,8 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
 
     private void realPurchase() {
         try {
-            ServerClient.Login login = ServerClient.getInstance().login;
-            ServerClient.getInstance().ticketInfoRegister(ticket.gubun + "", ticket.idx + "", login.name, login.phone, login.email, ticketView.getDate());
+            ServerClient client = ServerClient.getInstance();
+            client.ticketInfoRegister(ticket.gubun + "", ticket.idx + "", client.getUserName(), client.getUserMobile(), client.getUserEmail(), ticketView.getDate());
 
             String title = (ticket.gubun == 1) ? "주차권 구매" : "정기권 구매";
             String content = title + "가\n완료 되었습니다.";

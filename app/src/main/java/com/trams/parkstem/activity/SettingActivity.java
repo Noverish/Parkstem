@@ -41,7 +41,7 @@ public class SettingActivity extends BaseBackSearchActivity {
             }
         });
 
-        pushOn = ServerClient.getInstance().login.pushYN;
+        pushOn = ServerClient.getInstance().isUserPush();
         pushButton.removeAllViews();
         if(pushOn) {
             getLayoutInflater().inflate(R.layout.push_button_on, pushButton);
