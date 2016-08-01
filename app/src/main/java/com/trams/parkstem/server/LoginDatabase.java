@@ -20,6 +20,7 @@ public class LoginDatabase {
     private static final String ID_COLUMN = "id";
     private static final String PW_COLUMN = "pw";
     private static final String GUBUN_COLUMN = "gubun";
+    private static final String TOKEN_COLUMN = "token";
     private HashMap<String, String> database = new HashMap<>();
 
     private static LoginDatabase loginDatabase;
@@ -40,14 +41,15 @@ public class LoginDatabase {
         }
     }
 
-    public void setData(String gubun, String id, String pw) {
-        Log.e("saveLoginData","gubun : " + gubun + ", ID : " + id + ", Password : " + pw);
+    public void setData(String gubun, String id, String pw, String token) {
+        Log.e("saveLoginData","gubun : " + gubun + ", ID : " + id + ", Password : " + pw + " Token : " + token);
 
         database.clear();
 
         database.put(GUBUN_COLUMN, gubun);
         database.put(ID_COLUMN, id);
         database.put(PW_COLUMN, pw);
+        database.put(TOKEN_COLUMN, token);
 
         saveToInternalStorage(database);
     }
@@ -62,6 +64,10 @@ public class LoginDatabase {
 
     public String getGubun() {
         return database.get(GUBUN_COLUMN);
+    }
+
+    public String getToken() {
+        return database.get(TOKEN_COLUMN);
     }
 
     public boolean isDatabaseClear() {

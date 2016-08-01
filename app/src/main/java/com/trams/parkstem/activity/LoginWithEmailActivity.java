@@ -55,7 +55,7 @@ public class LoginWithEmailActivity extends BaseBackSearchActivity {
             } else {
                 ServerClient.getInstance().login(OnLoginSuccessListener.PARKSTEM, email, password, getIntent().getStringExtra("token"));
 
-                LoginDatabase.getInstance(this).setData(OnLoginSuccessListener.PARKSTEM, email, password);
+                LoginDatabase.getInstance(this).setData(OnLoginSuccessListener.PARKSTEM, email, password, getIntent().getStringExtra("token"));
 
                 Toast.makeText(this, "로그인에 성공했습니다.",Toast.LENGTH_SHORT).show();
 

@@ -63,9 +63,21 @@ public class SplashActivity extends AppCompatActivity{
             SplashActivity.this.startActivity(intent);
             finish();
         } else {
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
-            finish();
+            if(ServerClient.getInstance().login.certification) {
+                Intent intent = new Intent(this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+            } else {
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(SplashActivity.this, "모바일 인증을 해야합니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                Intent intent = new Intent(this, FirstScreenActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
     }
 

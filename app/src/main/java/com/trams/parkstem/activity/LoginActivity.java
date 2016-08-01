@@ -103,12 +103,13 @@ public class LoginActivity extends AppCompatActivity implements OnLoginSuccessLi
         try {
             ServerClient.getInstance().login(gubun, email, "", gcmDeviceToken);
 
-            loginDatabase.setData(gubun, email, "");
+            loginDatabase.setData(gubun, email, "", gcmDeviceToken);
 
             if (ServerClient.getInstance().login.certification) {
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
             } else {
+                Toast.makeText(this, "휴대폰 인증을 하셔야 합니다.", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(LoginActivity.this, FirstScreenActivity.class);
                 startActivity(intent);
             }
