@@ -9,6 +9,10 @@ import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
+import com.trams.parkstem.others.FacebookLoginClient;
+import com.trams.parkstem.others.KakaoLoginClient;
+import com.trams.parkstem.others.NaverLoginClient;
+import com.trams.parkstem.server.LoginDatabase;
 import com.trams.parkstem.server.ServerClient;
 import com.trams.parkstem.webview.Mobilecertification;
 
@@ -22,7 +26,6 @@ public class FirstScreenActivity extends BaseBackSearchActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_screen);
-        setBackEnable(false);
 
         btnToMobileCertificate = (RelativeLayout) findViewById(R.id.activity_first_moblie_certificate);
         btnToMobileCertificate.setOnClickListener(new View.OnClickListener() {
@@ -85,5 +88,20 @@ public class FirstScreenActivity extends BaseBackSearchActivity {
         } catch (ServerClient.ServerErrorException ex) {
             Toast.makeText(this, "모바일 인증 여부를 확인하는데 에러가 발생했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onToolbarBackButtonPressed() {
+        FacebookLoginClient facebookLoginClient = FacebookLoginClient.getInstance(this);
+        NaverLoginClient naverLoginClient = NaverLoginClient.getInstance(this);
+        KakaoLoginClient kakaoLoginClient = KakaoLoginClient.getInstance(this);
+
+        facebookLoginClient.logout();
+        naverLoginClient.logout(this);
+        kakaoLoginClient.logout();
+
+        LoginDatabase.getInstance(this).clearDatabase();
+
+        startActivity(new Intent(this, LoginActivity.class));
     }
 }

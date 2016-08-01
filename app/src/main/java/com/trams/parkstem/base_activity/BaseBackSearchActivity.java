@@ -67,6 +67,10 @@ public class BaseBackSearchActivity extends BaseActivity
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
     }
 
+    public void onToolbarBackButtonPressed() {
+
+    }
+
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
         FrameLayout content = (FrameLayout) findViewById(R.id.base_activity_back_content);
@@ -90,6 +94,7 @@ public class BaseBackSearchActivity extends BaseActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home ) {
+            onToolbarBackButtonPressed();
             finish();
             return true;
         }
