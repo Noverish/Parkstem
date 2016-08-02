@@ -4,9 +4,13 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/normal_status_bar</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:typeface">monospace</item>
+    </style>
+
+    <style name="SplashAppTheme" parent="AppTheme">
+        <item name="colorPrimaryDark">@color/splash_status_bar</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

@@ -15,4 +15,6 @@
     <color name="btn_3">#e5f0d4</color>
     <color name="btn_1">#c1e0b7</color>
     <color name="expiry">#960b10</color>
+    <color name="splash_status_bar">#a1ce59</color>
+    <color name="normal_status_bar">#e4f1d5</color>
 </resources>
