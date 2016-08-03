@@ -16,6 +16,7 @@ import com.trams.parkstem.server.ServerClient;
 public class CardRegister extends BaseBackSearchActivity {
     ServerClient serverClient = ServerClient.getInstance();
     String uid = serverClient.getUniqueID();
+    String cardName = "NEW_CARD!"; //얘를 카드이름으로 지정
     WebView webview;
 
     @Override
@@ -47,7 +48,7 @@ public class CardRegister extends BaseBackSearchActivity {
 
 
         String url = "https://inilite.inicis.com/inibill/inibill_card.jsp";
-        String data = "returnurl=http://app.parkstem.com/api/card_reg.php&mid=hotelvey11&goodname=certification&price=1&type=1&orderid=AAAAA&notice=good&timestamp=20160427171717&period=0&hashdata=0c4b70d28e3dfbdf6561d3aff631f8355a3991c965223bd88285a8d9f8c0e935&p_noti=" + uid + "^cardName";
+        String data = "returnurl=http://app.parkstem.com/api/card_reg.php&mid=hotelvey11&goodname=certification&price=1&type=1&orderid=AAAAA&notice=good&timestamp=20160427171717&period=0&hashdata=0c4b70d28e3dfbdf6561d3aff631f8355a3991c965223bd88285a8d9f8c0e935&p_noti=" + uid + "^" + cardName;
         try {
             byte[] postdata = data.getBytes("UTF-8");
             webview.postUrl(url, postdata);
