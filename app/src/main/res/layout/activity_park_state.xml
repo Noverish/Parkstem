@@ -47,6 +47,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:layout_marginTop="-4dp"
                     android:id="@+id/activity_park_state_park_address"
                     android:textColor="@color/BLACK"
                     android:textSize="15sp"
@@ -55,6 +56,7 @@
                     android:layout_height="wrap_content" />
 
                 <LinearLayout
+                    android:layout_marginTop="-3dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -88,6 +90,7 @@
 
 
                 <LinearLayout
+                    android:layout_marginTop="-6dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -171,11 +174,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout
+            android:layout_centerVertical="true"
             android:background="@drawable/img_clock"
             android:layout_width="25dp"
             android:layout_height="23dp" />
 
         <TextView
+            android:layout_centerVertical="true"
             android:textSize="23sp"
             android:layout_marginLeft="50dp"
             android:text="입차시간"
@@ -183,6 +188,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:layout_centerVertical="true"
             android:id="@+id/activity_park_state_car_in_time"
             android:layout_alignParentRight="true"
             android:layout_gravity="center_vertical|right"
@@ -200,11 +206,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout
+            android:layout_centerVertical="true"
             android:background="@drawable/img_clock"
             android:layout_width="25dp"
             android:layout_height="23dp" />
 
         <TextView
+            android:layout_centerVertical="true"
             android:textSize="23sp"
             android:layout_marginLeft="50dp"
             android:text="출차시간"
@@ -212,6 +220,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:layout_centerVertical="true"
             android:id="@+id/activity_park_state_car_out_time"
             android:layout_alignParentRight="true"
             android:layout_gravity="center_vertical|right"
@@ -251,6 +260,7 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:layout_centerVertical="true"
             android:id="@+id/activity_park_state_total_amount"
             android:layout_alignParentRight="true"
             android:layout_gravity="center_vertical|right"
