@@ -28,8 +28,6 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
         setSearchEnable(true);
         setToolbarTitle("모바일 주차권");
 
-        reloadServerData();
-
         swipeLayout = (SwipeRefreshLayout) findViewById(R.id.activity_ticket_mobile_refresh_layout);
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -39,6 +37,8 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
                 swipeLayout.setRefreshing(false);
             }
         });
+
+        reloadServerData();
     }
 
     private void showData() {

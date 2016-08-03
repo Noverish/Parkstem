@@ -28,8 +28,6 @@ public class TicketPurchaseListActivity extends BaseBackSearchActivity {
         setSearchEnable(true);
         setToolbarTitle("주차권 사용내역");
 
-        reloadServerData();
-
         swipeLayout = (SwipeRefreshLayout) findViewById(R.id.activity_ticket_purchase_refresh_layout);
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -39,6 +37,8 @@ public class TicketPurchaseListActivity extends BaseBackSearchActivity {
                 swipeLayout.setRefreshing(false);
             }
         });
+
+        reloadServerData();
     }
 
     private void showData() {
