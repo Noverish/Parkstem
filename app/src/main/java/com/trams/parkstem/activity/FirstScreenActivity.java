@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.trams.parkstem.R;
@@ -21,6 +22,7 @@ import com.trams.parkstem.webview.Mobilecertification;
  */
 public class FirstScreenActivity extends BaseBackSearchActivity {
     RelativeLayout btnToMobileCertificate, btnToCarRegister, btnToCardRegister;
+    TextView mobileStatus;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +53,7 @@ public class FirstScreenActivity extends BaseBackSearchActivity {
             }
         });
 
+
         RelativeLayout skipButton = (RelativeLayout) findViewById(R.id.activity_first_screen_skip);
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,9 +63,31 @@ public class FirstScreenActivity extends BaseBackSearchActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        try {
+            if (ServerClient.getInstance().memberInfo().certification) {
+                mobileStatus = (TextView) findViewById(R.id.activity_first_mobile_status);
+                mobileStatus.setText("휴대폰 인증 완료");
+            }
+        } catch (ServerClient.ServerErrorException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public void toMobileCerticication(){
-        Intent intent = new Intent(this, Mobilecertification.class);
-        startActivity(intent);
+        try {
+            if (ServerClient.getInstance().memberInfo().certification) {
+                Toast.makeText(this, "휴대폰 인증이 이미 완료되었습니다.", Toast.LENGTH_LONG).show();
+            } else {
+                Intent intent = new Intent(this, Mobilecertification.class);
+                startActivity(intent);
+            }
+        } catch (ServerClient.ServerErrorException ex) {
+            ex.printStackTrace();
+        }
     }
     public void toCarRegister(){
         Intent intent = new Intent(this, InputCarActivity.class);

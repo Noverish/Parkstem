@@ -22,7 +22,8 @@ public class CardRegister extends BaseBackSearchActivity {
     @Override
     public void onBackPressed() {
         if (webview.canGoBack()) {
-            webview.goBack();
+            Toast.makeText(this, "카드 등록시 뒤로가기를 하실 수 없습니다", Toast.LENGTH_LONG).show();
+            finish();
         } else {
             super.onBackPressed();
         }
