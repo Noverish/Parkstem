@@ -88,7 +88,8 @@ public class ServerClient  {
             }
             reader.close();
 
-            Log.e("jsonStr",jsonStr);
+            Log.e("jsonStr","jsonStr");
+            System.out.println(jsonStr);
 
             return new JSONObject(jsonStr);
         } catch (Exception ex) {

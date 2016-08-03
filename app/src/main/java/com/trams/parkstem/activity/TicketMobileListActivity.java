@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -53,7 +54,7 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
 
             if(list.data.size() != 0) {
                 TextView textView = (TextView) findViewById(R.id.activity_ticket_mobile_list_no_item);
-                swipeLayout.removeView(textView);
+                ((ViewGroup)textView.getParent()).removeView(textView);
             }
 
             for(ServerClient.TicketPurchase purchase: list.data){
