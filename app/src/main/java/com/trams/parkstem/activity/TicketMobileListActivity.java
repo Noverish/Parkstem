@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
+import com.trams.parkstem.others.HandlerHelper;
 import com.trams.parkstem.server.ServerClient;
 import com.trams.parkstem.view.TicketView;
 
@@ -32,18 +33,34 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
         swipeLayout = (SwipeRefreshLayout) findViewById(R.id.activity_ticket_mobile_refresh_layout);
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh() {
-                swipeLayout.setRefreshing(true);
-                reloadServerData();
-                swipeLayout.setRefreshing(false);
+            public void onRefresh() {loadServerDataProcess();
             }
         });
 
-        reloadServerData();
+        loadServerDataProcess();
     }
 
-    private void showData() {
-        showSearchResult("");
+    private void loadServerDataProcess() {
+        swipeLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeLayout.setRefreshing(true);
+            }
+        });
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                reloadServerData();
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeLayout.setRefreshing(false);
+                    }
+                });
+            }
+        }).start();
     }
 
     private void reloadServerData() {
@@ -54,9 +71,9 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
 
             TextView textView = (TextView) findViewById(R.id.activity_ticket_mobile_list_no_item);
             if(list.data.size() != 0)
-                textView.setVisibility(View.GONE);
+                HandlerHelper.setVisibilityHandler(handler, textView, View.GONE);
             else
-                textView.setVisibility(View.VISIBLE);
+                HandlerHelper.setVisibilityHandler(handler, textView, View.VISIBLE);
 
             for(ServerClient.TicketPurchase purchase: list.data){
                 if(purchase.allow) {
@@ -71,13 +88,17 @@ public class TicketMobileListActivity extends BaseBackSearchActivity {
         showData();
     }
 
+    private void showData() {
+        showSearchResult("");
+    }
+
     private void showSearchResult(String str) {
         LinearLayout content = (LinearLayout) findViewById(R.id.activity_ticket_mobile_list_layout);
-        content.removeAllViews();
+        HandlerHelper.removeAllViewsHandler(handler, content);
 
         for(TicketView listView : ticketMobileListViews) {
             if(listView.getTicketName().contains(str)) {
-                content.addView(listView);
+                HandlerHelper.addViewHandler(handler, content, listView);
             }
         }
     }

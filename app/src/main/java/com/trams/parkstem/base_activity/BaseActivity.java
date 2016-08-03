@@ -21,6 +21,7 @@ public class BaseActivity extends AppCompatActivity {
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private boolean shouldAlert = false;
     private Activity activity;
+    protected android.os.Handler handler = new android.os.Handler();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

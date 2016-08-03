@@ -38,6 +38,7 @@
                 android:id="@+id/activity_manage_ticket_list_no_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="invisible"
                 android:gravity="center"
                 android:text="주차권이 없습니다."/>
 

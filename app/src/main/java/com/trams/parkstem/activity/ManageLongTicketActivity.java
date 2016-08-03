@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
+import com.trams.parkstem.others.HandlerHelper;
 import com.trams.parkstem.server.ServerClient;
 import com.trams.parkstem.view.TicketView;
 
@@ -29,27 +31,51 @@ public class ManageLongTicketActivity extends BaseBackSearchActivity {
         setSearchEnable(true);
         setToolbarTitle("정기권 구매");
 
-        reloadServerData();
-
         swipeLayout = (SwipeRefreshLayout) findViewById(R.id.activity_manage_long_ticket_refresh_layout);
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                swipeLayout.setRefreshing(true);
-                reloadServerData();
-                swipeLayout.setRefreshing(false);
+                loadServerDataProcess();
             }
         });
+
+        loadServerDataProcess();
+    }
+
+    private void loadServerDataProcess() {
+        swipeLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeLayout.setRefreshing(true);
+            }
+        });
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                reloadServerData();
+
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        swipeLayout.setRefreshing(false);
+                    }
+                });
+            }
+        }).start();
     }
 
     private void reloadServerData() {
+        ticketViews.clear();
+
         try {
             ServerClient.LongTicketLists list = ServerClient.getInstance().listOfLongTicket(Calendar.getInstance());
 
-            if(list.data.size() != 0) {
-                TextView textView = (TextView) findViewById(R.id.activity_manage_login_ticket_list_no_item);
-                swipeLayout.removeView(textView);
-            }
+            TextView textView = (TextView) findViewById(R.id.activity_manage_login_ticket_list_no_item);
+            if(list.data.size() != 0)
+                HandlerHelper.setVisibilityHandler(handler, textView, View.GONE);
+            else
+                HandlerHelper.setVisibilityHandler(handler, textView, View.VISIBLE);
 
             for (ServerClient.Ticket ticket : list.data) {
                 TicketView ticketView = new TicketView(this, ticket, "상세정보", true, false, true);
@@ -68,11 +94,11 @@ public class ManageLongTicketActivity extends BaseBackSearchActivity {
 
     private void showSearchResult(String result) {
         LinearLayout content = (LinearLayout) findViewById(R.id.activity_manage_long_ticket_layout);
-        content.removeAllViews();
+        HandlerHelper.removeAllViewsHandler(handler, content);
 
         for(TicketView ticketView : ticketViews)
             if(ticketView.getTicketName().contains(result))
-                content.addView(ticketView);
+                HandlerHelper.addViewHandler(handler, content, ticketView);
     }
 
     @Override
