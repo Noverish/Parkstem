@@ -16,6 +16,7 @@ import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.custom_view.LocationChangeableListView;
 import com.trams.parkstem.server.ServerClient;
 import com.trams.parkstem.webview.CardRegister;
+import com.trams.parkstem.webview.Mobilecertification;
 
 import java.util.ArrayList;
 
@@ -77,8 +78,13 @@ public class InputCardActivity extends BaseBackSearchActivity {
     }
 
     private void register_new_card(){
-        Intent intent = new Intent(this, CardRegister.class);
-        startActivity(intent);
+        if(ServerClient.getInstance().isUserCertification()) {
+            Intent intent = new Intent(this, CardRegister.class);
+            startActivity(intent);
+        } else {
+            Toast.makeText(this, "카드 등록을 하시려면 휴대폰 인증을 하셔야 합니다", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, Mobilecertification.class));
+        }
     }
 
     private void refresh() {

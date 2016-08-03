@@ -1,6 +1,7 @@
 package com.trams.parkstem.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -20,6 +21,7 @@ import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.custom_view.LocationChangeableListView;
 import com.trams.parkstem.server.ServerClient;
+import com.trams.parkstem.webview.Mobilecertification;
 
 import java.util.ArrayList;
 
@@ -72,12 +74,7 @@ public class InputCarActivity extends BaseBackSearchActivity {
         inputNewCarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setEditStatus();
-
-                //show keyboard manually
-                carNumberEditText.requestFocus();
-                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.showSoftInput(carNumberEditText, 0);
+                onAddCarButtonPressed();
             }
         });
 
@@ -139,6 +136,20 @@ public class InputCarActivity extends BaseBackSearchActivity {
         carNumberEditText.setText("");
         mainCarNumberTextView.setText(listView.getMainItem().second);
 
+    }
+
+    private void onAddCarButtonPressed() {
+        if(ServerClient.getInstance().isUserCertification()) {
+            setEditStatus();
+
+            //show keyboard manually
+            carNumberEditText.requestFocus();
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(carNumberEditText, 0);
+        } else {
+            Toast.makeText(this, "차량 등록을 하시려면 휴대폰 인증을 하셔야 합니다", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this, Mobilecertification.class));
+        }
     }
 
     private void setEditStatus() {

@@ -88,8 +88,7 @@ public class ServerClient  {
             }
             reader.close();
 
-            Log.e("jsonStr","jsonStr");
-            System.out.println(jsonStr);
+            Log.e("jsonStr",jsonStr);
 
             return new JSONObject(jsonStr);
         } catch (Exception ex) {
@@ -98,57 +97,6 @@ public class ServerClient  {
         }
 
     }
-
-    private JSONObject connect(HashMap<String, String> hashMap, String urlin, String urlout) {
-        try {
-            String jsonStr;
-            URL requrl = new URL(urlin);
-            HttpURLConnection req = (HttpURLConnection) requrl.openConnection();
-
-            req.setConnectTimeout(10000);
-            req.setDoOutput(true);
-            req.setRequestProperty("Content-Type", "application/json");
-            req.setRequestProperty("X-Requested-With", "XMLHttpRequest");
-            req.setRequestMethod("POST");
-
-            URL resurl = new URL(urlout);
-            HttpURLConnection res = (HttpURLConnection) resurl.openConnection();
-
-            res.setConnectTimeout(10000);
-            res.setDoInput(true);
-            res.setRequestProperty("Content-Type", "application/json");
-            res.setRequestProperty("X-Requested-With", "XMLHttpRequest");
-            res.setRequestMethod("POST");
-
-
-            JSONObject json = new JSONObject();
-            for(String key : hashMap.keySet()) {
-                json.put(key, hashMap.get(key));
-            }
-
-            OutputStreamWriter wr= new OutputStreamWriter(req.getOutputStream());
-            wr.write(json.toString());
-            wr.flush();
-            wr.close();
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(res.getInputStream()));
-
-            String line;
-            jsonStr = "";
-
-            while ((line = reader.readLine()) != null) {
-                jsonStr += line + "\n";
-            }
-            reader.close();
-
-            return new JSONObject(jsonStr);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return null;
-        }
-
-    }
-
 
     //회원가입 및 로그인 관련 함수
     public void login(final String memberGubun, final String parkstemID, final String parkstemPW, final String token) throws ServerErrorException {
@@ -207,6 +155,7 @@ public class ServerClient  {
         login.certification = true;
         login.pushYN = true;*/
     }
+
 
     public void register(final String name, final String email, final String mobile, final String nickName, final String parkstemID, final String parkstemPW, final String token) throws ServerErrorException{
         Log.e(TAG,"register : " + name + ", " + email + ", " + mobile + ", " + nickName + ", " + parkstemID + ", " + parkstemPW + ", " + token);
@@ -325,7 +274,6 @@ public class ServerClient  {
         }
     }
 
-
     //회원 정보관리 함수
     public DashBoard dashboard() throws ServerErrorException{
         Log.e(TAG,"dashboard");
@@ -379,6 +327,7 @@ public class ServerClient  {
         }
     } //확인완료
 
+
     public void hipassOn(final String hipass) throws ServerErrorException{
         Log.e(TAG,"hipassOn : " + hipass);
 
@@ -415,7 +364,6 @@ public class ServerClient  {
             throw new ServerErrorException();
         }
     } //확인완료
-
 
     //주차 현황 함수
     public RecentCar recentCar() throws ServerErrorException{
@@ -456,6 +404,7 @@ public class ServerClient  {
 
 
     //주차장정보 함수
+
 
     /**이 함수는 data형식으로 값을 받아온다
      * 확인 필요
@@ -822,8 +771,9 @@ public class ServerClient  {
         }
     } //확인불가 - data가 비어있음
 
-
     //카드 관련 함수
+
+
     /**
      * 미완성
      */
@@ -904,7 +854,6 @@ public class ServerClient  {
         cardLists.data = list;
         return cardLists;
     }
-
     /** card_list 와 card_sort의 card data에서 sort데이터가 들어오지 않음**/
     public CardList cardList() throws ServerErrorException{
         String msg;
@@ -1153,7 +1102,6 @@ public class ServerClient  {
         }
     } //확인완료
 
-
     //티켓 관련 함수
     private TicketLists listOfAllTickets(Calendar now) throws ServerErrorException {
         Log.e(TAG,"listOfAllTickets : " + uniqueID);
@@ -1216,6 +1164,7 @@ public class ServerClient  {
             throw new ServerErrorException();
         }
     } //확인완료
+
 
     public TicketLists listOfTicket(Calendar now) throws ServerErrorException{
         TicketLists allTickets;
@@ -1346,9 +1295,8 @@ public class ServerClient  {
         }
     }
 
-
     //모바일 인증
-    public void mobileCertification() throws ServerErrorException{
+    /*public void mobileCertification() throws ServerErrorException{
         String msg;
         final String CertIn_URL = "http://app.parkstem.com/api/kmcis_start.php?uniqueID=" + uniqueID;
         final String CertOut_URL = "http://app.parkstem.com/api/kmcis_mobile.php";
@@ -1380,7 +1328,7 @@ public class ServerClient  {
             ex.printStackTrace();
             throw new ServerErrorException();
         }
-    }
+    }*/
 
 
     //약관
@@ -1419,6 +1367,7 @@ public class ServerClient  {
             throw new ServerErrorException();
         }
     }
+
 
     public String hipass(final String idx) throws ServerErrorException{
         String msg;
@@ -1516,6 +1465,7 @@ public class ServerClient  {
 
     //Classes
     public class Login{
+
         public boolean certification;
         public String name;
         public String email;
@@ -1529,8 +1479,8 @@ public class ServerClient  {
         public boolean certification;
         public boolean pushYN;
     }
-
     public class DashBoard{
+
         public String mycar;
         public String mycard;
         public int itemTotalCount;
@@ -1543,15 +1493,15 @@ public class ServerClient  {
         public String price;
         public Calendar pay_date;
     }
-
     public class RecentCar{
+
         public String local_id;
         public Calendar in_date;
         public Calendar out_date;
         public String total;
     }
-
     public static class ParkInfo{
+
         public String local_id = "";
         public String local_name = "";
         public String local_content = "";
@@ -1567,8 +1517,8 @@ public class ServerClient  {
         public int base_minute = 0;
         public String base_price = "0";
     }
-
     public class CarLists{
+
         public int itemTotalCount;
         public int pageCount;
         public ArrayList<CarInfo> data = new ArrayList<>();
@@ -1602,8 +1552,8 @@ public class ServerClient  {
         public String carNumber;
         public int gubun;
     }
-
     public class CardList{
+
         public int itemTotalCount;
         public int pageCount;
         public ArrayList<CardInfo> data = new ArrayList<>();
@@ -1614,8 +1564,8 @@ public class ServerClient  {
         public String card_name;
         public Calendar reg_date;
     }
-
     public class ParkHistoryList {
+
         public int itemTotalCount;
         public int pageCount;
         public ArrayList<ParkHistory> data = new ArrayList<>();
@@ -1655,21 +1605,21 @@ public class ServerClient  {
         public String ticket_name;
         public int ticket_idx;
         public String ticket_used;
-
     }
 
     public class TicketLists{
+
         public int itemTotalCount;
         public int pageCount;
         public ArrayList<Ticket> data = new ArrayList<>();
     }
-
-
     public static class Ticket implements Parcelable {
+
+
         public static final int LONG_TICKET_GUBUN = 2;
         public static final int SHORT_TICEKT_GUBUN = 1;
-
         public int idx;
+
         public String local_id;
         public String ticket_name;
         public String term;
@@ -1685,7 +1635,6 @@ public class ServerClient  {
         public String local_address;
         public String start_available_time;
         public String end_available_time;
-
         public Ticket() {
 
         }
@@ -1774,7 +1723,9 @@ public class ServerClient  {
                 return new Ticket[size];
             }
         };
+
     }
+
 
     public class LongTicketLists{
         public int itemTotalCount;
@@ -1886,6 +1837,56 @@ public class ServerClient  {
     }
 
 
+    /*private JSONObject connect(HashMap<String, String> hashMap, String urlin, String urlout) {
+        try {
+            String jsonStr;
+            URL requrl = new URL(urlin);
+            HttpURLConnection req = (HttpURLConnection) requrl.openConnection();
+
+            req.setConnectTimeout(10000);
+            req.setDoOutput(true);
+            req.setRequestProperty("Content-Type", "application/json");
+            req.setRequestProperty("X-Requested-With", "XMLHttpRequest");
+            req.setRequestMethod("POST");
+
+            URL resurl = new URL(urlout);
+            HttpURLConnection res = (HttpURLConnection) resurl.openConnection();
+
+            res.setConnectTimeout(10000);
+            res.setDoInput(true);
+            res.setRequestProperty("Content-Type", "application/json");
+            res.setRequestProperty("X-Requested-With", "XMLHttpRequest");
+            res.setRequestMethod("POST");
+
+
+            JSONObject json = new JSONObject();
+            for(String key : hashMap.keySet()) {
+                json.put(key, hashMap.get(key));
+            }
+
+            OutputStreamWriter wr= new OutputStreamWriter(req.getOutputStream());
+            wr.write(json.toString());
+            wr.flush();
+            wr.close();
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(res.getInputStream()));
+
+            String line;
+            jsonStr = "";
+
+            while ((line = reader.readLine()) != null) {
+                jsonStr += line + "\n";
+            }
+            reader.close();
+
+            return new JSONObject(jsonStr);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        }
+
+    }
+    */
 
 /* 암호화
      public static String getSHA256(String str) {
