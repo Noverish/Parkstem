@@ -112,6 +112,20 @@ public class HomeActivity extends BaseNavigationActivity {
     }
 
     private void onHipassButtonClicked() {
+        try {
+            boolean noCard = ServerClient.getInstance().cardList().data.size() == 0;
+            boolean noCar = ServerClient.getInstance().listOfCar().data.size() == 0;
+
+            if(noCar) {
+                Toast.makeText(this, "먼저 차량등록을 해야 합니다.",Toast.LENGTH_SHORT).show();
+                return;
+            } else if(noCard){
+                Toast.makeText(this, "먼저 카드등록을 해야 합니다.",Toast.LENGTH_SHORT).show();
+                return;
+            }
+        } catch (ServerClient.ServerErrorException ex) {
+            Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
+        }
 
         hipassOn = !hipassOn;
 
