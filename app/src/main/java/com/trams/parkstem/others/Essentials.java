@@ -194,4 +194,13 @@ public class Essentials {
             error.printStackTrace();
         }
     }
+
+    public static void toastMessage(android.os.Handler handler, final Context context, final String message) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

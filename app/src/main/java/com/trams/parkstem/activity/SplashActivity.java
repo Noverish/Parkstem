@@ -18,6 +18,7 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.trams.parkstem.R;
 import com.trams.parkstem.gcm.QuickstartPreferences;
 import com.trams.parkstem.gcm.RegistrationIntentService;
+import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.server.LoginDatabase;
 import com.trams.parkstem.server.ServerClient;
 
@@ -49,12 +50,7 @@ public class SplashActivity extends AppCompatActivity{
 
     private void changeActivity() {
         if(autoLoginFailMessage != null)
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(SplashActivity.this, autoLoginFailMessage, Toast.LENGTH_SHORT).show();
-                }
-            });
+            Essentials.toastMessage(handler, this, autoLoginFailMessage);
 
 
         if (goToLoginActivity) {
@@ -69,18 +65,13 @@ public class SplashActivity extends AppCompatActivity{
                     startActivity(intent);
                     finish();
                 } else {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(SplashActivity.this, "모바일 인증을 해야합니다.", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    Essentials.toastMessage(handler, this, "모바일 인증을 해야합니다.");
                     Intent intent = new Intent(this, FirstScreenActivity.class);
                     startActivity(intent);
                     finish();
                 }
             } catch (ServerClient.ServerErrorException ex) {
-                Toast.makeText(SplashActivity.this, "모바일 인증여부를 확인하는데 에러가 발생했습니다. - " + ex, Toast.LENGTH_SHORT).show();
+                Essentials.toastMessage(handler, this, "모바일 인증여부를 확인하는데 에러가 발생했습니다. - " + ex);
             }
         }
     }
@@ -106,7 +97,7 @@ public class SplashActivity extends AppCompatActivity{
             Intent intent = new Intent(this, RegistrationIntentService.class);
             startService(intent);
         } else {
-            Toast.makeText(this, "구글 플레이 서비스를 이용할 수 없습니다.\n푸쉬알림을 못 받을 수도 있습니다.", Toast.LENGTH_SHORT).show();
+            Essentials.toastMessage(handler, this, "구글 플레이 서비스를 이용할 수 없습니다.\n푸쉬알림을 못 받을 수도 있습니다.");
         }
     }
 

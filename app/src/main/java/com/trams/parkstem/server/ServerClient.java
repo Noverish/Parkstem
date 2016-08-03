@@ -241,7 +241,7 @@ public class ServerClient  {
     }
 
     public MemberInfo memberInfo() throws ServerErrorException{
-        Log.e(TAG,"memberInfo");
+        Log.e(TAG,"memberInfo : " + uniqueID);
 
         //{"res":"1","msg":"회원정보입니다.","name":"","email":"","mobile":"","certification":"","pushYN":"","token":"","uniqueID":""}
 
