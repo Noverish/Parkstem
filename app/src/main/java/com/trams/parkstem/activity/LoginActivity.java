@@ -21,7 +21,7 @@ import com.trams.parkstem.server.ServerClient;
 /**
  * Created by Noverish on 2016-07-04.
  */
-public class LoginActivity extends AppCompatActivity implements OnLoginSuccessListener {
+public class LoginActivity extends AppCompatActivity implements OnLoginSuccessListener, View.OnClickListener {
     private FacebookLoginClient facebookLoginClient;
     private NaverLoginClient naverLoginClient;
     private KakaoLoginClient kakaoLoginClient;
@@ -80,6 +80,9 @@ public class LoginActivity extends AppCompatActivity implements OnLoginSuccessLi
                 startActivity(intent);
             }
         });
+
+        View view = findViewById(R.id.activity_login_ester_egg);
+        view.setOnClickListener(this);
     }
 
     @Override
@@ -118,5 +121,15 @@ public class LoginActivity extends AppCompatActivity implements OnLoginSuccessLi
         } catch (ServerClient.ServerErrorException ex) {
             Toast.makeText(LoginActivity.this, "로그인에 실패 했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private int pressNumber;
+    @Override
+    public void onClick(View v) {
+        if(pressNumber == 4) {
+            startActivity(new Intent(this, HomeActivity.class));
+            finish();
+        } else
+            pressNumber++;
     }
 }
