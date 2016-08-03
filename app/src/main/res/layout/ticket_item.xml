@@ -95,7 +95,7 @@
 
                 <ImageView
                     android:id="@+id/ticket_mobile_item_picture"
-                    android:src="@drawable/img_place"
+                    android:background="@drawable/img_place"
                     android:layout_width="113dp"
                     android:layout_height="113dp"/>
 

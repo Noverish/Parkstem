@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.content.ContextCompat;
@@ -123,7 +124,7 @@ public class TicketView extends LinearLayout {
             parkInfo = ServerClient.getInstance().parkInfo(ticket.local_id);
 
             HttpImageThread thread = new HttpImageThread(parkInfo.local_photo1);
-            parkImage.setImageBitmap(thread.getImage());
+            parkImage.setBackground(new BitmapDrawable(getResources(), thread.getImage()));
         } catch (ServerClient.ServerErrorException ex) {
             ex.printStackTrace();
             Toast.makeText(context, "주차장 정보를 불러오는데 실패했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
@@ -157,7 +158,7 @@ public class TicketView extends LinearLayout {
             parkInfo = ServerClient.getInstance().parkInfo(purchase.local_id);
 
             HttpImageThread thread = new HttpImageThread(parkInfo.local_photo1);
-            parkImage.setImageBitmap(thread.getImage());
+            parkImage.setBackground(new BitmapDrawable(getResources(), thread.getImage()));
         } catch (ServerClient.ServerErrorException ex) {
             ex.printStackTrace();
             Toast.makeText(context, "주차장 정보를 불러오는데 실패했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
