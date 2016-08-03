@@ -44,6 +44,7 @@ public class Mobilecertification extends BaseBackSearchActivity {
                     } catch (ServerClient.ServerErrorException ex) {
                         Toast.makeText(Mobilecertification.this, "휴대폰 인증에 실패했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
                     }
+                    finish();
                 }
 //                if (Uri.parse(url).getHost().equals("app.parkstem.com/api/kmcis_mobile.php")) {
 //                    try{
