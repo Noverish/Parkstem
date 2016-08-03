@@ -3,6 +3,7 @@ package com.trams.parkstem.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -24,6 +25,10 @@ public class LoginWithEmailActivity extends BaseBackSearchActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_by_email);
+
+        //입력 한 글자가 * 로 보임
+        PasswordTransformationMethod PassWtm = new PasswordTransformationMethod();
+        ((EditText) findViewById(R.id.activity_login_by_email_password)).setTransformationMethod(PassWtm);
 
         RelativeLayout LoginButton = (RelativeLayout) findViewById(R.id.activity_login_by_email_login_button);
         TextView EmailRegister = (TextView) findViewById(R.id.activity_login_by_email_register);
@@ -47,11 +52,12 @@ public class LoginWithEmailActivity extends BaseBackSearchActivity {
             String email = ((EditText) findViewById(R.id.activity_login_by_email_address)).getText().toString();
             String password = ((EditText) findViewById(R.id.activity_login_by_email_password)).getText().toString();
 
-
-            if(!email.matches(".*@.*[.].*")) {
+            if(!email.matches("[A-Za-z]*@[A-Za-z]*[.][A-Za-z]*")) {
                 Toast.makeText(this, "잘못된 이메일 형식입니다.", Toast.LENGTH_SHORT).show();
             } else if(password.length() < 4) {
                 Toast.makeText(this, "비밀번호는 4자리 이상이어야 합니다.", Toast.LENGTH_SHORT).show();
+            } else if(password.matches(".*[ㄱ-ㅎ가-힣].*")) {
+                Toast.makeText(this, "비밀번호는 영어 대소문자 및 특수문자의 조합이어야 합니다.", Toast.LENGTH_SHORT).show();
             } else {
                 ServerClient.getInstance().login(OnLoginSuccessListener.PARKSTEM, email, password, getIntent().getStringExtra("token"));
 
