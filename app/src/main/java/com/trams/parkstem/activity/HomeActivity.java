@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseNavigationActivity;
+import com.trams.parkstem.custom_view.BelowBar;
 import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.server.ServerClient;
 import com.trams.parkstem.view.HistoryParkView;
@@ -22,6 +23,7 @@ public class HomeActivity extends BaseNavigationActivity {
     private ServerClient client = ServerClient.getInstance();
 
     private RelativeLayout hipassButton;
+    private BelowBar belowBar;
     private boolean hipassOn;
     private Context context;
 
@@ -33,6 +35,7 @@ public class HomeActivity extends BaseNavigationActivity {
         setContentView(R.layout.activity_home);
         this.context = this;
 
+        belowBar = (BelowBar) findViewById(R.id.activity_home_below_bar);
         hipassButton = (RelativeLayout) findViewById(R.id.activity_hipass_on_off_button);
         hipassButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,37 +43,6 @@ public class HomeActivity extends BaseNavigationActivity {
                 onHipassButtonClicked();
             }
         });
-
-        ServerClient.DashBoard dashBoard;
-        ServerClient.ParkHistory[] parkHistories = new ServerClient.ParkHistory[2];
-
-        try {
-            dashBoard = client.dashboard();
-            hipassOn = dashBoard.hipass;
-        } catch (ServerClient.ServerErrorException ex) {
-            Toast.makeText(this, "정보를 불러오는데 실패했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
-            hipassOn = false;
-        }
-
-        showHipassButton(hipassOn);
-
-        try{
-            ServerClient.ParkHistoryList parkHistoryList = ServerClient.getInstance().parkHistory();
-            if(parkHistoryList.data.size()>0){
-                HistoryParkView historyParkView = new HistoryParkView(this, parkHistoryList.data.get(0));
-                historyParkView.setBackgroundColor(ContextCompat.getColor(this, R.color.btn_3));
-                ((LinearLayout) findViewById(R.id.activity_home_park_list_1)).addView(historyParkView);
-            }
-
-            if(parkHistoryList.data.size()>1){
-                HistoryParkView historyParkView = new HistoryParkView(this, parkHistoryList.data.get(1));
-                historyParkView.setBackgroundColor(ContextCompat.getColor(this, R.color.WHITE));
-                ((LinearLayout) findViewById(R.id.activity_home_park_list_2)).addView(historyParkView);
-            }
-
-        } catch (ServerClient.ServerErrorException ex){
-            Log.e("ERROr!",ex.toString());
-        }
 
         ImageView alert = (ImageView) findViewById(R.id.activity_home_about_hipass); //팝업버튼선언
         alert.setOnClickListener(new View.OnClickListener(){
@@ -107,8 +79,6 @@ public class HomeActivity extends BaseNavigationActivity {
                 startActivity(intent);
             }
         });
-
-
     }
 
     private void onHipassButtonClicked() {
@@ -162,5 +132,42 @@ public class HomeActivity extends BaseNavigationActivity {
 
         if(resultCode == RESULT_FINISH)
             finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        ServerClient.DashBoard dashBoard;
+
+        try {
+            dashBoard = client.dashboard();
+            hipassOn = dashBoard.hipass;
+        } catch (ServerClient.ServerErrorException ex) {
+            Toast.makeText(this, "정보를 불러오는데 실패했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
+            hipassOn = false;
+        }
+
+        showHipassButton(hipassOn);
+
+        try{
+            ServerClient.ParkHistoryList parkHistoryList = ServerClient.getInstance().parkHistory();
+            if(parkHistoryList.data.size()>0){
+                HistoryParkView historyParkView = new HistoryParkView(this, parkHistoryList.data.get(0));
+                historyParkView.setBackgroundColor(ContextCompat.getColor(this, R.color.btn_3));
+                ((LinearLayout) findViewById(R.id.activity_home_park_list_1)).addView(historyParkView);
+            }
+
+            if(parkHistoryList.data.size()>1){
+                HistoryParkView historyParkView = new HistoryParkView(this, parkHistoryList.data.get(1));
+                historyParkView.setBackgroundColor(ContextCompat.getColor(this, R.color.WHITE));
+                ((LinearLayout) findViewById(R.id.activity_home_park_list_2)).addView(historyParkView);
+            }
+
+        } catch (ServerClient.ServerErrorException ex){
+            Log.e("ERROr!",ex.toString());
+        }
+
+        belowBar.refresh();
     }
 }

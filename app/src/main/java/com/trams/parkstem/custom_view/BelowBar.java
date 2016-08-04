@@ -56,6 +56,10 @@ public class BelowBar extends LinearLayout {
             }
         });
 
+        refresh();
+    }
+
+    public void refresh() {
         TextView carText = (TextView) findViewById(R.id.below_bar_car_text);
         TextView cardText = (TextView) findViewById(R.id.below_bar_card_text);
 
@@ -77,12 +81,5 @@ public class BelowBar extends LinearLayout {
             carText.setText(error.msg);
             cardText.setText(error.msg);
         }
-
-
-
-
-
-
     }
-
 }
