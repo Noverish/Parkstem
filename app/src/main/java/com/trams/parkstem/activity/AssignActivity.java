@@ -3,6 +3,8 @@ package com.trams.parkstem.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.clause.Clause2;
+import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.others.OnLoginSuccessListener;
 import com.trams.parkstem.server.ServerClient;
 
@@ -23,6 +26,8 @@ public class AssignActivity extends BaseBackSearchActivity {
     private TextView alert;
     private ServerClient serverClient;
     private RelativeLayout assignButton;
+    private EditText emailEditText;
+    private EditText passwordEditText;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +55,56 @@ public class AssignActivity extends BaseBackSearchActivity {
             public void onClick(View v){
                 Intent intent = new Intent(AssignActivity.this, Clause2.class);
                 startActivity(intent);
+            }
+        });
+
+        emailEditText = (EditText) findViewById(R.id.activity_assign_email);
+        emailEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String result = s.toString().replaceAll("[^0-9A-Za-z.@]", "");
+                if (!s.toString().equals(result)) {
+                    emailEditText.setText(result);
+                    emailEditText.setSelection(result.length());
+                    // alert the user
+
+                    Essentials.toastMessage(handler, AssignActivity.this, "아이디에 영어, 숫자 외의 글자를 입력 할 수 없습니다");
+                }
+            }
+        });
+
+        passwordEditText = (EditText) findViewById(R.id.activity_assign_password);
+        passwordEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String result = s.toString().replaceAll("[ㄱ-ㅎ가-힣]", "");
+                if (!s.toString().equals(result)) {
+                    passwordEditText.setText(result);
+                    passwordEditText.setSelection(result.length());
+                    // alert the user
+
+                    Essentials.toastMessage(handler, AssignActivity.this, "패스워드에 한글을 입력 할 수 없습니다");
+                }
             }
         });
     }
