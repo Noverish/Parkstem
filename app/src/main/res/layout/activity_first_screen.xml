@@ -46,8 +46,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="151dp">
                 <RelativeLayout
-                    android:background="@drawable/btn_greenround"
                     android:id="@+id/activity_first_moblie_certificate"
+                    android:background="@drawable/btn_greenround"
                     android:layout_width="113dp"
                     android:layout_height="113dp">
                     <RelativeLayout
@@ -55,8 +55,15 @@
                         android:background="@drawable/img_phone"
                         android:layout_width="40dp"
                         android:layout_height="70dp"/>
+
+                    <ImageView
+                        android:id="@+id/activity_first_mobile_success"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/img_sucess"
+                        android:visibility="invisible"/>
                 </RelativeLayout>
-                
+
                 <TextView
                     android:layout_marginTop="5dp"
                     android:layout_gravity="center_horizontal"

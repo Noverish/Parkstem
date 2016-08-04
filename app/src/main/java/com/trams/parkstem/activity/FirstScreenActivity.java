@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
+import com.trams.parkstem.server.ServerClient;
 import com.trams.parkstem.webview.Mobilecertification;
 
 /**
@@ -57,6 +59,10 @@ public class FirstScreenActivity extends BaseBackSearchActivity {
                 skip();
             }
         });
+
+        ImageView mobileSuccessImage = (ImageView) findViewById(R.id.activity_first_mobile_success);
+        if(ServerClient.getInstance().isUserCertification())
+            mobileSuccessImage.setVisibility(View.VISIBLE);
     }
 
     @Override
