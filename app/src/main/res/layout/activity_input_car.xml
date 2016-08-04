@@ -16,11 +16,27 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <ImageView
-                    android:layout_marginTop="137dp"
-                    android:src="@drawable/img_car"
-                    android:layout_width="88dp"
-                    android:layout_height="76dp" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <ImageView
+                        android:id="@+id/activity_input_car_image"
+                        android:layout_width="88dp"
+                        android:layout_height="76dp"
+                        android:layout_marginTop="137dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/img_car" />
+
+                    <ImageView
+                        android:id="@+id/activity_input_card_image"
+                        android:layout_width="110dp"
+                        android:layout_height="74dp"
+                        android:layout_marginTop="137dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/img_card" />
+                </RelativeLayout>
 
                 <TextView
                     android:id="@+id/input_first_car_text"
@@ -39,6 +55,7 @@
                     android:layout_width="174dp"
                     android:layout_height="44dp">
                     <TextView
+                        android:id="@+id/activity_input_car_button_text"
                         android:text="차량추가등록"
                         android:textColor="@color/WHITE"
                         android:textSize="27sp"

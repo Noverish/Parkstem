@@ -19,6 +19,7 @@ public class CardRegister extends BaseBackSearchActivity {
     String cardName = "NEW_CARD!"; //얘를 카드이름으로 지정
     WebView webview;
 
+
     @Override
     public void onBackPressed() {
         if (webview.canGoBack()) {
@@ -46,6 +47,8 @@ public class CardRegister extends BaseBackSearchActivity {
                 }
             }
         });
+
+        cardName = getIntent().getStringExtra("cardName");
 
 
         String url = "https://inilite.inicis.com/inibill/inibill_card.jsp";

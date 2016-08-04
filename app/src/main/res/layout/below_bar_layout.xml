@@ -14,13 +14,6 @@
             android:layout_height="match_parent">
 
             <RelativeLayout
-                android:id="@+id/below_bar_center_bar"
-                android:layout_centerInParent="true"
-                android:background="@drawable/img_bottom_bar"
-                android:layout_width="0.4dp"
-                android:layout_height="64dp"/>
-
-            <RelativeLayout
                 android:id="@+id/below_bar_car_button"
                 android:layout_marginLeft="0.2dp"
                 android:layout_toLeftOf="@+id/below_bar_center_bar"
@@ -37,17 +30,25 @@
                     android:layout_height="29dp" />
 
                 <TextView
-                    android:textColor="@color/gray_for_text"
-                    android:textSize="20sp"
                     android:id="@+id/below_bar_car_text"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="13dp"
-                    android:text="차량등록"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/gray_for_text"
+                    android:textSize="20sp"
+                    android:text="ERROR" />
+
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/below_bar_center_bar"
+                android:layout_centerInParent="true"
+                android:background="@drawable/img_bottom_bar"
+                android:layout_width="0.4dp"
+                android:layout_height="64dp"/>
 
             <RelativeLayout
                 android:id="@+id/below_bar_card_button"
@@ -72,7 +73,7 @@
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
                     android:layout_marginBottom="13dp"
-                    android:text="카드등록"
+                    android:text="ERROR"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

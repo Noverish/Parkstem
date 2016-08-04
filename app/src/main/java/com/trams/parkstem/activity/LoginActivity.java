@@ -127,6 +127,12 @@ public class LoginActivity extends AppCompatActivity implements OnLoginSuccessLi
     @Override
     public void onClick(View v) {
         if(pressNumber == 4) {
+            ServerClient.getInstance().setUniqueID("13617600");
+            try {
+                ServerClient.getInstance().memberInfo();
+            } catch (ServerClient.ServerErrorException ex) {
+
+            }
             startActivity(new Intent(this, HomeActivity.class));
             finish();
         } else

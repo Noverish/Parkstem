@@ -89,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
-                android:text="차량등록"
+                android:text="ERROR"
                 android:textColorHint="#bcc1c5"
                 android:textColor="@color/gray_for_text"
                 />
@@ -118,7 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
-                android:text="카드등록"
+                android:text="ERROR"
                 android:textColor="@color/gray_for_text"
                 />
             <TextView

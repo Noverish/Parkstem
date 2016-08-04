@@ -855,7 +855,7 @@ public class ServerClient  {
         return cardLists;
     }
     /** card_list 와 card_sort의 card data에서 sort데이터가 들어오지 않음**/
-    public CardList cardList() throws ServerErrorException{
+    public CardList cardList() throws ServerErrorException {
         String msg;
         final String CL_URL = "http://app.parkstem.com/api/card_list.php";
         Thread thread = new Thread(new Runnable() {
@@ -887,7 +887,7 @@ public class ServerClient  {
                     JSONObject jdata = jarray.getJSONObject(i);
                     CardInfo cardInfo = new CardInfo();
                     cardInfo.idx = jdata.getInt("idx");
-                    //cardInfo.sort = jdata.getInt("sort");
+                    cardInfo.sort = jdata.getInt("sort");
                     cardInfo.card_name = jdata.getString("card_name");
                     cardInfo.reg_date = Essentials.stringToCalendar(jdata.getString("reg_date"));
                     cardList.data.add(cardInfo);
@@ -1439,6 +1439,10 @@ public class ServerClient  {
         }
     }
 
+    public void setUniqueID(String uniqueID) {
+        this.uniqueID = uniqueID;
+    }
+
     public String getUniqueID() {
         return uniqueID;
     }
@@ -1560,7 +1564,7 @@ public class ServerClient  {
     }
     public class CardInfo{
         public int idx;
-        //public int sort;
+        public int sort;
         public String card_name;
         public Calendar reg_date;
     }

@@ -8,7 +8,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -62,7 +61,6 @@ public class InputCarActivity extends BaseBackSearchActivity {
             @Override
             public void onItemRemoved(Pair<Long, String> removeItem) {
                 try {
-                    Log.e("deleteCar","item : " + removeItem.first + ", " + removeItem.second);
                     serverClient.deleteCar(removeItem.second);
                 } catch (ServerClient.ServerErrorException ex) {
                     Toast.makeText(InputCarActivity.this, ex.msg, Toast.LENGTH_SHORT).show();
@@ -86,9 +84,16 @@ public class InputCarActivity extends BaseBackSearchActivity {
             }
         });
 
+        TextView addButtonText = (TextView) findViewById(R.id.activity_input_car_button_text);
+        addButtonText.setText("카드추가등록");
+
+        ImageView cardImage = (ImageView) findViewById(R.id.activity_input_card_image);
+        cardImage.setVisibility(View.INVISIBLE);
+
         mainCarNumberTextView = (TextView) findViewById(R.id.input_first_car_text);
 
         carNumberEditText = (EditText) findViewById(R.id.activity_input_car_add_number);
+        carNumberEditText.setHint("차량 번호");
         carNumberEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
