@@ -61,6 +61,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_gravity="center_horizontal"
                     android:text="휴대폰 인증"
+                    android:id="@+id/activity_first_mobile_status"
                     android:textSize="15sp"
                     android:textColor="@color/gray_for_text"
                     android:layout_width="wrap_content"

@@ -1,5 +1,6 @@
 package com.trams.parkstem.webview;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -14,7 +15,6 @@ import com.trams.parkstem.server.ServerClient;
  */
 public class Mobilecertification extends BaseBackSearchActivity {
     ServerClient serverClient = ServerClient.getInstance();
-    String clause;
     WebView webview;
 
     @Override
@@ -36,7 +36,7 @@ public class Mobilecertification extends BaseBackSearchActivity {
         webview.getSettings().setJavaScriptEnabled(true);
         webview.setWebViewClient(new WebViewClient() {
             @Override
-            public void onPageFinished(WebView view, String url) {
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 if (url.contains("mobile.php")) {
                     try {
                         if(ServerClient.getInstance().memberInfo().certification)
@@ -44,6 +44,7 @@ public class Mobilecertification extends BaseBackSearchActivity {
                     } catch (ServerClient.ServerErrorException ex) {
                         Toast.makeText(Mobilecertification.this, "휴대폰 인증에 실패했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
                     }
+                    finish();
                 }
 //                if (Uri.parse(url).getHost().equals("app.parkstem.com/api/kmcis_mobile.php")) {
 //                    try{
