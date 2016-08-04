@@ -118,7 +118,7 @@ public class AssignActivity extends BaseBackSearchActivity {
 
             if(name.equals("")) {
                 Toast.makeText(this, "이름을 입력해 주세요.", Toast.LENGTH_SHORT).show();
-            } else if(!email.matches("[A-Za-z]*@[A-Za-z]*[.][A-Za-z]*")) {
+            } else if(!email.matches("[A-Za-z0-9]+@[A-Za-z0-9]+[.][A-Za-z0-9]+")) {
                 Toast.makeText(this, "잘못된 이메일 형식입니다.", Toast.LENGTH_SHORT).show();
             } else if(password.length() < 4) {
                 Toast.makeText(this, "비밀번호는 4자리 이상이어야 합니다.", Toast.LENGTH_SHORT).show();
