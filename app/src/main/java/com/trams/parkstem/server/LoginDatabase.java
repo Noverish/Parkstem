@@ -71,7 +71,7 @@ public class LoginDatabase {
     }
 
     public boolean isDatabaseClear() {
-        return (database == null ||database.size() == 0);
+        return (database == null || database.size() == 1 ||database.size() == 0);
     }
 
     private void saveToInternalStorage(HashMap<String, String> map) {
@@ -111,8 +111,9 @@ public class LoginDatabase {
     }
 
     public void clearDatabase() {
-        context.deleteFile(DATABASE_FILE_NAME);
-        database = readFromInternalStorage();
+        database.remove(GUBUN_COLUMN);
+        database.remove(ID_COLUMN);
+        database.remove(PW_COLUMN);
 
         Log.e("database","database cleared");
     }
