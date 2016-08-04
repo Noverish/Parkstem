@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.server.ServerClient;
-import com.trams.parkstem.webview.Mobilecertification;
+import com.trams.parkstem.webview.MobilecertificationWebView;
 
 /**
  * Created by Noverish on 2016-07-12.
@@ -84,7 +84,7 @@ public class FirstScreenActivity extends BaseBackSearchActivity {
             if (ServerClient.getInstance().memberInfo().certification) {
                 Toast.makeText(this, "휴대폰 인증이 이미 완료되었습니다.", Toast.LENGTH_LONG).show();
             } else {
-                Intent intent = new Intent(this, Mobilecertification.class);
+                Intent intent = new Intent(this, MobilecertificationWebView.class);
                 startActivity(intent);
             }
         } catch (ServerClient.ServerErrorException ex) {

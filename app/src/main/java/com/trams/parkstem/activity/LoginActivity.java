@@ -11,11 +11,11 @@ import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseNavigationActivity;
-import com.trams.parkstem.others.FacebookLoginClient;
-import com.trams.parkstem.others.KakaoLoginClient;
-import com.trams.parkstem.others.NaverLoginClient;
-import com.trams.parkstem.others.OnLoginSuccessListener;
-import com.trams.parkstem.server.LoginDatabase;
+import com.trams.parkstem.login.FacebookLoginClient;
+import com.trams.parkstem.login.KakaoLoginClient;
+import com.trams.parkstem.login.NaverLoginClient;
+import com.trams.parkstem.login.OnLoginSuccessListener;
+import com.trams.parkstem.login.LoginDatabase;
 import com.trams.parkstem.server.ServerClient;
 
 /**

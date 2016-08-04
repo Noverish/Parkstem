@@ -115,7 +115,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.trams.parkstem.custom_view.LocationChangeableListView
+        <com.trams.parkstem.view.LocationChangeableListView
             android:id="@+id/activity_input_car_list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

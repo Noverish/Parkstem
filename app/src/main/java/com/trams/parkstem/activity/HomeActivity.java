@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseNavigationActivity;
-import com.trams.parkstem.custom_view.BelowBar;
+import com.trams.parkstem.view.BelowBar;
 import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.server.ServerClient;
 import com.trams.parkstem.view.HistoryParkView;

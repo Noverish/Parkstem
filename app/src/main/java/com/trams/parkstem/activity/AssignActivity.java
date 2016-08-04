@@ -14,10 +14,10 @@ import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
-import com.trams.parkstem.clause.Clause2;
+import com.trams.parkstem.login.OnLoginSuccessListener;
 import com.trams.parkstem.others.Essentials;
-import com.trams.parkstem.others.OnLoginSuccessListener;
 import com.trams.parkstem.server.ServerClient;
+import com.trams.parkstem.webview.ClauseWebView;
 
 /**
  * Created by Noverish on 2016-07-04.
@@ -53,7 +53,8 @@ public class AssignActivity extends BaseBackSearchActivity {
         alert.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(AssignActivity.this, Clause2.class);
+                Intent intent = new Intent(AssignActivity.this, ClauseWebView.class);
+                intent.putExtra(ClauseWebView.CLAUSE_EXTRA, 1);
                 startActivity(intent);
             }
         });

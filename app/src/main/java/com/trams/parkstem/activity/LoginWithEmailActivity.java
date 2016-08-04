@@ -15,8 +15,8 @@ import android.widget.Toast;
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.others.Essentials;
-import com.trams.parkstem.others.OnLoginSuccessListener;
-import com.trams.parkstem.server.LoginDatabase;
+import com.trams.parkstem.login.OnLoginSuccessListener;
+import com.trams.parkstem.login.LoginDatabase;
 import com.trams.parkstem.server.ServerClient;
 
 /**

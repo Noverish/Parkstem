@@ -14,7 +14,7 @@ import com.trams.parkstem.server.ServerClient;
 /**
  * Created by monc2 on 2016-07-22.
  */
-public class CardRegister extends BaseBackSearchActivity {
+public class CardRegisterWebView extends BaseBackSearchActivity {
     ServerClient serverClient = ServerClient.getInstance();
     String uid = serverClient.getUniqueID();
     String cardName = "NEW_CARD!"; //얘를 카드이름으로 지정
@@ -34,16 +34,16 @@ public class CardRegister extends BaseBackSearchActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.webview_card_register);
+        setContentView(R.layout.webview);
         setBackEnable(true);
-        webview = (WebView) findViewById(R.id.webview_card_register);
+        webview = (WebView) findViewById(R.id.webview);
 
         webview.getSettings().setJavaScriptEnabled(true);
         webview.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 if (url.contains("card_reg.php")) {
-                    Toast.makeText(CardRegister.this, "카드를 등록하였습니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CardRegisterWebView.this, "카드를 등록하였습니다.", Toast.LENGTH_LONG).show();
                     finish();
                 }
             }

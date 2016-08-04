@@ -1,4 +1,4 @@
-package com.trams.parkstem.others;
+package com.trams.parkstem.login;
 
 import android.app.Activity;
 import android.app.Application;
@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.facebook.FacebookSdk;
 import com.kakao.auth.KakaoSDK;
+import com.trams.parkstem.others.FontsOverride;
 
 /**
  * Created by Noverish on 2016-07-22.

@@ -19,10 +19,10 @@ import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
-import com.trams.parkstem.custom_view.LocationChangeableListView;
+import com.trams.parkstem.view.LocationChangeableListView;
 import com.trams.parkstem.server.ServerClient;
-import com.trams.parkstem.webview.CardRegister;
-import com.trams.parkstem.webview.Mobilecertification;
+import com.trams.parkstem.webview.CardRegisterWebView;
+import com.trams.parkstem.webview.MobilecertificationWebView;
 
 import java.util.ArrayList;
 
@@ -153,7 +153,7 @@ public class InputCardActivity extends BaseBackSearchActivity {
             imm.showSoftInput(cardNameEditText, 0);
         } else {
             Toast.makeText(this, "차량 등록을 하시려면 휴대폰 인증을 하셔야 합니다", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, Mobilecertification.class));
+            startActivity(new Intent(this, MobilecertificationWebView.class));
         }
     }
 
@@ -197,7 +197,7 @@ public class InputCardActivity extends BaseBackSearchActivity {
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(cardNameEditText.getWindowToken(), 0);
 
-            Intent intent = new Intent(this, CardRegister.class);
+            Intent intent = new Intent(this, CardRegisterWebView.class);
             intent.putExtra("cardName",cardNameEditText.getText().toString());
             startActivityForResult(intent, RESULT_OK);
 

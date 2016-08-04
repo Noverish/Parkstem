@@ -12,7 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.trams.parkstem.gcm.MyGcmListenerService;
 import com.trams.parkstem.others.Essentials;
-import com.trams.parkstem.others.GlobalApplication;
+import com.trams.parkstem.login.GlobalApplication;
 
 /**
  * Created by Noverish on 2016-07-23.

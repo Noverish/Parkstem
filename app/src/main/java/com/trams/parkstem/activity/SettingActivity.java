@@ -13,11 +13,11 @@ import android.widget.Toast;
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.base_activity.BaseNavigationActivity;
-import com.trams.parkstem.clause.Clause2;
-import com.trams.parkstem.others.FacebookLoginClient;
-import com.trams.parkstem.others.KakaoLoginClient;
-import com.trams.parkstem.others.NaverLoginClient;
-import com.trams.parkstem.server.LoginDatabase;
+import com.trams.parkstem.webview.ClauseWebView;
+import com.trams.parkstem.login.FacebookLoginClient;
+import com.trams.parkstem.login.KakaoLoginClient;
+import com.trams.parkstem.login.NaverLoginClient;
+import com.trams.parkstem.login.LoginDatabase;
 import com.trams.parkstem.server.ServerClient;
 
 /**
@@ -53,7 +53,8 @@ public class SettingActivity extends BaseBackSearchActivity {
         clauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SettingActivity.this, Clause2.class);
+                Intent intent = new Intent(SettingActivity.this, ClauseWebView.class);
+                intent.putExtra(ClauseWebView.CLAUSE_EXTRA, 1);
                 startActivity(intent);
             }
         });

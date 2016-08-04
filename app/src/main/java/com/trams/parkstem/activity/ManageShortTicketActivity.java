@@ -20,7 +20,7 @@ import java.util.Calendar;
 /**
  * Created by Noverish on 2016-07-08.
  */
-public class ManageTicketActivity extends BaseBackSearchActivity {
+public class ManageShortTicketActivity extends BaseBackSearchActivity {
     private SwipeRefreshLayout swipeLayout;
     private ArrayList<TicketView> ticketViews = new ArrayList<>();
     private TextView termName;

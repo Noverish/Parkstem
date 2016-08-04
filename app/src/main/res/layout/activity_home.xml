@@ -9,7 +9,7 @@
     android:id="@+id/content_main_layout"
     android:background="@color/WHITE">
 
-    <com.trams.parkstem.custom_view.BelowBar
+    <com.trams.parkstem.view.BelowBar
         android:id="@+id/activity_home_below_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

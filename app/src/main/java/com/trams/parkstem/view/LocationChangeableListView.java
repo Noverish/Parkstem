@@ -1,4 +1,4 @@
-package com.trams.parkstem.custom_view;
+package com.trams.parkstem.view;
 
 import android.content.Context;
 import android.graphics.Color;

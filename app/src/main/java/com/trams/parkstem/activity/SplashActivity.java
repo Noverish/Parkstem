@@ -19,7 +19,7 @@ import com.trams.parkstem.R;
 import com.trams.parkstem.gcm.QuickstartPreferences;
 import com.trams.parkstem.gcm.RegistrationIntentService;
 import com.trams.parkstem.others.Essentials;
-import com.trams.parkstem.server.LoginDatabase;
+import com.trams.parkstem.login.LoginDatabase;
 import com.trams.parkstem.server.ServerClient;
 
 /**

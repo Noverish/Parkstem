@@ -23,11 +23,9 @@ import com.trams.parkstem.activity.HistoryParkActivity;
 import com.trams.parkstem.activity.HistoryPaymentActivity;
 import com.trams.parkstem.activity.InputCarActivity;
 import com.trams.parkstem.activity.InputCardActivity;
-import com.trams.parkstem.activity.InputNewCardActivity;
 import com.trams.parkstem.activity.LoginActivity;
 import com.trams.parkstem.activity.ManageLongTicketActivity;
-import com.trams.parkstem.activity.ManageTicketActivity;
-import com.trams.parkstem.activity.MobileCertificationActivity;
+import com.trams.parkstem.activity.ManageShortTicketActivity;
 import com.trams.parkstem.activity.ParkStatusActivity;
 import com.trams.parkstem.activity.SettingActivity;
 import com.trams.parkstem.activity.SplashActivity;
@@ -112,14 +110,6 @@ public class BaseNavigationActivity extends BaseActivity {
             Intent intent = new Intent(this, AssignActivity.class);
             startActivity(intent);
             return true;
-        } else if (id == R.id.action_mobile) {
-            Intent intent = new Intent(this, MobileCertificationActivity.class);
-            startActivity(intent);
-            return true;
-        } else if (id == R.id.action_card_new_card) {
-            Intent intent = new Intent(this, InputNewCardActivity.class);
-            startActivity(intent);
-            return true;
         } else if (id == R.id.action_mobile_ticket) {
             Intent intent = new Intent(this, TicketMobileListActivity.class);
             startActivity(intent);
@@ -163,7 +153,7 @@ public class BaseNavigationActivity extends BaseActivity {
             Intent intent = new Intent(this, ManageLongTicketActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_park_ticket) {
-            Intent intent = new Intent(this, ManageTicketActivity.class);
+            Intent intent = new Intent(this, ManageShortTicketActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_park_list) {
             Intent intent = new Intent(this, HistoryParkActivity.class);
