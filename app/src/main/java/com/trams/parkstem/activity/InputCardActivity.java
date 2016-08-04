@@ -117,8 +117,6 @@ public class InputCardActivity extends BaseBackSearchActivity {
                 }
             }
         });
-
-        refresh();
     }
 
     private void refresh() {
@@ -219,11 +217,10 @@ public class InputCardActivity extends BaseBackSearchActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onResume() {
+        super.onResume();
 
-        Log.e("activity","result");
-
+        Log.e("refresh","refresh");
         refresh();
     }
 }
