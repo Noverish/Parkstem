@@ -2,6 +2,7 @@ package com.trams.parkstem.webview;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -51,8 +52,10 @@ public class CardRegister extends BaseBackSearchActivity {
         cardName = getIntent().getStringExtra("cardName");
 
 
+        Log.e("data","cardName : " + cardName + ", uid : " + uid);
+
         String url = "https://inilite.inicis.com/inibill/inibill_card.jsp";
-        String data = "returnurl=http://app.parkstem.com/api/card_reg.php&mid=hotelvey11&goodname=certification&price=1&type=1&orderid=AAAAA&notice=good&timestamp=20160427171717&period=0&hashdata=0c4b70d28e3dfbdf6561d3aff631f8355a3991c965223bd88285a8d9f8c0e935&p_noti=" + uid + "^" + cardName;
+        String data = "returnurl=http://app.parkstem.com/api/card_reg.php&mid=hotelvey11&goodname=certification&price=1&type=1&orderid=AAAAA&notice=good&timestamp=20160427171717&buyername=1&period=0&hashdata=0c4b70d28e3dfbdf6561d3aff631f8355a3991c965223bd88285a8d9f8c0e935&p_noti=" + uid + "^" + cardName;
         try {
             byte[] postdata = data.getBytes("UTF-8");
             webview.postUrl(url, postdata);

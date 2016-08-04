@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.util.Pair;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -191,7 +192,7 @@ public class InputCardActivity extends BaseBackSearchActivity {
 
     private void addCarNumber() {
         String carNumberStr = cardNameEditText.getText().toString();
-        if(carNumberStr.matches("[가-힣A-Za-z]*")) {
+        if(carNumberStr.matches("[ㄱ-ㅎ가-힣A-Za-z]*")) {
             setNotEditStatus();
 
             //hide keyboard
@@ -220,6 +221,8 @@ public class InputCardActivity extends BaseBackSearchActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        Log.e("activity","result");
 
         refresh();
     }
