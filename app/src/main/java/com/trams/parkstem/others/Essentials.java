@@ -123,8 +123,7 @@ public class Essentials {
     public static Calendar stringToCalendar(final String date){
         String[] dates;
         Calendar calendar;
-
-        dates = date.split("\\D");
+        dates = date.replaceFirst("\\[\"","").split("[\\D]+");
         calendar = Calendar.getInstance();
         if(dates.length == 3){
             calendar.set(Integer.parseInt(dates[0]),Integer.parseInt(dates[1]) - 1, Integer.parseInt(dates[2]));
