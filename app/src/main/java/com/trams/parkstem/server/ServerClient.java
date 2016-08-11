@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -88,7 +89,10 @@ public class ServerClient  {
             }
             reader.close();
 
-            Log.e("jsonStr",jsonStr);
+            List<String> logs = Essentials.splitEqually(jsonStr, 1000);
+            for(String str : logs) {
+                Log.e("jsonStr",str);
+            }
 
             return new JSONObject(jsonStr);
         } catch (Exception ex) {

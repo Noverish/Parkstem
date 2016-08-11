@@ -18,7 +18,9 @@ import android.widget.Toast;
 import com.trams.parkstem.R;
 import com.trams.parkstem.server.ServerClient;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by JaeHyo on 2016-07-13.
@@ -201,5 +203,16 @@ public class Essentials {
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public static List<String> splitEqually(String text, int size) {
+        // Give the list the right capacity to start with. You could use an array
+        // instead if you wanted.
+        List<String> ret = new ArrayList<String>((text.length() + size - 1) / size);
+
+        for (int start = 0; start < text.length(); start += size) {
+            ret.add(text.substring(start, Math.min(text.length(), start + size)));
+        }
+        return ret;
     }
 }
