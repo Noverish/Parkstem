@@ -115,6 +115,8 @@ public class LoginDatabase {
         database.remove(ID_COLUMN);
         database.remove(PW_COLUMN);
 
+        saveToInternalStorage(database);
+
         Log.e("database","database cleared");
     }
 }
