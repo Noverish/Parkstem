@@ -85,7 +85,7 @@ public class InputCarActivity extends BaseBackSearchActivity {
         });
 
         TextView addButtonText = (TextView) findViewById(R.id.activity_input_car_button_text);
-        addButtonText.setText("카드추가등록");
+        addButtonText.setText("차량추가등록");
 
         ImageView cardImage = (ImageView) findViewById(R.id.activity_input_card_image);
         cardImage.setVisibility(View.INVISIBLE);

@@ -60,15 +60,18 @@ public class FirstScreenActivity extends BaseBackSearchActivity {
             }
         });
 
-        ImageView mobileSuccessImage = (ImageView) findViewById(R.id.activity_first_mobile_success);
-        if(ServerClient.getInstance().isUserCertification())
-            mobileSuccessImage.setVisibility(View.VISIBLE);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
+        ImageView mobileSuccessImage = (ImageView) findViewById(R.id.activity_first_mobile_success);
+        if(ServerClient.getInstance().isUserCertification())
+            mobileSuccessImage.setVisibility(View.VISIBLE);
+        else
+            mobileSuccessImage.setVisibility(View.INVISIBLE);
+        
         try {
             if (ServerClient.getInstance().memberInfo().certification) {
                 mobileStatus = (TextView) findViewById(R.id.activity_first_mobile_status);
