@@ -42,7 +42,7 @@ public class TicketPurchaseListActivity extends BaseBackSearchActivity {
     }
 
     private void loadServerDataProcess() {
-        swipeLayout.post(new Runnable() {
+        handler.post(new Runnable() {
             @Override
             public void run() {
                 swipeLayout.setRefreshing(true);
