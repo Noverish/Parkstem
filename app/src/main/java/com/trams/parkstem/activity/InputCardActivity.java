@@ -19,8 +19,9 @@ import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
-import com.trams.parkstem.view.LocationChangeableListView;
+import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.server.ServerClient;
+import com.trams.parkstem.view.LocationChangeableListView;
 import com.trams.parkstem.webview.CardRegisterWebView;
 import com.trams.parkstem.webview.MobilecertificationWebView;
 
@@ -33,6 +34,7 @@ public class InputCardActivity extends BaseBackSearchActivity {
     private ServerClient serverClient;
 
     private EditText cardNameEditText;
+    private RelativeLayout addingConfirmButton;
     private TextView mainCardTextView;
     private LocationChangeableListView listView;
     private boolean inEditStatus;
@@ -69,6 +71,19 @@ public class InputCardActivity extends BaseBackSearchActivity {
                 }
             }
         });
+        listView.setOnItemNameClickedListener(new LocationChangeableListView.OnItemNameClickedListener() {
+            @Override
+            public void onItemNameClicked(final Pair<Long, String> item) {
+                setEditStatus(true);
+                cardNameEditText.setText(item.second);
+                addingConfirmButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        onChangeCarNameButtonPressed(item.first, cardNameEditText.getText().toString());
+                    }
+                });
+            }
+        });
 
         RelativeLayout inputNewCarButton = (RelativeLayout) findViewById(R.id.input_new_car_button);
         inputNewCarButton.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +93,7 @@ public class InputCardActivity extends BaseBackSearchActivity {
             }
         });
 
-        RelativeLayout addingConfirmButton = (RelativeLayout) findViewById(R.id.activity_input_car_adding_confirm);
+        addingConfirmButton = (RelativeLayout) findViewById(R.id.activity_input_car_adding_confirm);
         addingConfirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,7 +160,7 @@ public class InputCardActivity extends BaseBackSearchActivity {
 
     private void onAddCarButtonPressed() {
         if(ServerClient.getInstance().isUserCertification()) {
-            setEditStatus();
+            setEditStatus(true);
 
             //show keyboard manually
             cardNameEditText.requestFocus();
@@ -157,41 +172,62 @@ public class InputCardActivity extends BaseBackSearchActivity {
         }
     }
 
-    private void setEditStatus() {
-        inEditStatus = true;
+    private void onChangeCarNameButtonPressed(long idx, String cardName) {
+        try {
+            ServerClient.getInstance().changeCardName(idx, cardName);
+            Essentials.toastMessage(handler, this, "카드 이름을 변경했습니다.");
+            refresh();
+        } catch (ServerClient.ServerErrorException ex) {
+            Essentials.toastMessage(handler, this, "카드 이름을 변경하는데 실패했습니다.");
+        }
 
-        ImageView gray2 = (ImageView) findViewById(R.id.activity_input_car_gray2);
-        ImageView gray3 = (ImageView) findViewById(R.id.activity_input_car_gray3);
-        gray2.setVisibility(View.VISIBLE);
-        gray3.setVisibility(View.VISIBLE);
+        //hide keyboard
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(cardNameEditText.getWindowToken(), 0);
 
-        RelativeLayout editLayout = (RelativeLayout) findViewById(R.id.activity_input_car_editing);
-        editLayout.setVisibility(View.VISIBLE);
-
-        TextView inputCardText = (TextView) findViewById(R.id.input_first_car_text);
-        inputCardText.setVisibility(View.INVISIBLE);
+        setEditStatus(false);
+        addingConfirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addCarNumber();
+            }
+        });
     }
 
-    private void setNotEditStatus() {
-        inEditStatus = false;
+    private void setEditStatus(boolean edit) {
+        if(edit) {
+            inEditStatus = true;
 
-        ImageView gray2 = (ImageView) findViewById(R.id.activity_input_car_gray2);
-        ImageView gray3 = (ImageView) findViewById(R.id.activity_input_car_gray3);
-        gray2.setVisibility(View.INVISIBLE);
-        gray3.setVisibility(View.INVISIBLE);
+            ImageView gray2 = (ImageView) findViewById(R.id.activity_input_car_gray2);
+            ImageView gray3 = (ImageView) findViewById(R.id.activity_input_car_gray3);
+            gray2.setVisibility(View.VISIBLE);
+            gray3.setVisibility(View.VISIBLE);
 
-        RelativeLayout editLayout = (RelativeLayout) findViewById(R.id.activity_input_car_editing);
-        editLayout.setVisibility(View.INVISIBLE);
+            RelativeLayout editLayout = (RelativeLayout) findViewById(R.id.activity_input_car_editing);
+            editLayout.setVisibility(View.VISIBLE);
 
-        TextView inputCardText = (TextView) findViewById(R.id.input_first_car_text);
-        inputCardText.setVisibility(View.VISIBLE);
+            TextView inputCardText = (TextView) findViewById(R.id.input_first_car_text);
+            inputCardText.setVisibility(View.INVISIBLE);
+        } else {
+            inEditStatus = false;
 
+            ImageView gray2 = (ImageView) findViewById(R.id.activity_input_car_gray2);
+            ImageView gray3 = (ImageView) findViewById(R.id.activity_input_car_gray3);
+            gray2.setVisibility(View.INVISIBLE);
+            gray3.setVisibility(View.INVISIBLE);
+
+            RelativeLayout editLayout = (RelativeLayout) findViewById(R.id.activity_input_car_editing);
+            editLayout.setVisibility(View.INVISIBLE);
+
+            TextView inputCardText = (TextView) findViewById(R.id.input_first_car_text);
+            inputCardText.setVisibility(View.VISIBLE);
+        }
     }
 
     private void addCarNumber() {
         String carNumberStr = cardNameEditText.getText().toString();
         if(carNumberStr.matches("[ㄱ-ㅎ가-힣A-Za-z]*")) {
-            setNotEditStatus();
+            setEditStatus(false);
 
             //hide keyboard
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -201,7 +237,7 @@ public class InputCardActivity extends BaseBackSearchActivity {
             intent.putExtra("cardName",cardNameEditText.getText().toString());
             startActivityForResult(intent, RESULT_OK);
 
-            setNotEditStatus();
+            setEditStatus(false);
 
         } else {
             Toast.makeText(this, "카드 이름에는 한글과 영어만 사용할 수 있습니다",Toast.LENGTH_SHORT).show();
@@ -211,7 +247,7 @@ public class InputCardActivity extends BaseBackSearchActivity {
     @Override
     public void onBackPressed() {
         if(inEditStatus)
-            setNotEditStatus();
+            setEditStatus(false);
         else
             super.onBackPressed();
     }

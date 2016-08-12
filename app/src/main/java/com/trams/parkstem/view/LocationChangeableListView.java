@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.woxthebox.draglistview.DragItemAdapter;
@@ -33,6 +32,7 @@ public class LocationChangeableListView extends LinearLayout {
     private boolean inEditMode;
     private OnEditCompleteListener onEditCompleteListener;
     private OnItemRemovedListener onItemRemovedListener;
+    private OnItemNameClickedListener onItemNameClickedListener;
 
     private DragAdapter dragAdapter;
     private NormalAdapter normalAdapter;
@@ -161,6 +161,10 @@ public class LocationChangeableListView extends LinearLayout {
         this.onItemRemovedListener = listener;
     }
 
+    public void setOnItemNameClickedListener(OnItemNameClickedListener listener) {
+        this.onItemNameClickedListener = listener;
+    }
+
 
     public class NormalAdapter extends BaseAdapter {
         private List<Pair<Long, String>> listData;
@@ -256,9 +260,9 @@ public class LocationChangeableListView extends LinearLayout {
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
+        public void onBindViewHolder(final ViewHolder holder, int position) {
             super.onBindViewHolder(holder, position);
-            String text = mItemList.get(position).second;
+            final String text = mItemList.get(position).second;
             holder.textView.setText(text);
             if(position == 0)
                 holder.mainItem.setImageDrawable(mainItemImage);
@@ -268,6 +272,13 @@ public class LocationChangeableListView extends LinearLayout {
                 holder.selectedItem.setImageDrawable(selected);
             else
                 holder.selectedItem.setImageDrawable(notSelected);
+
+            holder.textView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemNameClickedListener.onItemNameClicked(new Pair<>(getItemId(holder.getAdapterPosition()), text));
+                }
+            });
         }
 
         @Override
@@ -329,7 +340,7 @@ public class LocationChangeableListView extends LinearLayout {
 
             @Override
             public boolean onItemLongClicked(View view) {
-                Toast.makeText(view.getContext(), "Item long clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(view.getContext(), "Item long clicked", Toast.LENGTH_SHORT).show();
                 return true;
             }
         }
@@ -342,6 +353,10 @@ public class LocationChangeableListView extends LinearLayout {
 
     public interface OnItemRemovedListener {
         void onItemRemoved(Pair<Long, String> removeItemList);
+    }
+
+    public interface OnItemNameClickedListener {
+        void onItemNameClicked(Pair<Long, String> item);
     }
 }
 

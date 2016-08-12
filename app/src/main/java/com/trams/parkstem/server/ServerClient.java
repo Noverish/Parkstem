@@ -1106,6 +1106,26 @@ public class ServerClient  {
         }
     } //확인완료
 
+    public void changeCardName(long idx, String newName) throws ServerErrorException {
+        Log.e(TAG,"changeCardName : " + idx + ", " + newName);
+
+        JSONObject result;
+
+        final String Recent_URL = "http://app.parkstem.com/api/card_nickname.php";
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("uniqueID",uniqueID);
+        hashMap.put("idx",idx + "");
+        hashMap.put("card_name",newName);
+
+        try {
+            ConnectThread thread = new ConnectThread(Recent_URL, hashMap);
+            result = thread.getResult();
+        } catch (ServerErrorException ex) {
+            ex.printStackTrace();
+            throw ex;
+        }
+    }
+
     //티켓 관련 함수
     private TicketLists listOfAllTickets(Calendar now) throws ServerErrorException {
         Log.e(TAG,"listOfAllTickets : " + uniqueID);

@@ -29,9 +29,12 @@
     <TextView
         android:id="@+id/list_item_text"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="13dp"
+        android:paddingRight="13dp"
         android:text="12가2345"
         android:textSize="27sp"
+        android:gravity="center"
         android:layout_centerInParent="true"/>
 
     <ImageView
