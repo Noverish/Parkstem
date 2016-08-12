@@ -27,14 +27,10 @@ public class LoginActivity extends AppCompatActivity implements OnLoginSuccessLi
     private KakaoLoginClient kakaoLoginClient;
     private LoginDatabase loginDatabase;
 
-    private String gcmDeviceToken = "login_activity_token_error";
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        gcmDeviceToken = getIntent().getStringExtra("token");
 
         loginDatabase = LoginDatabase.getInstance(this);
 
@@ -76,7 +72,6 @@ public class LoginActivity extends AppCompatActivity implements OnLoginSuccessLi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, LoginWithEmailActivity.class);
-                intent.putExtra("token",gcmDeviceToken);
                 startActivity(intent);
             }
         });
@@ -104,9 +99,9 @@ public class LoginActivity extends AppCompatActivity implements OnLoginSuccessLi
     @Override
     public void onLoginSuccess(String gubun, String name, String email, String mobile, String nickName, String kakaoID, String facebookID, String naverID, String parkstemID, String parkstemPW) {
         try {
-            ServerClient.getInstance().login(gubun, email, "", gcmDeviceToken);
+            ServerClient.getInstance().login(gubun, email, "", LoginDatabase.getInstance(this).getToken());
 
-            loginDatabase.setData(gubun, email, "", gcmDeviceToken);
+            loginDatabase.setData(gubun, email, "");
 
             if (ServerClient.getInstance().memberInfo().certification) {
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);

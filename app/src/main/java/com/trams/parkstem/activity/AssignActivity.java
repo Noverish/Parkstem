@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
+import com.trams.parkstem.login.LoginDatabase;
 import com.trams.parkstem.login.OnLoginSuccessListener;
 import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.server.ServerClient;
@@ -126,10 +127,10 @@ public class AssignActivity extends BaseBackSearchActivity {
             } else if(password.matches(".*[ㄱ-ㅎ가-힣].*")) {
                 Toast.makeText(this, "비밀번호는 영어 대소문자 및 특수문자의 조합이어야 합니다.", Toast.LENGTH_SHORT).show();
             } else {
-                ServerClient.getInstance().register(name, email, phone, "", email, password, getIntent().getStringExtra("token"));
+                ServerClient.getInstance().register(name, email, phone, "", email, password, LoginDatabase.getInstance(this).getToken());
                 Toast.makeText(this, "회원가입이 성공했습니다", Toast.LENGTH_SHORT).show();
 
-                ServerClient.getInstance().login(OnLoginSuccessListener.PARKSTEM, email, password, getIntent().getStringExtra("token"));
+                ServerClient.getInstance().login(OnLoginSuccessListener.PARKSTEM, email, password, LoginDatabase.getInstance(this).getToken());
 
                 Intent intent = new Intent(this, FirstScreenActivity.class);
                 startActivity(intent);

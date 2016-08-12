@@ -115,9 +115,9 @@ public class LoginWithEmailActivity extends BaseBackSearchActivity {
             } else if(password.matches(".*[ㄱ-ㅎ가-힣].*")) {
                 Toast.makeText(this, "비밀번호는 영어 대소문자 및 특수문자의 조합이어야 합니다.", Toast.LENGTH_SHORT).show();
             } else {
-                ServerClient.getInstance().login(OnLoginSuccessListener.PARKSTEM, email, password, getIntent().getStringExtra("token"));
+                ServerClient.getInstance().login(OnLoginSuccessListener.PARKSTEM, email, password, LoginDatabase.getInstance(this).getToken());
 
-                LoginDatabase.getInstance(this).setData(OnLoginSuccessListener.PARKSTEM, email, password, getIntent().getStringExtra("token"));
+                LoginDatabase.getInstance(this).setData(OnLoginSuccessListener.PARKSTEM, email, password);
 
                 Toast.makeText(this, "로그인에 성공했습니다.",Toast.LENGTH_SHORT).show();
 
@@ -137,7 +137,6 @@ public class LoginWithEmailActivity extends BaseBackSearchActivity {
 
     private  void onEmailRegisterClicked(){
         Intent intent = new Intent(this, AssignActivity.class);
-        intent.putExtra("token",getIntent().getStringExtra("token"));
         startActivity(intent);
         finish();
     }

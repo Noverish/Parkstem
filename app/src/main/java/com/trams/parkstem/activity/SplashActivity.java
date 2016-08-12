@@ -18,15 +18,14 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.trams.parkstem.R;
 import com.trams.parkstem.gcm.QuickstartPreferences;
 import com.trams.parkstem.gcm.RegistrationIntentService;
-import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.login.LoginDatabase;
+import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.server.ServerClient;
 
 /**
  * Created by Noverish on 2016-07-04.
  */
 public class SplashActivity extends AppCompatActivity{
-    private String gcmDeviceToken = "splash_activity_token_error";
     private boolean backgroundProcessDone = false;
     private boolean sleepDone = false;
     private boolean goToLoginActivity = true;
@@ -55,8 +54,7 @@ public class SplashActivity extends AppCompatActivity{
 
         if (goToLoginActivity) {
             Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-            intent.putExtra("token",gcmDeviceToken);
-            SplashActivity.this.startActivity(intent);
+            startActivity(intent);
             finish();
         } else {
             Intent intent = new Intent(this, HomeActivity.class);
@@ -107,7 +105,7 @@ public class SplashActivity extends AppCompatActivity{
                     // 액션이 COMPLETE일 경우
                     String token = intent.getStringExtra("token");
                     Log.e("GCM","COMPLETE - " + token);
-                    gcmDeviceToken = token;
+                    LoginDatabase.getInstance(SplashActivity.this).setToken(token);
 
                     if(isNetworkAvailable()) {
                         autoLoginThread = new AutoLoginThread();
@@ -179,7 +177,7 @@ public class SplashActivity extends AppCompatActivity{
             LoginDatabase loginDatabase = LoginDatabase.getInstance(SplashActivity.this);
             if(!loginDatabase.isDatabaseClear()) {
                 try {
-                    ServerClient.getInstance().login(loginDatabase.getGubun(), loginDatabase.getId(), loginDatabase.getPw(), gcmDeviceToken);
+                    ServerClient.getInstance().login(loginDatabase.getGubun(), loginDatabase.getId(), loginDatabase.getPw(), LoginDatabase.getInstance(SplashActivity.this).getToken());
 
                     goToLoginActivity = false;
                 } catch (ServerClient.ServerErrorException ex) {
