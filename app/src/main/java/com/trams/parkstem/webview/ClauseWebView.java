@@ -2,9 +2,12 @@ package com.trams.parkstem.webview;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.trams.parkstem.R;
 import com.trams.parkstem.server.ServerClient;
 
 /**
@@ -18,8 +21,15 @@ public class ClauseWebView extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        WebView webview = new WebView(this);
-        setContentView(webview);
+        setContentView(R.layout.webview);
+        WebView webview = (WebView) findViewById(R.id.webview);
+        Button backButton = (Button) findViewById(R.id.werbview_back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ClauseWebView.this.finish();
+            }
+        });
 
         int clauseNumber = getIntent().getIntExtra(CLAUSE_EXTRA, 0);
 

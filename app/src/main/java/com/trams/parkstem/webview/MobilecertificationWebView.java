@@ -2,8 +2,10 @@ package com.trams.parkstem.webview;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.trams.parkstem.R;
@@ -31,7 +33,10 @@ public class MobilecertificationWebView extends BaseBackSearchActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.webview);
         setBackEnable(true);
+
         webview = (WebView) findViewById(R.id.webview);
+        Button backButton = (Button) findViewById(R.id.werbview_back_button);
+        backButton.setVisibility(View.GONE);
 
         webview.getSettings().setJavaScriptEnabled(true);
         webview.setWebViewClient(new WebViewClient() {
