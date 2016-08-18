@@ -94,14 +94,18 @@ public class TicketPurchaseListActivity extends BaseBackSearchActivity {
         showSearchResult("");
     }
 
-    private void showSearchResult(String str) {
+    private void showSearchResult(String result) {
         LinearLayout content = (LinearLayout) findViewById(R.id.activity_ticket_purchase_list_layout);
         HandlerHelper.removeAllViewsHandler(handler, content);
 
-        for(TicketView listView : ticketMobileListViews) {
-            if(listView.getTicketName().contains(str)) {
-                HandlerHelper.addViewHandler(handler, content, listView);
-            }
+        for(TicketView ticketView : ticketMobileListViews) {
+            if (ticketView.getTicketName().contains(result) ||
+                    ticketView.getNewParkAddress().contains(result) ||
+                    ticketView.getOldParkAddress().contains(result) ||
+                    ticketView.getShortParkAddress().contains(result) ||
+                    ticketView.getParkName().contains(result))
+                HandlerHelper.addViewHandler(handler, content, ticketView);
+
         }
     }
 

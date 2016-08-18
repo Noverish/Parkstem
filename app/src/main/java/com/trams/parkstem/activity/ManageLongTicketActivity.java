@@ -96,8 +96,12 @@ public class ManageLongTicketActivity extends BaseBackSearchActivity {
         LinearLayout content = (LinearLayout) findViewById(R.id.activity_manage_long_ticket_layout);
         HandlerHelper.removeAllViewsHandler(handler, content);
 
-        for(TicketView ticketView : ticketViews)
-            if(ticketView.getTicketName().contains(result))
+        for (TicketView ticketView : ticketViews)
+            if (ticketView.getTicketName().contains(result) ||
+                    ticketView.getNewParkAddress().contains(result) ||
+                    ticketView.getOldParkAddress().contains(result) ||
+                    ticketView.getShortParkAddress().contains(result) ||
+                    ticketView.getParkName().contains(result))
                 HandlerHelper.addViewHandler(handler, content, ticketView);
     }
 

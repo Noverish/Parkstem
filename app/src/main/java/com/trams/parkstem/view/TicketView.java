@@ -39,6 +39,7 @@ public class TicketView extends LinearLayout {
     private ServerClient.Ticket ticket;
     private ServerClient.TicketPurchase purchase;
     private TicketViewData data;
+    private String parkName = "";
 
     private RelativeLayout abovecontent;
 
@@ -125,6 +126,7 @@ public class TicketView extends LinearLayout {
 
             HttpImageThread thread = new HttpImageThread(parkInfo.local_photo1);
             parkImage.setBackground(new BitmapDrawable(getResources(), thread.getImage()));
+            parkName = parkInfo.local_name;
         } catch (ServerClient.ServerErrorException ex) {
             ex.printStackTrace();
             Toast.makeText(context, "주차장 정보를 불러오는데 실패했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
@@ -159,6 +161,7 @@ public class TicketView extends LinearLayout {
 
             HttpImageThread thread = new HttpImageThread(parkInfo.local_photo1);
             parkImage.setBackground(new BitmapDrawable(getResources(), thread.getImage()));
+            parkName = parkInfo.local_name;
         } catch (ServerClient.ServerErrorException ex) {
             ex.printStackTrace();
             Toast.makeText(context, "주차장 정보를 불러오는데 실패했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
@@ -373,6 +376,22 @@ public class TicketView extends LinearLayout {
 
     public String getTicketName() {
         return data.ticketName;
+    }
+
+    public String getNewParkAddress() {
+        return data.newAddress;
+    }
+
+    public String getOldParkAddress() {
+        return data.oldAddress;
+    }
+
+    public String getShortParkAddress() {
+        return data.shortAddress;
+    }
+
+    public String getParkName() {
+        return parkName;
     }
 
     public void setDate(Calendar calendar) {
