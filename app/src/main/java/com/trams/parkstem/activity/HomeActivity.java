@@ -14,9 +14,9 @@ import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseNavigationActivity;
-import com.trams.parkstem.view.BelowBar;
 import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.server.ServerClient;
+import com.trams.parkstem.view.BelowBar;
 import com.trams.parkstem.view.HistoryParkView;
 
 public class HomeActivity extends BaseNavigationActivity {
@@ -26,6 +26,8 @@ public class HomeActivity extends BaseNavigationActivity {
     private BelowBar belowBar;
     private boolean hipassOn;
     private Context context;
+
+    private boolean alreadyBackButtonPressed = false;
 
     private final String TAG = getClass().getSimpleName();
 
@@ -137,11 +139,10 @@ public class HomeActivity extends BaseNavigationActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        ServerClient.DashBoard dashBoard;
+        alreadyBackButtonPressed = false;
 
         try {
-            dashBoard = client.dashboard();
+            ServerClient.DashBoard dashBoard = client.dashboard();
             hipassOn = dashBoard.hipass;
         } catch (ServerClient.ServerErrorException ex) {
             Toast.makeText(this, "정보를 불러오는데 실패했습니다 - " + ex.msg, Toast.LENGTH_SHORT).show();
@@ -169,5 +170,15 @@ public class HomeActivity extends BaseNavigationActivity {
         }
 
         belowBar.refresh();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(alreadyBackButtonPressed)
+            super.onBackPressed();
+        else {
+            alreadyBackButtonPressed = true;
+            Essentials.toastMessage(new android.os.Handler(), this, getString(R.string.on_back_button_pressed_message), 14);
+        }
     }
 }

@@ -205,6 +205,19 @@ public class Essentials {
         });
     }
 
+    public static void toastMessage(android.os.Handler handler, final Context context, final String message, final int textSize) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
+                TextView v = (TextView) toast.getView().findViewById(android.R.id.message);
+                if(v != null)
+                    v.setTextSize(textSize);
+                toast.show();
+            }
+        });
+    }
+
     public static List<String> splitEqually(String text, int size) {
         // Give the list the right capacity to start with. You could use an array
         // instead if you wanted.

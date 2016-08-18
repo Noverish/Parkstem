@@ -16,6 +16,7 @@ import com.trams.parkstem.login.KakaoLoginClient;
 import com.trams.parkstem.login.NaverLoginClient;
 import com.trams.parkstem.login.OnLoginSuccessListener;
 import com.trams.parkstem.login.LoginDatabase;
+import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.server.ServerClient;
 
 /**
@@ -26,6 +27,8 @@ public class LoginActivity extends AppCompatActivity implements OnLoginSuccessLi
     private NaverLoginClient naverLoginClient;
     private KakaoLoginClient kakaoLoginClient;
     private LoginDatabase loginDatabase;
+
+    private boolean alreadyBackButtonPressed = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -132,5 +135,21 @@ public class LoginActivity extends AppCompatActivity implements OnLoginSuccessLi
             finish();
         } else
             pressNumber++;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        alreadyBackButtonPressed = false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(alreadyBackButtonPressed)
+            super.onBackPressed();
+        else {
+            alreadyBackButtonPressed = true;
+            Essentials.toastMessage(new android.os.Handler(), this, getString(R.string.on_back_button_pressed_message), 14);
+        }
     }
 }
