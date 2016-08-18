@@ -198,6 +198,11 @@ public class LocationChangeableListView extends LinearLayout {
 
             if (convertView == null) {
                 convertView = inflater.inflate(R.layout.location_changeable_list_item_normal, parent, false);
+                if(position == 0)
+                    convertView.setBackground(ContextCompat.getDrawable(context, R.drawable.img_listbox));
+                else
+                    convertView.setBackground(ContextCompat.getDrawable(context, R.drawable.img_listbox_no_upper_bound));
+
                 mViewHolder = new MyViewHolder(convertView);
                 convertView.setTag(mViewHolder);
             } else {
