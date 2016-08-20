@@ -32,7 +32,8 @@
         <activity android:name=".activity.HomeActivity" />
         <activity
             android:name=".activity.LoginActivity"
-            android:theme="@style/SplashAppTheme" />
+            android:theme="@style/SplashAppTheme"
+            android:launchMode="standard" />
         <activity android:name=".activity.LoginWithEmailActivity" />
         <activity android:name=".activity.AssignActivity" />
         <activity android:name=".activity.InputCarActivity" />
