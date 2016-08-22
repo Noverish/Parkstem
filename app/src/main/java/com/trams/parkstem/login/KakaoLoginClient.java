@@ -56,7 +56,7 @@ public class KakaoLoginClient {
         UserManagement.requestLogout(new LogoutResponseCallback() {
             @Override
             public void onCompleteLogout() {
-                Log.e("logout","logout");
+                Log.d("logout","logout");
             }
         });
     }

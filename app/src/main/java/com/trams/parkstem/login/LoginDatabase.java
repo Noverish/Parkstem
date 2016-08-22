@@ -121,6 +121,6 @@ public class LoginDatabase {
 
         saveToInternalStorage(database);
 
-        Log.e("database","database cleared");
+        Log.d("database","database cleared");
     }
 }

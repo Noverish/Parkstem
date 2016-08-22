@@ -18,6 +18,7 @@ import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
@@ -26,6 +27,8 @@ import java.util.Arrays;
  * Created by Noverish on 2016-07-20.
  */
 public class FacebookLoginClient  {
+    public static FacebookLoginClient nowInstance;
+
     private Activity activity;
 
     private OnLoginSuccessListener listener;
@@ -40,22 +43,11 @@ public class FacebookLoginClient  {
         public void onSuccess(LoginResult loginResult) {
             accessToken = loginResult.getAccessToken();
             Profile profile = Profile.getCurrentProfile();
-//            Toast.makeText(activity, loginResult.getAccessToken().getUserId(), Toast.LENGTH_LONG).show();
-            // Toast.makeText(getActivity().getApplicationContext(), loginResult.getAccessToken().getToken(), Toast.LENGTH_LONG).show();
 
-
-            if(profile == null) {
-                profileTracker = new ProfileTracker() {
-                    @Override
-                    protected void onCurrentProfileChanged(Profile profile, Profile profile2) {
-                        // profile2 is the new profile
-                        Log.e("facebook - profile", profile2.getFirstName());
-                        profileTracker.stopTracking();
-                    }
-                };
-                // no need to call startTracking() on mProfileTracker
-                // because it is called by its constructor, internally.
-                profileTracker.startTracking();
+            if (profile == null) {
+                Log.e("ERROR", "profile is null");
+            } else {
+                Log.d("FacebookProfile", "id : " + profile.getId() + ", name : " + profile.getName());
             }
 
             GraphRequest request = GraphRequest.newMeRequest(
@@ -63,23 +55,25 @@ public class FacebookLoginClient  {
                     new GraphRequest.GraphJSONObjectCallback() {
                         @Override
                         public void onCompleted(JSONObject object, GraphResponse response) {
-                            Log.e("GraphRequest", response.toString());
-                            Log.e("GraphRequest", object.toString());
-
-                            // Application code
+                            if (listener == null) {
+                                Log.e("ERROR","OnLoginSuccessListener is null");
+                            } else if(response == null) {
+                                Log.e("ERROR","Facebook Graph Response is null");
+                            } else {
+                                try {
+                                    listener.onLoginSuccess(OnLoginSuccessListener.FACEBOOK, response.getJSONObject().getString("email"));
+                                } catch (JSONException json) {
+                                    json.printStackTrace();
+                                    Log.e("ERROR","Facebook Graph Response has no email");
+                                    Log.e("ERROR",response.toString() + "");
+                                }
+                            }
                         }
                     });
             Bundle parameters = new Bundle();
             parameters.putString("fields", "id,name,email");
             request.setParameters(parameters);
             request.executeAsync();
-
-            if (profile != null) {
-                Log.e("FacebookLoginSuccess", "Id : " + profile.getId() + ", name : " + profile.getName() + ", email : " + parameters.getString("email"));
-            }
-
-            if (listener != null)
-                listener.onLoginSuccess(OnLoginSuccessListener.FACEBOOK, parameters.getString("email"));
         }
 
         @Override
@@ -93,15 +87,7 @@ public class FacebookLoginClient  {
         }
     };
 
-    private static FacebookLoginClient instance;
-    public static FacebookLoginClient getInstance(Activity activity) {
-        if(instance == null)
-            instance = new FacebookLoginClient(activity);
-
-        return instance;
-    }
-
-    private FacebookLoginClient(Activity activity) {
+    public FacebookLoginClient(Activity activity) {
         this.activity = activity;
 
         callbackManager = CallbackManager.Factory.create();
@@ -109,11 +95,13 @@ public class FacebookLoginClient  {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
 // App code
-                Log.e("eNuri", "Current Token : " + currentAccessToken);
+//                Log.e("eNuri", "Current Token : " + currentAccessToken);
             }
         };
 
         accessTokenTracker.startTracking();
+
+        nowInstance = this;
     }
 
     public void login() {

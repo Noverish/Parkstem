@@ -91,7 +91,7 @@ public class ServerClient  {
 
             List<String> logs = Essentials.splitEqually(jsonStr, 1000);
             for(String str : logs) {
-                Log.e("jsonStr",str);
+                Log.d("jsonStr",str);
             }
 
             return new JSONObject(jsonStr);
@@ -131,7 +131,6 @@ public class ServerClient  {
         try {
             msg = result.getString("msg");
             res = result.getInt("res");
-            Log.e("login res",res + "");
 
             if(res != 0){
                 Log.d("ServerClient",msg);
@@ -1835,7 +1834,7 @@ public class ServerClient  {
                 }
                 reader.close();
 
-                Log.e("jsonStr",jsonStr);
+                Log.d("jsonStr",jsonStr);
 
                 Pattern pattern = Pattern.compile("[{].*[}]");
                 Matcher matcher = pattern.matcher(jsonStr);

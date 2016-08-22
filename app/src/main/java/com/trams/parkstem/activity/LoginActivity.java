@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity implements OnLoginSuccessLi
         naverLoginClient = NaverLoginClient.getInstance(this);
         naverLoginClient.setOnLoginSuccessListener(this);
 
-        facebookLoginClient = FacebookLoginClient.getInstance(this);
+        facebookLoginClient = new FacebookLoginClient(this);
         facebookLoginClient.setOnLoginSuccessListener(this);
 
         kakaoLoginClient = KakaoLoginClient.getInstance(this);

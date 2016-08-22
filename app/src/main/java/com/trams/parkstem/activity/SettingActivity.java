@@ -100,11 +100,10 @@ public class SettingActivity extends BaseBackSearchActivity {
     }
 
     private void logout() {
-        FacebookLoginClient facebookLoginClient = FacebookLoginClient.getInstance(this);
         NaverLoginClient naverLoginClient = NaverLoginClient.getInstance(this);
         KakaoLoginClient kakaoLoginClient = KakaoLoginClient.getInstance(this);
 
-        facebookLoginClient.logout();
+        FacebookLoginClient.nowInstance.logout();
         naverLoginClient.logout(this);
         kakaoLoginClient.logout();
 

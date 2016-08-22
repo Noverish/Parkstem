@@ -94,11 +94,11 @@ public class FirstScreenActivity extends BaseBackSearchActivity {
             ex.printStackTrace();
         }
     }
-    public void toCarRegister(){
+    public void toCarRegister() {
         Intent intent = new Intent(this, InputCarActivity.class);
         startActivity(intent);
     }
-    public void toCardRegister(){
+    public void toCardRegister() {
         Intent intent = new Intent(this, InputCardActivity.class);
         startActivity(intent);
     }
