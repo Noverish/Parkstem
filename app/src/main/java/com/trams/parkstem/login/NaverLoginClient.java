@@ -30,6 +30,8 @@ public class NaverLoginClient {
     private static final String OAUTH_CLIENT_NAME = "파크스템";
     private String accessToken;
 
+    private final String TAG = getClass().getSimpleName();
+
     private static NaverLoginClient instance;
     public static NaverLoginClient getInstance(Activity activity) {
         if(instance == null)
@@ -59,13 +61,7 @@ public class NaverLoginClient {
                     Log.e("NaverLoginSuccess",userProfile.toString());
 
                     if(listener != null) {
-                        listener.onLoginSuccess(
-                                OnLoginSuccessListener.NAVER,
-                                userProfile.name,
-                                userProfile.email,
-                                "",
-                                userProfile.nickName,
-                                "", "", userProfile.email, "", "");
+                        listener.onLoginSuccess(OnLoginSuccessListener.NAVER, userProfile.email);
                     }
                 } else {
                     String errorCode = mOAuthLoginModule.getLastErrorCode(NaverLoginClient.this.activity).getCode();

@@ -13,12 +13,12 @@ import android.widget.Toast;
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.base_activity.BaseNavigationActivity;
-import com.trams.parkstem.webview.ClauseWebView;
 import com.trams.parkstem.login.FacebookLoginClient;
 import com.trams.parkstem.login.KakaoLoginClient;
-import com.trams.parkstem.login.NaverLoginClient;
 import com.trams.parkstem.login.LoginDatabase;
+import com.trams.parkstem.login.NaverLoginClient;
 import com.trams.parkstem.server.ServerClient;
+import com.trams.parkstem.webview.ClauseWebView;
 
 /**
  * Created by Noverish on 2016-07-13.

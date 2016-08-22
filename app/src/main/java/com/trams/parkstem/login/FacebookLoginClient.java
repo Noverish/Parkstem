@@ -13,6 +13,7 @@ import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginBehavior;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
@@ -33,12 +34,29 @@ public class FacebookLoginClient  {
     private AccessTokenTracker accessTokenTracker = null;
     private AccessToken accessToken;
     private FacebookCallback<LoginResult> callback = new FacebookCallback<LoginResult>() {
+        private ProfileTracker profileTracker;
+
         @Override
         public void onSuccess(LoginResult loginResult) {
             accessToken = loginResult.getAccessToken();
             Profile profile = Profile.getCurrentProfile();
 //            Toast.makeText(activity, loginResult.getAccessToken().getUserId(), Toast.LENGTH_LONG).show();
             // Toast.makeText(getActivity().getApplicationContext(), loginResult.getAccessToken().getToken(), Toast.LENGTH_LONG).show();
+
+
+            if(profile == null) {
+                profileTracker = new ProfileTracker() {
+                    @Override
+                    protected void onCurrentProfileChanged(Profile profile, Profile profile2) {
+                        // profile2 is the new profile
+                        Log.e("facebook - profile", profile2.getFirstName());
+                        profileTracker.stopTracking();
+                    }
+                };
+                // no need to call startTracking() on mProfileTracker
+                // because it is called by its constructor, internally.
+                profileTracker.startTracking();
+            }
 
             GraphRequest request = GraphRequest.newMeRequest(
                     loginResult.getAccessToken(),
@@ -56,16 +74,12 @@ public class FacebookLoginClient  {
             request.setParameters(parameters);
             request.executeAsync();
 
-            Log.e("FacebookLoginSuccess","Id : " + profile.getId() + ", name : " + profile.getName() + ", email : " + parameters.getString("email"));
+            if (profile != null) {
+                Log.e("FacebookLoginSuccess", "Id : " + profile.getId() + ", name : " + profile.getName() + ", email : " + parameters.getString("email"));
+            }
 
-            if(listener != null)
-                listener.onLoginSuccess(
-                        OnLoginSuccessListener.FACEBOOK,
-                        profile.getName(),
-                        parameters.getString("email"),
-                        "",
-                        "",
-                        "", parameters.getString("email"), "", "", "");
+            if (listener != null)
+                listener.onLoginSuccess(OnLoginSuccessListener.FACEBOOK, parameters.getString("email"));
         }
 
         @Override

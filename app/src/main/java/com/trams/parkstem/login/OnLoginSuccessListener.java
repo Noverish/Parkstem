@@ -9,7 +9,5 @@ public interface OnLoginSuccessListener {
     String KAKAO = "kakao";
     String PARKSTEM = "parkstem";
 
-    void onLoginSuccess(
-            String gubun, String name, String email, String mobile, String nickName,
-            String kakaoID, String facebookID, String naverID, String parkstemID, String parkstemPW);
+    void onLoginSuccess(String gubun, String ID);
 }

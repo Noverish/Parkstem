@@ -13,9 +13,9 @@ import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseNavigationActivity;
 import com.trams.parkstem.login.FacebookLoginClient;
 import com.trams.parkstem.login.KakaoLoginClient;
+import com.trams.parkstem.login.LoginDatabase;
 import com.trams.parkstem.login.NaverLoginClient;
 import com.trams.parkstem.login.OnLoginSuccessListener;
-import com.trams.parkstem.login.LoginDatabase;
 import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.server.ServerClient;
 
@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity implements OnLoginSuccessLi
     }
 
     @Override
-    public void onLoginSuccess(String gubun, String name, String email, String mobile, String nickName, String kakaoID, String facebookID, String naverID, String parkstemID, String parkstemPW) {
+    public void onLoginSuccess(String gubun, String email) {
         try {
             ServerClient.getInstance().login(gubun, email, "", LoginDatabase.getInstance(this).getToken());
 

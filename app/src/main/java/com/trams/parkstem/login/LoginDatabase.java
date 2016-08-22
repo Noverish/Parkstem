@@ -44,8 +44,6 @@ public class LoginDatabase {
     public void setData(String gubun, String id, String pw) {
         Log.e("saveLoginData","gubun : " + gubun + ", ID : " + id + ", Password : " + pw);
 
-        database.clear();
-
         database.put(GUBUN_COLUMN, gubun);
         database.put(ID_COLUMN, id);
         database.put(PW_COLUMN, pw);

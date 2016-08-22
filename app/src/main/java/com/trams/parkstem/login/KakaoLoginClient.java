@@ -161,7 +161,7 @@ public class KakaoLoginClient {
                 Log.e("KakaoLoginSuccess","Id : " + userProfile.getId() + ", ServiceUserID : " + userProfile.getServiceUserId() +", nickName : " + userProfile.getNickname());
 
                 if(listener != null) {
-                    listener.onLoginSuccess(OnLoginSuccessListener.KAKAO, "", userProfile.getId() + "", "", "", "", "", "", "", "");
+                    listener.onLoginSuccess(OnLoginSuccessListener.KAKAO, userProfile.getId() + "");
                 }
             }
 
