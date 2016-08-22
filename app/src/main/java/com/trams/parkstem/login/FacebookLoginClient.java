@@ -30,6 +30,7 @@ public class FacebookLoginClient  {
     public static FacebookLoginClient nowInstance;
 
     private Activity activity;
+    private Profile profile;
 
     private OnLoginSuccessListener listener;
 
@@ -42,7 +43,7 @@ public class FacebookLoginClient  {
         @Override
         public void onSuccess(LoginResult loginResult) {
             accessToken = loginResult.getAccessToken();
-            Profile profile = Profile.getCurrentProfile();
+            profile = Profile.getCurrentProfile();
 
             if (profile == null) {
                 Log.e("ERROR", "profile is null");
@@ -66,6 +67,12 @@ public class FacebookLoginClient  {
                                     json.printStackTrace();
                                     Log.e("ERROR","Facebook Graph Response has no email");
                                     Log.e("ERROR",response.toString() + "");
+
+                                    if(profile == null) {
+                                        Log.e("ERROR","Facebook Profile is null");
+                                    } else {
+                                        listener.onLoginSuccess(OnLoginSuccessListener.FACEBOOK, profile.getId());
+                                    }
                                 }
                             }
                         }
