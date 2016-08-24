@@ -150,6 +150,7 @@ public class ServerClient  {
         try {
             ConnectThread.connect(urlStr, hashMap);
 
+            this.userPush = pushYN.equals("Y");
         } catch (ServerErrorException ex) {
             ex.printStackTrace();
             throw ex;
