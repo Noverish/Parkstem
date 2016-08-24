@@ -83,7 +83,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/activity_mypage_change_email"
+            android:id="@+id/activity_my_page_change_email"
             android:background="@drawable/box_edit"
             android:layout_marginTop="12sp"
             android:layout_width="270sp"
@@ -98,7 +98,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/activity_mypage_button"
+            android:id="@+id/activity_my_page_change_password"
             android:background="@drawable/box_edit"
             android:layout_marginTop="12sp"
             android:layout_width="270sp"
