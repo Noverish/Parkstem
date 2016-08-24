@@ -107,7 +107,7 @@ public class Essentials {
 
         TextView content = (TextView) popupView.findViewById(R.id.hipass_popup_content);
         try {
-            String str = ServerClient.getInstance().hipass("1");
+            String str = ServerClient.getInstance().hipassClause("1");
             str = str.replaceAll("</div>","");
             str = str.replaceAll("<div>","\n");
             str = str.replaceAll("<br />","");

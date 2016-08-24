@@ -15,7 +15,6 @@ import com.trams.parkstem.server.ServerClient;
 import com.trams.parkstem.view.TicketView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * Created by Noverish on 2016-07-08.
@@ -71,7 +70,7 @@ public class ManageShortTicketActivity extends BaseBackSearchActivity {
         ticketViews.clear();
 
         try {
-            ServerClient.TicketLists list = ServerClient.getInstance().listOfTicket(Calendar.getInstance());
+            ServerClient.TicketLists list = ServerClient.getInstance().listOfTicket();
 
             TextView textView = (TextView) findViewById(R.id.activity_manage_ticket_list_no_item);
             if(list.data.size() != 0)

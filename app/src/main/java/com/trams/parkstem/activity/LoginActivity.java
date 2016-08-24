@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity implements OnLoginSuccessLi
 
             loginDatabase.setData(gubun, email, "");
 
-            if (ServerClient.getInstance().memberInfo().certification) {
+            if (ServerClient.getInstance().isUserCertification()) {
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
             } else {
