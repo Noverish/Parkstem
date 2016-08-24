@@ -11,88 +11,71 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:paddingTop="27sp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_marginTop="27dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:gravity="center"
-                android:orientation="vertical"
+            <TextView
+                android:textColor="#5d5d5d"
+                android:textSize="17sp"
+                android:text="이메일 주소를 입력해 주세요"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp" />
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="39sp"
+                android:background="@drawable/box_edit">
 
-                <LinearLayout
+                <EditText
+                    android:id="@+id/activity_find_pw_email"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:gravity="left"
+                    android:hint="e-mail"
+                    android:singleLine="true"
+                    android:textSize="17sp"
+                    android:textColorHint="#bcc1c5"
+                    android:textColor="@color/BLACK"
+                    android:layout_marginLeft="31sp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
 
-                    <RelativeLayout
-                        android:layout_marginLeft="64sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+            <RelativeLayout
+                android:layout_marginTop="10sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
 
-                    <TextView
-                        android:textColor="#5d5d5d"
-                        android:textSize="17sp"
-                        android:text="이메일을 입력해 주세요"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+                <TextView
+                    android:textColor="#5d5d5d"
+                    android:textSize="11sp"
+                    android:text="가입한 이메일 주소로 임시 비밀번호 메일이 발송됩니다."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-                <RelativeLayout
-                    android:background="@drawable/box_edit"
-                    android:layout_width="270sp"
-                    android:layout_height="39sp">
-
-                    <EditText
-                        android:id="@+id/activity_find_pw_email"
-                        android:layout_centerVertical="true"
-                        android:background="@null"
-                        android:gravity="left"
-                        android:hint="e-mail"
-                        android:singleLine="true"
-                        android:textSize="17sp"
-                        android:textColorHint="#bcc1c5"
-                        android:textColor="@color/BLACK"
-                        android:layout_marginRight="31sp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+            </RelativeLayout>
 
 
-                </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/activity_find_pw_button"
+                android:background="@drawable/btn_1"
+                android:layout_marginTop="28sp"
+                android:layout_width="match_parent"
+                android:layout_height="39sp">
 
-                <RelativeLayout
-                    android:layout_marginTop="10sp"
-                    android:layout_width="270sp"
-                    android:layout_height="17sp">
-
-                    <TextView
-                        android:textColor="#5d5d5d"
-                        android:textSize="17sp"
-                        android:text="가입한 이메일 주소로 임시 비밀번호 메일이 발송됩니다."
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                </RelativeLayout>
-
-
-                <RelativeLayout
-                    android:id="@+id/activity_find_pw_button"
-                    android:background="@drawable/btn_1"
-                    android:layout_marginTop="28sp"
-                    android:layout_width="270sp"
-                    android:layout_height="39sp">
-
-                    <TextView
-                        android:layout_centerInParent="true"
-                        android:textSize="17sp"
-                        android:textColor="@color/WHITE"
-                        android:text="임시 비밀번호 전송"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </RelativeLayout>
-            </LinearLayout>
-        </RelativeLayout>
+                <TextView
+                    android:layout_centerInParent="true"
+                    android:textSize="17sp"
+                    android:textColor="@color/WHITE"
+                    android:text="임시 비밀번호 전송"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>

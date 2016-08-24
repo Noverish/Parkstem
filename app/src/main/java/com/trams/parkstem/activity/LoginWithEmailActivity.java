@@ -32,6 +32,17 @@ public class LoginWithEmailActivity extends BaseBackSearchActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_by_email);
 
+        TextView findPW = (TextView) findViewById(R.id.activity_login_by_email_find_password);
+        if(findPW != null) {
+            findPW.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(LoginWithEmailActivity.this, FindPasswordActivity.class));
+                }
+            });
+        }
+
+
         //입력 한 글자가 * 로 보임
         PasswordTransformationMethod PassWtm = new PasswordTransformationMethod();
         ((EditText) findViewById(R.id.activity_login_by_email_password)).setTransformationMethod(PassWtm);

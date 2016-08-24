@@ -182,6 +182,25 @@ public class ServerClient  {
     }
 
 
+    //비밀번호, 이메일 찾기 또는 변경
+    public void findPassword(String parkstemID) throws ServerErrorException {
+        String urlStr = "http://app.parkstem.com/api/findpw.php";
+
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("parkstemID",parkstemID);
+
+        try {
+            ConnectThread.connect(urlStr, hashMap);
+
+        } catch (ServerErrorException ex) {
+            ex.printStackTrace();
+            throw ex;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new ServerErrorException(0, "알 수 없는 오류");
+        }
+    }
+
     //회원 정보관리 함수
     public DashBoard dashboard() throws ServerErrorException{
         String urlStr = "http://app.parkstem.com/api/dashboard.php";

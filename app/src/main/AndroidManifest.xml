@@ -51,6 +51,7 @@
         <activity android:name=".webview.ClauseWebView" />
         <activity android:name=".webview.MobilecertificationWebView" />
         <activity android:name=".webview.CardRegisterWebView" />
+        <activity android:name=".activity.FindPasswordActivity" />
 
         <activity android:name=".activity.MyPageActivity" />
         <activity android:name=".activity.ChangePasswordActivity" />
