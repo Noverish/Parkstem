@@ -24,7 +24,7 @@ public class ChangePasswordActivity extends BaseBackSearchActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_pw);
-        setTitle("비밀번호 변경");
+        setToolbarTitle("비밀번호 변경");
 
         currentPW = (EditText) findViewById(R.id.activity_change_pw_current);
         newPW = (EditText) findViewById(R.id.activity_change_pw_new);

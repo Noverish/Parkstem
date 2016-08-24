@@ -33,7 +33,7 @@ public class MyPageActivity extends BaseBackSearchActivity implements View.OnTou
             changeEmail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    startActivity(new Intent(MyPageActivity.this, ChangeEmailActivity.class));
                 }
             });
         }
