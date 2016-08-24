@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:layout="http://schemas.android.com/apk/res-auto"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:paddingTop="55sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <RelativeLayout
+                    android:background="@drawable/box_edit"
+                    android:layout_width="270sp"
+                    android:layout_height="39sp">
+
+                    <EditText
+                        android:id="@+id/activity_change_email_email"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:gravity="left"
+                        android:hint="이메일 주소"
+                        android:singleLine="true"
+                        android:textSize="17sp"
+                        android:textColorHint="#bcc1c5"
+                        android:textColor="@color/BLACK"
+                        android:layout_marginRight="31sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/activity_change_email_button"
+                    android:background="@drawable/btn_1"
+                    android:layout_marginTop="49sp"
+                    android:layout_width="270sp"
+                    android:layout_height="39sp">
+
+                    <TextView
+                        android:layout_centerInParent="true"
+                        android:textSize="17sp"
+                        android:textColor="@color/WHITE"
+                        android:text="확인"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>
