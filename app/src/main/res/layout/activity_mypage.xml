@@ -1,6 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-</RelativeLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="162dp">
+
+            <RelativeLayout
+                android:layout_marginTop="34dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/img_home_person"
+                android:layout_width="111dp"
+                android:layout_height="111dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_centerVertical="true"
+                android:background="@drawable/login_naver_logo"
+                android:layout_width="14dp"
+                android:layout_height="14dp" />
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:textSize="15sp"
+                android:text="네이버 로그인 되었습니다."
+                android:layout_marginLeft="28dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/activity_mypage_name"
+            android:background="@drawable/btn_1"
+            android:layout_marginTop="12sp"
+            android:layout_width="270sp"
+            android:layout_height="39sp">
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:textSize="17sp"
+                android:textColor="@color/WHITE"
+                android:text="홍길동"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/activity_mypage_phone"
+            android:background="@drawable/btn_1"
+            android:layout_marginTop="12sp"
+            android:layout_width="270sp"
+            android:layout_height="39sp">
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:textSize="17sp"
+                android:textColor="@color/WHITE"
+                android:text="010-1234-5678"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/activity_mypage_change_email"
+            android:background="@drawable/btn_1"
+            android:layout_marginTop="12sp"
+            android:layout_width="270sp"
+            android:layout_height="39sp">
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:textSize="17sp"
+                android:textColor="@color/WHITE"
+                android:text="이메일 수정"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/activity_mypage_button"
+            android:background="@drawable/btn_1"
+            android:layout_marginTop="12sp"
+            android:layout_width="270sp"
+            android:layout_height="39sp">
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:textSize="17sp"
+                android:textColor="@color/WHITE"
+                android:text="비밀번호 변경"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</ScrollView>

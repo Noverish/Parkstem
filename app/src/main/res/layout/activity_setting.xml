@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="65dp">
         <RelativeLayout
-            android:background="@drawable/img_home_person_2"
+            android:background="@drawable/ic_info"
             android:layout_width="33dp"
             android:layout_height="33dp" />
         <TextView
@@ -78,16 +78,43 @@
         android:layout_height="0.8dp"/>
 
     <LinearLayout
-        android:id="@+id/activity_setting_logout"
+        android:id="@+id/activity_setting_mypage"
         android:paddingLeft="25dp"
         android:gravity="center_vertical"
         android:background="@drawable/btn_3"
         android:layout_width="match_parent"
         android:layout_height="65dp">
         <RelativeLayout
+            android:background="@drawable/img_home_person_2"
+            android:layout_width="33dp"
+            android:layout_height="33dp" />
+        <TextView
+
+            android:textSize="22sp"
+            android:text="마이페이지"
+            android:layout_marginLeft="26dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:background="@drawable/img_notice_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp" />
+
+    <LinearLayout
+        android:id="@+id/activity_setting_logout"
+        android:paddingLeft="25dp"
+        android:gravity="center_vertical"
+        android:background="@drawable/btn_3"
+        android:layout_width="match_parent"
+        android:layout_height="65dp">
+
+        <RelativeLayout
             android:background="@drawable/btn_logout"
             android:layout_width="33dp"
             android:layout_height="28dp" />
+
         <TextView
 
             android:textSize="22sp"
