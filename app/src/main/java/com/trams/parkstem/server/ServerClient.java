@@ -26,6 +26,7 @@ import java.util.regex.Pattern;
  * Created by monc2 on 2016-07-04.
  */
 public class ServerClient  {
+    private String memberGubun;
     private String uniqueID = "13617600";
     private String userName;
     private String userEmail;
@@ -69,6 +70,8 @@ public class ServerClient  {
             userMobile = result.getString("mobile");
             userPush = result.getString("pushYN").equals("Y");
             userCertification = result.getString("certification").equals("Y");
+
+            this.memberGubun = memberGubun;
         } catch (ServerErrorException ex) {
             ex.printStackTrace();
             throw ex;
@@ -845,6 +848,10 @@ public class ServerClient  {
 
     public void setUniqueID(String uniqueID) {
         this.uniqueID = uniqueID;
+    }
+
+    public String getMemberGubun() {
+        return memberGubun;
     }
 
     public String getUniqueID() {
