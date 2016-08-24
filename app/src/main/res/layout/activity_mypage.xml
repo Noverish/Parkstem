@@ -47,7 +47,7 @@
 
         <RelativeLayout
             android:id="@+id/activity_mypage_name"
-            android:background="@drawable/btn_1"
+            android:background="@drawable/box_edit"
             android:layout_marginTop="12sp"
             android:layout_width="270sp"
             android:layout_height="39sp">
@@ -56,14 +56,13 @@
                 android:id="@+id/activity_my_page_name"
                 android:layout_centerInParent="true"
                 android:textSize="17sp"
-                android:text="홍길동"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/activity_mypage_phone"
-            android:background="@drawable/btn_1"
+            android:background="@drawable/box_edit"
             android:layout_marginTop="12sp"
             android:layout_width="270sp"
             android:layout_height="39sp">
@@ -72,14 +71,13 @@
                 android:id="@+id/activity_my_page_phone"
                 android:layout_centerInParent="true"
                 android:textSize="17sp"
-                android:text="010-1234-5678"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/activity_mypage_change_email"
-            android:background="@drawable/btn_1"
+            android:background="@drawable/box_edit"
             android:layout_marginTop="12sp"
             android:layout_width="270sp"
             android:layout_height="39sp">
@@ -94,7 +92,7 @@
 
         <RelativeLayout
             android:id="@+id/activity_mypage_button"
-            android:background="@drawable/btn_1"
+            android:background="@drawable/box_edit"
             android:layout_marginTop="12sp"
             android:layout_width="270sp"
             android:layout_height="39sp">
