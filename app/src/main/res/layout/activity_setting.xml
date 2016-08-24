@@ -60,7 +60,6 @@
         android:layout_width="match_parent"
         android:layout_height="65dp">
         <RelativeLayout
-            android:background="@drawable/ic_info"
             android:layout_width="33dp"
             android:layout_height="33dp" />
         <TextView
