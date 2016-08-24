@@ -38,6 +38,7 @@ public class ServerClient  {
     private String userName;
     private String userEmail;
     private String userMobile;
+    private String userGubun;
     private boolean userCertification;
     private boolean userPush;
 
@@ -1473,6 +1474,10 @@ public class ServerClient  {
 
     public String getUserName() {
         return userName;
+    }
+
+    public String getMembergubun() {
+        return userGubun;
     }
 
     public String getUserEmail() {

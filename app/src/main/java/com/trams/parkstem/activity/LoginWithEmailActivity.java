@@ -38,6 +38,7 @@ public class LoginWithEmailActivity extends BaseBackSearchActivity {
 
         RelativeLayout LoginButton = (RelativeLayout) findViewById(R.id.activity_login_by_email_login_button);
         TextView EmailRegister = (TextView) findViewById(R.id.activity_login_by_email_register);
+        TextView FindPw = (TextView) findViewById(R.id.activity_login_by_email_find_pw);
         LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,6 +50,13 @@ public class LoginWithEmailActivity extends BaseBackSearchActivity {
             @Override
             public void onClick(View v) {
                 onEmailRegisterClicked();
+            }
+        });
+
+        FindPw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onPwFindClicked();
             }
         });
 
@@ -137,6 +145,12 @@ public class LoginWithEmailActivity extends BaseBackSearchActivity {
 
     private  void onEmailRegisterClicked(){
         Intent intent = new Intent(this, AssignActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void onPwFindClicked() {
+        Intent intent = new Intent(this, FindPwActivity.class);
         startActivity(intent);
         finish();
     }

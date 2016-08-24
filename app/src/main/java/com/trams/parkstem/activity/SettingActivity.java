@@ -59,6 +59,15 @@ public class SettingActivity extends BaseBackSearchActivity {
             }
         });
 
+        LinearLayout mypageButton = (LinearLayout) findViewById(R.id.activity_setting_mypage);
+        mypageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingActivity.this, Mypage.class);
+                startActivity(intent);
+            }
+        });
+
         LinearLayout logoutButton = (LinearLayout) findViewById(R.id.activity_setting_logout);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
