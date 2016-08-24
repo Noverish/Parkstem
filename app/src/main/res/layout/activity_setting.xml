@@ -26,7 +26,8 @@
         <RelativeLayout
             android:paddingLeft="25dp"
             android:layout_width="match_parent"
-            android:layout_height="65dp">
+            android:layout_height="65dp"
+            android:background="@drawable/activity_setting_button_onclick">
             <RelativeLayout
                 android:layout_centerVertical="true"
                 android:background="@drawable/img_clock"
@@ -61,7 +62,9 @@
             android:paddingLeft="25dp"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
-            android:layout_height="65dp">
+            android:layout_height="65dp"
+            android:background="@drawable/activity_setting_button_onclick">
+
             <RelativeLayout
                 android:background="@drawable/ic_info"
                 android:layout_width="33dp"
@@ -85,7 +88,9 @@
             android:paddingLeft="25dp"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
-            android:layout_height="65dp">
+            android:layout_height="65dp"
+            android:background="@drawable/activity_setting_button_onclick">
+
             <RelativeLayout
                 android:background="@drawable/img_home_person_2"
                 android:layout_width="33dp"
@@ -109,7 +114,9 @@
             android:paddingLeft="25dp"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
-            android:layout_height="65dp">
+            android:layout_height="65dp"
+            android:background="@drawable/activity_setting_button_onclick">
+
             <RelativeLayout
                 android:background="@drawable/btn_logout"
                 android:layout_width="33dp"
@@ -133,9 +140,10 @@
             android:paddingLeft="25dp"
             android:gravity="center_vertical"
             android:layout_width="match_parent"
-            android:layout_height="65dp">
-            <TextView
+            android:layout_height="65dp"
+            android:background="@drawable/activity_setting_button_onclick">
 
+            <TextView
                 android:textSize="22sp"
                 android:text="계정 탈퇴"
                 android:layout_marginLeft="59dp"
