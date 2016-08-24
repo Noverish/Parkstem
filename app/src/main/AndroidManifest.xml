@@ -53,6 +53,7 @@
         <activity android:name=".webview.CardRegisterWebView" />
 
         <activity android:name=".activity.MyPageActivity" />
+        <activity android:name=".activity.ChangePasswordActivity" />
 
         <!-- 네이버 아이디로 로그인에서 사용하는 액티비티를 등록 -->
         <activity android:name="com.nhn.android.naverlogin.ui.OAuthLoginActivity"

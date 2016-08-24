@@ -1,6 +1,7 @@
 package com.trams.parkstem.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -43,7 +44,7 @@ public class MyPageActivity extends BaseBackSearchActivity implements View.OnTou
             changePassword.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    startActivity(new Intent(MyPageActivity.this, ChangePasswordActivity.class));
                 }
             });
         }
