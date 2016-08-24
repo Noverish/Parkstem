@@ -3,125 +3,150 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="186dp">
-        
+        android:layout_height="match_parent">
         <RelativeLayout
-            android:layout_centerInParent="true"
-            android:background="@drawable/btn_setup_page"
-            android:layout_width="106dp"
-            android:layout_height="84dp" />
-    </RelativeLayout>
+            android:layout_width="match_parent"
+            android:layout_height="186dp">
 
-    <RelativeLayout
-        android:paddingLeft="25dp"
-        android:background="@drawable/btn_3"
-        android:layout_width="match_parent"
-        android:layout_height="65dp">
-        <RelativeLayout
-            android:layout_centerVertical="true"
-            android:background="@drawable/img_clock"
-            android:layout_width="33dp"
-            android:layout_height="31dp" />
-        <TextView
-            android:layout_centerVertical="true"
-            android:textSize="22sp"
-            android:text="푸쉬 알림"
-            android:layout_marginLeft="59dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <RelativeLayout
-            android:id="@+id/activity_setting_push_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="46dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true">
-            <include layout="@layout/push_button_on" />
+            <RelativeLayout
+                android:layout_centerInParent="true"
+                android:background="@drawable/btn_setup_page"
+                android:layout_width="106dp"
+                android:layout_height="84dp" />
         </RelativeLayout>
-    </RelativeLayout>
 
-    <RelativeLayout
-        android:background="@drawable/img_notice_bar"
-        android:layout_width="match_parent"
-        android:layout_height="0.8dp"/>
-
-    <LinearLayout
-        android:id="@+id/activity_setting_clause"
-        android:paddingLeft="25dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/btn_3"
-        android:layout_width="match_parent"
-        android:layout_height="65dp">
         <RelativeLayout
-            android:background="@drawable/img_home_person_2"
-            android:layout_width="33dp"
-            android:layout_height="33dp" />
-        <TextView
+            android:background="@drawable/img_notice_bar"
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"/>
 
-            android:textSize="22sp"
-            android:text="서비스 정책 및 약관"
-            android:layout_marginLeft="26dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:background="@drawable/img_notice_bar"
-        android:layout_width="match_parent"
-        android:layout_height="0.8dp"/>
-
-    <LinearLayout
-        android:id="@+id/activity_setting_logout"
-        android:paddingLeft="25dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/btn_3"
-        android:layout_width="match_parent"
-        android:layout_height="65dp">
         <RelativeLayout
-            android:background="@drawable/btn_logout"
-            android:layout_width="33dp"
-            android:layout_height="28dp" />
-        <TextView
+            android:paddingLeft="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="65dp">
+            <RelativeLayout
+                android:layout_centerVertical="true"
+                android:background="@drawable/img_clock"
+                android:layout_width="33dp"
+                android:layout_height="31dp" />
+            <TextView
+                android:layout_centerVertical="true"
+                android:textSize="22sp"
+                android:text="푸쉬 알림"
+                android:layout_marginLeft="59dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-            android:textSize="22sp"
-            android:text="로그아웃"
-            android:layout_marginLeft="26dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <RelativeLayout
+                android:id="@+id/activity_setting_push_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="46dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true">
+                <include layout="@layout/push_button_on" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:background="@drawable/img_notice_bar"
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"/>
+
+        <LinearLayout
+            android:id="@+id/activity_setting_clause"
+            android:paddingLeft="25dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="65dp">
+            <RelativeLayout
+                android:background="@drawable/ic_info"
+                android:layout_width="33dp"
+                android:layout_height="33dp" />
+            <TextView
+
+                android:textSize="22sp"
+                android:text="서비스 정책 및 약관"
+                android:layout_marginLeft="26dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:background="@drawable/img_notice_bar"
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"/>
+
+        <LinearLayout
+            android:id="@+id/activity_setting_my_page"
+            android:paddingLeft="25dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="65dp">
+            <RelativeLayout
+                android:background="@drawable/img_home_person_2"
+                android:layout_width="33dp"
+                android:layout_height="33dp" />
+            <TextView
+
+                android:textSize="22sp"
+                android:text="마이페이지"
+                android:layout_marginLeft="26dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:background="@drawable/img_notice_bar"
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"/>
+
+        <LinearLayout
+            android:id="@+id/activity_setting_logout"
+            android:paddingLeft="25dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="65dp">
+            <RelativeLayout
+                android:background="@drawable/btn_logout"
+                android:layout_width="33dp"
+                android:layout_height="28dp" />
+            <TextView
+
+                android:textSize="22sp"
+                android:text="로그아웃"
+                android:layout_marginLeft="26dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:background="@drawable/img_notice_bar"
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"/>
+
+        <LinearLayout
+            android:id="@+id/activity_setting_sign_out"
+            android:paddingLeft="25dp"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="65dp">
+            <TextView
+
+                android:textSize="22sp"
+                android:text="계정 탈퇴"
+                android:layout_marginLeft="59dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:background="@drawable/img_notice_bar"
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"/>
+
     </LinearLayout>
-
-    <RelativeLayout
-        android:background="@drawable/img_notice_bar"
-        android:layout_width="match_parent"
-        android:layout_height="0.8dp"/>
-
-    <LinearLayout
-        android:id="@+id/activity_setting_sign_out"
-        android:paddingLeft="25dp"
-        android:gravity="center_vertical"
-        android:background="@drawable/btn_3"
-        android:layout_width="match_parent"
-        android:layout_height="65dp">
-        <TextView
-
-            android:textSize="22sp"
-            android:text="계정 탈퇴"
-            android:layout_marginLeft="59dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:background="@drawable/img_notice_bar"
-        android:layout_width="match_parent"
-        android:layout_height="0.8dp"/>
-
-</LinearLayout>
 </ScrollView>
