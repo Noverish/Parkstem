@@ -40,6 +40,8 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
         RelativeLayout image = (RelativeLayout) findViewById(R.id.activity_manage_purchase_image);
 
         if (ticket.gubun == 1) {
+            setToolbarTitle("주차권 구매");
+
             ((TextView) findViewById(R.id.activity_manage_purchase_duetext)).setText(ticket.term_name);
 
             ticketView = new TicketView(this, ticket, "상세정보", false, false, false);
@@ -47,6 +49,8 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
         }
 
         else if(ticket.gubun == 2){
+            setToolbarTitle("정기권 구매");
+
             ((TextView) findViewById(R.id.activity_manage_purchase_duetext)).setText("");
 
             int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 47, getResources().getDisplayMetrics());
