@@ -32,6 +32,7 @@ public class SettingActivity extends BaseBackSearchActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        setToolbarTitle("설정");
 
         pushButton = (RelativeLayout) findViewById(R.id.activity_setting_push_button);
         pushButton.setOnClickListener(new View.OnClickListener() {
