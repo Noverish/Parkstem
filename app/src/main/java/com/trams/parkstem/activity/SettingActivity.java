@@ -32,6 +32,7 @@ public class SettingActivity extends BaseBackSearchActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        setToolbarTitle("설정");
 
         pushButton = (RelativeLayout) findViewById(R.id.activity_setting_push_button);
         pushButton.setOnClickListener(new View.OnClickListener() {
@@ -40,14 +41,6 @@ public class SettingActivity extends BaseBackSearchActivity {
                 changePushStatus();
             }
         });
-
-        pushOn = ServerClient.getInstance().isUserPush();
-        pushButton.removeAllViews();
-        if(pushOn) {
-            getLayoutInflater().inflate(R.layout.push_button_on, pushButton);
-        } else {
-            getLayoutInflater().inflate(R.layout.push_button_off, pushButton);
-        }
 
         LinearLayout clauseButton = (LinearLayout) findViewById(R.id.activity_setting_clause);
         clauseButton.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +77,19 @@ public class SettingActivity extends BaseBackSearchActivity {
                 signOut();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        pushOn = ServerClient.getInstance().isUserPush();
+        pushButton.removeAllViews();
+        if(pushOn) {
+            getLayoutInflater().inflate(R.layout.push_button_on, pushButton);
+        } else {
+            getLayoutInflater().inflate(R.layout.push_button_off, pushButton);
+        }
     }
 
     private void changePushStatus() {

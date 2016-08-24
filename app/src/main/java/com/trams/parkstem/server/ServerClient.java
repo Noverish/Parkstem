@@ -153,6 +153,7 @@ public class ServerClient  {
         try {
             ConnectThread.connect(urlStr, hashMap);
 
+            this.userPush = pushYN.equals("Y");
         } catch (ServerErrorException ex) {
             ex.printStackTrace();
             throw ex;
@@ -1203,9 +1204,12 @@ public class ServerClient  {
                 }
                 reader.close();
 
-                Log.d("Response",jsonStr);
+                ArrayList<String> strs = (ArrayList<String>) Essentials.splitEqually(jsonStr, 1000);
 
-                Pattern pattern = Pattern.compile("[{].*[}]");
+                for(String str : strs)
+                    Log.d("Response",str);
+
+                Pattern pattern = Pattern.compile("[{][\\s\\S]*[}]");
                 Matcher matcher = pattern.matcher(jsonStr);
 
                 if(matcher.find())
