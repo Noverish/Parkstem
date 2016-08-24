@@ -38,7 +38,7 @@
                         android:textSize="17sp"
                         android:textColorHint="#bcc1c5"
                         android:textColor="@color/BLACK"
-                        android:layout_marginRight="31sp"
+                        android:layout_marginLeft="31sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
@@ -61,7 +61,7 @@
                         android:textSize="17sp"
                         android:textColorHint="#bcc1c5"
                         android:textColor="@color/BLACK"
-                        android:layout_marginRight="31sp"
+                        android:layout_marginLeft="31sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
@@ -84,7 +84,7 @@
                         android:textSize="17sp"
                         android:textColorHint="#bcc1c5"
                         android:textColor="@color/BLACK"
-                        android:layout_marginRight="31sp"
+                        android:layout_marginLeft="31sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
