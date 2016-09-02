@@ -11,10 +11,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.login.OnLoginSuccessListener;
+import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.server.ServerClient;
 
 /**
@@ -33,7 +35,10 @@ public class MyPageActivity extends BaseBackSearchActivity implements View.OnTou
             changeEmail.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(MyPageActivity.this, ChangeEmailActivity.class));
+                    if(ServerClient.getInstance().getMemberGubun().equals(OnLoginSuccessListener.KAKAO))
+                        startActivity(new Intent(MyPageActivity.this, ChangeEmailActivity.class));
+                    else
+                        Essentials.toastMessage(handler, MyPageActivity.this, "카카오톡으로 로그인 하신 분만 사용할 수 있습니다.");
                 }
             });
         }
@@ -44,7 +49,10 @@ public class MyPageActivity extends BaseBackSearchActivity implements View.OnTou
             changePassword.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(MyPageActivity.this, ChangePasswordActivity.class));
+                    if(ServerClient.getInstance().getMemberGubun().equals(OnLoginSuccessListener.PARKSTEM))
+                        startActivity(new Intent(MyPageActivity.this, ChangePasswordActivity.class));
+                    else
+                        Toast.makeText(MyPageActivity.this, "이메일로 로그인 하신 분만 사용할 수 있습니다.", Toast.LENGTH_SHORT).show();
                 }
             });
         }

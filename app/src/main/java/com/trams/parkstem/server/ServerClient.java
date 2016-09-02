@@ -201,6 +201,47 @@ public class ServerClient  {
         }
     }
 
+    public void changePasword(String currentPW, String newPW, String newPWCheck) throws ServerErrorException {
+        String urlStr = "http://app.parkstem.com/api/passwd_update.php";
+
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("uniqueID",uniqueID);
+        hashMap.put("current_parkstemPW",currentPW);
+        hashMap.put("parkstemPW",newPW);
+        hashMap.put("parkstemPW_check",newPWCheck);
+
+        try {
+            ConnectThread.connect(urlStr, hashMap);
+
+        } catch (ServerErrorException ex) {
+            ex.printStackTrace();
+            throw ex;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new ServerErrorException(0, "알 수 없는 오류");
+        }
+    }
+
+    public void changeEmail(String memberGubun, String email) throws ServerErrorException{
+        String urlStr = "http://app.parkstem.com/api/email_update.php";
+
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("uniqueID",uniqueID);
+        hashMap.put("memberGubun",memberGubun);
+        hashMap.put("email",email);
+
+        try {
+            ConnectThread.connect(urlStr, hashMap);
+
+        } catch (ServerErrorException ex) {
+            ex.printStackTrace();
+            throw ex;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            throw new ServerErrorException(0, "알 수 없는 오류");
+        }
+    }
+
     //회원 정보관리 함수
     public DashBoard dashboard() throws ServerErrorException{
         String urlStr = "http://app.parkstem.com/api/dashboard.php";
@@ -1244,11 +1285,31 @@ public class ServerClient  {
         private JSONObject getResult() throws ServerErrorException{
             try {
                 join();
-                if(result == null)
-                    throw new ServerErrorException(0, "JSON ERROR");
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
                 throw new ServerErrorException(0, "Thread Join ERROR");
+            }
+
+            if(result == null)
+                throw new ServerErrorException(0, "JSON ERROR");
+            else {
+                int res;
+                try {
+                    res = result.getInt("res");
+                } catch (JSONException ex) {
+                    throw new ServerErrorException(0, "JSON ERROR - no res");
+                }
+
+                String msg;
+                try {
+                    msg = result.getString("msg");
+                } catch (JSONException ex) {
+                    throw new ServerErrorException(0, "JSON ERROR - no msg");
+                }
+
+                if(res == 0) {
+                    throw new ServerErrorException(0, msg);
+                }
             }
 
             return result;

@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
+import com.trams.parkstem.server.ServerClient;
 
 /**
  * Created by Noverish on 2016-08-24.
@@ -44,5 +45,17 @@ public class ChangeEmailActivity extends BaseBackSearchActivity {
 
         if(!emailStr.matches("[A-Za-z0-9]+@[A-Za-z0-9]+[.][A-Za-z0-9]+"))
             Toast.makeText(this, "잘못된 이메일 형식입니다.", Toast.LENGTH_SHORT).show();
+        else {
+            try {
+                String memberGubun = ServerClient.getInstance().getMemberGubun();
+                ServerClient.getInstance().changeEmail(memberGubun, emailStr);
+
+                Toast.makeText(this, "이메일 변경에 성공했습니다.", Toast.LENGTH_SHORT).show();
+                finish();
+            } catch (ServerClient.ServerErrorException ex) {
+
+                Toast.makeText(this, ex.msg, Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
