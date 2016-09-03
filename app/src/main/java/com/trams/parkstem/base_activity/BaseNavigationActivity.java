@@ -9,6 +9,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -60,7 +61,12 @@ public class BaseNavigationActivity extends BaseActivity {
         toggle.syncState();
 
         TextView userNameInNav = (TextView) findViewById(R.id.parkstem_menu_bar_user_name);
-        userNameInNav.setText(ServerClient.getInstance().getUserName());
+        try {
+            userNameInNav.setText(ServerClient.getInstance().memberInfo().name);
+        } catch (ServerClient.ServerErrorException ex) {
+            Log.e("ERROR","ServerClient memberInfo occurred Error");
+            userNameInNav.setText("ERROR");
+        }
 
         TextView menuBarParkstem = (TextView) findViewById(R.id.parkstem_menu_bar_parkstem);
         menuBarParkstem.setTypeface(myTypeface);
