@@ -67,7 +67,7 @@ public class ServerClient  {
             uniqueID = result.getString("uniqueID");
             userName = result.getString("name");
             userEmail = result.getString("email");
-            userMobile = result.getString("mobile");
+            userMobile = Essentials.mobileNumberWithBar(result.getString("mobile"));
             userPush = result.getString("pushYN").equals("Y");
             userCertification = result.getString("certification").equals("Y");
 
@@ -127,7 +127,7 @@ public class ServerClient  {
             MemberInfo memberInfo = new MemberInfo();
             userName = memberInfo.name = result.getString("name");
             userEmail = memberInfo.email = result.getString("email");
-            userMobile = memberInfo.mobile = result.getString("mobile");
+            userMobile = memberInfo.mobile = Essentials.mobileNumberWithBar(result.getString("mobile"));
             userPush = memberInfo.pushYN = result.getString("pushYN").equals("Y");
             userCertification = memberInfo.certification = result.getString("certification").equals("Y");
             return memberInfo;

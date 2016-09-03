@@ -228,4 +228,15 @@ public class Essentials {
         }
         return ret;
     }
+
+    public static String mobileNumberWithBar(String mobile) {
+        mobile = mobile.replaceAll("[^\\d]","");
+
+        String num1 = mobile.substring(0, 3);
+        String num2 = mobile.substring(3, 7);
+        String num3 = mobile.substring(7, 11);
+        mobile = num1 + "-" + num2 + "-" + num3;
+
+        return mobile;
+    }
 }
