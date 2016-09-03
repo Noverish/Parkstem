@@ -90,7 +90,7 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
             ServerClient.DashBoard dashBoard = ServerClient.getInstance().dashboard();
 
             ((TextView)findViewById(R.id.activity_manage_purchase_name)).setText(ServerClient.getInstance().getUserName());
-            ((TextView)findViewById(R.id.activity_manage_purchase_email)).setText(ServerClient.getInstance().getUserName());
+            ((TextView)findViewById(R.id.activity_manage_purchase_email)).setText(ServerClient.getInstance().getUserEmail());
             ((TextView)findViewById(R.id.activity_manage_purchase_phonenumber)).setText(ServerClient.getInstance().getUserMobile());
 
             TextView carEditButton = (TextView) findViewById(R.id.activity_manage_purchase_car_edit);
