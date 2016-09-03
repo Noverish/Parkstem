@@ -369,8 +369,9 @@ public class TicketView extends LinearLayout {
 
     private void refreshDate() {
         startDate.setText(Essentials.calendarToDateWithDot(calendar));
-        Calendar oneMonthLater = calendar;
+        Calendar oneMonthLater = (Calendar) calendar.clone();
         oneMonthLater.add(Calendar.MONTH, 1);
+        oneMonthLater.add(Calendar.DAY_OF_MONTH, -1);
         endDate.setText(Essentials.calendarToDateWithDot(oneMonthLater));
     }
 
