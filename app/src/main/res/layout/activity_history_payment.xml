@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="주차내역이 없습니다."/>
+            android:text="결제내역이 없습니다."/>
 
         <LinearLayout
             android:id="@+id/activity_history_payment_content_layout"
