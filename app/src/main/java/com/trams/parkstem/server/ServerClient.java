@@ -833,7 +833,7 @@ public class ServerClient  {
         }
     }
 
-    public void ticketInfoRegister(String gubun, String idx, String user_name, String user_phone, String user_email, Calendar date) throws ServerErrorException {
+    public void ticketInfoRegister(String gubun, String idx, String user_name, String user_phone, String user_email, Calendar startDate, Calendar endDate) throws ServerErrorException {
         String urlStr = "http://app.parkstem.com/api/ticket_pay.php";
 
         HashMap<String, String> hashMap = new HashMap<>();
@@ -844,8 +844,11 @@ public class ServerClient  {
         hashMap.put("user_phone",user_phone);
         hashMap.put("user_email",user_email);
         if(Integer.parseInt(gubun) == Ticket.LONG_TICKET_GUBUN) {
-            String str = Essentials.calendarToDateWithBar(date);
-            hashMap.put("start_date", str);
+            String startDateStr = Essentials.calendarToDateWithBar(startDate);
+            hashMap.put("start_date", startDateStr);
+
+            String endDateStr = Essentials.calendarToDateWithBar(endDate);
+            hashMap.put("end_date", endDateStr);
         }
 
         try {

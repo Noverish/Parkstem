@@ -34,7 +34,8 @@ import java.util.Calendar;
  */
 public class TicketView extends LinearLayout {
     private Context context;
-    private Calendar calendar;
+    private Calendar startDateCalendar;
+    private Calendar endDateCalendar;
 
     private ServerClient.Ticket ticket;
     private ServerClient.TicketPurchase purchase;
@@ -89,7 +90,7 @@ public class TicketView extends LinearLayout {
 
     private void init(Context contextParam) {
         this.context = contextParam;
-        calendar = Calendar.getInstance();
+        startDateCalendar = Calendar.getInstance();
 
         LayoutInflater inflater = LayoutInflater.from(context);
         inflater.inflate(R.layout.ticket_item, this, true);
@@ -135,7 +136,7 @@ public class TicketView extends LinearLayout {
 
         if(ticket.gubun == ServerClient.Ticket.SHORT_TICEKT_GUBUN) {
             data = new TicketViewData(ticket.ticket_name, parkInfo.short_address, buttonName,
-                    calendar, null,
+                    startDateCalendar, null,
                     parkInfo.new_address, parkInfo.local_address,
                     ticket.available_time + "시간", ticket.original_price, ticket.price,
                     ticket.term);
@@ -265,18 +266,18 @@ public class TicketView extends LinearLayout {
                         @Override
                         public void onDateSet(DatePicker view, int year, int monthOfYear,
                                               int dayOfMonth) {
-                            calendar.set(Calendar.YEAR, year);
-                            calendar.set(Calendar.MONTH, monthOfYear);
-                            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                            startDateCalendar.set(Calendar.YEAR, year);
+                            startDateCalendar.set(Calendar.MONTH, monthOfYear);
+                            startDateCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
                             refreshDate();
                         }
                     };
 
                     new DatePickerDialog(context, dateSetListener,
-                            calendar.get(Calendar.YEAR),
-                            calendar.get(Calendar.MONTH),
-                            calendar.get(Calendar.DAY_OF_MONTH)).show();
+                            startDateCalendar.get(Calendar.YEAR),
+                            startDateCalendar.get(Calendar.MONTH),
+                            startDateCalendar.get(Calendar.DAY_OF_MONTH)).show();
                 }
             });
         } else {
@@ -368,11 +369,13 @@ public class TicketView extends LinearLayout {
     }
 
     private void refreshDate() {
-        startDate.setText(Essentials.calendarToDateWithDot(calendar));
-        Calendar oneMonthLater = (Calendar) calendar.clone();
-        oneMonthLater.add(Calendar.MONTH, 1);
-        oneMonthLater.add(Calendar.DAY_OF_MONTH, -1);
-        endDate.setText(Essentials.calendarToDateWithDot(oneMonthLater));
+        startDate.setText(Essentials.calendarToDateWithDot(startDateCalendar));
+
+        endDateCalendar = (Calendar) startDateCalendar.clone();
+        endDateCalendar.add(Calendar.MONTH, 1);
+        endDateCalendar.add(Calendar.DAY_OF_MONTH, -1);
+
+        endDate.setText(Essentials.calendarToDateWithDot(endDateCalendar));
     }
 
     public String getTicketName() {
@@ -395,13 +398,18 @@ public class TicketView extends LinearLayout {
         return parkName;
     }
 
-    public void setDate(Calendar calendar) {
-        this.calendar = calendar;
+    public void setStartDate(Calendar startDateCalendar) {
+        this.startDateCalendar = startDateCalendar;
+
         refreshDate();
     }
 
-    public Calendar getDate() {
-        return calendar;
+    public Calendar getStartDate() {
+        return startDateCalendar;
+    }
+
+    public Calendar getEndDate() {
+        return endDateCalendar;
     }
 
     public void deleteGUMEword() {
@@ -440,7 +448,7 @@ public class TicketView extends LinearLayout {
 
         Intent intent = new Intent(context, ManagePurchaseActivity.class);
         intent.putExtra("ticket",ticket);
-        intent.putExtra("calendar",calendar.getTimeInMillis());
+        intent.putExtra("calendar", startDateCalendar.getTimeInMillis());
         context.startActivity(intent);
     }
 

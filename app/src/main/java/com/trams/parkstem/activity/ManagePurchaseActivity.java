@@ -65,7 +65,7 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
 
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(getIntent().getLongExtra("calendar",0));
-            ticketView.setDate(calendar);
+            ticketView.setStartDate(calendar);
         }
         ticketView.deleteGUMEword();
 
@@ -171,7 +171,7 @@ public class ManagePurchaseActivity extends BaseBackSearchActivity {
     private void realPurchase() {
         try {
             ServerClient client = ServerClient.getInstance();
-            client.ticketInfoRegister(ticket.gubun + "", ticket.idx + "", client.getUserName(), client.getUserMobile(), client.getUserEmail(), ticketView.getDate());
+            client.ticketInfoRegister(ticket.gubun + "", ticket.idx + "", client.getUserName(), client.getUserMobile(), client.getUserEmail(), ticketView.getStartDate(), ticketView.getEndDate());
 
             String title = (ticket.gubun == 1) ? "주차권 구매" : "정기권 구매";
             String content = title + "가\n완료 되었습니다.";
