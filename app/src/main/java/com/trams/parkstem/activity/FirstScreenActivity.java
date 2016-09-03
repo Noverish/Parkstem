@@ -3,6 +3,7 @@ package com.trams.parkstem.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -66,32 +67,30 @@ public class FirstScreenActivity extends BaseBackSearchActivity {
     protected void onResume() {
         super.onResume();
 
+        try {
+            ServerClient.getInstance().memberInfo();
+        } catch (ServerClient.ServerErrorException ex) {
+            Log.e("ERROR","ServerClient memberInfo returns error!");
+        }
+
         ImageView mobileSuccessImage = (ImageView) findViewById(R.id.activity_first_mobile_success);
         if(ServerClient.getInstance().isUserCertification())
             mobileSuccessImage.setVisibility(View.VISIBLE);
         else
             mobileSuccessImage.setVisibility(View.INVISIBLE);
-        
-        try {
-            if (ServerClient.getInstance().memberInfo().certification) {
-                mobileStatus = (TextView) findViewById(R.id.activity_first_mobile_status);
-                mobileStatus.setText("휴대폰 인증 완료");
-            }
-        } catch (ServerClient.ServerErrorException ex) {
-            ex.printStackTrace();
+
+        if (ServerClient.getInstance().isUserCertification()) {
+            mobileStatus = (TextView) findViewById(R.id.activity_first_mobile_status);
+            mobileStatus.setText("휴대폰 인증 완료");
         }
     }
 
     public void toMobileCerticication(){
-        try {
-            if (ServerClient.getInstance().memberInfo().certification) {
-                Toast.makeText(this, "휴대폰 인증이 이미 완료되었습니다.", Toast.LENGTH_LONG).show();
-            } else {
-                Intent intent = new Intent(this, MobilecertificationWebView.class);
-                startActivity(intent);
-            }
-        } catch (ServerClient.ServerErrorException ex) {
-            ex.printStackTrace();
+        if (ServerClient.getInstance().isUserCertification()) {
+            Toast.makeText(this, "휴대폰 인증이 이미 완료되었습니다.", Toast.LENGTH_LONG).show();
+        } else {
+            Intent intent = new Intent(this, MobilecertificationWebView.class);
+            startActivity(intent);
         }
     }
     public void toCarRegister() {
