@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.trams.parkstem.R;
 import com.trams.parkstem.base_activity.BaseBackSearchActivity;
 import com.trams.parkstem.login.OnLoginSuccessListener;
-import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.server.ServerClient;
 
 /**
@@ -31,16 +30,15 @@ public class MyPageActivity extends BaseBackSearchActivity implements View.OnTou
 
         RelativeLayout changeEmail = (RelativeLayout) findViewById(R.id.activity_my_page_change_email);
         if(changeEmail != null) {
-            changeEmail.setOnTouchListener(this);
-            changeEmail.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(ServerClient.getInstance().getMemberGubun().equals(OnLoginSuccessListener.KAKAO))
+            if(ServerClient.getInstance().getMemberGubun().equals(OnLoginSuccessListener.KAKAO)) {
+                changeEmail.setOnTouchListener(this);
+                changeEmail.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
                         startActivity(new Intent(MyPageActivity.this, ChangeEmailActivity.class));
-                    else
-                        Essentials.toastMessage(handler, MyPageActivity.this, "카카오톡으로 로그인 하신 분만 사용할 수 있습니다.");
-                }
-            });
+                    }
+                });
+            }
         }
 
         RelativeLayout changePassword = (RelativeLayout) findViewById(R.id.activity_my_page_change_password);
@@ -102,6 +100,15 @@ public class MyPageActivity extends BaseBackSearchActivity implements View.OnTou
         TextView phone = (TextView) findViewById(R.id.activity_my_page_phone);
         if(phone != null) {
             phone.setText(ServerClient.getInstance().getUserMobile());
+        }
+
+        TextView email = (TextView) findViewById(R.id.activity_my_page_email);
+        if(email != null) {
+            if(ServerClient.getInstance().getMemberGubun().equals(OnLoginSuccessListener.KAKAO) && ServerClient.getInstance().getUserEmail().equals("")) {
+                email.setText("이메일 수정");
+            } else {
+                email.setText(ServerClient.getInstance().getUserEmail());
+            }
         }
     }
 
