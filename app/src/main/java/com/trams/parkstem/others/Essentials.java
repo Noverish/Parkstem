@@ -230,6 +230,9 @@ public class Essentials {
     }
 
     public static String mobileNumberWithBar(String mobile) {
+        if(mobile.length() < 11)
+            return mobile;
+
         mobile = mobile.replaceAll("[^\\d]","");
 
         String num1 = mobile.substring(0, 3);
