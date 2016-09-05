@@ -36,13 +36,10 @@ public class MyGcmListenerService extends GcmListenerService {
         String title = data.getString("title");
         String message = data.getString("message");
 
-        Log.e("local_id",data.getString("local_id") + "");
-        Log.e("time",data.getString("time"));
-        Log.e("car_in_out",data.getString("car_in_out"));
-
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Title: " + title);
         Log.d(TAG, "Message: " + message);
+        Log.d(TAG, "data: " + data.toString());
 
         // GCM으로 받은 메세지를 디바이스에 알려주는 sendNotification()을 호출한다.
         sendNotification(title, message);
@@ -92,14 +89,32 @@ public class MyGcmListenerService extends GcmListenerService {
                         .build();
                 manager.notify(1, noti);
             } else {
-
+                Notification noti = new NotificationCompat.Builder(getApplicationContext())
+                        .setContentTitle("ERROR")
+                        .setContentText("ERROR - 입차시간과 출차시간이 없습니다.")
+                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setTicker("파크스템")
+                        .setContentIntent(pendingIntent)
+                        .setAutoCancel(true)
+                        .setSound(defaultSoundUri)
+                        .build();
+                manager.notify(1, noti);
             }
 
         } catch (ServerClient.ServerErrorException error) {
             error.printStackTrace();
-        }
 
-        Log.e("Send","Broadcast");
+            Notification noti = new NotificationCompat.Builder(getApplicationContext())
+                    .setContentTitle("ERROR")
+                    .setContentText("ERROR - " + error.msg)
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setTicker("파크스템")
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true)
+                    .setSound(defaultSoundUri)
+                    .build();
+            manager.notify(1, noti);
+        }
 
         LocalBroadcastManager.getInstance(this)
                 .sendBroadcast(new Intent(PUSH_RECEIVE));

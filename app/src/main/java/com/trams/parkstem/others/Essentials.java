@@ -188,11 +188,22 @@ public class Essentials {
                         .setPositiveButton("확인", null)
                         .show();
             } else {
-
+                new android.support.v7.app.AlertDialog.Builder(activity)
+                        .setIcon(android.R.drawable.ic_dialog_info)
+                        .setTitle("ERROR")
+                        .setMessage("ERROR - 입차시간과 출차시간이 없습니다.")
+                        .setPositiveButton("확인", null)
+                        .show();
             }
 
         } catch (ServerClient.ServerErrorException error) {
             error.printStackTrace();
+            new android.support.v7.app.AlertDialog.Builder(activity)
+                    .setIcon(android.R.drawable.ic_dialog_info)
+                    .setTitle("ERROR")
+                    .setMessage("ERROR - " + error.msg)
+                    .setPositiveButton("확인", null)
+                    .show();
         }
     }
 

@@ -9,10 +9,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.trams.parkstem.gcm.MyGcmListenerService;
-import com.trams.parkstem.others.Essentials;
 import com.trams.parkstem.login.GlobalApplication;
+import com.trams.parkstem.others.Essentials;
 
 /**
  * Created by Noverish on 2016-07-23.
@@ -60,12 +61,9 @@ public class BaseActivity extends AppCompatActivity {
             public void onReceive(Context context, Intent intent) {
                 String action = intent.getAction();
 
+                Log.i("Broadcast","Receive");
                 if(action.equals(MyGcmListenerService.PUSH_RECEIVE)){
-                    if(activity.equals(GlobalApplication.getCurrentActivity())) {
-                        Essentials.alertParkState(BaseActivity.this);
-                    } else {
-                        shouldAlert = true;
-                    }
+                    Essentials.alertParkState(BaseActivity.this);
                 }
             }
         };
