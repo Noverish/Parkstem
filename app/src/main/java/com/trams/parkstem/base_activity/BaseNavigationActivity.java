@@ -60,16 +60,21 @@ public class BaseNavigationActivity extends BaseActivity {
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        TextView menuBarParkstem = (TextView) findViewById(R.id.parkstem_menu_bar_parkstem);
+        menuBarParkstem.setTypeface(myTypeface);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         TextView userNameInNav = (TextView) findViewById(R.id.parkstem_menu_bar_user_name);
         try {
             userNameInNav.setText(ServerClient.getInstance().memberInfo().name);
         } catch (ServerClient.ServerErrorException ex) {
             Log.e("ERROR","ServerClient memberInfo occurred Error");
-            userNameInNav.setText("ERROR");
+            userNameInNav.setText("JSON ERROR");
         }
-
-        TextView menuBarParkstem = (TextView) findViewById(R.id.parkstem_menu_bar_parkstem);
-        menuBarParkstem.setTypeface(myTypeface);
     }
 
     @Override
