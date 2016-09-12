@@ -77,6 +77,11 @@ public class MobilecertificationWebView extends BaseBackSearchActivity {
                 Toast.makeText(MobilecertificationWebView.this, "휴대폰 인증하는데 오류가 발생했습니다. - JSON ERROR", Toast.LENGTH_SHORT).show();
             } finally {
                 finish();
+                try {
+                    ServerClient.getInstance().memberInfo();
+                } catch (ServerClient.ServerErrorException ex) {
+
+                }
             }
         }
     }
