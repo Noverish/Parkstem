@@ -1,7 +1,5 @@
 package com.trams.parkstem.fcm;
 
-import android.util.Log;
-
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
@@ -10,13 +8,22 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
  */
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
+    public static OnTokenRefreshedListener onTokenRefreshedListener;
+
     @Override
     public void onTokenRefresh() {
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         sendRegistrationToServer(refreshedToken);
+
+        if(onTokenRefreshedListener != null)
+            onTokenRefreshedListener.onTokenRefreshed(refreshedToken);
     }
 
     private void sendRegistrationToServer(String refreshedToken) {
 
+    }
+
+    public interface OnTokenRefreshedListener {
+        void onTokenRefreshed(String token);
     }
 }

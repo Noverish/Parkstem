@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.trams.parkstem.fcm.MyFirebaseMessagingService;
 import com.trams.parkstem.login.GlobalApplication;
 import com.trams.parkstem.others.Essentials;
 
@@ -36,8 +38,8 @@ public class BaseActivity extends AppCompatActivity {
         super.onResume();
         GlobalApplication.setCurrentActivity(this);
 
-        /*LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
-                new IntentFilter(MyGcmListenerService.PUSH_RECEIVE));*/
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(MyFirebaseMessagingService.PUSH_RECEIVE));
 
         if(shouldAlert) {
             Essentials.alertParkState(BaseActivity.this);
@@ -60,9 +62,9 @@ public class BaseActivity extends AppCompatActivity {
                 String action = intent.getAction();
 
                 Log.i("Broadcast","Receive");
-                /*if(action.equals(MyGcmListenerService.PUSH_RECEIVE)){
+                if(action.equals(MyFirebaseMessagingService.PUSH_RECEIVE)){
                     Essentials.alertParkState(BaseActivity.this);
-                }*/
+                }
             }
         };
     }
