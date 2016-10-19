@@ -28,5 +28,7 @@ dependencies {
     compile 'com.github.woxthebox:draglistview:1.2.8'
     compile 'com.facebook.android:facebook-android-sdk:4.8.2'
     compile group: 'com.kakao.sdk', name: 'usermgmt', version: project.KAKAO_SDK_VERSION
-
+    compile 'com.google.firebase:firebase-messaging:9.6.1'
 }
+
+apply plugin: 'com.google.gms.google-services'

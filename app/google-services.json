@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "505007107622",
+    "firebase_url": "https://parkstem-4b93d.firebaseio.com",
+    "project_id": "parkstem-4b93d",
+    "storage_bucket": "parkstem-4b93d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505007107622:android:1829e3c453a098c4",
+        "android_client_info": {
+          "package_name": "com.trams.parkstem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "505007107622-mvupmp8bj4d9kgn2uh0i7k7hdvgls8v5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDp9Yj86RDWuboiWR5IJ3ND8MStmkSI9VI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
