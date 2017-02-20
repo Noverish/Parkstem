@@ -22,12 +22,13 @@
             android:background="@null"
             android:textSize="17sp"
             android:layout_marginRight="31dp"
+            android:layout_marginLeft="31dp"
             android:textColor="@color/gray_for_text"
             android:hint="이메일 주소"
             android:textColorHint="@color/gray"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </RelativeLayout>
 
@@ -43,12 +44,13 @@
             android:background="@null"
             android:textSize="17sp"
             android:layout_marginRight="31dp"
+            android:layout_marginLeft="31dp"
             android:textColor="@color/gray_for_text"
             android:hint="비밀번호"
             android:textColorHint="@color/gray"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </RelativeLayout>
 

@@ -38,8 +38,8 @@ public class SplashActivity extends AppCompatActivity{
             changeActivity();
         } else {
             String token = FirebaseInstanceId.getInstance().getToken();
-            Log.i("token",token);
             if (token != null) {
+                Log.i("token",token);
                 LoginDatabase.getInstance(this).setToken(token);
                 new AutoLoginThread();
             } else {
